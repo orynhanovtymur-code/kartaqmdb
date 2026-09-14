@@ -167,6 +167,14 @@
   .cw{opacity:0;animation:popc .7s var(--e) forwards}
   .ctown{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);font-family:var(--fh);
     font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:#3c4a44;white-space:nowrap}
+  .edu-card{position:absolute;transform:translate(-50%,-100%);cursor:pointer;z-index:3;
+    display:flex;flex-direction:column;align-items:center;width:88px;opacity:0;animation:pop .8s var(--e) forwards}
+  .edu-card .ec-photo{width:72px;height:72px;border-radius:18px;background:#fff center/cover no-repeat;
+    box-shadow:0 14px 32px rgba(9,42,30,.22);border:3px solid #fff;transition:transform .35s var(--e),box-shadow .35s var(--e)}
+  .edu-card:hover .ec-photo{transform:translateY(-5px) scale(1.06);box-shadow:0 22px 44px rgba(9,42,30,.3)}
+  .edu-card .ec-lbl{margin-top:8px;text-align:center;font-family:var(--fh);font-size:11.5px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--green-d);background:rgba(255,255,255,.92);border-radius:8px;
+    padding:3px 8px;white-space:nowrap;max-width:120px;overflow:hidden;text-overflow:ellipsis}
   .legend{position:absolute;left:30px;bottom:26px;z-index:4;display:flex;gap:24px;align-items:center;
     background:rgba(255,255,255,.9);backdrop-filter:blur(6px);border-radius:18px;padding:13px 22px;box-shadow:var(--card)}
   .legend div{display:flex;align-items:center;gap:9px;font-size:13px;color:#3c4a44}
@@ -346,6 +354,7 @@
         <div class="mt-opt" data-cat="qari" title="Қарилар дайындау орталықтары">Қарилар дайындау орт.</div>
       </div>
       <div id="pins"></div>
+      <div id="eduPins" style="display:none"></div>
       <div class="legend">
         <div><i class="lg-sq"></i> Жеке нысан</div>
         <div><i class="lg-c"></i> Нысандар тобы</div>
@@ -3259,6 +3268,19 @@ const CLUSTER = [
 ];
 CLUSTER.forEach(c => { c.n = regionTotal(c.region); });
 
+// ── ҚМДБ-ға қарасты медресе-колледждер (9 нысан, әр өңірге бір-бірден) ──
+const EDU_LIST = [
+  {region:"Ақтөбе облысы", name:"«Актобе» медресе колледжі", address:"Ақтөбе облысы, Алға ауданы, Бестамақ ауылы, Алға көшесі 58 үй", phone:"8/713-37/ 6-81-45", email:"aktobe_medrese2015@mail.ru", photo:"./assets/medrese/aktobe.jpeg", lon:57.17, lat:49.2},
+  {region:"Алматы қаласы", name:"«Әбу Ханифа» медресе колледжі", address:"Алматы қ., Медеу ауданы, Пушкин к-сі, 12", phone:"8(727) 397-63-00, 97-63-00", email:"abu-hanifa2009@mail.ru, daniyarzholdybai@mail.ru", photo:"./assets/medrese/almaty-abuhanifa.jpeg", lon:76.95, lat:43.24},
+  {region:"Астана қаласы", name:"«Астана» медресе-колледжі", address:"Астана қаласы, Алматы ауданы, Қобланды батыр көшесі, 3", phone:"8(7172) 24-30-44, 24-40-47 (факс: 24-46-29)", email:"astana-medrese@mail.ru", photo:"./assets/medrese/astana.jpeg", lon:71.40, lat:51.12},
+  {region:"Павлодар облысы", name:"«Әбу Бәкір Сыддық» медресе колледжі", address:"Павлодар қаласы, Павлодарское ауылы, Абай көшесі, 40", phone:"8(7252) 63-03-10, 8 747 442-96-14", email:"kolledzh.pvl@mail.ru", photo:"./assets/medrese/pavlodar.jpeg", lon:76.97, lat:53.3},
+  {region:"Түркістан облысы", name:"«Сарыағаш» медресе колледжі", address:"Түркістан облысы, Сарыағаш ауданы, Жартытөбе ауылдық округі, Ынтымақ елді мекені, Аппаз ата көшесі, 1", phone:"8(72537) 5-52-92", email:"kazmedrese@gmail.com", photo:"./assets/medrese/saryagash.jpeg", lon:66.8, lat:43.5},
+  {region:"Жамбыл облысы", name:"«Һибатулла Тарази» медресе колледжі", address:"Жамбыл облысы, Тараз қаласы, Төле би даңғылы, 89 б", phone:"8(7262) 57-03-63", email:"medrese_hibatulla@mail.ru", photo:"./assets/medrese/taraz.jpeg", lon:73.5, lat:44.1},
+  {region:"Батыс Қазақстан облысы", name:"«Орал» медресе колледжі", address:"БҚО, Орал қаласы, Досмұхамедов көшесі, 22", phone:"8(7112) 50-40-02 (факс: 54-12-20)", email:"medrese_oral@mail.ru", photo:"./assets/medrese/oral.jpeg", lon:51.37, lat:51.23},
+  {region:"Алматы облысы", name:"«Үшқоңыр» медресе колледжі", address:"Алматы облысы, Шамалған ауылы, Жібек жолы көшесі, 164", phone:"8(727-71) 5-60-12", email:"ushkonir@bk.ru", photo:"./assets/medrese/ushkonir.jpeg", lon:78.0, lat:46.6},
+  {region:"Шымкент қаласы", name:"«Шымкент» медресе колледжі", address:"Шымкент қаласы, Рекордная өткелі, 4-үй", phone:"8(7252) 53-86-72, 53-86-74", email:"shymkent_medresesi@mail.ru", photo:"./assets/medrese/shymkent.jpeg", lon:69.60, lat:42.30}
+];
+
 // ── Тізім: сүзгілер, іздеу, чиптер, беттеу — барлығы OBJECTS үстінде жұмыс істейді ──
 const state = { q:'', region:null, type:null, cat:'all', page:1, showAll:false };
 const PAGE_SIZE = 10;
@@ -3350,26 +3372,54 @@ document.getElementById('modalClose').addEventListener('click', closeModal);
 modalOverlay.addEventListener('click', e=>{ if (e.target === modalOverlay) closeModal(); });
 document.addEventListener('keydown', e=>{ if (e.key === 'Escape') closeModal(); });
 
+// ── Медресе-колледж карточкасы: картадан ашылатын толық ақпарат ──
+function openEduModal(o){
+  document.getElementById('modalType').textContent = 'Медресе-колледж';
+  document.getElementById('modalTitle').textContent = o.name;
+  document.querySelector('#modalLoc span').textContent = o.address;
+  document.getElementById('modalHero').style.backgroundImage = o.photo ? `url("${o.photo}")` : 'none';
+  document.getElementById('modalGrid').innerHTML = `
+    <div class="modal-tile"><span class="mt-lab">Өңір</span><span class="mt-val">${o.region}</span></div>
+    <div class="modal-tile"><span class="mt-lab">Телефон</span><span class="mt-val">${o.phone||'—'}</span></div>
+    <div class="modal-tile" style="grid-column:1/-1"><span class="mt-lab">Электрондық пошта</span><span class="mt-val">${o.email||'—'}</span></div>`;
+  modalOverlay.classList.add('show');
+}
+
 const MAP_CAT_LABELS = { mosque:'Мешіттер', edu:'Медресе-колледждер', qari:'Қарилар дайындау орталықтары' };
 const pinsEl = document.getElementById('pins');
+const eduPinsEl = document.getElementById('eduPins');
+let mapProj = null;
+function renderEduPins(){
+  if (!mapProj || eduPinsEl.dataset.built) return;
+  eduPinsEl.dataset.built = '1';
+  EDU_LIST.forEach((o,i)=>{
+    const [x,y] = mapProj([o.lon, o.lat]);
+    const card = document.createElement('div');
+    card.className = 'edu-card';
+    card.style.left = x+'px'; card.style.top = (y-8)+'px';
+    card.style.animationDelay = (0.1 + i*0.09)+'s';
+    card.innerHTML = `<div class="ec-photo" style="background-image:url('${o.photo}')"></div><div class="ec-lbl">${o.region}</div>`;
+    card.addEventListener('click', ()=> openEduModal(o));
+    eduPinsEl.appendChild(card);
+  });
+}
 document.getElementById('mapToggle').addEventListener('click', e=>{
   const opt = e.target.closest('.mt-opt'); if (!opt) return;
   document.querySelectorAll('.mt-opt').forEach(n=>n.classList.remove('on'));
   opt.classList.add('on');
   const cat = opt.dataset.cat;
   document.getElementById('mapCatLabel').textContent = MAP_CAT_LABELS[cat];
-  if (cat === 'mosque') {
-    pinsEl.style.display = '';
-    document.getElementById('mapEmptyNote')?.remove();
-  } else {
-    pinsEl.style.display = 'none';
-    if (!document.getElementById('mapEmptyNote')) {
-      const note = document.createElement('div');
-      note.id = 'mapEmptyNote';
-      note.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:4;text-align:center;padding:0 60px;font-size:15px;color:var(--muted)';
-      note.textContent = MAP_CAT_LABELS[cat] + ' үшін карта деректері әзірге қосылмаған';
-      document.getElementById('map').appendChild(note);
-    }
+  document.getElementById('mapEmptyNote')?.remove();
+  pinsEl.style.display = cat === 'mosque' ? '' : 'none';
+  eduPinsEl.style.display = cat === 'edu' ? '' : 'none';
+  if (cat === 'edu') {
+    renderEduPins();
+  } else if (cat !== 'mosque') {
+    const note = document.createElement('div');
+    note.id = 'mapEmptyNote';
+    note.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:4;text-align:center;padding:0 60px;font-size:15px;color:var(--muted)';
+    note.textContent = MAP_CAT_LABELS[cat] + ' үшін карта деректері әзірге қосылмаған';
+    document.getElementById('map').appendChild(note);
   }
 });
 
@@ -3536,6 +3586,7 @@ renderList();
   const kz = all.find(f => f.properties.name === 'Kazakhstan');
   const proj = d3.geoMercator().fitExtent([[92,104],[w-92,h-128]], kz);
   const path = d3.geoPath(proj);
+  mapProj = proj;
 
   const defs = svg.append('defs');
   const g = defs.append('linearGradient').attr('id','kzfill').attr('x1','0').attr('y1','0').attr('x2','1').attr('y2','1');
