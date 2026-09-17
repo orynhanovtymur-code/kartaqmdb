@@ -169,6 +169,7 @@
     font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:#3c4a44;white-space:nowrap}
   .edu-card{position:absolute;transform:translate(-50%,-100%);cursor:pointer;z-index:3;
     display:flex;flex-direction:column;align-items:center;width:88px;opacity:0;animation:pop .8s var(--e) forwards}
+  .edu-card:hover{z-index:50}
   .edu-card .ec-photo{width:72px;height:72px;border-radius:18px;background:#fff center/cover no-repeat;
     box-shadow:0 14px 32px rgba(9,42,30,.22);border:3px solid #fff;transition:transform .35s var(--e),box-shadow .35s var(--e)}
   .edu-card:hover .ec-photo{transform:translateY(-5px) scale(1.06);box-shadow:0 22px 44px rgba(9,42,30,.3)}
@@ -188,7 +189,7 @@
   .lhead h2{font-size:20px;letter-spacing:.17em;text-transform:uppercase;position:relative;padding-bottom:9px}
   .lhead h2::after{content:"";position:absolute;left:1px;bottom:0;width:34px;height:3px;border-radius:2px;background:var(--gold)}
   .lhead .n{font-size:13px;color:var(--muted)}
-  .sortrow{display:flex;gap:9px;padding:0 26px 16px}
+  .sortrow{display:flex;flex-wrap:wrap;gap:9px;padding:0 26px 16px}
   .chip{display:flex;align-items:center;gap:7px;padding:9px 17px;border-radius:14px;background:var(--mint);color:#3c4a44;font-size:13.5px;cursor:pointer;
     transition:transform .35s var(--e),background .35s var(--e),color .35s var(--e),box-shadow .35s var(--e);white-space:nowrap}
   .chip svg{width:15px;height:15px;flex:none}
@@ -372,8 +373,8 @@
       <div class="sortrow">
         <div class="chip on" data-cat="all"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Барлығы</div>
         <div class="chip" data-cat="mosque"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V11l8-6 8 6v10"/><path d="M12 5V2"/><path d="M9 21v-5a3 3 0 0 1 6 0v5"/></svg>Мешіттер</div>
-        <div class="chip" data-cat="edu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m22 10-10-5L2 10l10 5 10-5Z"/><path d="M6 12v5c2.5 2 9.5 2 12 0v-5"/></svg>Оқу орындары</div>
-        <div class="chip" data-cat="heritage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V10l4-4 4 4v11"/><path d="M13 21V6l4-3 4 3v15"/></svg>Тарихи мұра</div>
+        <div class="chip" data-cat="edu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m22 10-10-5L2 10l10 5 10-5Z"/><path d="M6 12v5c2.5 2 9.5 2 12 0v-5"/></svg>Медресе-колледждер</div>
+        <div class="chip" data-cat="qari"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21 12 16 5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z"/></svg>Қарилар дайындау орталықтары</div>
       </div>
       <div class="items" id="items"></div>
       <div class="lfoot">
@@ -3304,9 +3305,14 @@ const QARI_LIST = [
   {region:"Алматы қаласы", name:"«Хусамуддин әс-Сығанақи» Қарилар дайындау ижаза орталығы", address:"Алматы қаласы, Наурызбай ауданы, Қалқаман-2 шағын ауданы, Қазыбеков М. көшесі, 7", phone:"+7 747 127 46 68", email:"", photo:"./assets/quran/18-almaty-khusamuddin.jpeg", lon:76.8167, lat:43.2}
 ];
 
+// ── Медресе-колледж және қарилар дайындау орталықтарын жалпы нысандар тізіміне қосу ──
+EDU_LIST.forEach(o=> OBJECTS.push({n:o.name, c:o.address, region:o.region, t:"Медресе-колледж", cat:"edu", d:"", phone:o.phone, email:o.email, photo:o.photo}));
+QARI_LIST.forEach(o=> OBJECTS.push({n:o.name, c:o.address, region:o.region, t:"Қарилар дайындау орталығы", cat:"qari", d:"", phone:o.phone, email:o.email, photo:o.photo}));
+
 // ── Тізім: сүзгілер, іздеу, чиптер, беттеу — барлығы OBJECTS үстінде жұмыс істейді ──
 const state = { q:'', region:null, type:null, cat:'all', page:1, showAll:false };
 const PAGE_SIZE = 10;
+const CAT_NOUN = { all:'нысан', mosque:'мешіт', edu:'медресе-колледж', qari:'орталық' };
 
 function applyFilters(){
   return OBJECTS.filter(o=>{
@@ -3332,7 +3338,7 @@ function renderList(){
   const start = (state.page - 1) * pageSize;
   const pageItems = filtered.slice(start, start + pageSize);
 
-  document.querySelector('.lhead .n').textContent = '2977 мешіт табылды';
+  document.querySelector('.lhead .n').textContent = `${filtered.length} ${CAT_NOUN[state.cat]||'нысан'} табылды`;
 
   const itemsEl = document.getElementById('items');
   itemsEl.innerHTML = pageItems.length ? pageItems.map((o,i)=>`
@@ -3385,7 +3391,10 @@ function openModal(o){
   document.querySelector('#modalLoc span').textContent = o.c;
   const modalHeroEl = document.getElementById('modalHero');
   modalHeroEl.style.backgroundImage = o.photo ? `url("${o.photo}")` : 'none';
-  document.getElementById('modalGrid').innerHTML = `
+  document.getElementById('modalGrid').innerHTML = (o.cat === 'edu' || o.cat === 'qari') ? `
+    <div class="modal-tile"><span class="mt-lab">Өңір</span><span class="mt-val">${o.region||'—'}</span></div>
+    <div class="modal-tile"><span class="mt-lab">Телефон</span><span class="mt-val">${o.phone||'—'}</span></div>
+    <div class="modal-tile" style="grid-column:1/-1"><span class="mt-lab">Электрондық пошта</span><span class="mt-val">${o.email||'—'}</span></div>` : `
     <div class="modal-tile"><span class="mt-lab">Қолданысқа берілген жылы</span><span class="mt-val">${o.year||'—'}</span></div>
     <div class="modal-tile"><span class="mt-lab">Сыйымдылығы</span><span class="mt-val">${o.capacity||'—'}</span></div>`;
   modalOverlay.classList.add('show');
@@ -3440,14 +3449,48 @@ function renderEduPins(){
     eduPinsEl.appendChild(card);
   });
 }
+// ── Қатар тұрған карточкаларды бір-бірінен ажырату (карта шектерінде) ──
+function spreadCardPoints(pts, w, h){
+  const minDist = 96;
+  for (let iter=0; iter<400; iter++){
+    let moved = false;
+    for (let i=0; i<pts.length; i++){
+      for (let j=i+1; j<pts.length; j++){
+        const a = pts[i], b = pts[j];
+        let dx = b.x-a.x, dy = b.y-a.y;
+        let dist = Math.hypot(dx,dy);
+        if (dist < minDist){
+          moved = true;
+          if (dist < 0.01){ dx = (Math.random()-0.5); dy = (Math.random()-0.5); dist = 0.01; }
+          const push = (minDist-dist)/2;
+          const ux = dx/dist, uy = dy/dist;
+          a.x -= ux*push; a.y -= uy*push;
+          b.x += ux*push; b.y += uy*push;
+        }
+      }
+    }
+    pts.forEach(p=>{ p.x += (p.tx-p.x)*0.04; p.y += (p.ty-p.y)*0.04; });
+    if (!moved) break;
+  }
+  const padX = 52, padTop = 120, padBottom = 24;
+  pts.forEach(p=>{
+    p.x = Math.min(Math.max(p.x, padX), w-padX);
+    p.y = Math.min(Math.max(p.y, padTop), h-padBottom);
+  });
+  return pts;
+}
 function renderQariPins(){
   if (!mapProj || qariPinsEl.dataset.built) return;
   qariPinsEl.dataset.built = '1';
-  QARI_LIST.forEach((o,i)=>{
-    const [x,y] = mapProj([o.lon, o.lat]);
+  const mapEl = document.getElementById('map');
+  const w = mapEl.clientWidth, h = mapEl.clientHeight;
+  const pts = QARI_LIST.map(o=>{ const [x,y] = mapProj([o.lon, o.lat]); return {o, x, y, tx:x, ty:y}; });
+  spreadCardPoints(pts, w, h);
+  pts.forEach((p,i)=>{
+    const o = p.o;
     const card = document.createElement('div');
     card.className = 'edu-card';
-    card.style.left = x+'px'; card.style.top = (y-8)+'px';
+    card.style.left = p.x+'px'; card.style.top = p.y+'px';
     card.style.animationDelay = (0.1 + i*0.06)+'s';
     card.innerHTML = `<div class="ec-photo" style="background-image:url('${o.photo}')"></div><div class="ec-lbl">${o.region}</div>`;
     card.addEventListener('click', ()=> openQariModal(o));
