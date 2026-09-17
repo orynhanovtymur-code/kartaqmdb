@@ -307,7 +307,7 @@
       </div>
       <div class="stat">
         <svg class="sicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21 12 16 5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z"/></svg>
-        <div><b>11</b><span title="Қарилар дайындау орталығы">Қарилар дайындау орталығы</span></div>
+        <div><b>18</b><span title="Қарилар дайындау орталығы">Қарилар дайындау орталығы</span></div>
       </div>
     </div>
   </header>
@@ -355,6 +355,7 @@
       </div>
       <div id="pins"></div>
       <div id="eduPins" style="display:none"></div>
+      <div id="qariPins" style="display:none"></div>
       <div class="legend">
         <div><i class="lg-sq"></i> Жеке нысан</div>
         <div><i class="lg-c"></i> Нысандар тобы</div>
@@ -3281,6 +3282,28 @@ const EDU_LIST = [
   {region:"Шымкент қаласы", name:"«Шымкент» медресе колледжі", address:"Шымкент қаласы, Рекордная өткелі, 4-үй", phone:"8(7252) 53-86-72, 53-86-74", email:"shymkent_medresesi@mail.ru", photo:"./assets/medrese/shymkent.jpeg", lon:69.60, lat:42.30}
 ];
 
+// ── ҚМДБ-ға қарасты Құран жаттау және қарилар дайындау орталықтары (18 нысан) ──
+const QARI_LIST = [
+  {region:"Ақмола облысы", name:"«Қауам Ад-Дин Әл-Итқани Әл-Фараби Ат-Түркістани» Құран жаттау орталығы", address:"Ақмола облысы, Целиноград ауданы, Қосшы ауылы, Айтмағамбет Есмағамбетұлы көшесі 31", phone:"+7 701 233 00 80", email:"kaz_2030@mail.ru", photo:"./assets/quran/01-akmola-kauam-ad-din.jpeg", lon:71.316, lat:51.081},
+  {region:"Шымкент қаласы", name:"«Ықылас» Құран жаттау орталығы", address:"Шымкент қаласы, Еңбекші ауданы, Теріскей (Север) мөлтек ауданы, ғимарат №1416", phone:"+7 7252 37 31 32", email:"halekekz@mail.ru", photo:"./assets/quran/02-shymkent-ykylas.jpeg", lon:69.59, lat:42.3417},
+  {region:"Түркістан облысы", name:"«Балаби Қари» Құран жаттау орталығы", address:"Түркістан облысы, Кентау қаласы, Шакарима көшесі 92", phone:"+7 7253 63 81 91", email:"kentau_tsentr_korana@mail.ru", photo:"./assets/quran/03-turkistan-balabi-kari.jpeg", lon:65.7305, lat:43.5312},
+  {region:"Түркістан облысы", name:"«Qusshy Ata» Құран жаттау орталығы", address:"Түркістан облысы, Кентау қ., Құсшы ата ауылы, Ырысты көшесі 23а", phone:"+7 771 795 85 65", email:"ikhlas.m@mail.ru", photo:"./assets/quran/04-turkistan-qusshy-ata.jpeg", lon:65.75, lat:43.55},
+  {region:"Ақмола облысы", name:"«Атбасар» Құран жаттау орталығы", address:"Ақмола облысы, Атбасар ауданы, Атбасар қаласы, Ахан Құрман 28/1", phone:"+7 777 036 6663", email:"atbasar.karilar.dayndauortaly@yandex.kz", photo:"./assets/quran/05-akmola-atbasar.jpeg", lon:68.3547, lat:51.8078},
+  {region:"Түркістан облысы", name:"«Әз-Тәуке хан» Құран жаттау орталығы", address:"Түркістан облысы, Арыс қаласы, Жаңақоныс көшесі, ғимарат 2Б", phone:"+7 702 435 06 36", email:"", photo:"./assets/quran/06-turkistan-az-tauke-han.jpeg", lon:68.7811, lat:42.4275},
+  {region:"Қызылорда облысы", name:"«Арал» Құран жаттау орталығы", address:"Қызылорда облысы, Арал ауданы, Арал қаласы, Әбілқайыр Хан көшесі, ғимарат 5А", phone:"+7 701 891 77 19", email:"", photo:"./assets/quran/07-kyzylorda-aral.jpeg", lon:61.6822, lat:46.7889},
+  {region:"Қызылорда облысы", name:"«Қазалы» Құран жаттау орталығы", address:"Қызылорда облысы, Қазалы ауданы, Әйтек Би кенті, Жанқожа Нұрмұхамедұлы көшесі, 89", phone:"+7 747 132 10 95", email:"", photo:"./assets/quran/08-kyzylorda-kazaly.jpeg", lon:62.1067, lat:45.7644},
+  {region:"Қызылорда облысы", name:"«Айқожа ишан» Құран жаттау орталығы", address:"Қызылорда облысы, Жаңақорған ауданы, Жаңақорған кенті, Төлеген Бердібаев көшесі, 192", phone:"", email:"", photo:"./assets/quran/09-kyzylorda-aikozha-ishan.jpeg", lon:67.2667, lat:43.5667},
+  {region:"Жамбыл облысы", name:"«Қордай» Құран жаттау орталығы", address:"Жамбыл облысы, Қордай ауданы, Масаншы ауылы, Медеу көшесі, 11а", phone:"", email:"kordaymedrese@mail.ru", photo:"./assets/quran/10-zhambyl-kordai.jpeg", lon:74.85, lat:42.95},
+  {region:"Алматы қаласы", name:"«Көк-Төбе» Құран жаттау орталығы", address:"Алматы қаласы, Медеу ауданы, Көк-Төбе шағын ауданы, Талғат Бигелдинов көшесі, үй №1", phone:"+7 701 277 99 22", email:"", photo:"./assets/quran/11-almaty-kok-tobe.jpeg", lon:76.9598, lat:43.2454},
+  {region:"Ақмола облысы", name:"«Тілеулес» Құран жаттау орталығы", address:"Ақмола облысы, Көкшетау қаласы, 8 март көшесі, 195", phone:"", email:"markazkokwe2019@mail.ru", photo:"./assets/quran/12-akmola-tileules.jpeg", lon:69.3833, lat:53.2833},
+  {region:"Түркістан облысы", name:"«Сауран» Құран жаттау орталығы", address:"Түркістан облысы, Сауран ауданы, Жүйнек ауылдық округі, Жүйнек ауылы, Яссауи көшесі, 6А", phone:"", email:"", photo:"./assets/quran/13-turkistan-sauran.jpeg", lon:68.15, lat:43.3667},
+  {region:"Түркістан облысы", name:"«Жетісай» Құран жаттау орталығы", address:"Түркістан облысы, Жетісай ауданы, Жетісай қаласы, Ескендіров көшесі, 3Б", phone:"", email:"", photo:"./assets/quran/14-turkistan-zhetisai.jpeg", lon:68.3467, lat:40.8497},
+  {region:"Ақмола облысы", name:"«Жібек жолы» Құран жаттау орталығы", address:"Ақмола облысы, Аршалы ауданы, Жібек жолы а.о., Желтоқсан көшесі, 2", phone:"", email:"", photo:"./assets/quran/15-akmola-zhibek-zholy.jpeg", lon:70.8833, lat:51.3833},
+  {region:"Атырау облысы", name:"«Сұлтан Бейбарыс» Құран жаттау орталығы", address:"Атырау облысы, Атырау қаласы, Атырау ауылдық округі, Қызылбалық ауылы, Қуанәлі Құрмашев көш., 64Б", phone:"+7 700 392 86 86", email:"", photo:"./assets/quran/16-atyrau-sultan-beibarys.jpeg", lon:51.95, lat:47.15},
+  {region:"Астана қаласы", name:"«Хусамуддин әс-Сығанақи» Қарилар дайындау ижаза орталығы", address:"Астана қаласы, Есіл ауданы, Қабанбай батыр даңғылы №36", phone:"+7 747 881 20 29", email:"", photo:"./assets/quran/17-astana-khusamuddin.jpg", lon:71.4491, lat:51.1801},
+  {region:"Алматы қаласы", name:"«Хусамуддин әс-Сығанақи» Қарилар дайындау ижаза орталығы", address:"Алматы қаласы, Наурызбай ауданы, Қалқаман-2 шағын ауданы, Қазыбеков М. көшесі, 7", phone:"+7 747 127 46 68", email:"", photo:"./assets/quran/18-almaty-khusamuddin.jpeg", lon:76.8167, lat:43.2}
+];
+
 // ── Тізім: сүзгілер, іздеу, чиптер, беттеу — барлығы OBJECTS үстінде жұмыс істейді ──
 const state = { q:'', region:null, type:null, cat:'all', page:1, showAll:false };
 const PAGE_SIZE = 10;
@@ -3385,9 +3408,23 @@ function openEduModal(o){
   modalOverlay.classList.add('show');
 }
 
+// ── Құран жаттау / қарилар дайындау орталығы карточкасы: картадан ашылатын толық ақпарат ──
+function openQariModal(o){
+  document.getElementById('modalType').textContent = 'Қарилар дайындау орталығы';
+  document.getElementById('modalTitle').textContent = o.name;
+  document.querySelector('#modalLoc span').textContent = o.address;
+  document.getElementById('modalHero').style.backgroundImage = o.photo ? `url("${o.photo}")` : 'none';
+  document.getElementById('modalGrid').innerHTML = `
+    <div class="modal-tile"><span class="mt-lab">Өңір</span><span class="mt-val">${o.region}</span></div>
+    <div class="modal-tile"><span class="mt-lab">Телефон</span><span class="mt-val">${o.phone||'—'}</span></div>
+    <div class="modal-tile" style="grid-column:1/-1"><span class="mt-lab">Электрондық пошта</span><span class="mt-val">${o.email||'—'}</span></div>`;
+  modalOverlay.classList.add('show');
+}
+
 const MAP_CAT_LABELS = { mosque:'Мешіттер', edu:'Медресе-колледждер', qari:'Қарилар дайындау орталықтары' };
 const pinsEl = document.getElementById('pins');
 const eduPinsEl = document.getElementById('eduPins');
+const qariPinsEl = document.getElementById('qariPins');
 let mapProj = null;
 function renderEduPins(){
   if (!mapProj || eduPinsEl.dataset.built) return;
@@ -3403,6 +3440,20 @@ function renderEduPins(){
     eduPinsEl.appendChild(card);
   });
 }
+function renderQariPins(){
+  if (!mapProj || qariPinsEl.dataset.built) return;
+  qariPinsEl.dataset.built = '1';
+  QARI_LIST.forEach((o,i)=>{
+    const [x,y] = mapProj([o.lon, o.lat]);
+    const card = document.createElement('div');
+    card.className = 'edu-card';
+    card.style.left = x+'px'; card.style.top = (y-8)+'px';
+    card.style.animationDelay = (0.1 + i*0.06)+'s';
+    card.innerHTML = `<div class="ec-photo" style="background-image:url('${o.photo}')"></div><div class="ec-lbl">${o.region}</div>`;
+    card.addEventListener('click', ()=> openQariModal(o));
+    qariPinsEl.appendChild(card);
+  });
+}
 document.getElementById('mapToggle').addEventListener('click', e=>{
   const opt = e.target.closest('.mt-opt'); if (!opt) return;
   document.querySelectorAll('.mt-opt').forEach(n=>n.classList.remove('on'));
@@ -3412,8 +3463,11 @@ document.getElementById('mapToggle').addEventListener('click', e=>{
   document.getElementById('mapEmptyNote')?.remove();
   pinsEl.style.display = cat === 'mosque' ? '' : 'none';
   eduPinsEl.style.display = cat === 'edu' ? '' : 'none';
+  qariPinsEl.style.display = cat === 'qari' ? '' : 'none';
   if (cat === 'edu') {
     renderEduPins();
+  } else if (cat === 'qari') {
+    renderQariPins();
   } else if (cat !== 'mosque') {
     const note = document.createElement('div');
     note.id = 'mapEmptyNote';
