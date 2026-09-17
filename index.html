@@ -3845,9 +3845,9 @@ renderList();
   {
     const [x,y] = proj([76.95, 43.24]);
     const nd = document.createElement('div');
-    nd.className='marker pmw'; nd.style.left=(x-70)+'px'; nd.style.top=(y-64)+'px';
+    nd.className='marker pmw'; nd.style.left=(x-20)+'px'; nd.style.top=(y-20)+'px';
     nd.style.animationDelay = '1.9s';
-    nd.innerHTML = `<div class="pm"><div class="thumb-img" style="width:100%;height:100%;border-radius:19px;background-image:url('${NUR_MUBARAK.photo}')"></div></div><div class="plabel">Нұр-Мүбарак ун-ті</div>`;
+    nd.innerHTML = `<div class="pm"><div class="thumb-img" style="width:100%;height:100%;border-radius:19px;background-image:url('${NUR_MUBARAK.photo}')"></div></div><div class="plabel">Нұр-Мүбарак</div>`;
     nd.querySelector('.pm').addEventListener('click', openNurMubarakModal);
     pins.appendChild(nd);
   }
