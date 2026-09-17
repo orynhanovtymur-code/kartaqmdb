@@ -149,6 +149,7 @@
   .zoom button:hover{transform:translateY(-2px);background:var(--mint);box-shadow:var(--card-h)}
 
   .marker{position:absolute;z-index:3}
+  .marker.pmw{z-index:5}
   .pmw{opacity:0;animation:pop .8s var(--e) forwards}
   .pm{width:84px;height:84px;border-radius:24px;padding:5px;background:#fff;position:relative;cursor:pointer;
     box-shadow:0 14px 32px rgba(9,42,30,.22);transition:transform .45s var(--e),box-shadow .45s var(--e)}
@@ -295,16 +296,16 @@
         <div><b>2 977</b><span title="Мешіт">Мешіт</span></div>
       </div>
       <div class="stat">
-        <svg class="sicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 10-10-5L2 10l10 5 10-5Z"/><path d="M6 12v5c2.5 2 9.5 2 12 0v-5"/><path d="M22 10v6"/></svg>
-        <div><b>9</b><span title="Медресе-колледж">Медресе-колледж</span></div>
-      </div>
-      <div class="stat">
         <svg class="sicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V10l4-4 4 4v11"/><path d="M13 21V6l4-3 4 3v15"/></svg>
         <div><b>1</b><span title="Университет">Университет</span></div>
       </div>
       <div class="stat">
         <svg class="sicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4.5A2.5 2.5 0 0 1 4.5 2H9a3 3 0 0 1 3 3v14a2 2 0 0 0-2-2H2Z"/><path d="M22 4.5A2.5 2.5 0 0 0 19.5 2H15a3 3 0 0 0-3 3v14a2 2 0 0 1 2-2h8Z"/></svg>
         <div><b>4</b><span title="Институт">Институт</span></div>
+      </div>
+      <div class="stat">
+        <svg class="sicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 10-10-5L2 10l10 5 10-5Z"/><path d="M6 12v5c2.5 2 9.5 2 12 0v-5"/><path d="M22 10v6"/></svg>
+        <div><b>9</b><span title="Медресе-колледж">Медресе-колледж</span></div>
       </div>
       <div class="stat">
         <svg class="sicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21 12 16 5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z"/></svg>
@@ -3430,6 +3431,44 @@ function openQariModal(o){
   modalOverlay.classList.add('show');
 }
 
+// ── Нұр-Мүбарак университеті: картадағы мешіттер қабатындағы жалғыз университет карточкасы ──
+const NUR_MUBARAK = {
+  name:"Нұр-Мүбарак Мысыр ислам мәдениеті университеті",
+  region:"Алматы қаласы",
+  address:"Алматы қаласы, Әл-Фараби даңғылы, 73",
+  email:"info@nmu.edu.kz",
+  phones:[
+    {label:"Ректорат кеңсесі", value:"+7 (727) 302-09-30"},
+    {label:"Қабылдау комиссиясы (WhatsApp)", value:"+7 700 302 09 30"},
+    {label:"Қабылдау комиссиясы (Қоңырау)", value:"+7 777 302 09 66"}
+  ],
+  photo:"./assets/university/nur-mubarak.jpg"
+};
+// ── ҚМДБ: картадағы басты мекеме карточкасы ──
+function openQmdbModal(){
+  document.getElementById('modalType').textContent = 'Мекеме';
+  document.getElementById('modalTitle').textContent = 'Қазақстан мұсылмандары діни басқармасы';
+  document.querySelector('#modalLoc span').textContent = 'Астана қаласы';
+  document.getElementById('modalHero').style.backgroundImage = `url("./assets/qmdb-building.jpeg")`;
+  document.getElementById('modalGrid').innerHTML = `
+    <div class="modal-tile"><span class="mt-lab">Бөлім</span><span class="mt-val">17</span></div>
+    <div class="modal-tile"><span class="mt-lab">Сектор</span><span class="mt-val">6</span></div>
+    <div class="modal-tile"><span class="mt-lab">Мекеме</span><span class="mt-val">10</span></div>`;
+  modalOverlay.classList.add('show');
+}
+function openNurMubarakModal(){
+  const o = NUR_MUBARAK;
+  document.getElementById('modalType').textContent = 'Университет';
+  document.getElementById('modalTitle').textContent = o.name;
+  document.querySelector('#modalLoc span').textContent = o.address;
+  document.getElementById('modalHero').style.backgroundImage = `url("${o.photo}")`;
+  document.getElementById('modalGrid').innerHTML = `
+    <div class="modal-tile" style="grid-column:1/-1"><span class="mt-lab">Өңір</span><span class="mt-val">${o.region}</span></div>
+    ${o.phones.map(p=>`<div class="modal-tile"><span class="mt-lab">${p.label}</span><span class="mt-val">${p.value}</span></div>`).join('')}
+    <div class="modal-tile" style="grid-column:1/-1"><span class="mt-lab">Электрондық пошта</span><span class="mt-val">${o.email}</span></div>`;
+  modalOverlay.classList.add('show');
+}
+
 const MAP_CAT_LABELS = { mosque:'Мешіттер', edu:'Медресе-колледждер', qari:'Қарилар дайындау орталықтары' };
 const pinsEl = document.getElementById('pins');
 const eduPinsEl = document.getElementById('eduPins');
@@ -3800,7 +3839,17 @@ renderList();
     qd.className='marker pmw'; qd.style.left=(x+46)+'px'; qd.style.top=(y+20)+'px';
     qd.style.animationDelay = '1.7s';
     qd.innerHTML = `<div class="pm"><div class="thumb-img" style="width:100%;height:100%;border-radius:19px;background-image:url('./assets/qmdb-building.jpeg')"></div></div><div class="plabel">ҚМДБ</div>`;
+    qd.querySelector('.pm').addEventListener('click', openQmdbModal);
     pins.appendChild(qd);
+  }
+  {
+    const [x,y] = proj([76.95, 43.24]);
+    const nd = document.createElement('div');
+    nd.className='marker pmw'; nd.style.left=(x-70)+'px'; nd.style.top=(y-64)+'px';
+    nd.style.animationDelay = '1.9s';
+    nd.innerHTML = `<div class="pm"><div class="thumb-img" style="width:100%;height:100%;border-radius:19px;background-image:url('${NUR_MUBARAK.photo}')"></div></div><div class="plabel">Нұр-Мүбарак ун-ті</div>`;
+    nd.querySelector('.pm').addEventListener('click', openNurMubarakModal);
+    pins.appendChild(nd);
   }
   CLUSTER.forEach((c,i)=>{
     const [x,y] = proj([c.lon,c.lat]);
