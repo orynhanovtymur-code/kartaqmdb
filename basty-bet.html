@@ -245,6 +245,16 @@
   :focus-visible{outline:2px solid var(--green);outline-offset:3px}
   ::selection{background:rgba(14,75,54,.18)}
 
+  .wc-card{width:1500px;height:900px;max-height:92%;background:#fff;border-radius:28px;position:relative;overflow:hidden;display:flex;flex-direction:column;
+    box-shadow:0 40px 100px rgba(9,42,30,.35);transform:translateY(18px) scale(.97);opacity:0;transition:transform .35s var(--e),opacity .35s var(--e)}
+  .modal-overlay.show .wc-card{transform:none;opacity:1}
+  .wc-head{padding:30px 40px 0}
+  .wc-cloud{flex:1;overflow-y:auto;display:flex;flex-wrap:wrap;justify-content:center;align-content:center;align-items:center;gap:6px 26px;padding:20px 48px 40px}
+  .wc-w{font-family:var(--fb);line-height:1.15;white-space:nowrap;opacity:0;animation:wcIn .7s var(--e) forwards,wcFloat 6s ease-in-out infinite;transition:transform .25s var(--e)}
+  .wc-w:hover{transform:scale(1.15)}
+  @keyframes wcIn{from{opacity:0;transform:scale(.3) translateY(20px)}to{opacity:1;transform:none}}
+  @keyframes wcFloat{0%,100%{translate:0 0}50%{translate:0 -6px}}
+
   #screen>.modal-overlay{position:absolute}
   .modal-overlay{inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
     background:rgba(9,26,20,.55);backdrop-filter:blur(3px);opacity:0;pointer-events:none;
@@ -424,6 +434,19 @@
           <span>Толық тізімді көру</span>
         </button>
       </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="wcOverlay">
+    <div class="wc-card" role="dialog" aria-modal="true">
+      <button class="modal-close" id="wcClose" aria-label="Жабу">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+      <div class="wc-head">
+        <span class="modal-type">Мешіттер</span>
+        <h2 class="modal-title" id="wcTitle"></h2>
+      </div>
+      <div class="wc-cloud" id="wcCloud"></div>
     </div>
   </div>
 
@@ -3705,12 +3728,30 @@ regionModalOverlay.addEventListener('click', e=>{ if (e.target === regionModalOv
 document.addEventListener('keydown', e=>{ if (e.key === 'Escape') closeRegionModal(); });
 document.getElementById('regionModalFullBtn').addEventListener('click', ()=>{
   closeRegionModal();
-  if (currentMapRegion) selectRegionFromMap(currentMapRegion);
-  state.showAll = false; state.page = 1;
-  allBtn.querySelector('span').textContent = 'Толық тізім';
-  renderList();
-  document.querySelector('.list').scrollIntoView({behavior:'smooth', block:'start'});
+  openWordCloud(currentMapRegion);
 });
+
+// ── Word cloud: өңірдің барлық мешіттерінің атаулары ──
+const wcOverlay = document.getElementById('wcOverlay');
+const WC_COLORS = ['#0e4b36','#c0392b','#2563eb','#d97706','#7c3aed','#0f766e','#db2777','#65a30d','#ea580c','#0891b2','#b45309','#4f46e5'];
+function openWordCloud(region){
+  const list = OBJECTS.filter(o=>o.cat==='mosque' && (!region || o.region===region));
+  document.getElementById('wcTitle').textContent = (region||'Барлық өңір') + ' · ' + list.length + ' мешіт';
+  const n = list.length;
+  const base = n>300 ? 13 : n>120 ? 16 : n>50 ? 20 : 26;
+  document.getElementById('wcCloud').innerHTML = list.map((o,i)=>{
+    const r = Math.random();
+    const size = Math.round(base * (0.8 + r*1.2));
+    const c = WC_COLORS[Math.floor(Math.random()*WC_COLORS.length)];
+    const wt = r>.6 ? 700 : 500;
+    return `<span class="wc-w" style="font-size:${size}px;font-weight:${wt};color:${c};animation-delay:${Math.min(i*0.02,1.5)}s,${(Math.random()*4).toFixed(2)}s">${o.n}</span>`;
+  }).join('');
+  wcOverlay.classList.add('show');
+}
+function closeWordCloud(){ wcOverlay.classList.remove('show'); }
+document.getElementById('wcClose').addEventListener('click', closeWordCloud);
+wcOverlay.addEventListener('click', e=>{ if (e.target === wcOverlay) closeWordCloud(); });
+document.addEventListener('keydown', e=>{ if (e.key === 'Escape') closeWordCloud(); });
 
 renderList();
 
