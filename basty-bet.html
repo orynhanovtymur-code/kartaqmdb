@@ -249,7 +249,7 @@
     box-shadow:0 40px 100px rgba(9,42,30,.35);transform:translateY(18px) scale(.97);opacity:0;transition:transform .35s var(--e),opacity .35s var(--e)}
   .modal-overlay.show .wc-card{transform:none;opacity:1}
   .wc-head{padding:30px 40px 0}
-  .wc-cloud{flex:1;overflow-y:auto;display:flex;flex-wrap:wrap;justify-content:center;align-content:center;align-items:center;gap:6px 26px;padding:20px 48px 40px}
+  .wc-cloud{flex:1;overflow:hidden;display:flex;flex-wrap:wrap;justify-content:center;align-content:center;align-items:center;gap:calc(6px*var(--k,1)) calc(26px*var(--k,1));padding:20px 48px 40px}
   .wc-w{font-family:var(--fb);line-height:1.15;white-space:nowrap;opacity:0;animation:wcIn .7s var(--e) forwards,wcFloat 6s ease-in-out infinite;transition:transform .25s var(--e)}
   .wc-w{cursor:pointer;transition:scale .25s var(--e),filter .25s var(--e)}
   .wc-cloud:hover .wc-w:not(:hover){filter:opacity(.28) saturate(.6)}
@@ -3747,9 +3747,18 @@ function openWordCloud(region){
     const size = Math.round(base * (0.75 + Math.pow(r,4)*2.6));
     const c = WC_COLORS[Math.floor(Math.random()*WC_COLORS.length)];
     const wt = r>.7 ? 700 : 500;
-    return `<span class="wc-w" style="font-size:${size}px;font-weight:${wt};color:${c};animation-delay:${Math.min(i*0.02,1.5)}s,${(Math.random()*4).toFixed(2)}s" data-oi="${OBJECTS.indexOf(o)}">${o.n}</span>`;
+    return `<span class="wc-w" style="font-size:calc(${size}px*var(--k,1));font-weight:${wt};color:${c};animation-delay:${Math.min(i*0.02,1.5)}s,${(Math.random()*4).toFixed(2)}s" data-oi="${OBJECTS.indexOf(o)}">${o.n}</span>`;
   }).join('');
   wcOverlay.classList.add('show');
+  // Бір экранға толық сыятындай масштабты іздеу (binary search)
+  const cl = document.getElementById('wcCloud');
+  let lo = 0.2, hi = 3;
+  for (let it=0; it<14; it++){
+    const mid = (lo+hi)/2;
+    cl.style.setProperty('--k', mid);
+    if (cl.scrollHeight > cl.clientHeight + 1) hi = mid; else lo = mid;
+  }
+  cl.style.setProperty('--k', lo);
 }
 document.getElementById('wcCloud').addEventListener('click', e=>{
   const w = e.target.closest('.wc-w'); if(!w) return;
