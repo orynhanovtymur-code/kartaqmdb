@@ -3741,7 +3741,7 @@ function openWordCloud(region){
   const list = OBJECTS.filter(o=>o.cat==='mosque' && (!region || o.region===region));
   document.getElementById('wcTitle').textContent = (region||'Барлық өңір') + ' · ' + list.length + ' мешіт';
   const n = list.length;
-  const base = n>300 ? 13 : n>120 ? 16 : n>50 ? 20 : 26;
+  const base = Math.max(10, Math.min(34, Math.round(Math.sqrt(640000/(Math.max(n,1)*29)))));
   document.getElementById('wcCloud').innerHTML = list.map((o,i)=>{
     const r = Math.random();
     const size = Math.round(base * (0.75 + Math.pow(r,4)*2.6));
