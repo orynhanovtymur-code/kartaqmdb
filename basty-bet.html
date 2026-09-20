@@ -21,9 +21,9 @@
   }
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;overflow:hidden;background:#dfe5e2}
-  #stage{position:fixed;inset:0}
+  #stage{position:fixed;inset:0;overflow:auto}
   #screen{
-    position:absolute;top:50%;left:50%;transform-origin:center center;
+    position:relative;margin:0 auto;flex:none;
     width:1920px;height:1080px;padding:38px 44px 26px;display:flex;flex-direction:column;
     font-family:var(--fb);color:var(--ink);border-radius:4px;overflow:hidden;
     background:
@@ -3862,11 +3862,6 @@ renderList();
   });
 })();
 
-function fit(){
-  const s = Math.min(innerWidth/1920, innerHeight/1080);
-  document.getElementById('screen').style.transform = 'translate(-50%,-50%) scale('+s+')';
-}
-addEventListener('resize', fit); fit();
 </script>
 </body>
 </html>
