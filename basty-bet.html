@@ -22,9 +22,9 @@
   }
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;overflow:hidden;background:#dfe5e2}
-  #stage{position:fixed;inset:0;overflow:auto}
+  #stage{position:fixed;inset:0}
   #screen{
-    position:relative;margin:0 auto;flex:none;
+    position:absolute;top:50%;left:50%;transform-origin:center center;
     width:1920px;height:1080px;padding:38px 44px 26px;display:flex;flex-direction:column;
     font-family:var(--fb);color:var(--ink);border-radius:4px;overflow:hidden;
     background:
@@ -3863,6 +3863,11 @@ renderList();
   });
 })();
 
+function fit(){
+  const s = Math.min(innerWidth/1920, innerHeight/1080);
+  document.getElementById('screen').style.transform = 'translate(-50%,-50%) scale('+s+')';
+}
+addEventListener('resize', fit); fit();
 // Қолданушы жақындату/алыстатуын өшіру (Ctrl+колесо, Ctrl +/-/0, pinch)
 addEventListener('wheel',e=>{if(e.ctrlKey)e.preventDefault()},{passive:false});
 addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&['+','-','=','0','_'].includes(e.key))e.preventDefault()});
