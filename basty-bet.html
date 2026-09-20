@@ -3736,7 +3736,7 @@ document.getElementById('regionModalFullBtn').addEventListener('click', ()=>{
 
 // ── Word cloud: өңірдің барлық мешіттерінің атаулары ──
 const wcOverlay = document.getElementById('wcOverlay');
-const WC_COLORS = ['#0e4b36','#c0392b','#2563eb','#d97706','#7c3aed','#0f766e','#db2777','#65a30d','#ea580c','#0891b2','#b45309','#4f46e5'];
+const WC_COLORS = ['#111111','#2b2b2b','#444444','#5e5e5e','#787878','#939393','#adadad'];
 function openWordCloud(region){
   const list = OBJECTS.filter(o=>o.cat==='mosque' && (!region || o.region===region));
   document.getElementById('wcTitle').textContent = (region||'Барлық өңір') + ' · ' + list.length + ' мешіт';
