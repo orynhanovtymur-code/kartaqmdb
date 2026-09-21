@@ -355,3 +355,8 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 .k-reception .rbtn .i{font-size:22px;color:#e8cf8f}
 .k-reception .rbtn:active,.k-reception .rbtn.pressed{transform:scale(.94)}
 .k-reception .rbtn::after{content:"";position:absolute;top:0;bottom:0;width:40px;left:-60px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);animation:shine 4.2s ease-in-out infinite}
+
+.k-reception{padding:16px 22px 16px 24px}
+.k-reception .ph{width:100px;height:100px}
+.k-reception .role{font-size:12.5px}
+.k-reception .nm{font-size:25px}

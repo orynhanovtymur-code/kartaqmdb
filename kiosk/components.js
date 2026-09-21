@@ -143,9 +143,7 @@ function ReceptionCard(lang){
       <div class="tx">
         <span class="role">${tr(r.role, lang)}</span>
         <b class="nm">${tr(r.name, lang)}</b>
-        <span class="sub">${tr(r.sub, lang)}</span>
       </div>
-      <button class="rbtn" data-nav="reception:${r.id}">${icon('calendar')}<span>${tr(r.action, lang)}</span></button>
     </div>`;
 }
 
