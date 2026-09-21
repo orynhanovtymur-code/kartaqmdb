@@ -116,15 +116,16 @@ function MenuCard(item, lang, i){
     </button>`;
   return `
     <button class="k-card g-${item.group} m-${item.id} anim" data-nav="menu:${item.id}" style="animation-delay:${0.2+i*0.06}s">
-      ${item.group==='tour' ? '<div class="pano" aria-hidden="true"></div><i class="spinring"></i><span class="b360">360°</span>' : ''}
-      <div class="ic">${icon(item.icon)}</div>
+      ${item.group==='media' ? `<div class="tv" aria-hidden="true"><i class="wave"></i><i class="wave w2"></i><i class="wave w3"></i></div><span class="live"><i></i>${T('live', lang)}</span>` : ''}
+      <div class="ic">${icon(item.icon)}${item.group==='tour' ? '<i class="spinring"></i>' : ''}</div>
       <div class="tx"><h3>${tr(item.title, lang)}</h3>${item.sub ? `<p>${tr(item.sub, lang)}</p>` : ''}</div>
+      ${item.group==='tour' ? '<span class="b360">360°</span>' : ''}
       <span class="go">${icon('arrow')}</span>
     </button>`;
 }
 
 function MainMenuGrid(lang){
-  const order = ['map','structure','leadership','departments','services','regions','products','tour'];
+  const order = ['map','structure','leadership','departments','services','regions','products','munara','tour'];
   const items = order.map(id => D.MENU.find(m => m.id === id));
   return `<div class="k-grid">${items.map((m,i)=>MenuCard(m, lang, i)).join('')}</div>`;
 }
