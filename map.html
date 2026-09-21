@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous"></script>
-<script src="./image-slot.js"></script>
 <style>
   :root{
     --ink:#0f1d17; --muted:#66756e; --line:rgba(15,29,23,.07);
@@ -39,9 +38,7 @@
     background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%230e4b36' stroke-opacity='.16'%3E%3Cpath d='M60 8 112 60 60 112 8 60Z'/%3E%3Cpath d='M24 24h72v72H24z'/%3E%3Ccircle cx='60' cy='60' r='26'/%3E%3C/g%3E%3C/svg%3E") 0 0/120px 120px;
     -webkit-mask-image:radial-gradient(circle at 70% 30%, #000, transparent 68%);
     mask-image:radial-gradient(circle at 70% 30%, #000, transparent 68%);
-    animation:drift 44s linear infinite;
   }
-  @keyframes drift{to{background-position:120px 120px}}
   #screen>*{position:relative}
   h1,h2,h3{font-family:var(--fh);margin:0;font-weight:400}
 
@@ -50,10 +47,9 @@
   @keyframes fade{from{opacity:0}to{opacity:1}}
   @keyframes pop{from{opacity:0;transform:translate(-50%,-100%) scale(.6)}to{opacity:1;transform:translate(-50%,-100%) scale(1)}}
   @keyframes popc{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
-  @keyframes ring{0%{box-shadow:0 0 0 0 rgba(14,75,54,.30)}70%{box-shadow:0 0 0 20px rgba(14,75,54,0)}100%{box-shadow:0 0 0 0 rgba(14,75,54,0)}}
   @keyframes draw{to{stroke-dashoffset:0}}
   @keyframes shimmer{0%{background-position:-260px 0}100%{background-position:420px 0}}
-  .anim{opacity:0;animation:up .9s var(--e) forwards}
+  .anim{animation:up .9s var(--e) backwards}
 
   header.top{display:flex;align-items:center;justify-content:space-between;gap:40px;padding-bottom:20px;
     border-bottom:1px solid rgba(176,141,67,.3)}
@@ -142,12 +138,6 @@
     transition:background .3s var(--e),color .3s var(--e)}
   .mt-opt:hover{background:var(--mint)}
   .mt-opt.on{background:linear-gradient(140deg,var(--green-l),var(--green));color:#fff}
-  .zoom{position:absolute;top:26px;right:30px;z-index:4;display:flex;flex-direction:column;gap:8px}
-  .zoom button{width:48px;height:48px;display:grid;place-items:center;border:0;border-radius:16px;background:#fff;color:var(--green);
-    cursor:pointer;box-shadow:var(--card);
-    transition:transform .35s var(--e),box-shadow .35s var(--e),background .35s var(--e)}
-  .zoom button svg{width:19px;height:19px}
-  .zoom button:hover{transform:translateY(-2px);background:var(--mint);box-shadow:var(--card-h)}
 
   .marker{position:absolute;z-index:3}
   .marker.pmw{z-index:5}
@@ -157,13 +147,14 @@
   .pm:hover{transform:translateY(-6px) scale(1.05);box-shadow:0 24px 50px rgba(9,42,30,.3)}
   .pm::after{content:"";position:absolute;left:50%;bottom:-7px;width:16px;height:16px;background:#fff;
     transform:translateX(-50%) rotate(45deg);border-radius:4px;box-shadow:6px 6px 14px rgba(9,42,30,.12)}
-  .pm image-slot{width:100%;height:100%;display:block;border-radius:19px;overflow:hidden}
   .plabel{margin-top:16px;text-align:center;font-family:var(--fh);font-size:14.5px;letter-spacing:.09em;
     text-transform:uppercase;color:var(--green-d);white-space:nowrap}
   .cluster{width:58px;height:58px;border-radius:50%;color:#fff;display:grid;place-items:center;cursor:pointer;
     font-family:var(--fh);font-size:19px;font-weight:400;transform:translate(-50%,-50%);
     background:linear-gradient(150deg,var(--green-l),var(--green) 60%,var(--green-d));
-    animation:ring 3.4s var(--e) infinite;transition:transform .4s var(--e)}
+    transition:transform .4s var(--e)}
+  .cluster::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid rgba(14,75,54,.4);pointer-events:none;animation:ringPulse 3.4s ease-out infinite}
+  @keyframes ringPulse{0%{transform:scale(1);opacity:.8}70%,100%{transform:scale(1.55);opacity:0}}
   .cluster:hover{transform:translate(-50%,-50%) scale(1.12)}
   .cluster.sm{width:48px;height:48px;font-size:18px}
   .cw{opacity:0;animation:popc .7s var(--e) forwards}
@@ -205,12 +196,11 @@
   .type{white-space:nowrap}
   .legend div{white-space:nowrap}
   .item{display:grid;grid-template-columns:106px 1fr;gap:15px;padding:11px 13px;border-radius:20px;cursor:pointer;
-    opacity:0;animation:up .8s var(--e) forwards;
+    animation:up .8s var(--e) backwards;
     transition:transform .4s var(--e),box-shadow .4s var(--e),background .4s var(--e)}
   .item:hover{transform:translateX(4px);background:#fff;box-shadow:var(--card-h)}
   .item.on{background:linear-gradient(140deg,#f2f9f5,#e9f3ee);box-shadow:var(--card);box-shadow:var(--card),inset 3px 0 0 var(--gold)}
   .thumb{width:106px;height:80px;border-radius:16px;overflow:hidden;position:relative;background:var(--mint)}
-  .thumb image-slot{width:100%;height:100%;display:block}
   .thumb-img{width:100%;height:100%;background-size:cover;background-position:center;background-repeat:no-repeat}
   .num{position:absolute;top:8px;left:8px;z-index:2;background:rgba(8,52,37,.82);backdrop-filter:blur(4px);
     color:var(--gold);font-family:var(--fh);font-size:12px;padding:2px 8px;border-radius:8px;letter-spacing:.08em}
@@ -273,7 +263,6 @@
   .modal-close:hover{background:#fff;transform:rotate(90deg)}
   .modal-close svg{width:18px;height:18px}
   .modal-hero{width:100%;height:340px;background:var(--mint);background-size:cover;background-position:center;background-repeat:no-repeat}
-  .modal-hero image-slot{width:100%;height:100%;display:block}
   .modal-body{padding:28px 34px 34px}
   .modal-type{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);
     background:var(--mint);padding:5px 13px;border-radius:10px;display:inline-block}

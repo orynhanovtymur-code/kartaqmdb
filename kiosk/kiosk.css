@@ -1,17 +1,30 @@
-/* ҚМДБ цифрлық ақпараттық терминалы — ортақ стильдер (Home + болашақ ішкі беттер) */
+/* ҚМДБ цифрлық ақпараттық терминалы — Home page стильдері (1920×1080 kiosk) */
+
+/* ── Токендер ── */
 :root{
   --ink:#0f1d17; --muted:#66756e; --line:rgba(15,29,23,.08);
   --green:#0e4b36; --green-d:#083425; --green-l:#2f7a5c; --mint:#eef5f1; --gold:#b08d43;
+  --surface:#fff; --go:rgba(14,75,54,.08);
   --fh:"Oswald",system-ui,sans-serif; --fb:"IBM Plex Sans",system-ui,sans-serif;
-  --card:0 14px 40px rgba(9,42,30,.07), 0 2px 6px rgba(9,42,30,.04);
-  --card-h:0 22px 60px rgba(9,42,30,.13), 0 3px 8px rgba(9,42,30,.06);
+  --card:0 14px 40px rgba(9,42,30,.07),0 2px 6px rgba(9,42,30,.04);
+  --card-h:0 22px 60px rgba(9,42,30,.13),0 3px 8px rgba(9,42,30,.06);
   --e:cubic-bezier(.22,.8,.28,1);
 }
+html[data-theme=dark]{
+  --ink:#e8f0eb; --muted:#98aba0; --line:rgba(255,255,255,.09);
+  --green:#2f8f69; --green-d:#d3eadf; --green-l:#5cbf95; --mint:#1f3329;
+  --surface:#15211b; --go:rgba(255,255,255,.08);
+  --card:0 14px 40px rgba(0,0,0,.35),0 2px 6px rgba(0,0,0,.25);
+  --card-h:0 22px 60px rgba(0,0,0,.5),0 3px 8px rgba(0,0,0,.3);
+  color-scheme:dark;
+}
+
+/* ── Негіз ── */
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%;overflow:hidden;background:#dfe5e2;touch-action:pan-x pan-y;
   -webkit-user-select:none;user-select:none;font-family:var(--fb);color:var(--ink)}
-button,input{font:inherit;color:inherit}
-button{cursor:pointer;border:0;background:none;padding:0}
+html[data-theme=dark],html[data-theme=dark] body{background:#060b09}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
 svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
 
 #stage{position:fixed;inset:0}
@@ -19,771 +32,201 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
   position:absolute;top:50%;left:50%;transform-origin:center center;
   width:1920px;height:1080px;padding:28px 48px 22px;display:flex;flex-direction:column;gap:14px;
   overflow:hidden;border-radius:4px;box-shadow:0 30px 90px rgba(9,42,30,.2);
-  background:
-    radial-gradient(1200px 600px at 88% -12%, rgba(14,75,54,.10), transparent 62%),
-    radial-gradient(900px 520px at -6% 108%, rgba(14,75,54,.07), transparent 60%),
-    #fbfcfb;
+  background:radial-gradient(1200px 600px at 88% -12%,rgba(14,75,54,.10),transparent 62%),
+             radial-gradient(900px 520px at -6% 108%,rgba(14,75,54,.07),transparent 60%),#fbfcfb;
 }
-/* нәзік исламдық геометриялық өрнек */
-#screen::before{
-  content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%230e4b36' stroke-width='1.2'%3E%3Cpath d='M60 6l14 20 24-6-6 24 20 14-20 14 6 24-24-6-14 20-14-20-24 6 6-24L6 60l20-14-6-24 24 6z'/%3E%3Ccircle cx='60' cy='60' r='16'/%3E%3C/g%3E%3C/svg%3E");
-  background-size:120px 120px;
-}
+html[data-theme=dark] #screen{
+  background:radial-gradient(1200px 600px at 88% -12%,rgba(47,143,105,.16),transparent 62%),
+             radial-gradient(900px 520px at -6% 108%,rgba(47,143,105,.10),transparent 60%),#0c1511;
+  box-shadow:0 30px 90px rgba(0,0,0,.6)}
+/* артқы фон: қиылысқан жұқа сызықтар (қозғалмайды) */
+#screen::before{content:"";position:absolute;inset:0;pointer-events:none;background:url("../assets/bg-lines-light.svg") center/cover no-repeat;
+  -webkit-mask-image:radial-gradient(ellipse 62% 58% at 8% 12%,#000 0,transparent 72%),radial-gradient(ellipse 58% 62% at 94% 92%,#000 0,transparent 72%),radial-gradient(ellipse 30% 26% at 58% 52%,rgba(0,0,0,.45),transparent 75%);
+  mask-image:radial-gradient(ellipse 62% 58% at 8% 12%,#000 0,transparent 72%),radial-gradient(ellipse 58% 62% at 94% 92%,#000 0,transparent 72%),radial-gradient(ellipse 30% 26% at 58% 52%,rgba(0,0,0,.45),transparent 75%)}
+html[data-theme=dark] #screen::before{background-image:url("../assets/bg-lines-dark.svg")}
 #screen>*{position:relative}
 
-/* ── Анимациялар ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes pulseGlow{0%,100%{box-shadow:0 0 0 0 rgba(14,75,54,.35)}50%{box-shadow:0 0 0 12px rgba(14,75,54,0)}}
-.anim{opacity:0;animation:fadeUp .7s var(--e) forwards}
-#screen{animation:fadeIn .5s ease both}
+/* ── Анимациялар: элемент ешқашан жасырын қалмайды (backwards) ── */
+@keyframes rise{from{opacity:0;transform:translateY(16px)}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes blink{50%{opacity:.25}}
+@keyframes pulseText{0%,100%{opacity:1}50%{opacity:.6}}
+@keyframes twinkle{0%,100%{opacity:.9}50%{opacity:.3}}
+.anim{animation:rise .5s var(--e) backwards}
 #screen.leaving{opacity:0;transition:opacity .28s ease}
+/* ?lite=1 — барлық сәндік анимацияны өшіру (диагностика) */
+html.lite *,html.lite *::before,html.lite *::after{animation:none!important;transition:none!important}
 
 /* ── Header ── */
-.k-header{display:flex;align-items:center;gap:28px;height:84px;flex:none;
-  padding:0 8px 14px;border-bottom:1px solid var(--line)}
+.k-header{display:flex;align-items:center;gap:28px;height:84px;flex:none;padding:0 8px 14px;border-bottom:1px solid var(--line)}
 .k-brand{display:flex;align-items:center;gap:18px;flex:1;min-width:0}
 .k-logo{width:64px;height:64px;flex:none}
 .k-logo img{width:100%;height:100%;object-fit:contain}
 .k-brand h1{margin:0;font-family:var(--fh);font-weight:500;font-size:24px;line-height:1.08;letter-spacing:.05em;color:var(--green-d);text-transform:uppercase}
 .k-brand small{display:block;margin-top:5px;font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.k-hsearch{display:flex;align-items:center;gap:12px;height:56px;padding:0 26px;border-radius:18px;background:#fff;
-  box-shadow:var(--card);font-size:20px;color:var(--green-d);font-weight:500}
-.k-hsearch .i{font-size:24px;color:var(--green-l)}
-.k-lang{display:flex;padding:5px;border-radius:18px;background:#fff;box-shadow:var(--card);gap:4px}
-.k-lang button{height:46px;padding:0 22px;border-radius:14px;font-family:var(--fh);font-size:20px;letter-spacing:.1em;color:var(--muted);transition:background .25s var(--e),color .25s var(--e)}
+.k-loc,.k-lang,.k-mode{display:flex;align-items:center;height:56px;border-radius:18px;background:var(--surface);box-shadow:var(--card)}
+.k-loc{gap:10px;padding:0 22px;font-size:20px;font-weight:600;color:var(--green-d)}
+.k-loc .i{font-size:24px;color:var(--green)}
+.k-lang,.k-mode{padding:5px;gap:4px}
+.k-lang button{height:46px;padding:0 18px;border-radius:14px;font-family:var(--fh);font-size:20px;letter-spacing:.1em;color:var(--muted);transition:background .25s var(--e),color .25s var(--e)}
 .k-lang button.on{background:var(--green);color:#fff}
-.k-clock{text-align:right;min-width:260px}
+.k-mode button{width:52px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:24px;color:var(--muted);transition:background .25s var(--e),color .25s var(--e)}
+.k-mode button.on{color:#fff}
+.k-mode button[data-theme-set=light].on{background:#f0a93b}
+.k-mode button[data-theme-set=dark].on{background:#1b2350;color:#e8cf8f}
+html[data-theme=dark] .k-mode button[data-theme-set=dark].on{background:#2b3570}
+.k-clock{text-align:right;min-width:230px}
 .k-clock b{display:block;font-family:var(--fh);font-weight:500;font-size:34px;line-height:1;color:var(--green-d);letter-spacing:.03em}
-.k-clock span{display:block;margin-top:5px;font-size:16px;color:var(--muted);letter-spacing:.04em}
+.k-clock .colon{font-style:normal;animation:blink 1s steps(2,jump-none) infinite}
+.k-clock span{display:block;margin-top:3px;font-size:15px;color:var(--muted);letter-spacing:.04em;transition:opacity .4s var(--e),transform .4s var(--e)}
 
-/* ── Негізгі layout: сол жақ ақпарат панелі + оң жақ әрекет аймағы ── */
+/* ── Орналасу ── */
 .k-body{flex:1;min-height:0;display:grid;grid-template-columns:540px 1fr;gap:28px}
-.k-side{order:-1;display:flex;flex-direction:column;gap:16px;min-height:0;min-width:0}
+.k-side{display:flex;flex-direction:column;gap:16px;min-height:0;min-width:0}
 .k-main{display:flex;flex-direction:column;gap:18px;min-height:0;min-width:0}
 
-/* ── Сол панель: сурет + welcome ── */
-.k-visual{flex:1;min-height:0;border-radius:32px;position:relative;overflow:hidden;box-shadow:var(--card-h);background:linear-gradient(160deg,#0e4b36,#083425)}
-.k-visual svg.ph{position:absolute;inset:0;width:100%;height:100%}
+/* ── Сол баған: сурет, төраға, жаңалықтар ── */
+.k-visual{flex:1;min-height:0;position:relative;overflow:hidden;border-radius:32px;box-shadow:var(--card-h);background:#0a3a2a}
 .k-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
 .k-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(8,52,37,.92),rgba(8,52,37,0) 62%)}
 .k-visual .cap{position:absolute;left:28px;right:28px;bottom:22px;z-index:1;color:#fff}
-.k-visual .cap h2{margin:0;font-family:var(--fh);font-weight:500;font-size:44px;letter-spacing:.04em;line-height:1.05}
+.k-visual h2{margin:0;font-family:var(--fh);font-weight:500;font-size:44px;letter-spacing:.04em;line-height:1.05;transition:opacity .4s var(--e),transform .4s var(--e)}
 .k-visual .cap span{display:block;margin-top:6px;font-size:18px;opacity:.9}
 
+.k-reception{flex:none;position:relative;display:flex;align-items:center;gap:16px;padding:16px 22px 16px 24px;border-radius:26px;background:var(--surface);box-shadow:var(--card);overflow:hidden}
+.k-reception::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--green)}
+.k-reception .ph{position:relative;flex:none;width:100px;height:100px;border-radius:50%;padding:4px;background:var(--surface);box-shadow:0 0 0 3px #c9a95b,0 0 0 9px var(--surface),0 8px 22px rgba(176,141,67,.3)}
+.k-reception .ph img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.k-reception .ph i{position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(232,207,143,.9);animation:halo 3.2s ease-out infinite}
+@keyframes halo{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.3);opacity:0}}
+.k-reception .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;padding-left:8px}
+.k-reception .role{font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7a5c1e;line-height:1.25}
+html[data-theme=dark] .k-reception .role{color:#d9b968}
+.k-reception .nm{font-size:25px;font-weight:700;line-height:1.15}
+
+.k-newsbox{flex:none;border-radius:28px;background:var(--surface);box-shadow:var(--card);padding:18px 24px 14px}
+.k-newsbox h4{margin:0 0 4px;font-size:15px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px}
+.k-newsbox h4::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.ni{display:flex;flex-direction:column;gap:2px;padding:10px 0;border-top:1px solid var(--line)}
+.ni:first-child{border-top:0}
+.ni .d{font-size:13px;font-weight:600;color:var(--green);letter-spacing:.04em}
+html[data-theme=dark] .ni .d{color:var(--green-l)}
+.ni .t{font-size:17px;font-weight:500;line-height:1.3}
+
 /* ── Намаз уақыттары ── */
-.k-namaz{flex:none;border-radius:28px;overflow:hidden;background:#fff;box-shadow:var(--card)}
-.k-next{padding:20px 26px 18px;background:linear-gradient(135deg,var(--green-d),var(--green) 75%);color:#fff}
-.k-next .lab{font-size:15px;letter-spacing:.12em;text-transform:uppercase;opacity:.75}
-.k-next .row{display:flex;align-items:baseline;justify-content:space-between;margin-top:6px}
-.k-next .nm{font-family:var(--fh);font-size:34px;letter-spacing:.06em}
-.k-next .tm{font-family:var(--fh);font-size:50px;line-height:1;color:#e8cf8f;font-variant-numeric:tabular-nums}
-.k-next .cd{margin-top:4px;font-size:18px;opacity:.9;font-variant-numeric:tabular-nums}
-.k-times{display:grid;grid-template-columns:repeat(6,1fr)}
-.k-time{display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px 0 14px;border-left:1px solid var(--line);transition:background .3s}
-.k-time:first-child{border-left:0}
-.k-time span{font-size:14px;color:var(--muted)}
-.k-time b{font-family:var(--fh);font-weight:500;font-size:22px;color:var(--green-d);font-variant-numeric:tabular-nums}
-.k-time.next{background:var(--mint)}
-.k-time.next span{color:var(--green);font-weight:600}
-.k-time.next b{color:var(--green);animation:pulseText 2s ease-in-out infinite}
-.k-time.past b{color:#a3afa9}
-@keyframes pulseText{0%,100%{opacity:1}50%{opacity:.55}}
-
-/* ── Бүгін ҚМДБ-да ── */
-.k-today{flex:1;min-height:0;border-radius:28px;background:#fff;box-shadow:var(--card);padding:18px 26px;display:flex;flex-direction:column;gap:6px}
-.k-today h4{margin:0 0 4px;font-size:15px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.k-event{flex:1;display:flex;align-items:center;gap:20px;border-top:1px solid var(--line)}
-.k-event:nth-child(2){border-top:0}
-.k-event b{flex:none;width:72px;font-family:var(--fh);font-weight:500;font-size:26px;color:var(--green)}
-.k-event span{font-size:18px;font-weight:600;line-height:1.2}
-.k-event small{display:block;font-size:14px;font-weight:400;color:var(--muted);margin-top:1px}
-
-/* ── Оң жақ: іздеу + чиптер ── */
-.k-find{flex:none;display:flex;flex-direction:column;gap:12px}
-.k-search{display:flex;align-items:center;gap:16px;height:76px;padding:0 12px 0 26px;border-radius:24px;background:#fff;
-  border:2px solid transparent;box-shadow:var(--card);transition:border-color .3s var(--e),box-shadow .3s var(--e),transform .3s var(--e)}
-.k-search .i{font-size:30px;color:var(--green-l);transition:color .3s}
-.k-search input{flex:1;height:100%;border:0;outline:0;background:none;font-size:22px;-webkit-user-select:text;user-select:text}
-.k-search input::placeholder{color:#8e9c95}
-.k-search:focus-within{border-color:var(--green);box-shadow:0 0 0 8px rgba(14,75,54,.10),var(--card-h);transform:translateY(-2px)}
-.k-search:focus-within .i{color:var(--green)}
-.k-search .go{height:54px;padding:0 30px;border-radius:16px;background:var(--green);color:#fff;font-size:18px;font-weight:600;transition:transform .2s var(--e)}
-.k-search .go:active{transform:scale(.96)}
-.k-quick{display:flex;gap:10px}
-.k-chip{flex:1;height:52px;display:flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;background:transparent;border:1.5px solid rgba(14,75,54,.22);
-  color:var(--green-d);font-size:17px;font-weight:500;transition:transform .2s var(--e),background .2s var(--e),color .2s var(--e)}
-.k-chip .i{font-size:22px;color:var(--green)}
-.k-chip:active,.k-chip.pressed{transform:scale(.95);background:var(--green);color:#fff}
-.k-chip:active .i,.k-chip.pressed .i{color:#e8cf8f}
-
-/* ── Мәзір: 1 басты карточка + 7 плитка ── */
-.k-grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,1fr);gap:16px}
-.k-card{position:relative;overflow:hidden;text-align:left;border-radius:28px;border:1px solid var(--line);box-shadow:var(--card);
-  display:flex;flex-direction:column;justify-content:space-between;padding:22px 22px 20px;background:#fff;
-  transition:transform .25s var(--e),box-shadow .25s var(--e),background .25s var(--e)}
-.k-card:active{transform:scale(.96);box-shadow:var(--card)}
-.k-card .ic{width:60px;height:60px;border-radius:18px;display:grid;place-items:center;font-size:32px}
-.k-card h3{margin:0;font-size:25px;font-weight:600;line-height:1.15;color:var(--ink);padding-right:44px}
-.k-card .go{position:absolute;right:18px;bottom:18px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:20px;background:rgba(14,75,54,.08);color:var(--green)}
-.g-info .ic{background:var(--mint);color:var(--green)}
-.g-place{background:#fbf7ec}
-.g-place .ic{background:#f1e6c8;color:#8a6a22}
-.g-place .go{background:rgba(176,141,67,.16);color:#8a6a22}
-.g-tech{background:#f0f7f5}
-.g-tech .ic{background:#d9ece7;color:#0f6b57}
-.g-media{background:var(--green-d);border-color:transparent}
-.g-media .ic{background:rgba(255,255,255,.12);color:#e8cf8f}
-.g-media h3{color:#fff}
-.g-media .go{background:rgba(255,255,255,.14);color:#e8cf8f}
-.k-card.feature{grid-column:1 / span 2;grid-row:1 / span 2;padding:32px;border:0;color:#fff;
-  background:radial-gradient(500px 300px at 90% 0%,rgba(232,207,143,.22),transparent 60%),linear-gradient(150deg,#0b3d2c,#0e4b36 60%,#146447)}
-.k-card.feature::before{content:"";position:absolute;inset:0;opacity:.09;background-image:radial-gradient(#fff 1.6px,transparent 1.8px);background-size:26px 26px}
-.k-card.feature .ic{position:relative;width:92px;height:92px;border-radius:28px;font-size:52px;background:rgba(255,255,255,.12);color:#e8cf8f}
-.k-card.feature .tx{position:relative}
-.k-card.feature h3{font-family:var(--fh);font-weight:500;font-size:52px;letter-spacing:.03em;text-transform:uppercase;color:#fff;padding:0}
-.k-card.feature p{margin:10px 0 0;font-size:21px;line-height:1.35;color:rgba(255,255,255,.82);max-width:420px}
-.k-card.feature .cta{position:relative;align-self:flex-start;display:flex;align-items:center;gap:12px;height:64px;padding:0 30px;border-radius:999px;background:#e8cf8f;color:#083425;font-size:21px;font-weight:600}
-.k-card.feature .cta .i{font-size:24px}
-.g-media{grid-column:3 / span 2}
-
-/* ── Төменгі жол: жаңалық + secondary ── */
-.k-bottom{flex:none;display:flex;align-items:center;gap:16px;height:64px}
-.k-news{flex:1;min-width:0;display:flex;align-items:center;gap:16px;font-size:17px;color:var(--muted);white-space:nowrap;overflow:hidden}
-.k-news em{flex:none;font-style:normal;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
-.k-news span{overflow:hidden;text-overflow:ellipsis;color:var(--ink);transition:opacity .35s}
-.k-secondary{flex:none;display:flex;gap:10px}
-.k-sbtn{height:52px;display:flex;align-items:center;gap:10px;padding:0 22px;border-radius:16px;background:transparent;color:var(--muted);font-size:16px;font-weight:500;transition:transform .2s var(--e),color .2s}
-.k-sbtn .i{font-size:22px;color:var(--green-l)}
-.k-sbtn:active{transform:scale(.95);color:var(--green)}
-
-/* ── Footer ── */
-.k-footer{flex:none;display:flex;align-items:center;justify-content:space-between;height:32px;font-size:14px;color:#93a099;letter-spacing:.08em}
-.k-footer .fi{display:flex;align-items:center;gap:8px}
-.k-footer .i{font-size:18px;color:var(--green-l)}
-.k-footer .qr{width:26px;height:26px;border-radius:5px;border:1.5px dashed #b7c2bc;display:grid;place-items:center;font-size:9px;color:#93a099}
-
-/* ── Toast ── */
-.k-toast{position:absolute;left:50%;bottom:70px;transform:translate(-50%,20px);z-index:50;padding:18px 34px;border-radius:20px;background:var(--green-d);color:#fff;
-  font-size:22px;opacity:0;pointer-events:none;transition:opacity .3s var(--e),transform .3s var(--e);box-shadow:0 20px 50px rgba(9,42,30,.35)}
-.k-toast.show{opacity:1;transform:translate(-50%,0)}
-
-/* ══════════════════════════════════════════════════════════
-   Болашақ ішкі беттерге арналған ортақ shell:
-   HEADER + СОЛ ТҰРАҚТЫ МӘЗІР + НЕГІЗГІ CONTENT
-   <div class="k-shell"><aside class="k-sidebar">…</aside><main class="k-content">…</main></div>
-   ══════════════════════════════════════════════════════════ */
-.k-shell{flex:1;min-height:0;display:grid;grid-template-columns:360px 1fr;gap:24px}
-.k-sidebar{display:flex;flex-direction:column;gap:12px;min-height:0;overflow:auto}
-.k-content{min-height:0;border-radius:28px;background:#fff;box-shadow:var(--card);padding:28px}
-
-/* ══ Жандандыру және анимациялар ══ */
-.k-clock .colon{font-style:normal;animation:blink 1s steps(2,jump-none) infinite}
-@keyframes blink{50%{opacity:.2}}
-.k-lang button{padding:0 18px}
-
-/* ғимарат суреті: баяу Ken Burns + сәлемдесу ауысады */
-.k-visual img{animation:kenburns 22s ease-in-out infinite alternate;transform-origin:60% 40%}
-@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.12) translate(-1.5%,-1%)}}
-.k-visual .cap h2{transition:opacity .4s var(--e),transform .4s var(--e)}
-
-/* намаз: келесі намазға дейінгі прогресс */
-.k-next{position:relative}
-.k-next .bar{margin-top:12px;height:6px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}
-.k-next .bar i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#e8cf8f,#fff3cf);transition:width 1s linear;position:relative}
-.k-next .bar i::after{content:"";position:absolute;right:0;top:-3px;width:12px;height:12px;border-radius:50%;background:#fff3cf;box-shadow:0 0 0 0 rgba(232,207,143,.7);animation:dotPulse 1.8s ease-out infinite}
-@keyframes dotPulse{to{box-shadow:0 0 0 12px rgba(232,207,143,0)}}
-.k-time.next{position:relative}
-.k-time.next::after{content:"";position:absolute;bottom:0;left:22%;right:22%;height:3px;border-radius:3px;background:var(--green)}
-
-/* басты карточка: пульстейтін карта нүктелері, жылтыр батырма, санауыштар */
-.k-card.feature .ic{animation:floaty 4.5s ease-in-out infinite}
-@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.pings{position:absolute;inset:0;pointer-events:none}
-.pings i{position:absolute;width:14px;height:14px;border-radius:50%;background:#e8cf8f;box-shadow:0 0 0 0 rgba(232,207,143,.6);animation:ping 2.8s ease-out infinite}
-@keyframes ping{0%{box-shadow:0 0 0 0 rgba(232,207,143,.6)}70%,100%{box-shadow:0 0 0 26px rgba(232,207,143,0)}}
-.k-card.feature .foot{position:relative;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.k-card.feature .cta{position:relative;overflow:hidden;flex:none}
-.k-card.feature .cta::after{content:"";position:absolute;top:0;bottom:0;width:60px;left:-80px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent);animation:shine 3.6s ease-in-out infinite}
-@keyframes shine{0%,55%{left:-80px}100%{left:130%}}
-.k-card.feature .stats{display:flex;gap:22px}
-.k-card.feature .stats div{display:flex;flex-direction:column;align-items:flex-start}
-.k-card.feature .stats b{font-family:var(--fh);font-weight:500;font-size:34px;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
-.k-card.feature .stats span{margin-top:3px;font-size:13px;color:rgba(255,255,255,.7)}
-
-/* плиткалардың иконкалары кезекпен жеңіл қалқиды */
-.k-card:not(.feature) .ic{animation:floaty 5s ease-in-out infinite}
-.k-card:nth-child(3) .ic{animation-delay:.5s}.k-card:nth-child(4) .ic{animation-delay:1s}.k-card:nth-child(5) .ic{animation-delay:1.5s}
-.k-card:nth-child(6) .ic{animation-delay:2s}.k-card:nth-child(7) .ic{animation-delay:2.5s}
-.k-card:not(.feature):not(:active):hover .go{transform:translateX(3px)}
-
-/* Munara TV: LIVE белгісі */
-.live{position:absolute;right:22px;top:36px;display:flex;align-items:center;gap:8px;padding:6px 14px 6px 12px;border-radius:99px;background:rgba(255,255,255,.12);
-  font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff}
-.live i{width:9px;height:9px;border-radius:50%;background:#ff5b5b;animation:liveDot 1.4s ease-in-out infinite}
-@keyframes liveDot{0%,100%{box-shadow:0 0 0 0 rgba(255,91,91,.7)}50%{box-shadow:0 0 0 8px rgba(255,91,91,0)}}
-.g-media .ic{margin-left:auto;margin-right:0}
-.g-media{background:radial-gradient(400px 200px at 100% 0%,rgba(232,207,143,.18),transparent 60%),var(--green-d)}
-
-/* жаңалық жолы */
-.k-news em::before{content:"";display:inline-block;width:8px;height:8px;margin-right:10px;border-radius:50%;background:var(--gold);animation:liveDot 2s ease-in-out infinite}
-
-.k-time .i{font-size:26px;color:var(--green-l);margin-bottom:2px}
-.k-time.next .i{color:var(--green);animation:floaty 3s ease-in-out infinite}
-.k-time.past .i{color:#b4beb8}
-.k-time{padding-top:14px}
-
-/* ══ Намаз панелінің минималистік градиент фоны (мезгілге қарай) ══ */
-.k-next{overflow:hidden;isolation:isolate;text-shadow:0 1px 8px rgba(0,20,40,.25)}
+.k-namaz{flex:none;display:flex;height:136px;border-radius:28px;background:var(--surface);box-shadow:var(--card);overflow:hidden}
+.k-next{position:relative;flex:none;width:400px;padding:16px 26px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;text-shadow:0 1px 8px rgba(0,20,40,.25);overflow:hidden;isolation:isolate}
 .k-next>*:not(.scene){position:relative;z-index:2}
+.k-next .cols{display:grid;grid-template-columns:1fr auto;column-gap:16px;row-gap:4px;align-items:center}
+.k-next .lab{font-size:15px;letter-spacing:.14em;text-transform:uppercase;opacity:.8}
+.k-next .cd{justify-self:end;font-size:22px;font-variant-numeric:tabular-nums}
+.k-next .nm,.k-next .tm{font-family:var(--fh);font-size:36px;line-height:1.1}
+.k-next .nm{letter-spacing:.06em}
+.k-next .tm{justify-self:end}
+.k-next .bar{height:6px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}
+.k-next .bar i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#e8cf8f,#fff3cf);transition:width 1s linear}
+/* аспан фоны: мезгілге қарай градиент */
 .scene{position:absolute;inset:0;z-index:0}
 .sc{position:absolute;inset:0;opacity:0;transition:opacity 2s ease;overflow:hidden}
 .sc.on{opacity:1}
-.sc[data-ph=night]  {background:linear-gradient(135deg,#070d22 0%,#111d45 55%,#243266 100%)}
-.sc[data-ph=fajr]   {background:linear-gradient(135deg,#101a3f 0%,#3a4880 55%,#b48aa6 100%)}
-.sc[data-ph=sunrise]{background:linear-gradient(135deg,#46639f 0%,#c58f9c 55%,#f3b98a 100%)}
-.sc[data-ph=noon]   {background:linear-gradient(135deg,#1c6fc4 0%,#3d98e0 55%,#8fd0f4 100%)}
-.sc[data-ph=asr]    {background:linear-gradient(135deg,#2f78b5 0%,#78b0c8 55%,#e9cf98 100%)}
-.sc[data-ph=sunset] {background:linear-gradient(135deg,#2b2a63 0%,#9a4470 55%,#f08a56 100%)}
-/* нәзік жарық дақ */
 .sc::after{content:"";position:absolute;right:-60px;top:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 68%)}
+.sc[data-ph=night]{background:linear-gradient(135deg,#070d22,#111d45 55%,#243266)}
+.sc[data-ph=fajr]{background:linear-gradient(135deg,#101a3f,#3a4880 55%,#b48aa6)}
+.sc[data-ph=sunrise]{background:linear-gradient(135deg,#46639f,#c58f9c 55%,#f3b98a)}
+.sc[data-ph=noon]{background:linear-gradient(135deg,#1c6fc4,#3d98e0 55%,#8fd0f4)}
+.sc[data-ph=asr]{background:linear-gradient(135deg,#2f78b5,#78b0c8 55%,#e9cf98)}
+.sc[data-ph=sunset]{background:linear-gradient(135deg,#2b2a63,#9a4470 55%,#f08a56)}
 .sc[data-ph=night]::after,.sc[data-ph=fajr]::after{background:radial-gradient(circle,rgba(190,205,255,.14),transparent 68%)}
-/* түнде және таңда — сирек жұлдыздар ғана */
 .stars{position:absolute;inset:0;background-repeat:no-repeat;animation:twinkle 4s ease-in-out infinite;
-  background-image:radial-gradient(1.4px 1.4px at 14% 24%,#fff,transparent),radial-gradient(1.2px 1.2px at 38% 70%,#fff,transparent),radial-gradient(1.6px 1.6px at 58% 18%,#fff,transparent),
-  radial-gradient(1.2px 1.2px at 80% 52%,#fff,transparent),radial-gradient(1.4px 1.4px at 92% 16%,#fff,transparent)}
-.stars.s2,.sun,.cloud,.moon,.glow{display:none}
+  background-image:radial-gradient(1.4px 1.4px at 14% 24%,#fff,transparent),radial-gradient(1.2px 1.2px at 38% 70%,#fff,transparent),radial-gradient(1.6px 1.6px at 58% 18%,#fff,transparent),radial-gradient(1.2px 1.2px at 80% 52%,#fff,transparent),radial-gradient(1.4px 1.4px at 92% 16%,#fff,transparent)}
 .sc[data-ph=fajr] .stars{opacity:.35}
-@keyframes twinkle{0%,100%{opacity:.9}50%{opacity:.3}}
-.k-next .tm{color:#fff}
-
-/* ══ Munara TV: тікелей эфир анимациясы ══ */
-@keyframes tvShift{to{background-position:100% 0}}
-.g-media .tv{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:inherit;background:linear-gradient(115deg,#062a1e,#0b4634,#0a3a2a,#124f3a);background-size:300% 100%;animation:tvShift 12s ease-in-out infinite alternate}
-/* сканлайндар */
-.g-media .tv::before{content:"";position:absolute;inset:-20px 0;opacity:.5;
-  background:repeating-linear-gradient(0deg,rgba(255,255,255,.045) 0 2px,transparent 2px 5px);animation:scan 4s linear infinite}
-@keyframes scan{to{transform:translateY(5px)}}
-/* эфир сәулесі */
-.g-media .tv::after{content:"";position:absolute;top:0;bottom:0;width:140px;left:-160px;transform:skewX(-18deg);
-  background:linear-gradient(90deg,transparent,rgba(232,207,143,.16),transparent);animation:beam 5s ease-in-out infinite}
-@keyframes beam{0%,40%{left:-160px}100%{left:110%}}
-/* сигнал толқындары иконканың айналасында */
-.g-media .wave{position:absolute;left:22px;top:24px;width:56px;height:56px;border-radius:50%;border:2px solid rgba(232,207,143,.55);animation:wave 3s ease-out infinite}
-.g-media .wave.w2{animation-delay:1s}.g-media .wave.w3{animation-delay:2s}
-@keyframes wave{0%{transform:scale(1);opacity:.7}100%{transform:scale(3.2);opacity:0}}
-/* аудио equalizer */
-.g-media h3{position:relative;margin-top:auto}
-.g-media h3,.g-media .ic,.g-media .go,.g-media .live{z-index:1}
-.g-media .ic{position:absolute;left:22px;top:24px;right:auto;margin:0}
-.live em{font-style:normal;margin-left:6px;padding-left:10px;border-left:1px solid rgba(255,255,255,.3);font-variant-numeric:tabular-nums;letter-spacing:.06em;font-weight:500}
-
-.k-clock span{margin-top:3px;font-size:15px}
-.k-clock .hj{color:var(--green);font-weight:500}
-
-/* ══ Намаз панелі — оң жақ үстінде бір қатар ══ */
-.k-namaz{display:flex;align-items:stretch;height:136px}
-.k-namaz .k-next{flex:none;width:400px;padding:14px 26px 12px;display:flex;flex-direction:column;justify-content:center}
-.k-namaz .k-next .row{margin-top:2px}
-.k-namaz .k-next .nm{font-size:32px}
-.k-namaz .k-next .tm{font-size:44px}
-.k-namaz .k-next .bar{margin-top:8px}
-.k-namaz .k-times{flex:1}
-.k-namaz .k-time{justify-content:center;padding:8px 0}
-.k-namaz .k-time span{font-size:16px}
-.k-namaz .k-time b{font-size:28px}
-.k-namaz .k-time .i{font-size:28px}
-.k-bottom{justify-content:flex-end;height:60px}
-
-/* ══ Сол жақ: жаңалықтар (суретсіз) ══ */
-.k-newsbox{flex:none;border-radius:28px;background:#fff;box-shadow:var(--card);padding:18px 24px 14px;display:flex;flex-direction:column;gap:6px}
-.k-newsbox h4{margin:0 0 4px;font-size:15px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px}
-.k-newsbox h4::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);animation:liveDot 2s ease-in-out infinite}
-.k-newsbox .ni{display:flex;flex-direction:column;gap:2px;padding:10px 0;border-top:1px solid var(--line);animation:fadeUp .6s var(--e) both}
-.k-newsbox .ni:nth-child(2){animation-delay:.1s}.k-newsbox .ni:nth-child(3){animation-delay:.2s}.k-newsbox .ni:nth-child(4){animation-delay:.3s}
-.k-newsbox .list .ni:first-child{border-top:0}
-.k-newsbox .d{font-size:13px;font-weight:600;color:var(--green);letter-spacing:.04em}
-.k-newsbox .t{font-size:17px;font-weight:500;line-height:1.3;color:var(--ink)}
-
-#kDate{transition:opacity .4s var(--e),transform .4s var(--e)}
-.k-clock{min-width:230px}
-
-/* намаз блогы: сол — келесі намаз/атауы, оң — қалған уақыт/намаз уақыты */
-.k-next .cols{display:flex;justify-content:space-between;align-items:stretch;gap:16px}
-.k-next .l,.k-next .r{display:flex;flex-direction:column;justify-content:space-between}
-.k-next .r{align-items:flex-end;text-align:right}
-.k-next .lab{font-size:15px;letter-spacing:.14em;text-transform:uppercase;opacity:.8}
-.k-next .nm{font-family:var(--fh);font-size:40px;line-height:1.1;letter-spacing:.06em;margin-top:6px}
-.k-next .cd{display:flex;align-items:baseline;gap:8px;font-size:22px;font-weight:500;opacity:1;font-variant-numeric:tabular-nums}
-.k-next .cd small{font-size:15px;opacity:.85;font-weight:400}
-.k-next .tm{font-family:var(--fh);font-size:40px;line-height:1.1;margin-top:6px;color:#fff}
-.k-namaz .k-next .nm,.k-namaz .k-next .tm{font-size:40px}
-.k-namaz .k-next .row{display:none}
-
-/* header: локация */
-.k-loc{display:flex;align-items:center;gap:10px;height:56px;padding:0 22px;border-radius:18px;background:#fff;box-shadow:var(--card);font-size:20px;font-weight:600;color:var(--green-d)}
-.k-loc .i{font-size:24px;color:var(--green)}
-
-/* намаз блогы: 2 қатар — (келесі намаз | қалған уақыт), (атауы | уақыты); прогреске бос орын */
-.k-next .cols{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;column-gap:16px;row-gap:4px;align-items:center}
-.k-next .l,.k-next .r{display:contents}
-.k-next .lab{grid-row:1;grid-column:1;margin:0}
-.k-next .cd{grid-row:1;grid-column:2;justify-self:end}
-.k-next .nm{grid-row:2;grid-column:1;margin:0}
-.k-next .tm{grid-row:2;grid-column:2;justify-self:end;margin:0}
-.k-namaz .k-next .bar{margin-top:24px}
-.k-namaz .k-next{padding-top:12px;padding-bottom:10px}
-.k-namaz .k-next{justify-content:space-between;padding:16px 26px 16px}
-.k-namaz .k-next .bar{margin-top:0}
-.k-namaz .k-next .nm,.k-namaz .k-next .tm{font-size:36px}
-.k-next .cd{font-weight:400}
-
-/* ══ Қабылдауға жазылу картасы (Бас мүфти) ══ */
-.k-reception{flex:none;position:relative;display:flex;align-items:center;gap:16px;padding:14px 16px 14px 20px;border-radius:26px;background:#fff;
-  box-shadow:var(--card);overflow:hidden}
-.k-reception::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--green)}
-.k-reception .ph{flex:none;width:92px;height:92px;border-radius:50%;padding:4px;background:#fff;
-  box-shadow:0 0 0 3px #c9a95b,0 0 0 9px #fff,0 8px 22px rgba(176,141,67,.35)}
-.k-reception .ph img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
-.k-reception .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;padding-left:8px}
-.k-reception .role{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7a5c1e;line-height:1.25}
-.k-reception .nm{font-size:20px;font-weight:700;line-height:1.15;color:var(--ink)}
-.k-reception .sub{font-size:14px;color:var(--muted)}
-.k-reception .rbtn{flex:none;width:118px;height:76px;padding:8px;border-radius:20px;background:var(--green);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
-  font-size:14px;font-weight:600;line-height:1.15;text-align:center;box-shadow:0 10px 24px rgba(14,75,54,.28);transition:transform .2s var(--e);position:relative;overflow:hidden}
-.k-reception .rbtn .i{font-size:22px;color:#e8cf8f}
-.k-reception .rbtn:active,.k-reception .rbtn.pressed{transform:scale(.94)}
-.k-reception .rbtn::after{content:"";position:absolute;top:0;bottom:0;width:40px;left:-60px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);animation:shine 4.2s ease-in-out infinite}
-
-.k-reception{padding:16px 22px 16px 24px}
-.k-reception .ph{width:100px;height:100px}
-.k-reception .role{font-size:12.5px}
-.k-reception .nm{font-size:25px}
-
-/* Бас мүфти суреті: нұр шашқан рамка */
-.k-reception .ph{position:relative;box-shadow:0 0 0 0 transparent;background:#fff;animation:aura 3.2s ease-in-out infinite}
-.k-reception .ph img{position:relative;z-index:2}
-@keyframes aura{0%,100%{box-shadow:0 0 14px 2px rgba(232,207,143,.45),0 0 0 6px #fff}50%{box-shadow:0 0 30px 10px rgba(232,207,143,.85),0 0 0 6px #fff}}
-.k-reception .ring{position:absolute;inset:-4px;border-radius:50%;z-index:1;
-  background:conic-gradient(from 0deg,#b8933f,#fff2bf,#c9a95b,#f6e3a1,#b8933f,#fff2bf,#c9a95b,#b8933f);
-  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3px));mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3px));
-  animation:spin 6s linear infinite}
-.k-reception .rays{position:absolute;inset:-15px;border-radius:50%;z-index:0;
-  background:repeating-conic-gradient(from 0deg,rgba(232,207,143,.75) 0 3deg,transparent 3deg 12deg);
-  -webkit-mask:radial-gradient(circle,transparent 62%,#000 66%,rgba(0,0,0,.0) 100%);mask:radial-gradient(circle,transparent 62%,#000 66%,rgba(0,0,0,0) 100%);
-  animation:spin 24s linear infinite reverse,raysPulse 3.2s ease-in-out infinite}
-@keyframes raysPulse{0%,100%{opacity:.35}50%{opacity:1}}
-.k-reception .pulse{position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(232,207,143,.9);z-index:0;animation:haloOut 3.2s ease-out infinite}
-@keyframes haloOut{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.32);opacity:0}}
-@keyframes spin{to{transform:rotate(360deg)}}
-.k-reception .rays{display:none}
-
-/* ══ Карточка иконкаларының мазмұнға байланысты анимациясы ══ */
-.ic svg *{transform-box:fill-box;transform-origin:center}
-/* ҚМДБ құрылымы: түйіндер кезекпен жанады, байланыс сызығы ағады */
-.m-structure .sn{animation:nodePop 3.6s ease-in-out infinite}
-.m-structure .sn.b{animation-delay:.5s}.m-structure .sn.c{animation-delay:1s}
-.m-structure .sl{stroke-dasharray:4 3;animation:flow 1.6s linear infinite}
-@keyframes nodePop{0%,100%{transform:scale(1)}20%{transform:scale(1.28)}40%{transform:scale(1)}}
-@keyframes flow{to{stroke-dashoffset:-14}}
-/* Басшылық құрам: жұлдыз жарқырайды, тұлға жеңіл көтеріледі */
-.m-leadership .ls{animation:starGlow 2.8s ease-in-out infinite;fill:rgba(176,141,67,.35)}
-.m-leadership .lp{animation:leadUp 4s ease-in-out infinite}
-@keyframes starGlow{0%,100%{transform:scale(.9);opacity:.55}50%{transform:scale(1.1);opacity:1}}
-@keyframes leadUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.2px)}}
-/* Бөлімдер: 4 бөлім кезекпен көтеріледі */
-.m-departments .dq{animation:nodePop 3.2s ease-in-out infinite}
-.m-departments .q2{animation-delay:.35s}.m-departments .q4{animation-delay:.7s}.m-departments .q3{animation-delay:1.05s}
-/* Қызметтер: қоңырау "динь" */
-.m-services .bell{animation:ding 3.4s ease-in-out infinite}
-@keyframes ding{0%,40%,100%{transform:translateY(0) rotate(0)}8%{transform:translateY(-3px) rotate(-8deg)}16%{transform:translateY(0) rotate(8deg)}24%{transform:translateY(-2px) rotate(-5deg)}32%{transform:rotate(3deg)}}
-/* Облыстық өкілдіктер: нүкте секіреді, астында толқын */
-.m-regions .pin{animation:pinDrop 2.6s ease-in-out infinite}
-.m-regions .rip{animation:ripple 2.6s ease-in-out infinite}
-@keyframes pinDrop{0%,100%{transform:translateY(0)}30%{transform:translateY(-3px)}55%{transform:translateY(0)}}
-@keyframes ripple{0%,100%{transform:scale(.6);opacity:.2}55%{transform:scale(1.25);opacity:1}}
-/* Цифрлық өнімдер: телефон діріл қағады, хабарлама нүктесі, экран сызықтары */
-.m-products .ph{animation:buzz 3.8s ease-in-out infinite}
-.m-products .bd{animation:badge 1.8s ease-in-out infinite}
-.m-products .scr{stroke-dasharray:6;animation:typing 3.8s ease-in-out infinite}
-@keyframes buzz{0%,60%,100%{transform:rotate(0)}64%{transform:rotate(-6deg)}68%{transform:rotate(6deg)}72%{transform:rotate(-4deg)}76%{transform:rotate(0)}}
-@keyframes badge{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.6}}
-@keyframes typing{0%{stroke-dashoffset:6}40%,100%{stroke-dashoffset:0}}
-
-/* 360° виртуалды тур: панорама сырғиды, орбита айналады */
-.g-tour{background:var(--green-d);border-color:transparent;grid-column:3 / span 2;position:relative}
-.g-tour .pano{position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,40,29,.96) 0%,rgba(6,40,29,.72) 45%,rgba(6,40,29,.5) 100%),url("../assets/qmdb-building.jpeg");
-  background-size:auto 100%,auto 150%;background-repeat:no-repeat,repeat-x;animation:panSlide 40s linear infinite}
-@keyframes panSlide{from{background-position:0 0,0 40%}to{background-position:0 0,-1400px 40%}}
-.g-tour h3{color:#fff;position:relative;margin-top:auto}
-.g-tour .ic{position:absolute;left:22px;top:24px;background:rgba(255,255,255,.14);color:#e8cf8f}
-@keyframes tiltOrb{0%,100%{transform:rotate(0)}50%{transform:rotate(180deg)}}
-.g-tour .orb{stroke-dasharray:5 3;animation:flow 1.4s linear infinite}
-.g-tour .spinring{position:absolute;left:14px;top:16px;width:76px;height:76px;border-radius:50%;border:2px dashed rgba(232,207,143,.7);animation:spin 12s linear infinite}
-.g-tour .b360{position:absolute;right:22px;top:20px;font-family:var(--fh);font-size:44px;line-height:1;letter-spacing:.04em;color:#e8cf8f;text-shadow:0 0 18px rgba(232,207,143,.6);animation:badge360 3s ease-in-out infinite}
-@keyframes badge360{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.06)}}
-.g-tour .go{background:rgba(255,255,255,.14);color:#e8cf8f}
-
-/* карточка сипаттамасы: жұқа, кішкентай */
-.k-card:not(.feature) .tx{padding-right:46px}
-.k-card:not(.feature) h3{padding-right:0}
-.k-card:not(.feature) .tx p{margin:6px 0 0;font-size:14.5px;font-weight:300;line-height:1.35;color:var(--muted);letter-spacing:.005em}
-.g-tour .tx{position:relative;margin-top:auto}
-.g-tour .tx p{color:rgba(255,255,255,.92)}
-
-/* ══ Жаңа торлы орналасу: құрылым (ұзын) + 4 карточка, астында цифрлық өнімдер, Munara TV және 360° тур ══ */
-.k-grid{grid-template-rows:1fr 1.15fr 1.15fr .75fr}
-.k-grid .k-card.feature{grid-column:1 / span 2;grid-row:1 / span 2}
-.k-grid .m-structure{grid-column:3 / span 2;grid-row:1}
-.k-grid .m-leadership{grid-column:3;grid-row:2}
-.k-grid .m-departments{grid-column:4;grid-row:2}
-.k-grid .m-services{grid-column:3;grid-row:3}
-.k-grid .m-regions{grid-column:4;grid-row:3}
-.k-grid .m-products{grid-column:1;grid-row:3}
-.k-grid .m-munara{grid-column:2;grid-row:3}
-.k-grid .g-tour{grid-column:1 / span 4;grid-row:4}
-
-/* ҚМДБ құрылымы: ұзын көлденең карточка */
-.k-grid .m-structure{flex-direction:row;align-items:center;justify-content:flex-start;gap:26px;padding:20px 28px}
-.k-grid .m-structure .ic{width:84px;height:84px;border-radius:24px;font-size:46px}
-.k-grid .m-structure .tx{flex:1;padding-right:56px}
-.k-grid .m-structure h3{font-size:30px}
-.k-grid .m-structure .tx p{font-size:16px}
-
-/* Munara TV: тікелей эфир карточкасы */
-.k-grid .g-media{grid-column:2}
-.g-media .tx{position:relative;margin-top:auto}
-.g-media .tx p{color:rgba(255,255,255,.85)}
-.g-media h3{margin-top:0}
-
-/* 360° тур: суретсіз, ұзын көлденең карточка */
-.k-grid .g-tour{flex-direction:row;align-items:center;justify-content:flex-start;gap:28px;padding:20px 32px;
-  background:radial-gradient(600px 220px at 85% 50%,rgba(232,207,143,.18),transparent 65%),linear-gradient(115deg,#062a1e,#0b4634 60%,#0a3a2a)}
-@keyframes tourShift{to{background-position:0 0,100% 0}}
-.g-tour .pano{display:none}
-.k-grid .g-tour .ic{position:relative;left:auto;top:auto;flex:none;width:84px;height:84px;border-radius:50%;font-size:46px}
-.g-tour .ic .spinring{position:absolute;inset:-10px;width:auto;height:auto;left:auto;top:auto}
-.k-grid .g-tour .tx{flex:1;margin-top:0;padding-right:0}
-.g-tour h3{font-size:32px}
-.k-grid .g-tour .b360{position:relative;right:auto;top:auto;flex:none;font-size:84px;margin-right:64px}
-
-.k-grid .k-card:not(.feature):not(.m-structure):not(.g-tour){padding:16px 18px}
-.k-grid .k-card:not(.feature):not(.m-structure):not(.g-tour) .ic{width:48px;height:48px;border-radius:15px;font-size:26px}
-.k-grid .g-media .ic{left:18px;top:16px}
-.k-grid .g-media .wave{left:18px;top:16px;width:48px;height:48px}
-.k-grid .g-media .live{right:18px;top:24px;font-size:12px;padding:5px 12px 5px 10px}
-.k-grid .k-card:not(.feature):not(.m-structure):not(.g-tour) h3{font-size:23px}
-.k-grid .g-tour .tx p,.k-grid .g-media .tx p{color:rgba(255,255,255,.88)}
-.k-grid .g-tour .b360{margin-right:72px}
-
-/* ══ Карта үш қатарға созылады, оң жағында 5 карточка; төменгі қатарда цифрлық өнімдер, Munara TV, 360° тур ══ */
-.k-grid{grid-template-rows:.9fr 1.1fr 1.1fr .9fr}
-.k-grid .k-card.feature{grid-column:1 / span 2;grid-row:1 / span 3}
-.k-grid .m-structure{grid-column:3 / span 2;grid-row:1}
-.k-grid .m-leadership{grid-column:3;grid-row:2}
-.k-grid .m-departments{grid-column:4;grid-row:2}
-.k-grid .m-services{grid-column:3;grid-row:3}
-.k-grid .m-regions{grid-column:4;grid-row:3}
-.k-grid .m-products{grid-column:1;grid-row:4}
-.k-grid .m-munara,.k-grid .g-media{grid-column:2;grid-row:4}
-.k-grid .g-tour{grid-column:3 / span 2;grid-row:4;gap:20px;padding:16px 24px}
-.k-grid .g-tour .ic{width:68px;height:68px;font-size:38px}
-.g-tour h3{font-size:26px}
-.k-grid .g-tour .b360{font-size:60px;margin-right:56px}
-
-/* ══ Үстіңгі қатарлар қысқарды, төменгі қатар (өнімдер, Munara TV, 360° тур) үлкейді ══ */
-.k-grid{grid-template-rows:.8fr .95fr .95fr 1.3fr}
-.k-grid .m-products .ic,.k-grid .g-media .ic{width:64px;height:64px;border-radius:19px;font-size:34px}
-.k-grid .g-media .wave{width:64px;height:64px}
-.k-grid .m-products h3,.k-grid .g-media h3{font-size:28px}
-.k-grid .g-media .live{top:28px;font-size:13px}
-.k-grid .g-tour{padding:20px 32px;gap:26px}
-.k-grid .g-tour .ic{width:88px;height:88px;font-size:48px}
-.g-tour h3{font-size:34px}
-.k-grid .g-tour .b360{font-size:78px;margin-right:64px}
-.k-grid .g-tour{gap:20px;padding:20px 26px}
-.k-grid .g-tour .ic{width:76px;height:76px;font-size:42px}
-.g-tour h3{font-size:28px;white-space:nowrap}
-.k-grid .g-tour .b360{font-size:66px;margin-right:56px}
-.k-grid .k-card.m-products .ic,.k-grid .k-card.m-munara .ic{width:64px;height:64px;border-radius:19px;font-size:34px}
-.k-grid .k-card.m-munara .wave{width:64px;height:64px}
-.k-grid .k-card.m-products h3,.k-grid .k-card.m-munara h3{font-size:28px}
-.k-grid .k-card.m-munara .live{top:28px}
-
-/* Munara TV: жасыл емес, қою көк-графит эфир фоны */
-.k-grid .k-card.g-media{background:#0e1320}
-.g-media .tv{background:linear-gradient(115deg,#0b0f1b,#1a2340,#101729,#232d52);background-size:300% 100%}
-
-/* Munara TV: «Цифрлық өнімдер» сияқты ашық көгілдір-жасыл фон */
-.k-grid .k-card.g-media{background:#f0f7f5;border:1px solid var(--line)}
-.g-media .tv{background:none;animation:none}
-.g-media .tv::before{opacity:.5;background:repeating-linear-gradient(0deg,rgba(15,107,87,.05) 0 2px,transparent 2px 5px)}
-.g-media .tv::after{background:linear-gradient(90deg,transparent,rgba(15,107,87,.10),transparent)}
-.g-media h3{color:var(--ink)}
-.k-grid .k-card.g-media .ic{background:#d9ece7;color:#0f6b57}
-.g-media .wave{border-color:rgba(15,107,87,.45)}
-.g-media .live{background:rgba(15,107,87,.10);color:#0f6b57}
-.g-media .go{background:rgba(14,75,54,.08);color:var(--green)}
-.g-media .wave{display:none}
-
-/* ══ Түнгі / жарық режим ауыстырғышы ══ */
-.k-theme{position:relative;width:56px;height:56px;border-radius:18px;background:#fff;box-shadow:var(--card);color:var(--green-d);display:grid;place-items:center;font-size:26px;overflow:hidden;transition:transform .2s var(--e),background .4s}
-.k-theme:active{transform:scale(.92)}
-.k-theme .i{grid-area:1/1;transition:transform .5s var(--e),opacity .35s}
-.k-theme .ti-sun{transform:rotate(-90deg) scale(.4);opacity:0;color:#e8cf8f}
-html[data-theme=dark] .k-theme .ti-moon{transform:rotate(90deg) scale(.4);opacity:0}
-html[data-theme=dark] .k-theme .ti-sun{transform:none;opacity:1}
-
-html[data-theme=dark]{
-  --ink:#e8f0eb;--muted:#98aba0;--line:rgba(255,255,255,.09);--mint:#1c2d25;
-  --green:#2f8f69;--green-d:#d3eadf;--green-l:#5cbf95;
-  --card:0 14px 40px rgba(0,0,0,.35),0 2px 6px rgba(0,0,0,.25);--card-h:0 22px 60px rgba(0,0,0,.5),0 3px 8px rgba(0,0,0,.3);
-  color-scheme:dark;
-}
-html[data-theme=dark],html[data-theme=dark] body{background:#060b09}
-html[data-theme=dark] #screen{
-  background:radial-gradient(1200px 600px at 88% -12%,rgba(47,143,105,.16),transparent 62%),radial-gradient(900px 520px at -6% 108%,rgba(47,143,105,.10),transparent 60%),#0c1511;
-  box-shadow:0 30px 90px rgba(0,0,0,.6)}
-html[data-theme=dark] #screen::before{opacity:.06;filter:invert(1)}
-html[data-theme=dark] .k-hsearch,html[data-theme=dark] .k-lang,html[data-theme=dark] .k-loc,html[data-theme=dark] .k-theme,
-html[data-theme=dark] .k-namaz,html[data-theme=dark] .k-today,html[data-theme=dark] .k-search,html[data-theme=dark] .k-newsbox,
-html[data-theme=dark] .k-reception,html[data-theme=dark] .k-content,html[data-theme=dark] .k-card{background:#15211b}
-html[data-theme=dark] .k-card{border-color:rgba(255,255,255,.07)}
-html[data-theme=dark] .k-lang button{color:#94a89d}
-html[data-theme=dark] .k-lang button.on{background:#2f8f69;color:#fff}
-html[data-theme=dark] .k-theme{color:#e8cf8f}
-html[data-theme=dark] .k-time.past b{color:#5f7268}
-html[data-theme=dark] .k-time.past .i{color:#4a5b52}
-html[data-theme=dark] .k-time.next{background:#1c2d25}
-html[data-theme=dark] .k-card .go{background:rgba(255,255,255,.08);color:#5cbf95}
-html[data-theme=dark] .g-info .ic{background:#1f3329;color:#5cbf95}
-html[data-theme=dark] .g-place,html[data-theme=dark] .k-card.g-place{background:#211d13}
-html[data-theme=dark] .g-place .ic{background:rgba(232,207,143,.18);color:#e3c476}
-html[data-theme=dark] .g-place .go{background:rgba(232,207,143,.14);color:#e3c476}
-html[data-theme=dark] .k-card.g-tech,html[data-theme=dark] .k-grid .k-card.g-media{background:#12241f;border-color:rgba(255,255,255,.07)}
-html[data-theme=dark] .g-tech .ic,html[data-theme=dark] .k-grid .k-card.g-media .ic{background:#1d3a33;color:#6fd0b3}
-html[data-theme=dark] .g-media .live{background:rgba(111,208,179,.14);color:#6fd0b3}
-html[data-theme=dark] .g-media .go{background:rgba(255,255,255,.08);color:#6fd0b3}
-html[data-theme=dark] .g-media .tv::before{background:repeating-linear-gradient(0deg,rgba(111,208,179,.05) 0 2px,transparent 2px 5px)}
-html[data-theme=dark] .k-reception .role{color:#d9b968}
-html[data-theme=dark] .k-reception .ph{background:#15211b}
-html[data-theme=dark] .k-reception .ph img{filter:brightness(.95)}
-html[data-theme=dark] .k-reception::before{background:#2f8f69}
-html[data-theme=dark] .k-newsbox .d{color:#5cbf95}
-html[data-theme=dark] .k-toast{background:#0e4b36}
-html[data-theme=dark] .k-time span{color:#98aba0}
-html[data-theme=dark] .k-brand small,html[data-theme=dark] .k-clock span{color:#98aba0}
-@keyframes auraDark{0%,100%{box-shadow:0 0 14px 2px rgba(232,207,143,.35),0 0 0 6px #15211b}50%{box-shadow:0 0 30px 10px rgba(232,207,143,.7),0 0 0 6px #15211b}}
-html[data-theme=dark] .k-reception .ph{animation-name:auraDark}
-
-/* түнгі режим: үлкен жасыл карточкалар өз градиентін сақтайды */
-html[data-theme=dark] .k-card.feature{background:radial-gradient(500px 300px at 90% 0%,rgba(232,207,143,.20),transparent 60%),linear-gradient(150deg,#0a3527,#0e4b36 60%,#146447)}
-html[data-theme=dark] .k-grid .g-tour{background:radial-gradient(600px 220px at 85% 50%,rgba(232,207,143,.16),transparent 65%),linear-gradient(115deg,#062a1e,#0b4634 60%,#0a3a2a)}
-
-/* ══ 360° виртуалды тур: панорама көрермені (viewfinder) ══ */
-.k-grid .g-tour{overflow:hidden;background:linear-gradient(180deg,#07281d 0%,#0c4433 55%,#1b6a4c 100%)}
-.g-tour .vt{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;color:#e8cf8f}
-/* аспан жарығы */
-.g-tour .vt::before{content:"";position:absolute;left:55%;top:30%;width:260px;height:260px;margin:-130px;border-radius:50%;background:radial-gradient(circle,rgba(232,207,143,.30),transparent 68%);animation:sunDrift 18s ease-in-out infinite alternate}
-@keyframes sunDrift{to{transform:translateX(220px)}}
-/* горизонт сызығы */
-.g-tour .vt::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34px;background:linear-gradient(to top,rgba(4,26,19,.85),transparent)}
-.vt .sk{position:absolute;left:0;bottom:0;height:120px;width:100%;overflow:hidden}
-.vt .trk{display:flex;width:max-content;height:100%;animation:skySlide linear infinite}
-.vt .trk svg{flex:none;display:block}
-.vt .sk.far{height:96px;opacity:.16}.vt .sk.far .trk{animation-duration:70s}
-.vt .sk.far svg{width:480px;height:96px}
-.vt .sk.near{opacity:.34}.vt .sk.near .trk{animation-duration:36s}
-@keyframes skySlide{to{transform:translateX(-50%)}}
-/* белсенді нүктелер (hotspot) */
-.vt .hs{position:absolute;width:30px;height:30px;border-radius:50%;background:rgba(232,207,143,.9);color:#083425;display:grid;place-items:center;font-style:normal;
-  box-shadow:0 0 0 0 rgba(232,207,143,.7);animation:hsPulse 2.4s ease-out infinite}
-.vt .hs b{font-size:20px;line-height:1;font-weight:600}
-.vt .hs.h1{left:47%;bottom:62px}.vt .hs.h2{left:66%;bottom:88px;animation-delay:.8s}.vt .hs.h3{left:82%;bottom:50px;animation-delay:1.6s}
-@keyframes hsPulse{0%{box-shadow:0 0 0 0 rgba(232,207,143,.65)}70%,100%{box-shadow:0 0 0 20px rgba(232,207,143,0)}}
-/* компас лентасы */
-.vt .tape{position:absolute;left:0;right:0;top:0;height:22px;opacity:.7;
-  background:repeating-linear-gradient(90deg,rgba(232,207,143,.75) 0 2px,transparent 2px 22px) 0 0/44px 10px repeat-x,repeating-linear-gradient(90deg,rgba(232,207,143,.45) 0 1px,transparent 1px 22px) 11px 0/22px 6px repeat-x;animation:tape 4s linear infinite}
-@keyframes tape{to{background-position:44px 0,33px 0}}
-.vt .tri{position:absolute;left:50%;top:12px;width:0;height:0;margin-left:-6px;border-left:6px solid transparent;border-right:6px solid transparent;border-top:9px solid #e8cf8f}
-/* viewfinder бұрыштары */
-.vt .br{position:absolute;width:26px;height:26px;border:2px solid rgba(232,207,143,.85)}
-.vt .br.tl{left:12px;top:30px;border-right:0;border-bottom:0;border-radius:8px 0 0 0}
-.vt .br.tr{right:12px;top:30px;border-left:0;border-bottom:0;border-radius:0 8px 0 0}
-.vt .br.bl{left:12px;bottom:12px;border-right:0;border-top:0;border-radius:0 0 0 8px}
-.vt .br.rb{right:12px;bottom:12px;border-left:0;border-top:0;border-radius:0 0 8px 0}
-/* бұру көрсеткілері */
-.vt .chev{position:absolute;top:50%;width:14px;height:14px;border-top:3px solid rgba(232,207,143,.8);border-right:3px solid rgba(232,207,143,.8);animation:chev 1.8s ease-in-out infinite}
-.vt .chev.r{right:22px;transform:rotate(45deg)}.vt .chev.l{left:22px;transform:rotate(-135deg)}
-@keyframes chev{0%,100%{opacity:.25}50%{opacity:1}}
-.k-grid .g-tour .ic,.k-grid .g-tour .tx,.k-grid .g-tour .b360,.k-grid .g-tour .go{position:relative;z-index:2}
-.k-grid .g-tour .go{position:absolute}
-/* бағыт көрсеткіші: ағымдағы градус */
-.k-grid .g-tour .b360{font-size:58px;margin-right:64px;text-shadow:0 0 18px rgba(232,207,143,.55);animation:none;font-variant-numeric:tabular-nums}
-.k-grid .g-tour .b360 b{font-weight:400}
-.g-tour h3{text-shadow:0 2px 14px rgba(0,0,0,.5)}
-
-/* түрлі-түсті намаз иконкалары */
-.k-time .pi{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;margin-bottom:3px;box-shadow:0 6px 14px rgba(0,0,0,.18);transition:transform .3s var(--e),opacity .3s}
-.k-time .pi svg{width:24px;height:24px;display:block}
-.pi-fajr{background:#7047e0}.pi-sunrise{background:#3a6df0}.pi-dhuhr{background:#ffb000}.pi-asr{background:#f08a1c}.pi-maghrib{background:#d9505a}.pi-isha{background:#1b1670}
+.k-times{flex:1;display:grid;grid-template-columns:repeat(6,1fr)}
+.k-time{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:8px 0;border-left:1px solid var(--line);cursor:pointer;transition:background .3s,transform .2s var(--e)}
+.k-time:first-child{border-left:0}
+.k-time:active{transform:scale(.94)}
+.k-time span{font-size:16px;color:var(--muted)}
+.k-time b{font-family:var(--fh);font-weight:500;font-size:28px;color:var(--green-d);font-variant-numeric:tabular-nums}
+.k-time.next{background:var(--mint)}
+.k-time.next span{color:var(--green);font-weight:600}
+html[data-theme=dark] .k-time.next span{color:var(--green-l)}
+.k-time.next b{color:var(--green);animation:pulseText 2s ease-in-out infinite}
+.k-time.next::after{content:"";position:absolute;bottom:0;left:22%;right:22%;height:3px;border-radius:3px;background:var(--green)}
+.k-time.past b{color:#a3afa9}
 .k-time.past .pi{opacity:.4;filter:saturate(.6)}
-.k-time.next .pi{animation:floaty 3s ease-in-out infinite;box-shadow:0 8px 20px rgba(14,75,54,.35)}
-.k-namaz .k-time{padding:8px 0}
-/* 360° тур: мәтінмен қиылыспау */
-.vt .hs.h1{left:38%;bottom:26px}.vt .hs.h2{left:60%;bottom:44px;animation-delay:.8s}.vt .hs.h3{left:80%;bottom:26px;animation-delay:1.6s}
-.vt .chev.l{display:none}
+html[data-theme=dark] .k-time.past b{color:#5f7268}
+.k-time.preview{box-shadow:inset 0 -3px 0 var(--gold)}
+.pi{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;margin-bottom:3px}
+.k-time.next .pi{animation:floaty 3s ease-in-out infinite}
+.pi svg{width:24px;height:24px;display:block}
+.pi-fajr{background:#7047e0}.pi-sunrise{background:#3a6df0}.pi-dhuhr{background:#ffb000}.pi-asr{background:#f08a1c}.pi-maghrib{background:#d9505a}.pi-isha{background:#1b1670}
 
-/* интерактивті карта: сандар иконканың астында, сипаттама бір қатарда */
-.k-card.feature .stats{position:relative;display:flex;gap:34px;margin-top:14px}
-.k-card.feature .stats div{display:flex;flex-direction:column;align-items:flex-start}
-.k-card.feature .stats div+div{padding-left:34px;border-left:1px solid rgba(255,255,255,.2)}
-.k-card.feature .stats b{font-family:var(--fh);font-weight:500;font-size:40px;line-height:1;color:#fff}
-.k-card.feature .stats span{margin-top:5px;font-size:15px;color:rgba(255,255,255,.75)}
-.k-card.feature .tx p{max-width:none;font-size:20px;margin-top:8px}
-.k-card.feature .foot{justify-content:flex-start}
-.k-card.feature .tx{margin-top:auto}
-.k-card.feature .foot{margin-top:22px}
-.k-time .pi,.k-time.next .pi{box-shadow:none}
+/* ── Мәзір торы ── */
+.k-grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:.8fr .95fr .95fr 1.3fr;gap:16px}
+.m-map{grid-column:1 / span 2;grid-row:1 / span 3}
+.m-structure{grid-column:3 / span 2;grid-row:1}
+.m-leadership{grid-column:3;grid-row:2}.m-departments{grid-column:4;grid-row:2}
+.m-services{grid-column:3;grid-row:3}.m-regions{grid-column:4;grid-row:3}
+.m-products{grid-column:1;grid-row:4}.m-munara{grid-column:2;grid-row:4}
+.m-tour{grid-column:3 / span 2;grid-row:4}
 
-/* карта блогы: сандар мен тақырып ортада, иконка жоғарыда, батырма төменде тұрақты */
-.k-card.feature .stats{margin-top:auto;margin-bottom:22px}
-.k-card.feature .tx{margin-top:0;margin-bottom:auto}
-.k-card.feature .foot{margin-top:34px}
-.g-tour h3{font-size:26px;line-height:1.2}
-.k-grid .g-tour .b360{font-size:46px;margin-right:64px}
-.k-grid .g-tour .tx{min-width:0}
-.g-tour h3{white-space:normal}
-.vt .chev{display:none}
-.g-tour h3{white-space:nowrap;font-size:25px}
-.k-grid .g-tour .b360{font-size:40px;margin-right:54px}
-.k-grid .g-tour{gap:16px}
-
-/* ══ 360° тур: минимализм ══ */
-.k-grid .g-tour{background:radial-gradient(420px 260px at 82% 50%,rgba(232,207,143,.12),transparent 70%),#0a3a2a;justify-content:flex-start;padding:22px 32px;overflow:hidden}
-.g-tour .vt,.g-tour .pano{display:none}
-.k-grid .g-tour .tx{flex:none;z-index:2}
-.g-tour h3{font-size:30px;line-height:1.2;font-weight:600;letter-spacing:.005em;white-space:nowrap}
-.g-tour .dial{position:absolute;right:74px;top:50%;width:176px;height:176px;margin-top:-88px;z-index:1;pointer-events:none}
-.g-tour .dial svg{width:100%;height:100%;overflow:visible}
-.g-tour .dial .ticks{stroke:#e8cf8f;stroke-linecap:round;opacity:.7;transform-origin:100px 100px;animation:dialSpin 60s linear infinite reverse}
-.g-tour .dial .orbit{fill:none;stroke:rgba(232,207,143,.28);stroke-width:1.2;stroke-dasharray:2 5}
-.g-tour .dial .odot{transform-origin:100px 100px;animation:dialSpin 9s linear infinite}
-.g-tour .dial .odot circle{fill:#e8cf8f;filter:drop-shadow(0 0 6px rgba(232,207,143,.9))}
-.g-tour .dial .dl{font-family:var(--fh);font-size:36px;fill:#fff;letter-spacing:.04em}
-@keyframes dialSpin{to{transform:rotate(360deg)}}
-.g-tour h3{font-size:26px}
-.g-tour .dial{right:62px;width:160px;height:160px;margin-top:-80px}
-
-/* ══ 360° тур: ғимарат жоспары бойынша серуен ══ */
-.g-tour .dial{display:none}
-.k-grid .g-tour{background:radial-gradient(380px 240px at 78% 50%,rgba(232,207,143,.10),transparent 70%),#0a3a2a}
-.g-tour .plan{position:absolute;right:66px;top:50%;width:270px;margin-top:-75px;z-index:1;pointer-events:none}
-.g-tour .plan svg{width:100%;display:block;overflow:visible}
-.plan .wall{fill:none;stroke:rgba(232,207,143,.75);stroke-width:2}
-.plan .room{fill:rgba(232,207,143,0);stroke:rgba(232,207,143,.35);stroke-width:1.2;animation:roomLit 13s ease-in-out infinite}
-@keyframes roomLit{0%,14%,100%{fill:rgba(232,207,143,0);stroke:rgba(232,207,143,.35)}5%{fill:rgba(232,207,143,.35);stroke:rgba(232,207,143,.9)}}
-.plan .route{fill:none;stroke:rgba(255,255,255,.22);stroke-width:1.5;stroke-dasharray:3 5;animation:routeFlow 3s linear infinite}
-@keyframes routeFlow{to{stroke-dashoffset:-16}}
-.plan .cone{fill:rgba(232,207,143,.38)}
-.plan .me{fill:#f5e3a8;stroke:#0a3a2a;stroke-width:1.5;filter:drop-shadow(0 0 5px rgba(232,207,143,.9))}
-.g-tour h3{font-size:26px}
-.g-tour .plan{width:196px;right:26px;margin-top:-62px}
-
-/* 360° тур: басқа карточкалармен бірізді орналасу (иконка жоғарыда, атау төменде) */
-.k-grid .g-tour{flex-direction:column;align-items:flex-start;justify-content:space-between;gap:0;padding:16px 18px}
-.k-grid .k-card.g-tour .ic{position:relative;left:auto;top:auto;width:48px;height:48px;border-radius:15px;font-size:26px;background:rgba(255,255,255,.14);color:#e8cf8f}
-.k-grid .g-tour .ic .spinring{display:none}
-.k-grid .g-tour .tx{margin-top:0;padding-right:60px}
-.g-tour h3{font-size:26px}
-
-/* 360° тур иконкасы: VR көзілдірік "айналаға қарайды" */
-.g-tour .ic .vr{animation:lookAround 6s ease-in-out infinite}
-.g-tour .ic .pl{animation:pupils 6s ease-in-out infinite}
-@keyframes lookAround{0%,100%{transform:rotate(0)}25%{transform:rotate(-9deg)}75%{transform:rotate(9deg)}}
-@keyframes pupils{0%,100%{transform:translateX(0)}25%{transform:translateX(-1.1px)}75%{transform:translateX(1.1px)}}
-.g-tour h3{font-size:30px}
-
-/* ══ Барлық карточкада тақырып төмендегі көрсеткі батырмасымен бір деңгейде ══ */
-.k-grid .k-card:not(.feature) .tx{position:absolute;left:18px;right:70px;bottom:18px;height:40px;display:flex;align-items:center;padding:0;margin:0;min-width:0}
-.k-grid .k-card:not(.feature) .tx h3{margin:0;padding:0;line-height:1.15}
-.k-grid .m-structure{flex-direction:column;align-items:flex-start;justify-content:space-between;gap:0;padding:16px 18px}
-.k-grid .k-card.m-structure .ic{width:48px;height:48px;border-radius:15px;font-size:26px}
-.k-grid .m-structure h3{font-size:26px}
-
-/* ══ Карта мен 360° турдан басқа карточкалар — бірдей фон ══ */
-.k-grid .k-card:not(.feature):not(.g-tour){background:#fff;border:1px solid var(--line)}
-.k-grid .k-card:not(.feature):not(.g-tour) .ic{background:var(--mint);color:var(--green)}
-.k-grid .k-card:not(.feature):not(.g-tour) .go{background:rgba(14,75,54,.08);color:var(--green)}
-html[data-theme=dark] .k-grid .k-card:not(.feature):not(.g-tour){background:#15211b;border-color:rgba(255,255,255,.07)}
-html[data-theme=dark] .k-grid .k-card:not(.feature):not(.g-tour) .ic{background:#1f3329;color:#5cbf95}
-html[data-theme=dark] .k-grid .k-card:not(.feature):not(.g-tour) .go{background:rgba(255,255,255,.08);color:#5cbf95}
-
-/* Қызметтер: тісті доңғалақ баяу айналады */
-.m-services .bell{animation:none}
-.m-services .gear{animation:gearSpin 9s linear infinite}
-@keyframes gearSpin{to{transform:rotate(360deg)}}
-.g-media .tv::before,.g-media .tv::after{display:none}
-
-/* режим ауыстырғыш: жарық | түн — екі иконка қатар */
-.k-mode{display:flex;padding:5px;border-radius:18px;background:#fff;box-shadow:var(--card);gap:4px}
-.k-mode button{width:52px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:24px;color:var(--muted);transition:background .25s var(--e),color .25s var(--e),transform .2s var(--e)}
-.k-mode button:active{transform:scale(.92)}
-.k-mode button.on{background:var(--green);color:#fff}
-.k-mode button[data-theme-set=light].on{background:#f0a93b;color:#fff}
-.k-mode button[data-theme-set=dark].on{background:#1b2350;color:#e8cf8f}
-html[data-theme=dark] .k-mode{background:#15211b}
-html[data-theme=dark] .k-mode button{color:#94a89d}
-html[data-theme=dark] .k-mode button.on{color:#fff}
-html[data-theme=dark] .k-mode button[data-theme-set=dark].on{background:#2b3570;color:#e8cf8f}
-
-/* ══ Карточкалардың сол жағында алтын түсті рамка сызығы ══ */
-.k-grid .k-card:not(.feature)::before{content:"";position:absolute;left:0;top:20px;bottom:20px;width:4px;border-radius:0 4px 4px 0;
-  background:linear-gradient(180deg,#f0dca4,#b08d43);box-shadow:0 0 12px rgba(232,207,143,.45);pointer-events:none;z-index:2;transition:top .35s var(--e),bottom .35s var(--e)}
-.k-grid .k-card:not(.feature):active::before{top:12px;bottom:12px}
-
-/* ══ Алтын рамка: сол жақтан басталып, жоғарғы және төменгі жиек бойымен баяу өшіп жоғалады ══ */
-.k-grid .k-card:not(.feature)::before{content:"";position:absolute;inset:0;left:0;top:0;bottom:0;right:0;width:auto;border-radius:inherit;padding:2px;
+.k-card{position:relative;overflow:hidden;text-align:left;border-radius:28px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--card);
+  padding:16px 18px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .25s var(--e)}
+.k-card:active{transform:scale(.96)}
+/* алтын рамка: сол жақтан басталып, жоғарғы және төменгі жиек бойымен өшеді */
+.k-card::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2px;pointer-events:none;z-index:2;
   background:linear-gradient(90deg,#f3e0a8 0%,#c9a95b 14%,rgba(201,169,91,.45) 34%,rgba(201,169,91,0) 62%);
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
-  box-shadow:none;pointer-events:none;z-index:2;transition:opacity .3s var(--e)}
-.k-grid .k-card:not(.feature):active::before{top:0;bottom:0;opacity:.6}
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.k-card .ic{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;font-size:26px;background:var(--mint);color:var(--green)}
+html[data-theme=dark] .k-card .ic{color:var(--green-l)}
+.k-card .tx{position:absolute;left:18px;right:70px;bottom:18px;height:40px;display:flex;align-items:center;min-width:0}
+.k-card h3{margin:0;font-size:23px;font-weight:600;line-height:1.15}
+.k-card .go{position:absolute;right:18px;bottom:18px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:20px;background:var(--go);color:var(--green)}
+html[data-theme=dark] .k-card .go{color:var(--green-l)}
+.m-structure h3{font-size:26px}
 
-/* ══ Алтын рамка карточканы айналып жүреді (әр карточкада басқа жылдамдық, бағыт, фаза) ══ */
-@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
-.k-grid .k-card:not(.feature)::before{
-  background:
-    conic-gradient(from var(--a),rgba(201,169,91,0) 0deg,rgba(201,169,91,0) 215deg,rgba(201,169,91,.55) 300deg,#f6e6b0 345deg,rgba(246,230,176,0) 360deg),
-    linear-gradient(90deg,rgba(201,169,91,.5),rgba(201,169,91,0) 45%);
-  animation:goldOrbit var(--dur,8s) linear infinite var(--dir,normal);animation-delay:var(--dl,0s)}
-@keyframes goldOrbit{to{--a:360deg}}
-.m-structure{--dur:7s;--dir:normal;--dl:0s}
-.m-leadership{--dur:9s;--dir:reverse;--dl:-2s}
-.m-departments{--dur:6s;--dir:normal;--dl:-4s}
-.m-services{--dur:8s;--dir:reverse;--dl:-1s}
-.m-regions{--dur:10s;--dir:normal;--dl:-6s}
-.m-products{--dur:7.5s;--dir:reverse;--dl:-3s}
-.m-munara{--dur:6.5s;--dir:normal;--dl:-5s}
-.g-tour{--dur:9s;--dir:reverse;--dl:-7s}
-.k-grid .g-tour::before{display:none}
+/* Интерактивті карта */
+.k-card.feature{padding:32px;border:0;color:#fff;
+  background:radial-gradient(500px 300px at 90% 0%,rgba(232,207,143,.22),transparent 60%),linear-gradient(150deg,#0b3d2c,#0e4b36 60%,#146447)}
+.k-card.feature::before{display:none}
+.feature .ic{width:92px;height:92px;border-radius:28px;font-size:52px;background:rgba(255,255,255,.12);color:#e8cf8f}
+.feature .stats{display:flex;gap:34px;margin:auto 0 22px}
+.feature .stats div{display:flex;flex-direction:column}
+.feature .stats div+div{padding-left:34px;border-left:1px solid rgba(255,255,255,.2)}
+.feature .stats b{font-family:var(--fh);font-weight:500;font-size:40px;line-height:1}
+.feature .stats span{margin-top:5px;font-size:15px;color:rgba(255,255,255,.75)}
+.feature .tx{position:static;height:auto;display:block;margin-bottom:auto}
+.feature h3{font-family:var(--fh);font-weight:500;font-size:52px;letter-spacing:.03em;text-transform:uppercase;line-height:1.1}
+.feature p{margin:8px 0 0;font-size:20px;line-height:1.35;color:rgba(255,255,255,.82)}
+.feature .cta{align-self:flex-start;display:inline-flex;align-items:center;gap:12px;height:64px;padding:0 30px;margin-top:34px;border-radius:999px;background:#e8cf8f;color:#083425;font-size:21px;font-weight:600}
+.feature .cta .i{font-size:24px}
 
-/* ══ Артқы фон: мөлдір ағынды сызықтар ══ */
-#screen::before{opacity:1;background-image:url("../assets/bg-lines-light.svg");background-size:cover;background-position:center;background-repeat:no-repeat;filter:none;animation:linesDrift 40s ease-in-out infinite alternate}
-html[data-theme=dark] #screen::before{opacity:1;filter:none;background-image:url("../assets/bg-lines-dark.svg")}
-@keyframes linesDrift{from{transform:translateX(-18px) scale(1.03)}to{transform:translateX(18px) scale(1.03)}}
+/* 360° тур */
+.m-tour{border:0;color:#fff;background:radial-gradient(380px 240px at 78% 50%,rgba(232,207,143,.10),transparent 70%),#0a3a2a}
+.m-tour::before{display:none}
+.m-tour .ic{background:rgba(255,255,255,.14);color:#e8cf8f}
+.m-tour h3{font-size:30px;white-space:nowrap}
+.m-tour .go{background:rgba(255,255,255,.14);color:#e8cf8f}
+.plan{position:absolute;right:26px;top:50%;width:196px;margin-top:-62px;pointer-events:none}
+.plan svg{width:100%;display:block}
+.plan .wall{fill:none;stroke:rgba(232,207,143,.75);stroke-width:2}
+.plan .room{fill:none;stroke:rgba(232,207,143,.35);stroke-width:1.2}
+.plan .route{fill:none;stroke:rgba(255,255,255,.22);stroke-width:1.5;stroke-dasharray:3 5}
+.plan .cone{fill:rgba(232,207,143,.38)}
+.plan .me{fill:#f5e3a8;stroke:#0a3a2a;stroke-width:1.5}
 
-/* Интерактивті карта: фондағы нүктелер алынды */
-.k-card.feature::before,.k-card.feature .pings{display:none}
-
-/* ══ Артқы фон: бір-бірімен қиылысқан сызықтар торы, кей жерлері біртіндеп өшіп жоғалады ══ */
-#screen::before{
-  -webkit-mask-image:radial-gradient(ellipse 62% 58% at 8% 12%,#000 0,transparent 72%),radial-gradient(ellipse 58% 62% at 94% 92%,#000 0,transparent 72%),radial-gradient(ellipse 30% 26% at 58% 52%,rgba(0,0,0,.45),transparent 75%);
-  mask-image:radial-gradient(ellipse 62% 58% at 8% 12%,#000 0,transparent 72%),radial-gradient(ellipse 58% 62% at 94% 92%,#000 0,transparent 72%),radial-gradient(ellipse 30% 26% at 58% 52%,rgba(0,0,0,.45),transparent 75%);
-  animation:linesDrift 50s ease-in-out infinite alternate}
-
-/* Жыпылықтауды жою: артқы фон қозғалмайды */
-#screen::before{animation:none!important;transform:none}
-/* ?lite=1 — барлық сәндік анимацияны өшіру (қате себебін іздеу үшін) */
-html.lite *,html.lite *::before,html.lite *::after{animation:none!important;transition:none!important}
-html.lite .anim{opacity:1!important}
+/* иконка анимациялары (кішкентай, мағынаға сай) */
+.ic svg *{transform-box:fill-box;transform-origin:center}
+@keyframes pop{0%,100%{transform:scale(1)}20%{transform:scale(1.28)}40%{transform:scale(1)}}
+.m-structure .sn{animation:pop 3.6s ease-in-out infinite}
+.m-structure .sn.b{animation-delay:.5s}.m-structure .sn.c{animation-delay:1s}
+.m-departments .dq{animation:pop 3.2s ease-in-out infinite}
+.m-departments .q2{animation-delay:.35s}.m-departments .q4{animation-delay:.7s}.m-departments .q3{animation-delay:1.05s}
+.m-leadership .lp{animation:floaty 4s ease-in-out infinite}
+.m-services .gear{animation:spin 9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.m-regions .pin{animation:pinDrop 2.6s ease-in-out infinite}
+@keyframes pinDrop{0%,100%{transform:translateY(0)}30%{transform:translateY(-3px)}55%{transform:translateY(0)}}
+.m-products .ph{animation:buzz 3.8s ease-in-out infinite}
+@keyframes buzz{0%,60%,100%{transform:rotate(0)}64%{transform:rotate(-6deg)}68%{transform:rotate(6deg)}72%{transform:rotate(-4deg)}76%{transform:rotate(0)}}
+.m-tour .vr{animation:look 6s ease-in-out infinite}
+@keyframes look{0%,100%{transform:rotate(0)}25%{transform:rotate(-9deg)}75%{transform:rotate(9deg)}}
