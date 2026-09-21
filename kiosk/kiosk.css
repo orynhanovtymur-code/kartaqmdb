@@ -719,3 +719,8 @@ html[data-theme=dark] .k-grid .g-tour{background:radial-gradient(600px 220px at 
 html[data-theme=dark] .k-grid .k-card:not(.feature):not(.g-tour){background:#15211b;border-color:rgba(255,255,255,.07)}
 html[data-theme=dark] .k-grid .k-card:not(.feature):not(.g-tour) .ic{background:#1f3329;color:#5cbf95}
 html[data-theme=dark] .k-grid .k-card:not(.feature):not(.g-tour) .go{background:rgba(255,255,255,.08);color:#5cbf95}
+
+/* Қызметтер: тісті доңғалақ баяу айналады */
+.m-services .bell{animation:none}
+.m-services .gear{animation:gearSpin 9s linear infinite}
+@keyframes gearSpin{to{transform:rotate(360deg)}}
