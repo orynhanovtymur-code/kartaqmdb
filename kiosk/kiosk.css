@@ -711,3 +711,11 @@ html[data-theme=dark] .k-grid .g-tour{background:radial-gradient(600px 220px at 
 .k-grid .m-structure{flex-direction:column;align-items:flex-start;justify-content:space-between;gap:0;padding:16px 18px}
 .k-grid .k-card.m-structure .ic{width:48px;height:48px;border-radius:15px;font-size:26px}
 .k-grid .m-structure h3{font-size:26px}
+
+/* ══ Карта мен 360° турдан басқа карточкалар — бірдей фон ══ */
+.k-grid .k-card:not(.feature):not(.g-tour){background:#fff;border:1px solid var(--line)}
+.k-grid .k-card:not(.feature):not(.g-tour) .ic{background:var(--mint);color:var(--green)}
+.k-grid .k-card:not(.feature):not(.g-tour) .go{background:rgba(14,75,54,.08);color:var(--green)}
+html[data-theme=dark] .k-grid .k-card:not(.feature):not(.g-tour){background:#15211b;border-color:rgba(255,255,255,.07)}
+html[data-theme=dark] .k-grid .k-card:not(.feature):not(.g-tour) .ic{background:#1f3329;color:#5cbf95}
+html[data-theme=dark] .k-grid .k-card:not(.feature):not(.g-tour) .go{background:rgba(255,255,255,.08);color:#5cbf95}
