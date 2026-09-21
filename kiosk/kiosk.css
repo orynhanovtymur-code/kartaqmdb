@@ -711,3 +711,18 @@ html[data-theme=dark] .k-grid .g-tour{background:radial-gradient(600px 220px at 
 .k-grid .m-structure{flex-direction:column;align-items:flex-start;justify-content:space-between;gap:0;padding:16px 18px}
 .k-grid .k-card.m-structure .ic{width:48px;height:48px;border-radius:15px;font-size:26px}
 .k-grid .m-structure h3{font-size:26px}
+
+/* ══ Әр карточканың тақырыбына сай мөлдір үлкен белгі (watermark) — оң жақ жоғары бұрышта ══ */
+.k-card .wm{position:absolute;right:-22px;top:-22px;width:132px;height:132px;font-size:132px;line-height:0;pointer-events:none;z-index:0;opacity:.09;color:var(--green);
+  transform:rotate(-8deg);transition:transform .6s var(--e),opacity .4s;animation:wmFloat 9s ease-in-out infinite}
+.k-card .wm .i{width:100%;height:100%;stroke-width:1.1}
+@keyframes wmFloat{0%,100%{transform:rotate(-8deg) translateY(0)}50%{transform:rotate(-4deg) translateY(4px)}}
+.k-card:active .wm{transform:rotate(0) scale(1.08);opacity:.14}
+.k-card.feature .wm{right:-40px;top:-40px;width:250px;height:250px;font-size:250px;color:#fff;opacity:.07}
+.k-card.g-place .wm{color:#8a6a22;opacity:.10}
+.k-card.g-tech .wm,.k-card.g-media .wm{color:#0f6b57;opacity:.10}
+.k-card.g-tour .wm{color:#e8cf8f;opacity:.08;right:-16px;top:-26px;width:150px;height:150px;font-size:150px}
+.k-card .ic,.k-card .tx,.k-card .go{z-index:1}
+html[data-theme=dark] .k-card .wm{color:#5cbf95;opacity:.10}
+html[data-theme=dark] .k-card.feature .wm{color:#fff;opacity:.06}
+html[data-theme=dark] .k-card.g-place .wm{color:#e3c476;opacity:.09}

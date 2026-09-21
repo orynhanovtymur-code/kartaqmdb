@@ -170,6 +170,7 @@ function HeroSection(lang){
 function MenuCard(item, lang, i){
   if (item.primary) return `
     <button class="k-card feature anim" data-nav="menu:${item.id}" style="animation-delay:${0.2+i*0.06}s">
+      <i class="wm" aria-hidden="true">${icon(item.icon)}</i>
       <div class="pings" aria-hidden="true"><i style="left:60%;top:12%"></i><i style="left:82%;top:9%;animation-delay:.7s"></i><i style="left:91%;top:30%;animation-delay:1.4s"></i><i style="left:72%;top:24%;animation-delay:2.1s"></i><i style="left:94%;top:58%;animation-delay:1s"></i></div>
       <div class="ic">${icon(item.icon)}</div>
       <div class="stats">${D.STATS.map(x=>`<div><b data-count="${x.n}">0</b><span>${T(x.label, lang)}</span></div>`).join('')}</div>
@@ -178,6 +179,7 @@ function MenuCard(item, lang, i){
     </button>`;
   return `
     <button class="k-card g-${item.group} m-${item.id} anim" data-nav="menu:${item.id}" style="animation-delay:${0.2+i*0.06}s">
+      <i class="wm" aria-hidden="true">${icon(item.icon)}</i>
       ${item.group==='media' ? `<div class="tv" aria-hidden="true"></div><span class="live"><i></i>${T('live', lang)}</span>` : ''}
       ${item.group==='tour' ? PlanTour() : ''}
       <div class="ic">${icon(item.icon)}</div>
