@@ -99,7 +99,7 @@ function PlanTour(){
   const rooms = [[22,22,68,42],[96,22,68,42],[170,22,68,42],[244,22,34,42],[22,98,80,42],[108,98,80,42],[194,98,84,42]];
   return `<div class="plan" aria-hidden="true"><svg viewBox="0 0 300 162">
     <rect class="wall" x="10" y="10" width="280" height="142" rx="12"/>
-    ${rooms.map(r => `<rect class="room" x="${r[0]}" y="${r[1]}" width="${r[2]}" height="${r[3]}" rx="5"/>`).join('')}
+    ${rooms.map((r, i) => `<rect class="room" x="${r[0]}" y="${r[1]}" width="${r[2]}" height="${r[3]}" rx="5" style="animation-delay:${(i * 1.8).toFixed(1)}s"/>`).join('')}
     <path class="route" d="${TOUR_PATH}"/>
     <g><path class="cone" d="M0 0 L34 -15 A37 37 0 0 1 34 15 Z"/><circle class="me" r="5"/>
       <animateMotion dur="26s" repeatCount="indefinite" rotate="auto" path="${TOUR_PATH}"/></g>
@@ -111,7 +111,7 @@ function MenuCard(item, lang, i){
   if (item.id === 'map') return `
     <button class="k-card feature m-map anim" data-nav="${item.id}" ${delay}>
       <div class="ic">${icon(item.icon)}</div>
-      <div class="stats">${D.STATS.map(x => `<div><b data-count="${x.n}">${x.n.toLocaleString('ru-RU')}</b><span>${T(x.label, lang)}</span></div>`).join('')}</div>
+      <div class="stats">${D.STATS.map(x => `<div><b data-count="${x.n}">0</b><span>${T(x.label, lang)}</span></div>`).join('')}</div>
       <div class="tx"><h3>${tr(item.title, lang)}</h3><p>${tr(item.sub, lang)}</p></div>
       <span class="cta">${T('openMap', lang)} ${icon('arrow')}</span>
     </button>`;

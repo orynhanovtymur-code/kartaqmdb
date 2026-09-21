@@ -76,6 +76,7 @@ function tickPrayer(force){
 function runCounters(){
   document.querySelectorAll('[data-count]').forEach(el => {
     const to = +el.dataset.count, t0 = performance.now();
+    el.textContent = '0';
     (function step(t){
       const k = Math.min(1, (t - t0) / 1800);
       el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))).toLocaleString('ru-RU');
@@ -105,7 +106,7 @@ function fitFrames(){
 }
 
 /* ── Рендер ── */
-let firstRender = true;
+let countTimer;
 function render(){
   const L = state.lang;
   document.documentElement.lang = L;
@@ -116,7 +117,7 @@ function render(){
   greetIdx = 0; dateText = '';
   fitFrames();
   tickClock(); tickPrayer(true);
-  if (firstRender){ firstRender = false; runCounters(); }
+  clearTimeout(countTimer); countTimer = setTimeout(runCounters, 500);
 }
 
 /* ── Басу оқиғалары ── */
