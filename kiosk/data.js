@@ -6,8 +6,13 @@ const L = (kk, ru, en) => ({kk, ru, en});
 
 const ICONS = {
   about:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',
-  leadership:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.4"/><path d="M17 14c2.5 0 4 1.8 4 4.5"/>',
-  structure:'<rect x="9" y="3" width="6" height="5" rx="1"/><rect x="2" y="16" width="6" height="5" rx="1"/><rect x="16" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M5 16v-4h14v4"/>',
+  structure:'<rect class="sn a" x="9" y="3" width="6" height="5" rx="1"/><rect class="sn b" x="2" y="16" width="6" height="5" rx="1"/><rect class="sn c" x="16" y="16" width="6" height="5" rx="1"/><path class="sl" d="M12 8v4M5 16v-4h14v4"/>',
+  leadership:'<path class="ls" d="M12 1.8l1.1 2.3 2.5.3-1.8 1.7.5 2.5L12 7.4 9.7 8.6l.5-2.5L8.4 4.4l2.5-.3z"/><circle class="lp" cx="12" cy="13.2" r="3"/><path class="lp" d="M6 22c0-3 2.7-5 6-5s6 2 6 5"/>',
+  departments:'<rect class="dq q1" x="3" y="3" width="8" height="8" rx="1.6"/><rect class="dq q2" x="13" y="3" width="8" height="8" rx="1.6"/><rect class="dq q3" x="3" y="13" width="8" height="8" rx="1.6"/><rect class="dq q4" x="13" y="13" width="8" height="8" rx="1.6"/>',
+  services:'<g class="bell"><path d="M5 17a7 7 0 0 1 14 0"/><path d="M12 6.5V10M10 6.5h4"/></g><path d="M3 20h18"/>',
+  regions:'<ellipse class="rip" cx="12" cy="21.4" rx="6" ry="1.5"/><g class="pin"><path d="M12 19s6-5.2 6-9.8A6 6 0 0 0 6 9.2c0 4.6 6 9.8 6 9.8z"/><circle cx="12" cy="9.2" r="2.2"/></g>',
+  products:'<g class="ph"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 19h2"/><path class="scr" d="M10 7h4M10 10h4M10 13h2.5"/></g><circle class="bd" cx="18" cy="4" r="2.4" fill="currentColor" stroke="none"/>',
+  tour:'<ellipse class="orb" cx="12" cy="12" rx="10" ry="4.2"/><path d="M12 3a4.2 9 0 0 1 0 18"/><circle cx="12" cy="12" r="2.4"/>',
   building:'<rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2M10 21v-3h4v3"/>',
   map:'<path d="M4 21V11l8-6 8 6v10"/><path d="M12 5V2"/><path d="M9 21v-5a3 3 0 0 1 6 0v5"/>',
   orgs:'<path d="M3 21h18"/><path d="M5 21V8l5-3v16"/><path d="M14 21V11l5 2v8"/><path d="M8 10h.01M8 14h.01M17 15h.01"/>',
@@ -33,15 +38,15 @@ const ICONS = {
 
 /* route: null = ішкі бет әлі жасалмаған. Кейін тек route жолын қосу жеткілікті. */
 const MENU = [
-  {id:'about', group:'info',      icon:'about',      route:null, title:L('ҚМДБ туралы','О ҚМДБ','About SAMK'),               sub:L('Тарихы, миссиясы және қызмет бағыттары','История, миссия и направления деятельности','History, mission and areas of work')},
-  {id:'leadership', group:'info', icon:'leadership', route:null, title:L('Басшылық','Руководство','Leadership'),             sub:L('Бас мүфти және ҚМДБ басшылығы','Верховный муфтий и руководство ДУМК','Grand Mufti and SAMK leadership')},
-  {id:'structure', group:'info',  icon:'structure',  route:null, title:L('Құрылым','Структура','Structure'),                sub:L('Басқармалар, бөлімдер және секторлар','Управления, отделы и секторы','Departments, divisions and sectors')},
-  {id:'building', group:'place',   icon:'building',   route:null, title:L('Ғимарат','Здание','Building'),                   sub:L('Қабаттар, кабинеттер және залдар','Этажи, кабинеты и залы','Floors, offices and halls')},
-  {id:'map', group:'feature',        icon:'map',        route:'./map.html', primary:true,
-                                                          title:L('Интерактивті карта','Интерактивная карта','Interactive map'), sub:L('Қазақстан мешіттері мен діни оқу орындары','Мечети и религиозные учебные заведения Казахстана','Mosques and religious educational institutions of Kazakhstan')},
-  {id:'orgs', group:'place',       icon:'orgs',       route:null, title:L('Қарасты мекемелер','Подведомственные учреждения','Affiliated institutions'), sub:L('Оқу орындары, қорлар және ұйымдар','Учебные заведения, фонды и организации','Schools, foundations and organizations')},
-  {id:'digital', group:'tech',    icon:'digital',    route:null, title:L('Цифрлық жобалар','Цифровые проекты','Digital projects'), sub:L('Қосымшалар, сайттар және онлайн платформалар','Приложения, сайты и онлайн-платформы','Apps, websites and online platforms')},
-  {id:'munara', group:'media',     icon:'tv',         route:null, title:L('Munara TV','Munara TV','Munara TV'),              sub:L('Тікелей эфир және медиа жобалар','Прямой эфир и медиапроекты','Live broadcast and media projects')}
+  {id:'map',         group:'feature', icon:'map', route:'./map.html', primary:true,
+                                    title:L('Интерактивті карта','Интерактивная карта','Interactive map'), sub:L('Қазақстан мешіттері мен діни оқу орындары','Мечети и религиозные учебные заведения Казахстана','Mosques and religious educational institutions of Kazakhstan')},
+  {id:'structure',   group:'info',  icon:'structure',   route:null, title:L('ҚМДБ құрылымы','Структура ДУМК','SAMK structure')},
+  {id:'leadership',  group:'info',  icon:'leadership',  route:null, title:L('Басшылық құрам','Руководящий состав','Leadership team')},
+  {id:'departments', group:'info',  icon:'departments', route:null, title:L('Бөлімдер','Отделы','Departments')},
+  {id:'services',    group:'place', icon:'services',    route:null, title:L('Қызметтер','Услуги','Services')},
+  {id:'regions',     group:'place', icon:'regions',     route:null, title:L('Облыстық өкілдіктер','Областные представительства','Regional offices')},
+  {id:'products',    group:'tech',  icon:'products',    route:null, title:L('Цифрлық өнімдер','Цифровые продукты','Digital products')},
+  {id:'tour',        group:'tour',  icon:'tour',        route:null, title:L('360° виртуалды тур','360° виртуальный тур','360° virtual tour')}
 ];
 
 const QUICK_ACTIONS = [

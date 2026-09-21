@@ -378,3 +378,49 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 @keyframes haloOut{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.32);opacity:0}}
 @keyframes spin{to{transform:rotate(360deg)}}
 .k-reception .rays{display:none}
+
+/* ══ Карточка иконкаларының мазмұнға байланысты анимациясы ══ */
+.ic svg *{transform-box:fill-box;transform-origin:center}
+/* ҚМДБ құрылымы: түйіндер кезекпен жанады, байланыс сызығы ағады */
+.m-structure .sn{animation:nodePop 3.6s ease-in-out infinite}
+.m-structure .sn.b{animation-delay:.5s}.m-structure .sn.c{animation-delay:1s}
+.m-structure .sl{stroke-dasharray:4 3;animation:flow 1.6s linear infinite}
+@keyframes nodePop{0%,100%{transform:scale(1)}20%{transform:scale(1.28)}40%{transform:scale(1)}}
+@keyframes flow{to{stroke-dashoffset:-14}}
+/* Басшылық құрам: жұлдыз жарқырайды, тұлға жеңіл көтеріледі */
+.m-leadership .ls{animation:starGlow 2.8s ease-in-out infinite;fill:rgba(176,141,67,.35)}
+.m-leadership .lp{animation:leadUp 4s ease-in-out infinite}
+@keyframes starGlow{0%,100%{transform:scale(.9);opacity:.55}50%{transform:scale(1.1);opacity:1}}
+@keyframes leadUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.2px)}}
+/* Бөлімдер: 4 бөлім кезекпен көтеріледі */
+.m-departments .dq{animation:nodePop 3.2s ease-in-out infinite}
+.m-departments .q2{animation-delay:.35s}.m-departments .q4{animation-delay:.7s}.m-departments .q3{animation-delay:1.05s}
+/* Қызметтер: қоңырау "динь" */
+.m-services .bell{animation:ding 3.4s ease-in-out infinite}
+@keyframes ding{0%,40%,100%{transform:translateY(0) rotate(0)}8%{transform:translateY(-3px) rotate(-8deg)}16%{transform:translateY(0) rotate(8deg)}24%{transform:translateY(-2px) rotate(-5deg)}32%{transform:rotate(3deg)}}
+/* Облыстық өкілдіктер: нүкте секіреді, астында толқын */
+.m-regions .pin{animation:pinDrop 2.6s ease-in-out infinite}
+.m-regions .rip{animation:ripple 2.6s ease-in-out infinite}
+@keyframes pinDrop{0%,100%{transform:translateY(0)}30%{transform:translateY(-3px)}55%{transform:translateY(0)}}
+@keyframes ripple{0%,100%{transform:scale(.6);opacity:.2}55%{transform:scale(1.25);opacity:1}}
+/* Цифрлық өнімдер: телефон діріл қағады, хабарлама нүктесі, экран сызықтары */
+.m-products .ph{animation:buzz 3.8s ease-in-out infinite}
+.m-products .bd{animation:badge 1.8s ease-in-out infinite}
+.m-products .scr{stroke-dasharray:6;animation:typing 3.8s ease-in-out infinite}
+@keyframes buzz{0%,60%,100%{transform:rotate(0)}64%{transform:rotate(-6deg)}68%{transform:rotate(6deg)}72%{transform:rotate(-4deg)}76%{transform:rotate(0)}}
+@keyframes badge{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.6}}
+@keyframes typing{0%{stroke-dashoffset:6}40%,100%{stroke-dashoffset:0}}
+
+/* 360° виртуалды тур: панорама сырғиды, орбита айналады */
+.g-tour{background:var(--green-d);border-color:transparent;grid-column:3 / span 2;position:relative}
+.g-tour .pano{position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,40,29,.9),rgba(6,40,29,.45) 60%,rgba(6,40,29,.75)),url("../assets/qmdb-building.jpeg");
+  background-size:auto 100%,auto 150%;background-repeat:no-repeat,repeat-x;animation:panSlide 40s linear infinite}
+@keyframes panSlide{from{background-position:0 0,0 40%}to{background-position:0 0,-1400px 40%}}
+.g-tour h3{color:#fff;position:relative;margin-top:auto}
+.g-tour .ic{position:absolute;left:22px;top:24px;background:rgba(255,255,255,.14);color:#e8cf8f}
+@keyframes tiltOrb{0%,100%{transform:rotate(0)}50%{transform:rotate(180deg)}}
+.g-tour .orb{stroke-dasharray:5 3;animation:flow 1.4s linear infinite}
+.g-tour .spinring{position:absolute;left:14px;top:16px;width:76px;height:76px;border-radius:50%;border:2px dashed rgba(232,207,143,.7);animation:spin 12s linear infinite}
+.g-tour .b360{position:absolute;right:22px;top:20px;font-family:var(--fh);font-size:44px;line-height:1;letter-spacing:.04em;color:#e8cf8f;text-shadow:0 0 18px rgba(232,207,143,.6);animation:badge360 3s ease-in-out infinite}
+@keyframes badge360{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.06)}}
+.g-tour .go{background:rgba(255,255,255,.14);color:#e8cf8f}
