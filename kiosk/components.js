@@ -17,7 +17,10 @@ function Header(lang){
       <button data-lang="ru" class="${lang==='ru'?'on':''}">РУС</button>
       <button data-lang="en" class="${lang==='en'?'on':''}">ENG</button>
     </div>
-    <button class="k-theme" data-act="theme" aria-label="${T('themeToDark', lang)} / ${T('themeToLight', lang)}">${icon('moon','ti-moon')}${icon('sun','ti-sun')}</button>
+    <div class="k-mode" role="group" aria-label="${T('themeToDark', lang)} / ${T('themeToLight', lang)}">
+      <button data-theme-set="light" aria-label="${T('themeToLight', lang)}">${icon('sun')}</button>
+      <button data-theme-set="dark" aria-label="${T('themeToDark', lang)}">${icon('moon')}</button>
+    </div>
     <div class="k-clock"><b id="kClock">--:--</b><span id="kDate"></span></div>`;
 }
 

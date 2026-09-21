@@ -725,3 +725,15 @@ html[data-theme=dark] .k-grid .k-card:not(.feature):not(.g-tour) .go{background:
 .m-services .gear{animation:gearSpin 9s linear infinite}
 @keyframes gearSpin{to{transform:rotate(360deg)}}
 .g-media .tv::before,.g-media .tv::after{display:none}
+
+/* режим ауыстырғыш: жарық | түн — екі иконка қатар */
+.k-mode{display:flex;padding:5px;border-radius:18px;background:#fff;box-shadow:var(--card);gap:4px}
+.k-mode button{width:52px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:24px;color:var(--muted);transition:background .25s var(--e),color .25s var(--e),transform .2s var(--e)}
+.k-mode button:active{transform:scale(.92)}
+.k-mode button.on{background:var(--green);color:#fff}
+.k-mode button[data-theme-set=light].on{background:#f0a93b;color:#fff}
+.k-mode button[data-theme-set=dark].on{background:#1b2350;color:#e8cf8f}
+html[data-theme=dark] .k-mode{background:#15211b}
+html[data-theme=dark] .k-mode button{color:#94a89d}
+html[data-theme=dark] .k-mode button.on{color:#fff}
+html[data-theme=dark] .k-mode button[data-theme-set=dark].on{background:#2b3570;color:#e8cf8f}

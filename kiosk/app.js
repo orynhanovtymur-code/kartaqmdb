@@ -8,6 +8,7 @@ const $ = id => document.getElementById(id);
 /* ── Түнгі / жарық режим ── */
 function applyTheme(t){
   document.documentElement.dataset.theme = t;
+  document.querySelectorAll('[data-theme-set]').forEach(b=>b.classList.toggle('on', b.dataset.themeSet === t));
   try{ localStorage.setItem('kiosk-theme', t); }catch(e){}
 }
 applyTheme((function(){ try{ return localStorage.getItem('kiosk-theme'); }catch(e){} })() === 'dark' ? 'dark' : 'light');
@@ -20,6 +21,7 @@ function render(){
   $('kHeader').innerHTML = U.Header(L);
   $('kSide').innerHTML = U.SidePanel(L, state.times);
   $('kMain').innerHTML = U.NamazTimesWidget(L, state.times) + U.MainMenuGrid(L);
+  applyTheme(document.documentElement.dataset.theme);
   tickClock(); tickPrayer(true); greetIdx = 0;
   setTimeout(runCounters, 700);
 }
@@ -157,6 +159,8 @@ document.addEventListener('click', e=>{
     try{ localStorage.setItem('kiosk-lang', state.lang); }catch(err){}
     render(); return;
   }
+  const ts = e.target.closest('[data-theme-set]');
+  if (ts){ applyTheme(ts.dataset.themeSet); return; }
   const act = e.target.closest('[data-act]');
   if (act){
     if (act.dataset.act === 'theme') applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
