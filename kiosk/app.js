@@ -12,7 +12,7 @@ function render(){
   document.documentElement.lang = L;
   $('kHeader').innerHTML = U.Header(L);
   $('kSide').innerHTML = U.SidePanel(L, state.times);
-  $('kMain').innerHTML = U.MainMenuGrid(L) + '<div class="k-bottom">' + U.NewsSection(L) + U.SecondaryActions(L) + '</div>';
+  $('kMain').innerHTML = U.NamazTimesWidget(L, state.times) + U.MainMenuGrid(L) + '<div class="k-bottom">' + U.SecondaryActions(L) + '</div>';
   $('kFooter').innerHTML = U.Footer(L);
   tickClock(); tickPrayer(true); greetIdx = 0;
   setTimeout(runCounters, 700);
@@ -177,7 +177,6 @@ addEventListener('contextmenu', e=>e.preventDefault());
 fit(); render();
 D.PrayerService.get().then(t=>{ state.times = t; render(); });
 setInterval(()=>{ tickClock(); tickPrayer(); }, 1000);
-setInterval(rotateNews, 6000);
 setInterval(rotateGreeting, 5000);
 setInterval(rotatePlaceholder, 3500);
 Idle.start();

@@ -57,6 +57,7 @@ const SECONDARY = [
 const NEWS = [
   {date:'20.09.2026', title:L('Астанада жаңа мешіттің іргетасы қаланды','В Астане заложен фундамент новой мечети','Foundation laid for a new mosque in Astana')},
   {date:'18.09.2026', title:L('Қари дайындау орталықтарында жаңа оқу маусымы басталды','В центрах подготовки қари начался новый учебный сезон','New academic season begins at qari training centers')},
+  {date:'16.09.2026', title:L('Мешіттерде жастарға арналған дәрістер циклі өтеді','В мечетях пройдёт цикл лекций для молодёжи','A lecture series for young people will be held in mosques')},
   {date:'15.09.2026', title:L('ҚМДБ жаңа мобильді қосымшасы іске қосылды','Запущено новое мобильное приложение ДУМК','New SAMK mobile app launched')}
 ];
 

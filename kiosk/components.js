@@ -76,7 +76,7 @@ function TodayEvents(lang){
 }
 
 function SidePanel(lang, times){
-  return BuildingVisual(lang) + NamazTimesWidget(lang, times);
+  return BuildingVisual(lang) + NewsSection(lang);
 }
 
 /* Оң жақ: іздеу + жылдам чиптер */
@@ -134,8 +134,11 @@ function SecondaryActions(lang){
 }
 
 function NewsSection(lang){
-  const n = D.NEWS[0];
-  return `<div class="k-news" id="kNews"><em>${T('news', lang)}</em><span id="kNewsText">${n.date} · ${tr(n.title, lang)}</span></div>`;
+  return `
+    <div class="k-newsbox">
+      <h4>${T('news', lang)}</h4>
+      <div class="list">${D.NEWS.slice(0,4).map(n=>`<div class="ni"><span class="d">${n.date}</span><span class="t">${tr(n.title, lang)}</span></div>`).join('')}</div>
+    </div>`;
 }
 
 function Footer(lang){

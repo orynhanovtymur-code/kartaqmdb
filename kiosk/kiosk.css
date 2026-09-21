@@ -281,3 +281,27 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 
 .k-clock span{margin-top:3px;font-size:15px}
 .k-clock .hj{color:var(--green);font-weight:500}
+
+/* ══ Намаз панелі — оң жақ үстінде бір қатар ══ */
+.k-namaz{display:flex;align-items:stretch;height:136px}
+.k-namaz .k-next{flex:none;width:400px;padding:14px 26px 12px;display:flex;flex-direction:column;justify-content:center}
+.k-namaz .k-next .row{margin-top:2px}
+.k-namaz .k-next .nm{font-size:32px}
+.k-namaz .k-next .tm{font-size:44px}
+.k-namaz .k-next .bar{margin-top:8px}
+.k-namaz .k-times{flex:1}
+.k-namaz .k-time{justify-content:center;padding:8px 0}
+.k-namaz .k-time span{font-size:16px}
+.k-namaz .k-time b{font-size:28px}
+.k-namaz .k-time .i{font-size:28px}
+.k-bottom{justify-content:flex-end;height:60px}
+
+/* ══ Сол жақ: жаңалықтар (суретсіз) ══ */
+.k-newsbox{flex:none;border-radius:28px;background:#fff;box-shadow:var(--card);padding:18px 24px 14px;display:flex;flex-direction:column;gap:6px}
+.k-newsbox h4{margin:0 0 4px;font-size:15px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px}
+.k-newsbox h4::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);animation:liveDot 2s ease-in-out infinite}
+.k-newsbox .ni{display:flex;flex-direction:column;gap:2px;padding:10px 0;border-top:1px solid var(--line);animation:fadeUp .6s var(--e) both}
+.k-newsbox .ni:nth-child(2){animation-delay:.1s}.k-newsbox .ni:nth-child(3){animation-delay:.2s}.k-newsbox .ni:nth-child(4){animation-delay:.3s}
+.k-newsbox .list .ni:first-child{border-top:0}
+.k-newsbox .d{font-size:13px;font-weight:600;color:var(--green);letter-spacing:.04em}
+.k-newsbox .t{font-size:17px;font-weight:500;line-height:1.3;color:var(--ink)}
