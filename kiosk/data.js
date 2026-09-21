@@ -2,7 +2,7 @@
    Мәзір, жаңалық, іс-шара және намаз уақыты осында ғана басқарылады.
    Кейін бұл файлдың орнына API / Admin Panel жауабын қосуға болады. */
 (function(){
-const L = (kk, ru) => ({kk, ru});
+const L = (kk, ru, en) => ({kk, ru, en});
 
 const ICONS = {
   about:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',
@@ -25,50 +25,50 @@ const ICONS = {
 
 /* route: null = ішкі бет әлі жасалмаған. Кейін тек route жолын қосу жеткілікті. */
 const MENU = [
-  {id:'about', group:'info',      icon:'about',      route:null, title:L('ҚМДБ туралы','О ҚМДБ'),               sub:L('Тарихы, миссиясы және қызмет бағыттары','История, миссия и направления деятельности')},
-  {id:'leadership', group:'info', icon:'leadership', route:null, title:L('Басшылық','Руководство'),             sub:L('Бас мүфти және ҚМДБ басшылығы','Верховный муфтий и руководство ДУМК')},
-  {id:'structure', group:'info',  icon:'structure',  route:null, title:L('Құрылым','Структура'),                sub:L('Басқармалар, бөлімдер және секторлар','Управления, отделы и секторы')},
-  {id:'building', group:'place',   icon:'building',   route:null, title:L('Ғимарат','Здание'),                   sub:L('Қабаттар, кабинеттер және залдар','Этажи, кабинеты и залы')},
+  {id:'about', group:'info',      icon:'about',      route:null, title:L('ҚМДБ туралы','О ҚМДБ','About SAMK'),               sub:L('Тарихы, миссиясы және қызмет бағыттары','История, миссия и направления деятельности','History, mission and areas of work')},
+  {id:'leadership', group:'info', icon:'leadership', route:null, title:L('Басшылық','Руководство','Leadership'),             sub:L('Бас мүфти және ҚМДБ басшылығы','Верховный муфтий и руководство ДУМК','Grand Mufti and SAMK leadership')},
+  {id:'structure', group:'info',  icon:'structure',  route:null, title:L('Құрылым','Структура','Structure'),                sub:L('Басқармалар, бөлімдер және секторлар','Управления, отделы и секторы','Departments, divisions and sectors')},
+  {id:'building', group:'place',   icon:'building',   route:null, title:L('Ғимарат','Здание','Building'),                   sub:L('Қабаттар, кабинеттер және залдар','Этажи, кабинеты и залы','Floors, offices and halls')},
   {id:'map', group:'feature',        icon:'map',        route:'./map.html', primary:true,
-                                                          title:L('Интерактивті карта','Интерактивная карта'), sub:L('Қазақстан мешіттері мен діни оқу орындары','Мечети и религиозные учебные заведения Казахстана')},
-  {id:'orgs', group:'place',       icon:'orgs',       route:null, title:L('Қарасты мекемелер','Подведомственные учреждения'), sub:L('Оқу орындары, қорлар және ұйымдар','Учебные заведения, фонды и организации')},
-  {id:'digital', group:'tech',    icon:'digital',    route:null, title:L('Цифрлық жобалар','Цифровые проекты'), sub:L('Қосымшалар, сайттар және онлайн платформалар','Приложения, сайты и онлайн-платформы')},
-  {id:'munara', group:'media',     icon:'tv',         route:null, title:L('Munara TV','Munara TV'),              sub:L('Тікелей эфир және медиа жобалар','Прямой эфир и медиапроекты')}
+                                                          title:L('Интерактивті карта','Интерактивная карта','Interactive map'), sub:L('Қазақстан мешіттері мен діни оқу орындары','Мечети и религиозные учебные заведения Казахстана','Mosques and religious educational institutions of Kazakhstan')},
+  {id:'orgs', group:'place',       icon:'orgs',       route:null, title:L('Қарасты мекемелер','Подведомственные учреждения','Affiliated institutions'), sub:L('Оқу орындары, қорлар және ұйымдар','Учебные заведения, фонды и организации','Schools, foundations and organizations')},
+  {id:'digital', group:'tech',    icon:'digital',    route:null, title:L('Цифрлық жобалар','Цифровые проекты','Digital projects'), sub:L('Қосымшалар, сайттар және онлайн платформалар','Приложения, сайты и онлайн-платформы','Apps, websites and online platforms')},
+  {id:'munara', group:'media',     icon:'tv',         route:null, title:L('Munara TV','Munara TV','Munara TV'),              sub:L('Тікелей эфир және медиа жобалар','Прямой эфир и медиапроекты','Live broadcast and media projects')}
 ];
 
 const QUICK_ACTIONS = [
-  {id:'find-person', icon:'person', route:null, title:L('Қызметкерді табу','Найти сотрудника')},
-  {id:'find-dept',   icon:'building', route:null, title:L('Бөлімді табу','Найти отдел')},
-  {id:'find-room',   icon:'door',   route:null, title:L('Кабинетті табу','Найти кабинет')},
-  {id:'find-mosque', icon:'map',    route:'./map.html', title:L('Мешітті табу','Найти мечеть')}
+  {id:'find-person', icon:'person', route:null, title:L('Қызметкерді табу','Найти сотрудника','Find an employee')},
+  {id:'find-dept',   icon:'building', route:null, title:L('Бөлімді табу','Найти отдел','Find a department')},
+  {id:'find-room',   icon:'door',   route:null, title:L('Кабинетті табу','Найти кабинет','Find an office')},
+  {id:'find-mosque', icon:'map',    route:'./map.html', title:L('Мешітті табу','Найти мечеть','Find a mosque')}
 ];
 
 const SECONDARY = [
-  {id:'resources', icon:'globe', route:null, title:L('Ресми ресурстар','Официальные ресурсы')},
-  {id:'contacts',  icon:'phone', route:null, title:L('Байланыс және қабылдау','Контакты и приём')}
+  {id:'resources', icon:'globe', route:null, title:L('Ресми ресурстар','Официальные ресурсы','Official resources')},
+  {id:'contacts',  icon:'phone', route:null, title:L('Байланыс және қабылдау','Контакты и приём','Contacts and reception')}
 ];
 
 const NEWS = [
-  {date:'20.09.2026', title:L('Астанада жаңа мешіттің іргетасы қаланды','В Астане заложен фундамент новой мечети')},
-  {date:'18.09.2026', title:L('Қари дайындау орталықтарында жаңа оқу маусымы басталды','В центрах подготовки қари начался новый учебный сезон')},
-  {date:'15.09.2026', title:L('ҚМДБ жаңа мобильді қосымшасы іске қосылды','Запущено новое мобильное приложение ДУМК')}
+  {date:'20.09.2026', title:L('Астанада жаңа мешіттің іргетасы қаланды','В Астане заложен фундамент новой мечети','Foundation laid for a new mosque in Astana')},
+  {date:'18.09.2026', title:L('Қари дайындау орталықтарында жаңа оқу маусымы басталды','В центрах подготовки қари начался новый учебный сезон','New academic season begins at qari training centers')},
+  {date:'15.09.2026', title:L('ҚМДБ жаңа мобильді қосымшасы іске қосылды','Запущено новое мобильное приложение ДУМК','New SAMK mobile app launched')}
 ];
 
 const EVENTS = [
-  {time:'14:30', title:L('Мәжіліс','Заседание'), place:L('Мәжіліс залы','Зал заседаний')},
-  {time:'16:00', title:L('Кездесу','Встреча'), place:L('Акт залы','Актовый зал')},
-  {time:'17:30', title:L('Қабылдау','Приём граждан'), place:L('1-қабат, 105 кабинет','1 этаж, кабинет 105')}
+  {time:'14:30', title:L('Мәжіліс','Заседание','Meeting'), place:L('Мәжіліс залы','Зал заседаний','Meeting hall')},
+  {time:'16:00', title:L('Кездесу','Встреча','Appointment'), place:L('Акт залы','Актовый зал','Assembly hall')},
+  {time:'17:30', title:L('Қабылдау','Приём граждан','Reception'), place:L('1-қабат, 105 кабинет','1 этаж, кабинет 105','Floor 1, office 105')}
 ];
 
 const PRAYER_NAMES = {
-  fajr:L('Таң','Фаджр'), sunrise:L('Күн','Восход'), dhuhr:L('Бесін','Зухр'),
-  asr:L('Екінті','Аср'), maghrib:L('Ақшам','Магриб'), isha:L('Құптан','Иша')
+  fajr:L('Таң','Фаджр','Fajr'), sunrise:L('Күн','Восход','Sunrise'), dhuhr:L('Бесін','Зухр','Dhuhr'),
+  asr:L('Екінті','Аср','Asr'), maghrib:L('Ақшам','Магриб','Maghrib'), isha:L('Құптан','Иша','Isha')
 };
 const PRAYER_ORDER = ['fajr','sunrise','dhuhr','asr','maghrib','isha'];
 
 /* Демо деректер. Нақты API қосылғанда тек PrayerService.get ауыстырылады. */
 const PrayerService = {
-  city: L('Астана','Астана'),
+  city: L('Астана','Астана','Astana'),
   async get(/* cityId, dateISO */){
     return {fajr:'04:37', sunrise:'06:12', dhuhr:'12:08', asr:'16:10', maghrib:'18:01', isha:'19:31'};
   }
@@ -77,35 +77,44 @@ const PrayerService = {
 const I18N = {
   months:{
     kk:['қаңтар','ақпан','наурыз','сәуір','мамыр','маусым','шілде','тамыз','қыркүйек','қазан','қараша','желтоқсан'],
+    en:['January','February','March','April','May','June','July','August','September','October','November','December'],
     ru:['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря']
   },
   t:{
-    orgName:L('ҚАЗАҚСТАН МҰСЫЛМАНДАРЫ ДІНИ БАСҚАРМАСЫ','ДУХОВНОЕ УПРАВЛЕНИЕ МУСУЛЬМАН КАЗАХСТАНА'),
-    orgShort:L('Қазақстан мұсылмандары діни басқармасы','Духовное управление мусульман Казахстана'),
-    terminal:L('Цифрлық ақпараттық терминал','Цифровой информационный терминал'),
-    search:L('Іздеу','Поиск'),
-    welcome:L('ҚОШ КЕЛДІҢІЗ!','ДОБРО ПОЖАЛОВАТЬ!'),
-    choose:L('Қажетті ақпаратты немесе қызметті таңдаңыз','Выберите нужную информацию или услугу'),
-    searchPh:L('Бөлімді, қызметкерді, мешітті немесе қызметті іздеңіз...','Найдите отдел, сотрудника, мечеть или услугу...'),
-    find:L('Табу','Найти'),
-    nextPrayer:L('Келесі намаз','Следующий намаз'),
-    left:L('қалды','осталось'),
-    pickSection:L('Қажетті бөлімді таңдаңыз','Выберите нужный раздел'),
-    quick:L('Жылдам әрекеттер','Быстрые действия'),
-    news:L('Соңғы жаңалықтар','Последние новости'),
-    today:L('Бүгін ҚМДБ-да','Сегодня в ДУМК'),
-    soon:L('Бұл бөлім жақын арада ашылады','Этот раздел скоро откроется'),
-    searchSoon:L('Іздеу жақын арада қосылады','Поиск скоро будет доступен'),
-    visual:L('ҚМДБ ғимараты','Здание ДУМК'),
-    visualSub:L('Астана, Қазақстан','Астана, Казахстан'),
-    official:L('Ресми ақпарат','Официальная информация'),
-    rights:L('© Қазақстан мұсылмандары діни басқармасы','© Духовное управление мусульман Казахстана'),
-    open:L('Ашу','Открыть'),
-    openMap:L('Картаны ашу','Открыть карту')
+    orgName:L('ҚАЗАҚСТАН МҰСЫЛМАНДАРЫ ДІНИ БАСҚАРМАСЫ','ДУХОВНОЕ УПРАВЛЕНИЕ МУСУЛЬМАН КАЗАХСТАНА','SPIRITUAL ADMINISTRATION OF MUSLIMS OF KAZAKHSTAN'),
+    orgShort:L('Қазақстан мұсылмандары діни басқармасы','Духовное управление мусульман Казахстана','Spiritual Administration of Muslims of Kazakhstan'),
+    terminal:L('Цифрлық ақпараттық терминал','Цифровой информационный терминал','Digital information terminal'),
+    search:L('Іздеу','Поиск','Search'),
+    welcome:L('ҚОШ КЕЛДІҢІЗ!','ДОБРО ПОЖАЛОВАТЬ!','WELCOME!'),
+    choose:L('Қажетті ақпаратты немесе қызметті таңдаңыз','Выберите нужную информацию или услугу','Choose the information or service you need'),
+    searchPh:L('Бөлімді, қызметкерді, мешітті немесе қызметті іздеңіз...','Найдите отдел, сотрудника, мечеть или услугу...','Search a department, employee, mosque or service...'),
+    find:L('Табу','Найти','Find'),
+    nextPrayer:L('Келесі намаз','Следующий намаз','Next prayer'),
+    left:L('қалды','осталось','left'),
+    pickSection:L('Қажетті бөлімді таңдаңыз','Выберите нужный раздел','Choose a section'),
+    quick:L('Жылдам әрекеттер','Быстрые действия','Quick actions'),
+    news:L('Соңғы жаңалықтар','Последние новости','Latest news'),
+    today:L('Бүгін ҚМДБ-да','Сегодня в ДУМК','Today at SAMK'),
+    soon:L('Бұл бөлім жақын арада ашылады','Этот раздел скоро откроется','This section will open soon'),
+    searchSoon:L('Іздеу жақын арада қосылады','Поиск скоро будет доступен','Search will be available soon'),
+    visual:L('ҚМДБ ғимараты','Здание ДУМК','SAMK building'),
+    visualSub:L('Астана, Қазақстан','Астана, Казахстан','Astana, Kazakhstan'),
+    official:L('Ресми ақпарат','Официальная информация','Official information'),
+    rights:L('© Қазақстан мұсылмандары діни басқармасы','© Духовное управление мусульман Казахстана','© Spiritual Administration of Muslims of Kazakhstan'),
+    open:L('Ашу','Открыть','Open'),
+    greet:{kk:'Қош келдіңіз!',ru:'Добро пожаловать!',en:'Welcome!'},
+    live:L('Тікелей','В эфире','Live'),
+    mosques:L('мешіт','мечетей','mosques'),
+    schools:L('оқу орны','учебных заведений','schools'),
+    qari:L('қари орталығы','центров қари','qari centers'),
+    ph:[L('Мешітті іздеңіз...','Найдите мечеть...','Search a mosque...'),L('Бөлімді табыңыз...','Найдите отдел...','Find a department...'),L('Қызметкерді іздеңіз...','Найдите сотрудника...','Look up an employee...'),L('Кабинетті табыңыз...','Найдите кабинет...','Find an office...')],
+    openMap:L('Картаны ашу','Открыть карту','Open the map')
   }
 };
 
 /* Idle режим конфигурациясы (әзірге өшірулі). Кейін экрандар кезектесіп көрсетіледі. */
+const STATS = [{n:2977,label:'mosques'},{n:14,label:'schools'},{n:18,label:'qari'}];
+
 const IDLE_CONFIG = {
   enabled:false,
   timeoutMs:120000,
@@ -113,5 +122,5 @@ const IDLE_CONFIG = {
   slideMs:12000
 };
 
-window.KIOSK_DATA = {ICONS, MENU, QUICK_ACTIONS, SECONDARY, NEWS, EVENTS, PRAYER_NAMES, PRAYER_ORDER, PrayerService, I18N, IDLE_CONFIG};
+window.KIOSK_DATA = {ICONS, MENU, QUICK_ACTIONS, SECONDARY, NEWS, EVENTS, STATS, PRAYER_NAMES, PRAYER_ORDER, PrayerService, I18N, IDLE_CONFIG};
 })();

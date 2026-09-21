@@ -9,12 +9,13 @@ const pad = n => String(n).padStart(2,'0');
 /* ── Рендер ── */
 function render(){
   const L = state.lang;
-  document.documentElement.lang = L === 'ru' ? 'ru' : 'kk';
+  document.documentElement.lang = L;
   $('kHeader').innerHTML = U.Header(L);
   $('kSide').innerHTML = U.SidePanel(L, state.times);
   $('kMain').innerHTML = U.HeroSection(L) + U.MainMenuGrid(L) + '<div class="k-bottom">' + U.NewsSection(L) + U.SecondaryActions(L) + '</div>';
   $('kFooter').innerHTML = U.Footer(L);
-  tickClock(); tickPrayer(true);
+  tickClock(); tickPrayer(true); greetIdx = 0;
+  setTimeout(runCounters, 700);
 }
 
 /* ── Уақыт пен күн ── */
@@ -28,7 +29,7 @@ function rotateNews(){
 }
 function tickClock(){
   const n = new Date();
-  $('kClock').textContent = pad(n.getHours()) + ':' + pad(n.getMinutes());
+  $('kClock').innerHTML = pad(n.getHours()) + '<i class="colon">:</i>' + pad(n.getMinutes());
   $('kDate').textContent = n.getDate() + ' ' + D.I18N.months[state.lang][n.getMonth()] + ' ' + n.getFullYear();
 }
 
@@ -55,8 +56,38 @@ function tickPrayer(force){
     $('kNextName').textContent = U.tr(D.PRAYER_NAMES[key], state.lang).toUpperCase();
     $('kNextTime').textContent = state.times[key];
   }
+  const prevIdx = (idx + order.length - 1) % order.length;
+  const prev = prayerDate(state.times[order[prevIdx]], idx === 0 ? -1 : 0);
+  const frac = Math.min(1, Math.max(0, (now - prev) / (target - prev)));
+  const bar = $('kBar'); if (bar) bar.style.width = (frac*100).toFixed(1) + '%';
   const s = Math.max(0, Math.round((target - now)/1000));
   $('kCountdown').textContent = pad(Math.floor(s/3600)) + ':' + pad(Math.floor(s%3600/60)) + ':' + pad(s%60);
+}
+
+/* ── Жандандыру: сәлемдесу, placeholder, санауыштар ── */
+let greetIdx = 0;
+function rotateGreeting(){
+  const el = $('kGreet'); if (!el) return;
+  const g = D.I18N.t.greet, order = [state.lang, ...['kk','ru','en'].filter(k=>k!==state.lang)];
+  greetIdx = (greetIdx + 1) % order.length;
+  el.style.opacity = 0; el.style.transform = 'translateY(10px)';
+  setTimeout(()=>{ el.textContent = g[order[greetIdx]]; el.style.opacity = 1; el.style.transform = 'none'; }, 400);
+}
+let phIdx = 0;
+function rotatePlaceholder(){
+  const el = $('kSearch'); if (!el || document.activeElement === el) return;
+  phIdx = (phIdx + 1) % D.I18N.t.ph.length;
+  el.placeholder = U.tr(D.I18N.t.ph[phIdx], state.lang);
+}
+function runCounters(){
+  document.querySelectorAll('[data-count]').forEach(el=>{
+    const to = +el.dataset.count, t0 = performance.now(), dur = 1800;
+    (function step(t){
+      const k = Math.min(1, (t - t0)/dur), e = 1 - Math.pow(1-k, 3);
+      el.textContent = Math.round(to*e).toLocaleString('ru-RU');
+      if (k < 1) requestAnimationFrame(step);
+    })(t0);
+  });
 }
 
 /* ── Навигация ── */
@@ -128,5 +159,7 @@ fit(); render();
 D.PrayerService.get().then(t=>{ state.times = t; render(); });
 setInterval(()=>{ tickClock(); tickPrayer(); }, 1000);
 setInterval(rotateNews, 6000);
+setInterval(rotateGreeting, 5000);
+setInterval(rotatePlaceholder, 3500);
 Idle.start();
 })();

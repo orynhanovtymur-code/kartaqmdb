@@ -177,3 +177,54 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 .k-shell{flex:1;min-height:0;display:grid;grid-template-columns:360px 1fr;gap:24px}
 .k-sidebar{display:flex;flex-direction:column;gap:12px;min-height:0;overflow:auto}
 .k-content{min-height:0;border-radius:28px;background:#fff;box-shadow:var(--card);padding:28px}
+
+/* ══ Жандандыру және анимациялар ══ */
+.k-clock .colon{font-style:normal;animation:blink 1s steps(2,jump-none) infinite}
+@keyframes blink{50%{opacity:.2}}
+.k-lang button{padding:0 18px}
+
+/* ғимарат суреті: баяу Ken Burns + сәлемдесу ауысады */
+.k-visual img{animation:kenburns 22s ease-in-out infinite alternate;transform-origin:60% 40%}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.12) translate(-1.5%,-1%)}}
+.k-visual .cap h2{transition:opacity .4s var(--e),transform .4s var(--e)}
+
+/* намаз: келесі намазға дейінгі прогресс */
+.k-next{position:relative}
+.k-next .bar{margin-top:12px;height:6px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}
+.k-next .bar i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#e8cf8f,#fff3cf);transition:width 1s linear;position:relative}
+.k-next .bar i::after{content:"";position:absolute;right:0;top:-3px;width:12px;height:12px;border-radius:50%;background:#fff3cf;box-shadow:0 0 0 0 rgba(232,207,143,.7);animation:dotPulse 1.8s ease-out infinite}
+@keyframes dotPulse{to{box-shadow:0 0 0 12px rgba(232,207,143,0)}}
+.k-time.next{position:relative}
+.k-time.next::after{content:"";position:absolute;bottom:0;left:22%;right:22%;height:3px;border-radius:3px;background:var(--green)}
+
+/* басты карточка: пульстейтін карта нүктелері, жылтыр батырма, санауыштар */
+.k-card.feature .ic{animation:floaty 4.5s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.pings{position:absolute;inset:0;pointer-events:none}
+.pings i{position:absolute;width:14px;height:14px;border-radius:50%;background:#e8cf8f;box-shadow:0 0 0 0 rgba(232,207,143,.6);animation:ping 2.8s ease-out infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(232,207,143,.6)}70%,100%{box-shadow:0 0 0 26px rgba(232,207,143,0)}}
+.k-card.feature .foot{position:relative;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.k-card.feature .cta{position:relative;overflow:hidden;flex:none}
+.k-card.feature .cta::after{content:"";position:absolute;top:0;bottom:0;width:60px;left:-80px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent);animation:shine 3.6s ease-in-out infinite}
+@keyframes shine{0%,55%{left:-80px}100%{left:130%}}
+.k-card.feature .stats{display:flex;gap:22px}
+.k-card.feature .stats div{display:flex;flex-direction:column;align-items:flex-start}
+.k-card.feature .stats b{font-family:var(--fh);font-weight:500;font-size:34px;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.k-card.feature .stats span{margin-top:3px;font-size:13px;color:rgba(255,255,255,.7)}
+
+/* плиткалардың иконкалары кезекпен жеңіл қалқиды */
+.k-card:not(.feature) .ic{animation:floaty 5s ease-in-out infinite}
+.k-card:nth-child(3) .ic{animation-delay:.5s}.k-card:nth-child(4) .ic{animation-delay:1s}.k-card:nth-child(5) .ic{animation-delay:1.5s}
+.k-card:nth-child(6) .ic{animation-delay:2s}.k-card:nth-child(7) .ic{animation-delay:2.5s}
+.k-card:not(.feature):not(:active):hover .go{transform:translateX(3px)}
+
+/* Munara TV: LIVE белгісі */
+.live{position:absolute;left:22px;top:24px;display:flex;align-items:center;gap:8px;padding:6px 14px 6px 12px;border-radius:99px;background:rgba(255,255,255,.12);
+  font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff}
+.live i{width:9px;height:9px;border-radius:50%;background:#ff5b5b;animation:liveDot 1.4s ease-in-out infinite}
+@keyframes liveDot{0%,100%{box-shadow:0 0 0 0 rgba(255,91,91,.7)}50%{box-shadow:0 0 0 8px rgba(255,91,91,0)}}
+.g-media .ic{margin-left:auto;margin-right:0}
+.g-media{background:radial-gradient(400px 200px at 100% 0%,rgba(232,207,143,.18),transparent 60%),var(--green-d)}
+
+/* жаңалық жолы */
+.k-news em::before{content:"";display:inline-block;width:8px;height:8px;margin-right:10px;border-radius:50%;background:var(--gold);animation:liveDot 2s ease-in-out infinite}
