@@ -525,3 +525,10 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 .g-media .wave{border-color:rgba(15,107,87,.45)}
 .g-media .live{background:rgba(15,107,87,.10);color:#0f6b57}
 .g-media .go{background:rgba(14,75,54,.08);color:var(--green)}
+
+/* Munara TV: иконка — сигнал шеңберлерінің дәл ортасында */
+.k-grid .k-card.m-munara .ic{width:64px!important;height:64px!important;font-size:34px!important;left:44px!important;top:36px!important;right:auto;z-index:2}
+.k-grid .k-card.m-munara .wave{left:44px;top:36px;width:64px;height:64px;transform-origin:50% 50%;animation:waveC 3s ease-out infinite}
+.k-grid .k-card.m-munara .wave.w2{animation-delay:1s}.k-grid .k-card.m-munara .wave.w3{animation-delay:2s}
+@keyframes waveC{0%{transform:scale(1);opacity:.8}100%{transform:scale(2.3);opacity:0}}
+.k-grid .k-card.m-munara .ic{border-radius:50%!important}
