@@ -5,6 +5,8 @@ const state = {lang: (function(){try{return localStorage.getItem('kiosk-lang')}c
 
 const $ = id => document.getElementById(id);
 
+try{ if (new URLSearchParams(location.search).get('lite')) document.documentElement.classList.add('lite'); }catch(e){}
+
 /* ── Түнгі / жарық режим ── */
 function applyTheme(t){
   document.documentElement.dataset.theme = t;

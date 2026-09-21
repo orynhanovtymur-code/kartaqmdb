@@ -781,3 +781,9 @@ html[data-theme=dark] #screen::before{opacity:1;filter:none;background-image:url
   -webkit-mask-image:radial-gradient(ellipse 62% 58% at 8% 12%,#000 0,transparent 72%),radial-gradient(ellipse 58% 62% at 94% 92%,#000 0,transparent 72%),radial-gradient(ellipse 30% 26% at 58% 52%,rgba(0,0,0,.45),transparent 75%);
   mask-image:radial-gradient(ellipse 62% 58% at 8% 12%,#000 0,transparent 72%),radial-gradient(ellipse 58% 62% at 94% 92%,#000 0,transparent 72%),radial-gradient(ellipse 30% 26% at 58% 52%,rgba(0,0,0,.45),transparent 75%);
   animation:linesDrift 50s ease-in-out infinite alternate}
+
+/* Жыпылықтауды жою: артқы фон қозғалмайды */
+#screen::before{animation:none!important;transform:none}
+/* ?lite=1 — барлық сәндік анимацияны өшіру (қате себебін іздеу үшін) */
+html.lite *,html.lite *::before,html.lite *::after{animation:none!important;transition:none!important}
+html.lite .anim{opacity:1!important}
