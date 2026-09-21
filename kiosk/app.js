@@ -35,7 +35,6 @@ function hijriText(d){
 function tickClock(){
   const n = new Date();
   $('kClock').innerHTML = pad(n.getHours()) + '<i class="colon">:</i>' + pad(n.getMinutes());
-  const tc = $('kTc'); if (tc) tc.textContent = pad(n.getHours()) + ':' + pad(n.getMinutes()) + ':' + pad(n.getSeconds());
   $('kHijri').textContent = hijriText(n);
   $('kDate').textContent = n.getDate() + ' ' + D.I18N.months[state.lang][n.getMonth()] + ' ' + n.getFullYear();
 }
