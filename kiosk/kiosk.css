@@ -646,3 +646,8 @@ html[data-theme=dark] .k-grid .g-tour{background:radial-gradient(600px 220px at 
 .k-card.feature .tx{margin-top:auto}
 .k-card.feature .foot{margin-top:22px}
 .k-time .pi,.k-time.next .pi{box-shadow:none}
+
+/* карта блогы: сандар мен тақырып ортада, иконка жоғарыда, батырма төменде тұрақты */
+.k-card.feature .stats{margin-top:auto;margin-bottom:22px}
+.k-card.feature .tx{margin-top:0;margin-bottom:auto}
+.k-card.feature .foot{margin-top:34px}
