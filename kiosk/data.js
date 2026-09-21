@@ -115,7 +115,7 @@ const I18N = {
     rights:L('© Қазақстан мұсылмандары діни басқармасы','© Духовное управление мусульман Казахстана','© Spiritual Administration of Muslims of Kazakhstan'),
     open:L('Ашу','Открыть','Open'),
     greet:{kk:'Қош келдіңіз!',ru:'Добро пожаловать!',en:'Welcome!'},
-    live:L('Тікелей','В эфире','Live'),
+    live:L('Тікелей эфир','Прямой эфир','Live broadcast'),
     mosques:L('мешіт','мечетей','mosques'),
     schools:L('оқу орны','учебных заведений','schools'),
     qari:L('қари орталығы','центров қари','qari centers'),

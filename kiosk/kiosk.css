@@ -219,7 +219,7 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 .k-card:not(.feature):not(:active):hover .go{transform:translateX(3px)}
 
 /* Munara TV: LIVE белгісі */
-.live{position:absolute;left:22px;top:24px;display:flex;align-items:center;gap:8px;padding:6px 14px 6px 12px;border-radius:99px;background:rgba(255,255,255,.12);
+.live{position:absolute;left:96px;top:36px;display:flex;align-items:center;gap:8px;padding:6px 14px 6px 12px;border-radius:99px;background:rgba(255,255,255,.12);
   font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff}
 .live i{width:9px;height:9px;border-radius:50%;background:#ff5b5b;animation:liveDot 1.4s ease-in-out infinite}
 @keyframes liveDot{0%,100%{box-shadow:0 0 0 0 rgba(255,91,91,.7)}50%{box-shadow:0 0 0 8px rgba(255,91,91,0)}}
@@ -270,7 +270,7 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
   background:linear-gradient(90deg,transparent,rgba(232,207,143,.16),transparent);animation:beam 5s ease-in-out infinite}
 @keyframes beam{0%,40%{left:-160px}100%{left:110%}}
 /* сигнал толқындары иконканың айналасында */
-.g-media .wave{position:absolute;right:37px;top:38px;width:56px;height:56px;border-radius:50%;border:2px solid rgba(232,207,143,.55);animation:wave 3s ease-out infinite}
+.g-media .wave{position:absolute;left:22px;top:24px;width:56px;height:56px;border-radius:50%;border:2px solid rgba(232,207,143,.55);animation:wave 3s ease-out infinite}
 .g-media .wave.w2{animation-delay:1s}.g-media .wave.w3{animation-delay:2s}
 @keyframes wave{0%{transform:scale(1);opacity:.7}100%{transform:scale(3.2);opacity:0}}
 /* аудио equalizer */
@@ -284,7 +284,7 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 @keyframes eq{0%,100%{transform:scaleY(.18)}50%{transform:scaleY(1)}}
 .g-media h3{position:relative;margin-top:auto}
 .g-media h3,.g-media .ic,.g-media .go,.g-media .live{z-index:1}
-.g-media .ic{position:absolute;right:22px;top:24px;margin:0}
+.g-media .ic{position:absolute;left:22px;top:24px;right:auto;margin:0}
 .live em{font-style:normal;margin-left:6px;padding-left:10px;border-left:1px solid rgba(255,255,255,.3);font-variant-numeric:tabular-nums;letter-spacing:.06em;font-weight:500}
 
 .k-clock span{margin-top:3px;font-size:15px}
