@@ -134,8 +134,8 @@ const I18N = {
     greet:{kk:'Қош келдіңіз!',ru:'Добро пожаловать!',en:'Welcome!'},
     live:L('Тікелей эфир','Прямой эфир','Live broadcast'),
     mosques:L('мешіт','мечетей','mosques'),
-    schools:L('оқу орны','учебных заведений','schools'),
-    qari:L('қари орталығы','центров қари','qari centers'),
+    schools:L('медресе','медресе','madrasahs'),
+    qari:L('қарилар орталығы','центры қари','qari centers'),
     ph:[L('Мешітті іздеңіз...','Найдите мечеть...','Search a mosque...'),L('Бөлімді табыңыз...','Найдите отдел...','Find a department...'),L('Қызметкерді іздеңіз...','Найдите сотрудника...','Look up an employee...'),L('Кабинетті табыңыз...','Найдите кабинет...','Find an office...')],
     themeToDark:L('Түнгі режим','Тёмная тема','Dark mode'),
     themeToLight:L('Жарық режим','Светлая тема','Light mode'),
@@ -144,7 +144,7 @@ const I18N = {
 };
 
 /* Idle режим конфигурациясы (әзірге өшірулі). Кейін экрандар кезектесіп көрсетіледі. */
-const STATS = [{n:2977,label:'mosques'},{n:14,label:'schools'},{n:18,label:'qari'}];
+const STATS = [{n:2977,label:'mosques'},{n:9,label:'schools'},{n:18,label:'qari'}];
 
 const IDLE_CONFIG = {
   enabled:false,

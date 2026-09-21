@@ -634,3 +634,14 @@ html[data-theme=dark] .k-grid .g-tour{background:radial-gradient(600px 220px at 
 /* 360° тур: мәтінмен қиылыспау */
 .vt .hs.h1{left:38%;bottom:26px}.vt .hs.h2{left:60%;bottom:44px;animation-delay:.8s}.vt .hs.h3{left:80%;bottom:26px;animation-delay:1.6s}
 .vt .chev.l{display:none}
+
+/* интерактивті карта: сандар иконканың астында, сипаттама бір қатарда */
+.k-card.feature .stats{position:relative;display:flex;gap:34px;margin-top:14px}
+.k-card.feature .stats div{display:flex;flex-direction:column;align-items:flex-start}
+.k-card.feature .stats div+div{padding-left:34px;border-left:1px solid rgba(255,255,255,.2)}
+.k-card.feature .stats b{font-family:var(--fh);font-weight:500;font-size:40px;line-height:1;color:#fff}
+.k-card.feature .stats span{margin-top:5px;font-size:15px;color:rgba(255,255,255,.75)}
+.k-card.feature .tx p{max-width:none;font-size:20px;margin-top:8px}
+.k-card.feature .foot{justify-content:flex-start}
+.k-card.feature .tx{margin-top:auto}
+.k-card.feature .foot{margin-top:22px}
