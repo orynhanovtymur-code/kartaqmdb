@@ -29,7 +29,7 @@ const MENU = [
   {id:'departments', icon:'departments', route:null, title:L('Бөлімдер','Отделы','Departments')},
   {id:'services',    icon:'services',    route:null, title:L('Қызметтер','Услуги','Services')},
   {id:'regions',     icon:'regions',     route:null, title:L('Өкілдіктер','Представительства','Offices')},
-  {id:'products',    icon:'products',    route:null, title:L('Цифрлық өнімдер','Цифровые продукты','Digital products')},
+  {id:'products',    icon:'products',    route:null, embed:'https://digital.muftyat.kz', title:L('Цифрлық өнімдер','Цифровые продукты','Digital products')},
   {id:'munara',      icon:'tv',          route:null, title:L('Munara TV','Munara TV','Munara TV')},
   {id:'tour',        icon:'tour',        route:null, title:L('360° виртуалды тур','360° виртуальный тур','360° virtual tour')}
 ];

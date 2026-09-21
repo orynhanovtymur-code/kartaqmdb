@@ -120,6 +120,19 @@ function render(){
   clearTimeout(countTimer); countTimer = setTimeout(runCounters, 500);
 }
 
+/* ── Сайтты модалкада ашу (беттен шықпайды) ── */
+function openEmbed(url){
+  if (document.getElementById('embedModal')) return;
+  const m = document.createElement('div');
+  m.id = 'embedModal';
+  m.style.cssText = 'position:absolute;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;background:rgba(3,10,7,.72)';
+  m.innerHTML = '<div style="position:relative;width:92%;height:92%;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.4)">'
+    + '<button id="embedClose" aria-label="Close" style="position:absolute;top:16px;right:16px;z-index:2;width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.95);box-shadow:0 2px 10px rgba(0,0,0,.25);font-size:26px;line-height:1">✕</button>'
+    + '<iframe src="' + url + '" style="width:100%;height:100%;border:0" allow="fullscreen"></iframe></div>';
+  m.addEventListener('click', e => { if (e.target === m || e.target.closest('#embedClose')) m.remove(); });
+  ($('screen') || document.body).appendChild(m);
+}
+
 /* ── Басу оқиғалары ── */
 document.addEventListener('click', e => {
   const t = e.target;
@@ -132,6 +145,7 @@ document.addEventListener('click', e => {
   const nav = t.closest('[data-nav]');
   if (nav){
     const item = D.MENU.find(m => m.id === nav.dataset.nav);
+    if (item && item.embed){ openEmbed(item.embed); return; }
     if (item && item.route){ $('screen').classList.add('leaving'); setTimeout(() => { location.href = item.route; }, 280); }
     return;
   }
