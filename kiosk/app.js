@@ -13,7 +13,6 @@ function render(){
   $('kHeader').innerHTML = U.Header(L);
   $('kSide').innerHTML = U.SidePanel(L, state.times);
   $('kMain').innerHTML = U.NamazTimesWidget(L, state.times) + U.MainMenuGrid(L) + '<div class="k-bottom">' + U.SecondaryActions(L) + '</div>';
-  $('kFooter').innerHTML = U.Footer(L);
   tickClock(); tickPrayer(true); greetIdx = 0;
   setTimeout(runCounters, 700);
 }

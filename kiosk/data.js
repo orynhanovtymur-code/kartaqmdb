@@ -50,7 +50,6 @@ const QUICK_ACTIONS = [
 ];
 
 const SECONDARY = [
-  {id:'resources', icon:'globe', route:null, title:L('Ресми ресурстар','Официальные ресурсы','Official resources')},
   {id:'contacts',  icon:'phone', route:null, title:L('Байланыс және қабылдау','Контакты и приём','Contacts and reception')}
 ];
 
