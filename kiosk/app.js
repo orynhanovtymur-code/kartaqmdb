@@ -61,7 +61,7 @@ function tickPrayer(force){
   const prev = prayerDate(state.times[order[prevIdx]], idx === 0 ? -1 : 0);
   const frac = Math.min(1, Math.max(0, (now - prev) / (target - prev)));
   const PH = {fajr:'fajr', sunrise:'sunrise', dhuhr:'noon', asr:'asr', maghrib:'sunset', isha:'night'};
-  const phase = FORCE_PHASE || (idx === 0 ? 'night' : PH[order[prevIdx]]);
+  const phase = FORCE_PHASE || state.preview || (idx === 0 ? 'night' : PH[order[prevIdx]]);
   document.querySelectorAll('.sc').forEach(el=>el.classList.toggle('on', el.dataset.ph === phase));
   const bar = $('kBar'); if (bar) bar.style.width = (frac*100).toFixed(1) + '%';
   const s = Math.max(0, Math.round((target - now)/1000));
@@ -112,7 +112,16 @@ function go(item){
   } else toast(U.T('soon', state.lang));
 }
 
+const PH_OF = {fajr:'fajr', sunrise:'sunrise', dhuhr:'noon', asr:'asr', maghrib:'sunset', isha:'night'};
 document.addEventListener('click', e=>{
+  /* ТЕСТ: намаз уақытын басқанда сол мезгілдің фонын көрсету (қайта бассаңыз — автомат режим) */
+  const tm = e.target.closest('.k-time');
+  if (tm){
+    const ph = PH_OF[tm.dataset.p];
+    state.preview = state.preview === ph ? null : ph;
+    document.querySelectorAll('.k-time').forEach(el=>el.classList.toggle('preview', !!state.preview && PH_OF[el.dataset.p] === state.preview));
+    tickPrayer(true); return;
+  }
   const nav = e.target.closest('[data-nav]');
   if (nav){
     nav.classList.add('pressed'); setTimeout(()=>nav.classList.remove('pressed'), 220);

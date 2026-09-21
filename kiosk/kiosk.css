@@ -280,3 +280,8 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 .sc[data-ph=sunset] .cloud{background:rgba(255,170,130,.45)}
 .sc[data-ph=asr] .cloud{background:rgba(255,246,220,.55)}
 @keyframes drift{to{transform:translateX(720px)}}
+
+/* тест: намаз ұяшықтарын басып фонды көру */
+.k-time{cursor:pointer;transition:background .3s,transform .2s var(--e)}
+.k-time:active{transform:scale(.94)}
+.k-time.preview{box-shadow:inset 0 -3px 0 var(--gold)}
