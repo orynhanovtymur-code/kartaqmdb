@@ -767,3 +767,11 @@ html[data-theme=dark] .k-mode button[data-theme-set=dark].on{background:#2b3570;
 .m-munara{--dur:6.5s;--dir:normal;--dl:-5s}
 .g-tour{--dur:9s;--dir:reverse;--dl:-7s}
 .k-grid .g-tour::before{display:none}
+
+/* ══ Артқы фон: мөлдір ағынды сызықтар ══ */
+#screen::before{opacity:1;background-image:url("../assets/bg-lines-light.svg");background-size:cover;background-position:center;background-repeat:no-repeat;filter:none;animation:linesDrift 40s ease-in-out infinite alternate}
+html[data-theme=dark] #screen::before{opacity:1;filter:none;background-image:url("../assets/bg-lines-dark.svg")}
+@keyframes linesDrift{from{transform:translateX(-18px) scale(1.03)}to{transform:translateX(18px) scale(1.03)}}
+
+/* Интерактивті карта: фондағы нүктелер алынды */
+.k-card.feature::before,.k-card.feature .pings{display:none}
