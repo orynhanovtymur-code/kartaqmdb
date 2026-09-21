@@ -228,3 +228,8 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 
 /* жаңалық жолы */
 .k-news em::before{content:"";display:inline-block;width:8px;height:8px;margin-right:10px;border-radius:50%;background:var(--gold);animation:liveDot 2s ease-in-out infinite}
+
+.k-time .i{font-size:26px;color:var(--green-l);margin-bottom:2px}
+.k-time.next .i{color:var(--green);animation:floaty 3s ease-in-out infinite}
+.k-time.past .i{color:#b4beb8}
+.k-time{padding-top:14px}

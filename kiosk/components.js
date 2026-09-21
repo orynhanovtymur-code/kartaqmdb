@@ -36,7 +36,7 @@ function BuildingVisual(lang){
 
 function NamazTimesWidget(lang, times){
   const cells = D.PRAYER_ORDER.map(k => `
-    <div class="k-time" data-p="${k}"><span>${tr(D.PRAYER_NAMES[k], lang)}</span><b>${times ? times[k] : '--:--'}</b></div>`).join('');
+    <div class="k-time" data-p="${k}">${icon(k)}<span>${tr(D.PRAYER_NAMES[k], lang)}</span><b>${times ? times[k] : '--:--'}</b></div>`).join('');
   return `
     <div class="k-namaz">
       <div class="k-next">

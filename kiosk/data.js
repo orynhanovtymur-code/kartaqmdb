@@ -19,6 +19,12 @@ const ICONS = {
   door:'<path d="M6 21V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v17"/><path d="M4 21h16"/><path d="M14 12h.01"/>',
   search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
   info:'<circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/>',
+  fajr:'<path d="M3 19h18"/><path d="M7 19a5 5 0 0 1 10 0"/><path d="M5 8h.01M12 5h.01M19 8h.01"/>',
+  sunrise:'<path d="M3 19h18"/><path d="M7 19a5 5 0 0 1 10 0"/><path d="M12 3v6M9.5 5.5 12 3l2.5 2.5"/><path d="M4.9 11l1.8 1.8M19.1 11l-1.8 1.8"/>',
+  dhuhr:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  asr:'<circle cx="12" cy="13" r="4"/><path d="M12 4v2M4.5 7.5 6 9M19.5 7.5 18 9M2 13h2M20 13h2M3 20h18"/>',
+  maghrib:'<path d="M3 19h18"/><path d="M7 19a5 5 0 0 1 10 0"/><path d="M12 3v6M9.5 6.5 12 9l2.5-2.5"/><path d="M4.9 11l1.8 1.8M19.1 11l-1.8 1.8"/>',
+  isha:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/><path d="M17 3v3M15.5 4.5h3"/>',
   arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
   link:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'
 };
