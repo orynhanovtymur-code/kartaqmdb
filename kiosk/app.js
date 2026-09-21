@@ -30,6 +30,7 @@ function rotateNews(){
 function tickClock(){
   const n = new Date();
   $('kClock').innerHTML = pad(n.getHours()) + '<i class="colon">:</i>' + pad(n.getMinutes());
+  const tc = $('kTc'); if (tc) tc.textContent = pad(n.getHours()) + ':' + pad(n.getMinutes()) + ':' + pad(n.getSeconds());
   $('kDate').textContent = n.getDate() + ' ' + D.I18N.months[state.lang][n.getMonth()] + ' ' + n.getFullYear();
 }
 
