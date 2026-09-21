@@ -724,3 +724,4 @@ html[data-theme=dark] .k-grid .k-card:not(.feature):not(.g-tour) .go{background:
 .m-services .bell{animation:none}
 .m-services .gear{animation:gearSpin 9s linear infinite}
 @keyframes gearSpin{to{transform:rotate(360deg)}}
+.g-media .tv::before,.g-media .tv::after{display:none}
