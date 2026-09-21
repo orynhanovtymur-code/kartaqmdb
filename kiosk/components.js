@@ -33,7 +33,13 @@ function ReceptionCard(lang){
   const r = D.RECEPTION;
   return `
     <div class="k-reception">
-      <div class="ph"><i></i><svg class="orbit" viewBox="0 0 118 118" aria-hidden="true"><circle class="t" cx="59" cy="59" r="57.5" pathLength="1000"/><circle class="h" cx="59" cy="59" r="57.5" pathLength="1000"/></svg><img src="${r.photo}" alt="" onerror="this.remove()"></div>
+      <div class="ph"><i></i><svg class="orbit" viewBox="0 0 118 118" aria-hidden="true">
+        <defs><linearGradient id="muftiGrad" gradientUnits="userSpaceOnUse" x1="4" y1="59" x2="114" y2="59">
+          <stop offset=".42" stop-color="#e8cf8f" stop-opacity="0"/><stop offset=".72" stop-color="#e8cf8f" stop-opacity=".4"/><stop offset=".93" stop-color="#f6e6b0" stop-opacity=".9"/><stop offset="1" stop-color="#fff3cf"/>
+          <animateTransform attributeName="gradientTransform" type="rotate" from="0 59 59" to="360 59 59" dur="6s" repeatCount="indefinite"/></linearGradient></defs>
+        <circle cx="59" cy="59" r="57" stroke="url(#muftiGrad)" stroke-width="8" opacity=".25"/>
+        <circle cx="59" cy="59" r="57" stroke="url(#muftiGrad)" stroke-width="3.5"/>
+      </svg><img src="${r.photo}" alt="" onerror="this.remove()"></div>
       <div class="tx"><span class="role">${tr(r.role, lang)}</span><b class="nm">${tr(r.name, lang)}</b></div>
     </div>`;
 }
@@ -111,7 +117,7 @@ function MenuCard(item, lang, i){
     </button>`;
   return `
     <button class="k-card m-${item.id} anim" data-nav="${item.id}" ${delay}>
-      ${item.id === 'tour' ? PlanTour() : '<svg class="frame" aria-hidden="true"><rect class="tail" pathLength="1000"/><rect class="head" pathLength="1000"/></svg>'}
+      ${item.id === 'tour' ? PlanTour() : '<svg class="frame" aria-hidden="true"></svg>'}
       <div class="ic">${icon(item.icon)}</div>
       <div class="tx"><h3>${tr(item.title, lang)}</h3></div>
       <span class="go">${icon('arrow')}</span>

@@ -84,13 +84,23 @@ function runCounters(){
   });
 }
 
-/* Айналатын алтын рамка: SVG өлшемін карточка өлшеміне келтіру (pathLength дұрыс істеуі үшін) */
+/* Айналатын алтын рамка: жұмсақ градиент жарығы карточка жиегін бойлай баяу айналады.
+   [ұзақтығы (с), бағыты (1 / -1), бастапқы фазасы (с)] — әр карточкада әртүрлі */
+const FRAME = {structure:[7,1,0], leadership:[9,-1,-2], departments:[6,1,-4], services:[8,-1,-1], regions:[10,1,-6], products:[7.5,-1,-3], munara:[6.5,1,-5]};
 function fitFrames(){
   document.querySelectorAll('.k-card').forEach(card => {
-    const svg = card.querySelector('.frame'); if (!svg) return;
-    const w = card.offsetWidth, h = card.offsetHeight;
+    const svg = card.querySelector('.frame'), cfg = FRAME[card.dataset.nav]; if (!svg || !cfg) return;
+    const w = card.offsetWidth, h = card.offsetHeight, cx = w / 2, cy = h / 2, R = Math.hypot(w, h) / 2 * 0.85;
+    const [dur, dir, begin] = cfg, id = 'fg-' + card.dataset.nav;
     svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
-    svg.querySelectorAll('rect').forEach(r => { r.setAttribute('x', 1); r.setAttribute('y', 1); r.setAttribute('width', w - 2); r.setAttribute('height', h - 2); r.setAttribute('rx', 27); });
+    svg.innerHTML = `
+      <defs><linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="${cx - R}" y1="${cy}" x2="${cx + R}" y2="${cy}">
+        <stop offset=".42" stop-color="#e8cf8f" stop-opacity="0"/><stop offset=".7" stop-color="#e8cf8f" stop-opacity=".4"/>
+        <stop offset=".92" stop-color="#f6e6b0" stop-opacity=".9"/><stop offset="1" stop-color="#fff3cf"/>
+        <animateTransform attributeName="gradientTransform" type="rotate" from="${dir > 0 ? 0 : 360} ${cx} ${cy}" to="${dir > 0 ? 360 : 0} ${cx} ${cy}" dur="${dur}s" begin="${begin}s" repeatCount="indefinite"/>
+      </linearGradient></defs>
+      <rect x="1" y="1" width="${w - 2}" height="${h - 2}" rx="27" stroke="url(#${id})" stroke-width="7" opacity=".22"/>
+      <rect x="1" y="1" width="${w - 2}" height="${h - 2}" rx="27" stroke="url(#${id})" stroke-width="2"/>`;
   });
 }
 
