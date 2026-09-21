@@ -476,3 +476,18 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 .k-grid .k-card:not(.feature):not(.m-structure):not(.g-tour) h3{font-size:23px}
 .k-grid .g-tour .tx p,.k-grid .g-media .tx p{color:rgba(255,255,255,.88)}
 .k-grid .g-tour .b360{margin-right:72px}
+
+/* ══ Карта үш қатарға созылады, оң жағында 5 карточка; төменгі қатарда цифрлық өнімдер, Munara TV, 360° тур ══ */
+.k-grid{grid-template-rows:.9fr 1.1fr 1.1fr .9fr}
+.k-grid .k-card.feature{grid-column:1 / span 2;grid-row:1 / span 3}
+.k-grid .m-structure{grid-column:3 / span 2;grid-row:1}
+.k-grid .m-leadership{grid-column:3;grid-row:2}
+.k-grid .m-departments{grid-column:4;grid-row:2}
+.k-grid .m-services{grid-column:3;grid-row:3}
+.k-grid .m-regions{grid-column:4;grid-row:3}
+.k-grid .m-products{grid-column:1;grid-row:4}
+.k-grid .m-munara,.k-grid .g-media{grid-column:2;grid-row:4}
+.k-grid .g-tour{grid-column:3 / span 2;grid-row:4;gap:20px;padding:16px 24px}
+.k-grid .g-tour .ic{width:68px;height:68px;font-size:38px}
+.g-tour h3{font-size:26px}
+.k-grid .g-tour .b360{font-size:60px;margin-right:56px}
