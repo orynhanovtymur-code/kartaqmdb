@@ -84,6 +84,16 @@ function runCounters(){
   });
 }
 
+/* Айналатын алтын рамка: SVG өлшемін карточка өлшеміне келтіру (pathLength дұрыс істеуі үшін) */
+function fitFrames(){
+  document.querySelectorAll('.k-card').forEach(card => {
+    const svg = card.querySelector('.frame'); if (!svg) return;
+    const w = card.offsetWidth, h = card.offsetHeight;
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    svg.querySelectorAll('rect').forEach(r => { r.setAttribute('x', 1); r.setAttribute('y', 1); r.setAttribute('width', w - 2); r.setAttribute('height', h - 2); r.setAttribute('rx', 27); });
+  });
+}
+
 /* ── Рендер ── */
 let firstRender = true;
 function render(){
@@ -94,6 +104,7 @@ function render(){
   $('kMain').innerHTML = U.NamazTimesWidget(L, state.times) + U.MainMenuGrid(L);
   applyTheme(document.documentElement.dataset.theme);
   greetIdx = 0; dateText = '';
+  fitFrames();
   tickClock(); tickPrayer(true);
   if (firstRender){ firstRender = false; runCounters(); }
 }
