@@ -704,3 +704,10 @@ html[data-theme=dark] .k-grid .g-tour{background:radial-gradient(600px 220px at 
 @keyframes lookAround{0%,100%{transform:rotate(0)}25%{transform:rotate(-9deg)}75%{transform:rotate(9deg)}}
 @keyframes pupils{0%,100%{transform:translateX(0)}25%{transform:translateX(-1.1px)}75%{transform:translateX(1.1px)}}
 .g-tour h3{font-size:30px}
+
+/* ══ Барлық карточкада тақырып төмендегі көрсеткі батырмасымен бір деңгейде ══ */
+.k-grid .k-card:not(.feature) .tx{position:absolute;left:18px;right:70px;bottom:18px;height:40px;display:flex;align-items:center;padding:0;margin:0;min-width:0}
+.k-grid .k-card:not(.feature) .tx h3{margin:0;padding:0;line-height:1.15}
+.k-grid .m-structure{flex-direction:column;align-items:flex-start;justify-content:space-between;gap:0;padding:16px 18px}
+.k-grid .k-card.m-structure .ic{width:48px;height:48px;border-radius:15px;font-size:26px}
+.k-grid .m-structure h3{font-size:26px}
