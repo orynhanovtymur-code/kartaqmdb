@@ -3,6 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta charset="utf-8">
+<script>try{if(localStorage.getItem('kiosk-theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}</script>
 <title>Қазақстан мешіттері мен діни оқу орындары</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -279,6 +280,7 @@
   #regionModalGrid .modal-tile svg{width:22px;height:22px;flex:none;color:var(--green-l)}
   #regionModalGrid .rt-text{display:flex;flex-direction:column;gap:3px}
 </style>
+<link rel="stylesheet" href="./kiosk/map-dark.css">
 </head>
 <body>
 <div id="stage"><div id="screen">
@@ -3726,7 +3728,9 @@ document.getElementById('regionModalFullBtn').addEventListener('click', ()=>{
 
 // ── Word cloud: өңірдің барлық мешіттерінің атаулары ──
 const wcOverlay = document.getElementById('wcOverlay');
-const WC_COLORS = ['#111111','#2b2b2b','#444444','#5e5e5e','#787878','#939393','#adadad'];
+const WC_COLORS_LIGHT = ['#111111','#2b2b2b','#444444','#5e5e5e','#787878','#939393','#adadad'];
+const WC_COLORS_DARK = ['#f2f6f3','#dbe5de','#c3d1c8','#adbdb3','#96a89d','#7f9388','#6a7d72'];
+const wcColors = () => document.documentElement.dataset.theme === 'dark' ? WC_COLORS_DARK : WC_COLORS_LIGHT;
 function openWordCloud(region){
   const list = OBJECTS.filter(o=>o.cat==='mosque' && (!region || o.region===region));
   document.getElementById('wcTitle').textContent = (region||'Барлық өңір') + ' · ' + list.length + ' мешіт';
@@ -3735,7 +3739,7 @@ function openWordCloud(region){
   document.getElementById('wcCloud').innerHTML = list.map((o,i)=>{
     const r = Math.random();
     const size = Math.round(base * (0.75 + Math.pow(r,4)*2.6));
-    const c = WC_COLORS[Math.floor(Math.random()*WC_COLORS.length)];
+    const c = (pal=>pal[Math.floor(Math.random()*pal.length)])(wcColors());
     const wt = r>.7 ? 700 : 500;
     return `<span class="wc-w" style="font-size:calc(${size}px*var(--k,1));font-weight:${wt};color:${c};animation-delay:${Math.min(i*0.02,1.5)}s,${(Math.random()*4).toFixed(2)}s" data-oi="${OBJECTS.indexOf(o)}">${o.n}</span>`;
   }).join('');
