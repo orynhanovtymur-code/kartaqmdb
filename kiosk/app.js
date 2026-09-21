@@ -12,7 +12,7 @@ function render(){
   document.documentElement.lang = L;
   $('kHeader').innerHTML = U.Header(L);
   $('kSide').innerHTML = U.SidePanel(L, state.times);
-  $('kMain').innerHTML = U.HeroSection(L) + U.MainMenuGrid(L) + '<div class="k-bottom">' + U.NewsSection(L) + U.SecondaryActions(L) + '</div>';
+  $('kMain').innerHTML = U.MainMenuGrid(L) + '<div class="k-bottom">' + U.NewsSection(L) + U.SecondaryActions(L) + '</div>';
   $('kFooter').innerHTML = U.Footer(L);
   tickClock(); tickPrayer(true); greetIdx = 0;
   setTimeout(runCounters, 700);
