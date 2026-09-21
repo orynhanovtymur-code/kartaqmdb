@@ -75,11 +75,11 @@ function tickPrayer(force){
 /* Интерактивті карта: сандар 0-ден өседі (тек бір рет) */
 function runCounters(){
   document.querySelectorAll('[data-count]').forEach(el => {
-    const to = +el.dataset.count, t0 = performance.now();
-    el.textContent = '0';
+    const to = +el.dataset.count, t0 = performance.now(), dur = 3200;
     (function step(t){
-      const k = Math.min(1, (t - t0) / 1800);
-      el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))).toLocaleString('ru-RU');
+      const k = Math.min(1, (t - t0) / dur);
+      const e = 0.5 - Math.cos(Math.PI * k) / 2;            // жұмсақ басталады және жұмсақ тоқтайды
+      el.textContent = Math.round(to * e).toLocaleString('ru-RU');   // 0, 1, 2, 3 … біртіндеп өседі
       if (k < 1) requestAnimationFrame(step);
     })(t0);
   });

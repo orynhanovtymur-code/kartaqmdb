@@ -270,3 +270,21 @@ html[data-theme=dark] .k-card .go{color:var(--green-l)}
 .k-next .bar i{position:relative}
 .k-next .bar i::after{content:"";position:absolute;right:0;top:-3px;width:12px;height:12px;border-radius:50%;background:#fff3cf;animation:dotGlow 1.8s ease-out infinite}
 @keyframes dotGlow{0%{box-shadow:0 0 0 0 rgba(232,207,143,.7)}100%{box-shadow:0 0 0 12px rgba(232,207,143,0)}}
+
+/* ══ Жұмсақ (плавный) қозғалыс: қатты секірулер алынды ══ */
+@keyframes pop{0%,100%{transform:scale(1)}50%{transform:scale(1.16)}}
+@keyframes buzz{0%,100%{transform:rotate(0)}50%{transform:rotate(3deg)}}
+@keyframes look{0%,100%{transform:rotate(0)}50%{transform:rotate(6deg)}}
+@keyframes pinDrop{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@keyframes ripple{0%,100%{transform:scale(.7);opacity:.35}50%{transform:scale(1.15);opacity:.9}}
+@keyframes typing{0%,100%{stroke-dashoffset:5}50%{stroke-dashoffset:0}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}}
+.m-structure .sn,.m-departments .dq{animation-duration:4.2s}
+.m-products .ph{animation-duration:5s}
+.m-tour .vr{animation-duration:7s}
+.k-clock .colon{animation:blink 2s ease-in-out infinite}
+.anim{animation-duration:.8s}
+.k-card,.k-time,.k-lang button,.k-mode button{transition-duration:.45s}
+.k-card:active{transform:scale(.97)}
+.k-visual h2,.k-clock span{transition-duration:.7s}
