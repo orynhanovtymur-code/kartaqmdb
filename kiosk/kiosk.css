@@ -766,3 +766,4 @@ html[data-theme=dark] .k-mode button[data-theme-set=dark].on{background:#2b3570;
 .m-products{--dur:7.5s;--dir:reverse;--dl:-3s}
 .m-munara{--dur:6.5s;--dir:normal;--dl:-5s}
 .g-tour{--dur:9s;--dir:reverse;--dl:-7s}
+.k-grid .g-tour::before{display:none}
