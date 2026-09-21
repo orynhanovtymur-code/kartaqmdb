@@ -50,7 +50,6 @@ const QUICK_ACTIONS = [
 ];
 
 const SECONDARY = [
-  {id:'contacts',  icon:'phone', route:null, title:L('Байланыс және қабылдау','Контакты и приём','Contacts and reception')}
 ];
 
 const NEWS = [
