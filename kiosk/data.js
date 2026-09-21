@@ -7,7 +7,7 @@ const L = (kk, ru, en) => ({kk, ru, en});
 const ICONS = {
   about:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',
   structure:'<rect class="sn a" x="9" y="3" width="6" height="5" rx="1"/><rect class="sn b" x="2" y="16" width="6" height="5" rx="1"/><rect class="sn c" x="16" y="16" width="6" height="5" rx="1"/><path class="sl" d="M12 8v4M5 16v-4h14v4"/>',
-  leadership:'<path class="ls" d="M12 1.8l1.1 2.3 2.5.3-1.8 1.7.5 2.5L12 7.4 9.7 8.6l.5-2.5L8.4 4.4l2.5-.3z"/><circle class="lp" cx="12" cy="13.2" r="3"/><path class="lp" d="M6 22c0-3 2.7-5 6-5s6 2 6 5"/>',
+  leadership:'<circle class="lp" cx="12" cy="8.5" r="4"/><path class="lp" d="M4.5 21c0-4.1 3.4-7 7.500-7s7.500 2.9 7.500 7"/>',
   departments:'<rect class="dq q1" x="3" y="3" width="8" height="8" rx="1.6"/><rect class="dq q2" x="13" y="3" width="8" height="8" rx="1.6"/><rect class="dq q3" x="3" y="13" width="8" height="8" rx="1.6"/><rect class="dq q4" x="13" y="13" width="8" height="8" rx="1.6"/>',
   services:'<g class="gear"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="6.6"/><path d="M12 2.4v3M12 18.6v3M2.4 12h3M18.6 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M5.2 18.8l2.1-2.1M16.7 7.3l2.1-2.1"/></g>',
   regions:'<ellipse class="rip" cx="12" cy="21.4" rx="6" ry="1.5"/><g class="pin"><path d="M12 19s6-5.2 6-9.8A6 6 0 0 0 6 9.2c0 4.6 6 9.8 6 9.8z"/><circle cx="12" cy="9.2" r="2.2"/></g>',
