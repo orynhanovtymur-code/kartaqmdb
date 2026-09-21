@@ -781,24 +781,3 @@ html[data-theme=dark] #screen::before{opacity:1;filter:none;background-image:url
   -webkit-mask-image:radial-gradient(ellipse 62% 58% at 8% 12%,#000 0,transparent 72%),radial-gradient(ellipse 58% 62% at 94% 92%,#000 0,transparent 72%),radial-gradient(ellipse 30% 26% at 58% 52%,rgba(0,0,0,.45),transparent 75%);
   mask-image:radial-gradient(ellipse 62% 58% at 8% 12%,#000 0,transparent 72%),radial-gradient(ellipse 58% 62% at 94% 92%,#000 0,transparent 72%),radial-gradient(ellipse 30% 26% at 58% 52%,rgba(0,0,0,.45),transparent 75%);
   animation:linesDrift 50s ease-in-out infinite alternate}
-
-/* ══ Сайтты модал ішінде ашу (iframe) ══ */
-.k-embed{position:absolute;inset:0;z-index:80;background:rgba(6,20,14,.62);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s var(--e)}
-.k-embed.show{opacity:1;pointer-events:auto}
-.k-embed-card{position:absolute;inset:34px 52px;border-radius:30px;background:#fff;overflow:hidden;display:flex;flex-direction:column;
-  box-shadow:0 40px 100px rgba(0,0,0,.45);transform:translateY(24px) scale(.97);opacity:0;transition:transform .4s var(--e),opacity .4s var(--e)}
-.k-embed.show .k-embed-card{transform:none;opacity:1}
-.k-embed-head{flex:none;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 18px 0 30px;border-bottom:1px solid var(--line);background:#fff}
-.k-embed-title{font-family:var(--fh);font-size:26px;letter-spacing:.06em;text-transform:uppercase;color:var(--green-d);display:flex;align-items:center;gap:14px}
-.k-embed-title::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold)}
-.k-embed-close{width:56px;height:56px;border-radius:18px;background:var(--mint);color:var(--green);display:grid;place-items:center;transition:transform .25s var(--e),background .25s}
-.k-embed-close svg{width:24px;height:24px}
-.k-embed-close:active{transform:scale(.9) rotate(90deg);background:var(--green);color:#fff}
-.k-embed-body{flex:1;position:relative;min-height:0;background:#fff}
-.k-embed-body iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
-.k-embed-load{position:absolute;inset:0;display:grid;place-items:center;background:#fff;transition:opacity .4s;z-index:1;pointer-events:none}
-.k-embed-load.done{opacity:0}
-.k-embed-load i{width:54px;height:54px;border-radius:50%;border:4px solid var(--mint);border-top-color:var(--green);animation:spin 1s linear infinite}
-html[data-theme=dark] .k-embed-card,html[data-theme=dark] .k-embed-head{background:#15211b}
-html[data-theme=dark] .k-embed-close{background:#1f3329;color:#5cbf95}
-#screen>.k-embed,#screen>.k-toast{position:absolute}
