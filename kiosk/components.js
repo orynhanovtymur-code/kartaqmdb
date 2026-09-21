@@ -34,12 +34,30 @@ function BuildingVisual(lang){
     </div>`;
 }
 
+
+/* Күн уақытына сай өзгеретін аспан фоны (намаз панелі) */
+function SkyScene(){
+  const sun = '<i class="sun"></i>';
+  const cloud = '<i class="cloud c1"></i><i class="cloud c2"></i><i class="cloud c3"></i>';
+  const stars = '<i class="stars"></i><i class="stars s2"></i>';
+  const moon = '<svg class="moon" viewBox="0 0 40 40"><path d="M27 4a17 17 0 1 0 9 26A14 14 0 0 1 27 4z" fill="#f6f0cf"/></svg>';
+  return `<div class="scene" aria-hidden="true">
+    <div class="sc" data-ph="night">${stars}${moon}</div>
+    <div class="sc" data-ph="fajr">${stars}<i class="glow"></i></div>
+    <div class="sc" data-ph="sunrise"><i class="glow"></i>${sun}${cloud}</div>
+    <div class="sc" data-ph="noon">${sun}${cloud}</div>
+    <div class="sc" data-ph="asr">${sun}${cloud}</div>
+    <div class="sc" data-ph="sunset"><i class="glow"></i>${sun}${cloud}</div>
+  </div>`;
+}
+
 function NamazTimesWidget(lang, times){
   const cells = D.PRAYER_ORDER.map(k => `
     <div class="k-time" data-p="${k}">${icon(k)}<span>${tr(D.PRAYER_NAMES[k], lang)}</span><b>${times ? times[k] : '--:--'}</b></div>`).join('');
   return `
     <div class="k-namaz">
       <div class="k-next">
+        ${SkyScene()}
         <div class="lab">${tr(D.PrayerService.city, lang)} · ${T('nextPrayer', lang)}</div>
         <div class="row"><div class="nm"><span id="kNextName">—</span></div><div class="tm" id="kNextTime"></div></div>
         <div class="cd"><span id="kCountdown">--:--:--</span> ${T('left', lang)}</div>

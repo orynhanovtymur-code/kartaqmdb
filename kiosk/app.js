@@ -39,6 +39,7 @@ function prayerDate(hhmm, dayOffset){
   d.setDate(d.getDate() + (dayOffset||0)); d.setHours(h, m, 0, 0); return d;
 }
 let lastNext = null;
+const FORCE_PHASE = new URLSearchParams(location.search).get('phase'); // тест үшін: ?phase=night|fajr|sunrise|noon|asr|sunset
 function tickPrayer(force){
   if (!state.times) return;
   const now = new Date(), order = D.PRAYER_ORDER;
@@ -59,6 +60,9 @@ function tickPrayer(force){
   const prevIdx = (idx + order.length - 1) % order.length;
   const prev = prayerDate(state.times[order[prevIdx]], idx === 0 ? -1 : 0);
   const frac = Math.min(1, Math.max(0, (now - prev) / (target - prev)));
+  const PH = {fajr:'fajr', sunrise:'sunrise', dhuhr:'noon', asr:'asr', maghrib:'sunset', isha:'night'};
+  const phase = FORCE_PHASE || (idx === 0 ? 'night' : PH[order[prevIdx]]);
+  document.querySelectorAll('.sc').forEach(el=>el.classList.toggle('on', el.dataset.ph === phase));
   const bar = $('kBar'); if (bar) bar.style.width = (frac*100).toFixed(1) + '%';
   const s = Math.max(0, Math.round((target - now)/1000));
   $('kCountdown').textContent = pad(Math.floor(s/3600)) + ':' + pad(Math.floor(s%3600/60)) + ':' + pad(s%60);
