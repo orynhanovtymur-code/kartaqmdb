@@ -645,3 +645,4 @@ html[data-theme=dark] .k-grid .g-tour{background:radial-gradient(600px 220px at 
 .k-card.feature .foot{justify-content:flex-start}
 .k-card.feature .tx{margin-top:auto}
 .k-card.feature .foot{margin-top:22px}
+.k-time .pi,.k-time.next .pi{box-shadow:none}
