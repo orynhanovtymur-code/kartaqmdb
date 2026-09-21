@@ -749,3 +749,20 @@ html[data-theme=dark] .k-mode button[data-theme-set=dark].on{background:#2b3570;
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
   box-shadow:none;pointer-events:none;z-index:2;transition:opacity .3s var(--e)}
 .k-grid .k-card:not(.feature):active::before{top:0;bottom:0;opacity:.6}
+
+/* ══ Алтын рамка карточканы айналып жүреді (әр карточкада басқа жылдамдық, бағыт, фаза) ══ */
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+.k-grid .k-card:not(.feature)::before{
+  background:
+    conic-gradient(from var(--a),rgba(201,169,91,0) 0deg,rgba(201,169,91,0) 215deg,rgba(201,169,91,.55) 300deg,#f6e6b0 345deg,rgba(246,230,176,0) 360deg),
+    linear-gradient(90deg,rgba(201,169,91,.5),rgba(201,169,91,0) 45%);
+  animation:goldOrbit var(--dur,8s) linear infinite var(--dir,normal);animation-delay:var(--dl,0s)}
+@keyframes goldOrbit{to{--a:360deg}}
+.m-structure{--dur:7s;--dir:normal;--dl:0s}
+.m-leadership{--dur:9s;--dir:reverse;--dl:-2s}
+.m-departments{--dur:6s;--dir:normal;--dl:-4s}
+.m-services{--dur:8s;--dir:reverse;--dl:-1s}
+.m-regions{--dur:10s;--dir:normal;--dl:-6s}
+.m-products{--dur:7.5s;--dir:reverse;--dl:-3s}
+.m-munara{--dur:6.5s;--dir:normal;--dl:-5s}
+.g-tour{--dur:9s;--dir:reverse;--dl:-7s}
