@@ -219,7 +219,7 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 .k-card:not(.feature):not(:active):hover .go{transform:translateX(3px)}
 
 /* Munara TV: LIVE белгісі */
-.live{position:absolute;left:96px;top:36px;display:flex;align-items:center;gap:8px;padding:6px 14px 6px 12px;border-radius:99px;background:rgba(255,255,255,.12);
+.live{position:absolute;right:22px;top:36px;display:flex;align-items:center;gap:8px;padding:6px 14px 6px 12px;border-radius:99px;background:rgba(255,255,255,.12);
   font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff}
 .live i{width:9px;height:9px;border-radius:50%;background:#ff5b5b;animation:liveDot 1.4s ease-in-out infinite}
 @keyframes liveDot{0%,100%{box-shadow:0 0 0 0 rgba(255,91,91,.7)}50%{box-shadow:0 0 0 8px rgba(255,91,91,0)}}
