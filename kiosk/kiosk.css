@@ -525,3 +525,4 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 .g-media .wave{border-color:rgba(15,107,87,.45)}
 .g-media .live{background:rgba(15,107,87,.10);color:#0f6b57}
 .g-media .go{background:rgba(14,75,54,.08);color:var(--green)}
+.g-media .wave{display:none}
