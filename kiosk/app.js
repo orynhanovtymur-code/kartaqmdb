@@ -11,13 +11,21 @@ function render(){
   const L = state.lang;
   document.documentElement.lang = L === 'ru' ? 'ru' : 'kk';
   $('kHeader').innerHTML = U.Header(L);
-  $('kMain').innerHTML = U.HeroSection(L) + U.NamazTimesWidget(L, state.times) + U.MainMenuGrid(L) + U.QuickActions(L);
-  $('kSide').innerHTML = U.BuildingVisual(L) + U.NewsSection(L) + U.TodayEvents(L) + U.SecondaryActions(L);
+  $('kSide').innerHTML = U.SidePanel(L, state.times);
+  $('kMain').innerHTML = U.HeroSection(L) + U.MainMenuGrid(L) + '<div class="k-bottom">' + U.NewsSection(L) + U.SecondaryActions(L) + '</div>';
   $('kFooter').innerHTML = U.Footer(L);
   tickClock(); tickPrayer(true);
 }
 
 /* ── Уақыт пен күн ── */
+let newsIdx = 0;
+function rotateNews(){
+  const el = $('kNewsText'); if (!el) return;
+  newsIdx = (newsIdx + 1) % D.NEWS.length;
+  const n = D.NEWS[newsIdx];
+  el.style.opacity = 0;
+  setTimeout(()=>{ el.textContent = n.date + ' · ' + U.tr(n.title, state.lang); el.style.opacity = 1; }, 350);
+}
 function tickClock(){
   const n = new Date();
   $('kClock').textContent = pad(n.getHours()) + ':' + pad(n.getMinutes());
@@ -45,7 +53,7 @@ function tickPrayer(force){
       el.classList.toggle('past', idx !== 0 && i < idx);
     });
     $('kNextName').textContent = U.tr(D.PRAYER_NAMES[key], state.lang).toUpperCase();
-    $('kNextTime').textContent = '— ' + state.times[key];
+    $('kNextTime').textContent = state.times[key];
   }
   const s = Math.max(0, Math.round((target - now)/1000));
   $('kCountdown').textContent = pad(Math.floor(s/3600)) + ':' + pad(Math.floor(s%3600/60)) + ':' + pad(s%60);
@@ -119,5 +127,6 @@ addEventListener('contextmenu', e=>e.preventDefault());
 fit(); render();
 D.PrayerService.get().then(t=>{ state.times = t; render(); });
 setInterval(()=>{ tickClock(); tickPrayer(); }, 1000);
+setInterval(rotateNews, 6000);
 Idle.start();
 })();
