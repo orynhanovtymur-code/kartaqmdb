@@ -139,7 +139,7 @@ function ReceptionCard(lang){
   const r = D.RECEPTION;
   return `
     <div class="k-reception">
-      <div class="ph"><img src="${r.photo}" alt="" onerror="this.remove()"></div>
+      <div class="ph"><i class="rays"></i><i class="ring"></i><i class="pulse"></i><img src="${r.photo}" alt="" onerror="this.remove()"></div>
       <div class="tx">
         <span class="role">${tr(r.role, lang)}</span>
         <b class="nm">${tr(r.name, lang)}</b>
