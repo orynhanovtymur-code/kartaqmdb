@@ -33,7 +33,7 @@ function ReceptionCard(lang){
   const r = D.RECEPTION;
   return `
     <div class="k-reception">
-      <div class="ph"><i></i><img src="${r.photo}" alt="" onerror="this.remove()"></div>
+      <div class="ph"><i></i><svg class="orbit" viewBox="0 0 118 118" aria-hidden="true"><circle class="t" cx="59" cy="59" r="57.5" pathLength="1000"/><circle class="h" cx="59" cy="59" r="57.5" pathLength="1000"/></svg><img src="${r.photo}" alt="" onerror="this.remove()"></div>
       <div class="tx"><span class="role">${tr(r.role, lang)}</span><b class="nm">${tr(r.name, lang)}</b></div>
     </div>`;
 }

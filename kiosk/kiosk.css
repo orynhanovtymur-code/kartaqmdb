@@ -246,3 +246,12 @@ html[data-theme=dark] .k-card .go{color:var(--green-l)}
 .m-regions{--dur:10s;--dir:normal;--dl:-6s}
 .m-products{--dur:7.5s;--dir:reverse;--dl:-3s}
 .m-munara{--dur:6.5s;--dir:normal;--dl:-5s}
+
+/* Бас мүфти суреті: айналасында алтын доға дөңгелек айналады */
+.k-reception .ph .orbit{position:absolute;left:-9px;top:-9px;width:118px;height:118px;pointer-events:none;overflow:visible}
+.orbit circle{fill:none;stroke-linecap:round;stroke-width:3;transform-box:fill-box;transform-origin:center;animation-duration:4.5s;animation-timing-function:linear;animation-iteration-count:infinite}
+.orbit .t{stroke:rgba(201,169,91,.45);stroke-dasharray:260 740;animation-name:spin}
+.orbit .h{stroke:#f3dfa2;stroke-dasharray:80 920;animation-name:spinHead}
+@keyframes spinHead{from{transform:rotate(56deg)}to{transform:rotate(416deg)}}
+.orbit circle{stroke-width:4}
+.orbit .t{stroke:rgba(201,169,91,.65)}
