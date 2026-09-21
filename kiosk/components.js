@@ -181,6 +181,7 @@ function MenuCard(item, lang, i){
     </button>`;
   return `
     <button class="k-card g-${item.group} m-${item.id} anim" data-nav="menu:${item.id}" style="animation-delay:${0.2+i*0.06}s">
+      ${item.group==='tour' ? '' : '<i class="orb" aria-hidden="true"></i>'}
       ${item.group==='media' ? `<div class="tv" aria-hidden="true"></div>` : ''}
       ${item.group==='tour' ? PlanTour() : ''}
       <div class="ic">${icon(item.icon)}</div>

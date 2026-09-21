@@ -802,3 +802,14 @@ html[data-theme=dark] #screen::before{opacity:1;filter:none;background-image:url
 html[data-theme=dark] .k-embed-card,html[data-theme=dark] .k-embed-head{background:#15211b}
 html[data-theme=dark] .k-embed-close{background:#1f3329;color:#5cbf95}
 #screen>.k-embed,#screen>.k-toast{position:absolute}
+
+/* ══ Өнімділік: алтын рамка енді GPU-мен айналады (transform), фон сызықтары қозғалмайды ══ */
+.k-grid .k-card:not(.feature)::before{display:none}
+.k-card .orb{position:absolute;inset:0;border-radius:inherit;padding:2px;pointer-events:none;z-index:2;overflow:hidden;
+  background:linear-gradient(90deg,rgba(201,169,91,.5),rgba(201,169,91,0) 45%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.k-card .orb::before{content:"";position:absolute;left:50%;top:50%;width:720px;height:720px;margin:-360px;
+  background:conic-gradient(from 0deg,rgba(201,169,91,0) 0deg,rgba(201,169,91,0) 215deg,rgba(201,169,91,.55) 300deg,#f6e6b0 345deg,rgba(246,230,176,0) 360deg);
+  will-change:transform;animation:orbSpin var(--dur,8s) linear infinite var(--dir,normal);animation-delay:var(--dl,0s)}
+@keyframes orbSpin{to{transform:rotate(360deg)}}
+#screen::before{animation:none}
