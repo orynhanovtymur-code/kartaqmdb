@@ -16,7 +16,7 @@ function Header(lang){
       <button data-lang="ru" class="${lang==='ru'?'on':''}">РУС</button>
       <button data-lang="en" class="${lang==='en'?'on':''}">ENG</button>
     </div>
-    <div class="k-clock"><b id="kClock">--:--</b><span id="kDate"></span><span id="kHijri" class="hj"></span></div>`;
+    <div class="k-clock"><b id="kClock">--:--</b><span id="kDate"></span></div>`;
 }
 
 /* Сол жақ панель: сурет + қош келдіңіз, намаз, бүгінгі іс-шаралар */

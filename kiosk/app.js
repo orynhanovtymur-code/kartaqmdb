@@ -31,11 +31,22 @@ function hijriText(d){
   const p = Object.fromEntries(HIJRI_FMT.formatToParts(d).map(x=>[x.type, x.value]));
   return p.day + ' ' + D.I18N.hijri[state.lang][+p.month - 1] + ' ' + p.year + ' ' + D.I18N.hijri.suffix[state.lang];
 }
+/* Күн жолы: григориан мен хижри кезектесіп ауысады (бір қатарда) */
+let dateMode = 'greg', dateFading = false, dateTexts = {};
+function rotateDate(){
+  const el = $('kDate'); if (!el) return;
+  dateMode = dateMode === 'greg' ? 'hij' : 'greg';
+  dateFading = true; el.style.opacity = 0; el.style.transform = 'translateY(6px)';
+  setTimeout(()=>{ el.textContent = dateTexts[dateMode]; el.style.opacity = 1; el.style.transform = 'none'; dateFading = false; }, 400);
+}
 function tickClock(){
   const n = new Date();
   $('kClock').innerHTML = pad(n.getHours()) + '<i class="colon">:</i>' + pad(n.getMinutes());
-  $('kHijri').textContent = hijriText(n);
-  $('kDate').textContent = n.getDate() + ' ' + D.I18N.months[state.lang][n.getMonth()] + ' ' + n.getFullYear();
+  const greg = n.getDate() + ' ' + D.I18N.months[state.lang][n.getMonth()] + ' ' + n.getFullYear();
+  const hij = hijriText(n);
+  dateTexts = {greg, hij};
+  if (!$('kDate').textContent) $('kDate').textContent = dateMode === 'hij' ? hij : greg;
+  else if (!dateFading) $('kDate').textContent = dateMode === 'hij' ? hij : greg;
 }
 
 /* ── Намаз уақыттары және countdown ── */
@@ -177,6 +188,7 @@ fit(); render();
 D.PrayerService.get().then(t=>{ state.times = t; render(); });
 setInterval(()=>{ tickClock(); tickPrayer(); }, 1000);
 setInterval(rotateGreeting, 5000);
+setInterval(rotateDate, 4500);
 setInterval(rotatePlaceholder, 3500);
 Idle.start();
 })();

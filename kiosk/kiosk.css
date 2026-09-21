@@ -305,3 +305,6 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 .k-newsbox .list .ni:first-child{border-top:0}
 .k-newsbox .d{font-size:13px;font-weight:600;color:var(--green);letter-spacing:.04em}
 .k-newsbox .t{font-size:17px;font-weight:500;line-height:1.3;color:var(--ink)}
+
+#kDate{transition:opacity .4s var(--e),transform .4s var(--e)}
+.k-clock{min-width:230px}
