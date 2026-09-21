@@ -49,7 +49,7 @@ const MENU = [
   {id:'regions',     group:'place', icon:'regions',     route:null, title:L('Өкілдіктер','Представительства','Offices'),sub:L('Барлық облыстардағы өкілдіктер','Представительства во всех областях','Offices across all regions')},
   {id:'products',    group:'tech',  icon:'products',    route:null, title:L('Цифрлық өнімдер','Цифровые продукты','Digital products'),sub:L('Қосымшалар, сайттар және платформалар','Приложения, сайты и платформы','Apps, websites and platforms')},
   {id:'munara',     group:'media', icon:'tv',          route:null, title:L('Munara TV','Munara TV','Munara TV'),sub:L('Тікелей эфир және медиа','Прямой эфир и медиа','Live broadcast and media')},
-  {id:'tour',        group:'tour',  icon:'tour',        route:null, title:L('360° виртуалды тур','360° виртуальный тур','360° virtual tour'),sub:L('Ғимаратты кең панорамамен аралаңыз','Прогулка по зданию в панораме','Explore the building in panorama')}
+  {id:'tour',        group:'tour',  icon:'tour',        route:null, title:L('ҚМДБ ғимаратына\n360° виртуалды тур','По зданию ДУМК\n360° виртуальный тур','SAMK building\n360° virtual tour'),sub:L('Ғимаратты кең панорамамен аралаңыз','Прогулка по зданию в панораме','Explore the building in panorama')}
 ];
 
 const QUICK_ACTIONS = [

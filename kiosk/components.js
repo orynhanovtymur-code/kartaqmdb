@@ -153,7 +153,7 @@ function MenuCard(item, lang, i){
         <i class="chev l"></i><i class="chev r"></i>
       </div>` : ''}
       <div class="ic">${icon(item.icon)}${item.group==='tour' ? '<i class="spinring"></i>' : ''}</div>
-      <div class="tx"><h3>${tr(item.title, lang)}</h3></div>
+      <div class="tx"><h3>${tr(item.title, lang).replace('\n','<br>')}</h3></div>
       ${item.group==='tour' ? '<span class="b360"><b id="kHead">000</b>°</span>' : ''}
       <span class="go">${icon('arrow')}</span>
     </button>`;
