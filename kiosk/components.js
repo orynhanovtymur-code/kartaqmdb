@@ -61,7 +61,7 @@ function NamazTimesWidget(lang, times){
         ${SkyScene()}
         <div class="cols">
           <div class="l"><div class="lab">${T('nextPrayer', lang)}</div><div class="nm" id="kNextName">—</div></div>
-          <div class="r"><div class="cd"><span id="kCountdown">--:--:--</span><small>${T('left', lang)}</small></div><div class="tm" id="kNextTime"></div></div>
+          <div class="r"><div class="cd"><span id="kCountdown">--:--:--</span></div><div class="tm" id="kNextTime"></div></div>
         </div>
         <div class="bar"><i id="kBar"></i></div>
       </div>
