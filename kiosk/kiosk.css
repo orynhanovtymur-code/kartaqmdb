@@ -697,3 +697,10 @@ html[data-theme=dark] .k-grid .g-tour{background:radial-gradient(600px 220px at 
 .k-grid .g-tour .ic .spinring{display:none}
 .k-grid .g-tour .tx{margin-top:0;padding-right:60px}
 .g-tour h3{font-size:26px}
+
+/* 360° тур иконкасы: VR көзілдірік "айналаға қарайды" */
+.g-tour .ic .vr{animation:lookAround 6s ease-in-out infinite}
+.g-tour .ic .pl{animation:pupils 6s ease-in-out infinite}
+@keyframes lookAround{0%,100%{transform:rotate(0)}25%{transform:rotate(-9deg)}75%{transform:rotate(9deg)}}
+@keyframes pupils{0%,100%{transform:translateX(0)}25%{transform:translateX(-1.1px)}75%{transform:translateX(1.1px)}}
+.g-tour h3{font-size:30px}

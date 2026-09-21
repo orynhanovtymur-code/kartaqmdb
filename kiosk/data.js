@@ -12,7 +12,7 @@ const ICONS = {
   services:'<g class="bell"><path d="M5 17a7 7 0 0 1 14 0"/><path d="M12 6.5V10M10 6.5h4"/></g><path d="M3 20h18"/>',
   regions:'<ellipse class="rip" cx="12" cy="21.4" rx="6" ry="1.5"/><g class="pin"><path d="M12 19s6-5.2 6-9.8A6 6 0 0 0 6 9.2c0 4.6 6 9.8 6 9.8z"/><circle cx="12" cy="9.2" r="2.2"/></g>',
   products:'<g class="ph"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 19h2"/><path class="scr" d="M10 7h4M10 10h4M10 13h2.5"/></g><circle class="bd" cx="18" cy="4" r="2.4" fill="currentColor" stroke="none"/>',
-  tour:'<ellipse class="orb" cx="12" cy="12" rx="10" ry="4.2"/><path d="M12 3a4.2 9 0 0 1 0 18"/><circle cx="12" cy="12" r="2.4"/>',
+  tour:'<g class="vr"><path d="M4.5 8h15A2.5 2.5 0 0 1 22 10.5v4a2.5 2.5 0 0 1-2.5 2.5h-3.3c-1 0-1.6-.7-2.2-1.5-.4-.6-1.1-1-2-1s-1.6.4-2 1c-.6.8-1.2 1.5-2.200 1.5H4.5A2.5 2.5 0 0 1 2 14.500v-4A2.5 2.5 0 0 1 4.500 8z"/><circle class="pl" cx="7.500" cy="12" r="1.500" fill="currentColor" stroke="none"/><circle class="pl" cx="16.500" cy="12" r="1.500" fill="currentColor" stroke="none"/></g>',
   building:'<rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2M10 21v-3h4v3"/>',
   map:'<path d="M4 21V11l8-6 8 6v10"/><path d="M12 5V2"/><path d="M9 21v-5a3 3 0 0 1 6 0v5"/>',
   orgs:'<path d="M3 21h18"/><path d="M5 21V8l5-3v16"/><path d="M14 21V11l5 2v8"/><path d="M8 10h.01M8 14h.01M17 15h.01"/>',
@@ -49,7 +49,7 @@ const MENU = [
   {id:'regions',     group:'place', icon:'regions',     route:null, title:L('Өкілдіктер','Представительства','Offices'),sub:L('Барлық облыстардағы өкілдіктер','Представительства во всех областях','Offices across all regions')},
   {id:'products',    group:'tech',  icon:'products',    route:null, title:L('Цифрлық өнімдер','Цифровые продукты','Digital products'),sub:L('Қосымшалар, сайттар және платформалар','Приложения, сайты и платформы','Apps, websites and platforms')},
   {id:'munara',     group:'media', icon:'tv',          route:null, title:L('Munara TV','Munara TV','Munara TV'),sub:L('Тікелей эфир және медиа','Прямой эфир и медиа','Live broadcast and media')},
-  {id:'tour',        group:'tour',  icon:'tour',        route:null, title:L('ҚМДБ орталық аппаратына\n360° виртуалды тур','По центральному аппарату ДУМК\n360° виртуальный тур','SAMK central office\n360° virtual tour'),sub:L('Ғимаратты кең панорамамен аралаңыз','Прогулка по зданию в панораме','Explore the building in panorama')}
+  {id:'tour',        group:'tour',  icon:'tour',        route:null, title:L('360° виртуалды тур','360° виртуальный тур','360° virtual tour'),sub:L('Ғимаратты кең панорамамен аралаңыз','Прогулка по зданию в панораме','Explore the building in panorama')}
 ];
 
 const QUICK_ACTIONS = [
