@@ -52,6 +52,25 @@ function Dial360(){
   </svg></div>`;
 }
 
+
+/* 360° тур: ғимараттың сызықты жоспары, ішінде көру бұрышы бар нүкте жүріп өтеді */
+function PlanTour(){
+  const rooms = [
+    [22,22,68,42],[96,22,68,42],[170,22,68,42],[244,22,34,42],
+    [22,98,80,42],[108,98,80,42],[194,98,84,42]
+  ];
+  return `<div class="plan" aria-hidden="true"><svg viewBox="0 0 300 162">
+    <rect class="wall" x="10" y="10" width="280" height="142" rx="12"/>
+    ${rooms.map((r,i)=>`<rect class="room r${i}" x="${r[0]}" y="${r[1]}" width="${r[2]}" height="${r[3]}" rx="5" style="animation-delay:${(i*1.8).toFixed(1)}s"/>`).join('')}
+    <path class="route" d="M24 81 H130 V43 H60 V81 H200 V119 H150 V81 H262 V119 H240 V81 H24"/>
+    <g class="walker">
+      <path class="cone" d="M0 0 L34 -15 A37 37 0 0 1 34 15 Z"/>
+      <circle class="me" r="5"/>
+      <animateMotion dur="26s" repeatCount="indefinite" rotate="auto" path="M24 81 H130 V43 H60 V81 H200 V119 H150 V81 H262 V119 H240 V81 H24"/>
+    </g>
+  </svg></div>`;
+}
+
 function BuildingVisual(lang){
   return `
     <div class="k-visual">
@@ -160,7 +179,7 @@ function MenuCard(item, lang, i){
   return `
     <button class="k-card g-${item.group} m-${item.id} anim" data-nav="menu:${item.id}" style="animation-delay:${0.2+i*0.06}s">
       ${item.group==='media' ? `<div class="tv" aria-hidden="true"></div><span class="live"><i></i>${T('live', lang)}</span>` : ''}
-      ${item.group==='tour' ? Dial360() : ''}
+      ${item.group==='tour' ? PlanTour() : ''}
       ${item.group==='tour' ? '' : `<div class="ic">${icon(item.icon)}</div>`}
       <div class="tx"><h3>${tr(item.title, lang).replace('\n','<br>')}</h3></div>
       

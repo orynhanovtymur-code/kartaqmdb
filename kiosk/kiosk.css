@@ -675,3 +675,18 @@ html[data-theme=dark] .k-grid .g-tour{background:radial-gradient(600px 220px at 
 @keyframes dialSpin{to{transform:rotate(360deg)}}
 .g-tour h3{font-size:26px}
 .g-tour .dial{right:62px;width:160px;height:160px;margin-top:-80px}
+
+/* ══ 360° тур: ғимарат жоспары бойынша серуен ══ */
+.g-tour .dial{display:none}
+.k-grid .g-tour{background:radial-gradient(380px 240px at 78% 50%,rgba(232,207,143,.10),transparent 70%),#0a3a2a}
+.g-tour .plan{position:absolute;right:66px;top:50%;width:270px;margin-top:-75px;z-index:1;pointer-events:none}
+.g-tour .plan svg{width:100%;display:block;overflow:visible}
+.plan .wall{fill:none;stroke:rgba(232,207,143,.75);stroke-width:2}
+.plan .room{fill:rgba(232,207,143,0);stroke:rgba(232,207,143,.35);stroke-width:1.2;animation:roomLit 13s ease-in-out infinite}
+@keyframes roomLit{0%,14%,100%{fill:rgba(232,207,143,0);stroke:rgba(232,207,143,.35)}5%{fill:rgba(232,207,143,.35);stroke:rgba(232,207,143,.9)}}
+.plan .route{fill:none;stroke:rgba(255,255,255,.22);stroke-width:1.5;stroke-dasharray:3 5;animation:routeFlow 3s linear infinite}
+@keyframes routeFlow{to{stroke-dashoffset:-16}}
+.plan .cone{fill:rgba(232,207,143,.38)}
+.plan .me{fill:#f5e3a8;stroke:#0a3a2a;stroke-width:1.5;filter:drop-shadow(0 0 5px rgba(232,207,143,.9))}
+.g-tour h3{font-size:26px}
+.g-tour .plan{width:196px;right:26px;margin-top:-62px}
