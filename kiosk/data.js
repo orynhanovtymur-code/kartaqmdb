@@ -47,7 +47,7 @@ const MENU = [
   {id:'departments', group:'info',  icon:'departments', route:null, title:L('Бөлімдер','Отделы','Departments'),sub:L('Әр бөлімнің міндеті мен байланысы','Задачи и контакты каждого отдела','Roles and contacts of each department')},
   {id:'services',    group:'place', icon:'services',    route:null, title:L('Қызметтер','Услуги','Services'),sub:L('Азаматтарға көрсетілетін қызметтер','Услуги для граждан','Services available to citizens')},
   {id:'regions',     group:'place', icon:'regions',     route:null, title:L('Өкілдіктер','Представительства','Offices'),sub:L('Барлық облыстардағы өкілдіктер','Представительства во всех областях','Offices across all regions')},
-  {id:'products',    group:'tech',  icon:'products',    route:null, title:L('Цифрлық өнімдер','Цифровые продукты','Digital products'),sub:L('Қосымшалар, сайттар және платформалар','Приложения, сайты и платформы','Apps, websites and platforms')},
+  {id:'products',    group:'tech',  icon:'products',    route:null, embed:'https://digital.muftyat.kz', title:L('Цифрлық өнімдер','Цифровые продукты','Digital products'),sub:L('Қосымшалар, сайттар және платформалар','Приложения, сайты и платформы','Apps, websites and platforms')},
   {id:'munara',     group:'media', icon:'tv',          route:null, title:L('Munara TV','Munara TV','Munara TV'),sub:L('Тікелей эфир және медиа','Прямой эфир и медиа','Live broadcast and media')},
   {id:'tour',        group:'tour',  icon:'tour',        route:null, title:L('360° виртуалды тур','360° виртуальный тур','360° virtual tour'),sub:L('Ғимаратты кең панорамамен аралаңыз','Прогулка по зданию в панораме','Explore the building in panorama')}
 ];

@@ -17,6 +17,20 @@
       <main class="k-main" id="kMain"></main>
       <aside class="k-side" id="kSide"></aside>
     </div>
+    <div class="k-embed" id="kEmbed" aria-hidden="true">
+      <div class="k-embed-card" role="dialog" aria-modal="true">
+        <div class="k-embed-head">
+          <span class="k-embed-title" id="kEmbedTitle"></span>
+          <button class="k-embed-close" id="kEmbedClose" aria-label="Жабу">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+        <div class="k-embed-body">
+          <div class="k-embed-load" id="kEmbedLoad"><i></i></div>
+          <iframe id="kEmbedFrame" title="" src="about:blank" allow="fullscreen" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
     <div class="k-toast" id="kToast" role="status"></div>
   </div>
 </div>

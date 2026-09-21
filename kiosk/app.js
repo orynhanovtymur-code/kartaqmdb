@@ -131,7 +131,26 @@ function toast(msg){
   const t = $('kToast'); t.textContent = msg; t.classList.add('show');
   clearTimeout(toastTimer); toastTimer = setTimeout(()=>t.classList.remove('show'), 2200);
 }
+/* Сайтты модал ішінде көрсету (бөлек бетке өтпейді) */
+function openEmbed(item){
+  $('kEmbedTitle').textContent = U.tr(item.title, state.lang);
+  $('kEmbedLoad').classList.remove('done');
+  $('kEmbedFrame').src = item.embed;
+  $('kEmbed').classList.add('show');
+  $('kEmbed').setAttribute('aria-hidden', 'false');
+}
+function closeEmbed(){
+  $('kEmbed').classList.remove('show');
+  $('kEmbed').setAttribute('aria-hidden', 'true');
+  setTimeout(()=>{ if (!$('kEmbed').classList.contains('show')) $('kEmbedFrame').src = 'about:blank'; }, 400);
+}
+$('kEmbedClose').addEventListener('click', closeEmbed);
+$('kEmbed').addEventListener('click', e=>{ if (e.target === $('kEmbed')) closeEmbed(); });
+$('kEmbedFrame').addEventListener('load', ()=>$('kEmbedLoad').classList.add('done'));
+document.addEventListener('keydown', e=>{ if (e.key === 'Escape') closeEmbed(); });
+
 function go(item){
+  if (item.embed){ openEmbed(item); return; }
   if (item.route){
     $('screen').classList.add('leaving');
     setTimeout(()=>{ location.href = item.route; }, 280);
