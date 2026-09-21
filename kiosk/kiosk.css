@@ -690,3 +690,10 @@ html[data-theme=dark] .k-grid .g-tour{background:radial-gradient(600px 220px at 
 .plan .me{fill:#f5e3a8;stroke:#0a3a2a;stroke-width:1.5;filter:drop-shadow(0 0 5px rgba(232,207,143,.9))}
 .g-tour h3{font-size:26px}
 .g-tour .plan{width:196px;right:26px;margin-top:-62px}
+
+/* 360° тур: басқа карточкалармен бірізді орналасу (иконка жоғарыда, атау төменде) */
+.k-grid .g-tour{flex-direction:column;align-items:flex-start;justify-content:space-between;gap:0;padding:16px 18px}
+.k-grid .k-card.g-tour .ic{position:relative;left:auto;top:auto;width:48px;height:48px;border-radius:15px;font-size:26px;background:rgba(255,255,255,.14);color:#e8cf8f}
+.k-grid .g-tour .ic .spinring{display:none}
+.k-grid .g-tour .tx{margin-top:0;padding-right:60px}
+.g-tour h3{font-size:26px}
