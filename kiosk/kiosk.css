@@ -308,3 +308,19 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 
 #kDate{transition:opacity .4s var(--e),transform .4s var(--e)}
 .k-clock{min-width:230px}
+
+/* намаз блогы: сол — келесі намаз/атауы, оң — қалған уақыт/намаз уақыты */
+.k-next .cols{display:flex;justify-content:space-between;align-items:stretch;gap:16px}
+.k-next .l,.k-next .r{display:flex;flex-direction:column;justify-content:space-between}
+.k-next .r{align-items:flex-end;text-align:right}
+.k-next .lab{font-size:15px;letter-spacing:.14em;text-transform:uppercase;opacity:.8}
+.k-next .nm{font-family:var(--fh);font-size:40px;line-height:1.1;letter-spacing:.06em;margin-top:6px}
+.k-next .cd{display:flex;align-items:baseline;gap:8px;font-size:22px;font-weight:500;opacity:1;font-variant-numeric:tabular-nums}
+.k-next .cd small{font-size:15px;opacity:.85;font-weight:400}
+.k-next .tm{font-family:var(--fh);font-size:40px;line-height:1.1;margin-top:6px;color:#fff}
+.k-namaz .k-next .nm,.k-namaz .k-next .tm{font-size:40px}
+.k-namaz .k-next .row{display:none}
+
+/* header: локация */
+.k-loc{display:flex;align-items:center;gap:10px;height:56px;padding:0 22px;border-radius:18px;background:#fff;box-shadow:var(--card);font-size:20px;font-weight:600;color:var(--green-d)}
+.k-loc .i{font-size:24px;color:var(--green)}

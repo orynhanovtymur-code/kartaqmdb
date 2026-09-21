@@ -11,6 +11,7 @@ function Header(lang){
       <div class="k-logo"><img src="./assets/logo-qmdb.png" alt="ҚМДБ"></div>
       <div><h1>${T('orgName', lang)}</h1><small>${T('terminal', lang)}</small></div>
     </div>
+    <div class="k-loc">${icon('pin')}<span>${tr(D.PrayerService.city, lang)}</span></div>
     <div class="k-lang" role="group" aria-label="Тіл / Язык">
       <button data-lang="kk" class="${lang==='kk'?'on':''}">KAZ</button>
       <button data-lang="ru" class="${lang==='ru'?'on':''}">РУС</button>
@@ -58,9 +59,10 @@ function NamazTimesWidget(lang, times){
     <div class="k-namaz">
       <div class="k-next">
         ${SkyScene()}
-        <div class="lab">${tr(D.PrayerService.city, lang)} · ${T('nextPrayer', lang)}</div>
-        <div class="row"><div class="nm"><span id="kNextName">—</span></div><div class="tm" id="kNextTime"></div></div>
-        <div class="cd"><span id="kCountdown">--:--:--</span> ${T('left', lang)}</div>
+        <div class="cols">
+          <div class="l"><div class="lab">${T('nextPrayer', lang)}</div><div class="nm" id="kNextName">—</div></div>
+          <div class="r"><div class="cd"><span id="kCountdown">--:--:--</span><small>${T('left', lang)}</small></div><div class="tm" id="kNextTime"></div></div>
+        </div>
         <div class="bar"><i id="kBar"></i></div>
       </div>
       <div class="k-times">${cells}</div>
