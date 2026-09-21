@@ -27,10 +27,16 @@ function rotateNews(){
   el.style.opacity = 0;
   setTimeout(()=>{ el.textContent = n.date + ' · ' + U.tr(n.title, state.lang); el.style.opacity = 1; }, 350);
 }
+const HIJRI_FMT = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', {day:'numeric', month:'numeric', year:'numeric'});
+function hijriText(d){
+  const p = Object.fromEntries(HIJRI_FMT.formatToParts(d).map(x=>[x.type, x.value]));
+  return p.day + ' ' + D.I18N.hijri[state.lang][+p.month - 1] + ' ' + p.year + ' ' + D.I18N.hijri.suffix[state.lang];
+}
 function tickClock(){
   const n = new Date();
   $('kClock').innerHTML = pad(n.getHours()) + '<i class="colon">:</i>' + pad(n.getMinutes());
   const tc = $('kTc'); if (tc) tc.textContent = pad(n.getHours()) + ':' + pad(n.getMinutes()) + ':' + pad(n.getSeconds());
+  $('kHijri').textContent = hijriText(n);
   $('kDate').textContent = n.getDate() + ' ' + D.I18N.months[state.lang][n.getMonth()] + ' ' + n.getFullYear();
 }
 

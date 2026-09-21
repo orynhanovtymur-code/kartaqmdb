@@ -54,8 +54,8 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 .k-lang{display:flex;padding:5px;border-radius:18px;background:#fff;box-shadow:var(--card);gap:4px}
 .k-lang button{height:46px;padding:0 22px;border-radius:14px;font-family:var(--fh);font-size:20px;letter-spacing:.1em;color:var(--muted);transition:background .25s var(--e),color .25s var(--e)}
 .k-lang button.on{background:var(--green);color:#fff}
-.k-clock{text-align:right;min-width:210px}
-.k-clock b{display:block;font-family:var(--fh);font-weight:500;font-size:38px;line-height:1;color:var(--green-d);letter-spacing:.03em}
+.k-clock{text-align:right;min-width:260px}
+.k-clock b{display:block;font-family:var(--fh);font-weight:500;font-size:34px;line-height:1;color:var(--green-d);letter-spacing:.03em}
 .k-clock span{display:block;margin-top:5px;font-size:16px;color:var(--muted);letter-spacing:.04em}
 
 /* ── Негізгі layout: сол жақ ақпарат панелі + оң жақ әрекет аймағы ── */
@@ -286,3 +286,6 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 .g-media h3,.g-media .ic,.g-media .go,.g-media .live{z-index:1}
 .g-media .ic{position:absolute;right:22px;top:24px;margin:0}
 .live em{font-style:normal;margin-left:6px;padding-left:10px;border-left:1px solid rgba(255,255,255,.3);font-variant-numeric:tabular-nums;letter-spacing:.06em;font-weight:500}
+
+.k-clock span{margin-top:3px;font-size:15px}
+.k-clock .hj{color:var(--green);font-weight:500}

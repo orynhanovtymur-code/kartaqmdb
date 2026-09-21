@@ -86,6 +86,12 @@ const I18N = {
     en:['January','February','March','April','May','June','July','August','September','October','November','December'],
     ru:['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря']
   },
+  hijri:{
+    kk:['Мұхаррам','Сафар','Рабиғул-әууәл','Рабиғул-ахир','Жумада-л-уля','Жумада-с-сания','Ражаб','Шағбан','Рамазан','Шәууәл','Зұл-қағда','Зұл-хижжа'],
+    ru:['Мухаррам','Сафар','Раби-уль-авваль','Раби-уль-ахир','Джумада-уль-уля','Джумада-уль-ахира','Раджаб','Шаабан','Рамадан','Шавваль','Зуль-каада','Зуль-хиджа'],
+    en:['Muharram','Safar','Rabi al-Awwal','Rabi al-Thani','Jumada al-Ula','Jumada al-Thani','Rajab','Shaban','Ramadan','Shawwal','Dhu al-Qadah','Dhu al-Hijjah'],
+    suffix:{kk:'х.',ru:'г. х.',en:'AH'}
+  },
   t:{
     orgName:L('ҚАЗАҚСТАН МҰСЫЛМАНДАРЫ ДІНИ БАСҚАРМАСЫ','ДУХОВНОЕ УПРАВЛЕНИЕ МУСУЛЬМАН КАЗАХСТАНА','SPIRITUAL ADMINISTRATION OF MUSLIMS OF KAZAKHSTAN'),
     orgShort:L('Қазақстан мұсылмандары діни басқармасы','Духовное управление мусульман Казахстана','Spiritual Administration of Muslims of Kazakhstan'),
