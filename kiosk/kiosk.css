@@ -652,3 +652,10 @@ html[data-theme=dark] .k-grid .g-tour{background:radial-gradient(600px 220px at 
 .k-card.feature .tx{margin-top:0;margin-bottom:auto}
 .k-card.feature .foot{margin-top:34px}
 .g-tour h3{font-size:26px;line-height:1.2}
+.k-grid .g-tour .b360{font-size:46px;margin-right:64px}
+.k-grid .g-tour .tx{min-width:0}
+.g-tour h3{white-space:normal}
+.vt .chev{display:none}
+.g-tour h3{white-space:nowrap;font-size:25px}
+.k-grid .g-tour .b360{font-size:40px;margin-right:54px}
+.k-grid .g-tour{gap:16px}
