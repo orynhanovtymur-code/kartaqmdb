@@ -56,7 +56,7 @@ function TodayEvents(lang){
 }
 
 function SidePanel(lang, times){
-  return BuildingVisual(lang) + NamazTimesWidget(lang, times) + TodayEvents(lang);
+  return BuildingVisual(lang) + NamazTimesWidget(lang, times);
 }
 
 /* Оң жақ: іздеу + жылдам чиптер */
