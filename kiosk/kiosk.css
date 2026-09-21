@@ -514,3 +514,14 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 /* Munara TV: жасыл емес, қою көк-графит эфир фоны */
 .k-grid .k-card.g-media{background:#0e1320}
 .g-media .tv{background:linear-gradient(115deg,#0b0f1b,#1a2340,#101729,#232d52);background-size:300% 100%}
+
+/* Munara TV: «Цифрлық өнімдер» сияқты ашық көгілдір-жасыл фон */
+.k-grid .k-card.g-media{background:#f0f7f5;border:1px solid var(--line)}
+.g-media .tv{background:none;animation:none}
+.g-media .tv::before{opacity:.5;background:repeating-linear-gradient(0deg,rgba(15,107,87,.05) 0 2px,transparent 2px 5px)}
+.g-media .tv::after{background:linear-gradient(90deg,transparent,rgba(15,107,87,.10),transparent)}
+.g-media h3{color:var(--ink)}
+.k-grid .k-card.g-media .ic{background:#d9ece7;color:#0f6b57}
+.g-media .wave{border-color:rgba(15,107,87,.45)}
+.g-media .live{background:rgba(15,107,87,.10);color:#0f6b57}
+.g-media .go{background:rgba(14,75,54,.08);color:var(--green)}
