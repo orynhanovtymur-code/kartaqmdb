@@ -40,13 +40,13 @@ const ICONS = {
 const MENU = [
   {id:'map',         group:'feature', icon:'map', route:'./map.html', primary:true,
                                     title:L('Интерактивті карта','Интерактивная карта','Interactive map'), sub:L('Қазақстан мешіттері мен діни оқу орындары','Мечети и религиозные учебные заведения Казахстана','Mosques and religious educational institutions of Kazakhstan')},
-  {id:'structure',   group:'info',  icon:'structure',   route:null, title:L('ҚМДБ құрылымы','Структура ДУМК','SAMK structure')},
-  {id:'leadership',  group:'info',  icon:'leadership',  route:null, title:L('Басшылық құрам','Руководящий состав','Leadership team')},
-  {id:'departments', group:'info',  icon:'departments', route:null, title:L('Бөлімдер','Отделы','Departments')},
-  {id:'services',    group:'place', icon:'services',    route:null, title:L('Қызметтер','Услуги','Services')},
-  {id:'regions',     group:'place', icon:'regions',     route:null, title:L('Облыстық өкілдіктер','Областные представительства','Regional offices')},
-  {id:'products',    group:'tech',  icon:'products',    route:null, title:L('Цифрлық өнімдер','Цифровые продукты','Digital products')},
-  {id:'tour',        group:'tour',  icon:'tour',        route:null, title:L('360° виртуалды тур','360° виртуальный тур','360° virtual tour')}
+  {id:'structure',   group:'info',  icon:'structure',   route:null, title:L('ҚМДБ құрылымы','Структура ДУМК','SAMK structure'),sub:L('Басқармалар мен бөлімдердің өзара байланысы','Связи управлений и отделов','How departments and divisions connect')},
+  {id:'leadership',  group:'info',  icon:'leadership',  route:null, title:L('Басшылық құрам','Руководящий состав','Leadership team'),sub:L('Бас мүфти және орынбасарлары','Верховный муфтий и его заместители','The Grand Mufti and deputies')},
+  {id:'departments', group:'info',  icon:'departments', route:null, title:L('Бөлімдер','Отделы','Departments'),sub:L('Әр бөлімнің міндеті мен байланысы','Задачи и контакты каждого отдела','Roles and contacts of each department')},
+  {id:'services',    group:'place', icon:'services',    route:null, title:L('Қызметтер','Услуги','Services'),sub:L('Азаматтарға көрсетілетін қызметтер','Услуги для граждан','Services available to citizens')},
+  {id:'regions',     group:'place', icon:'regions',     route:null, title:L('Облыстық өкілдіктер','Областные представительства','Regional offices'),sub:L('Барлық облыстардағы өкілдіктер','Представительства во всех областях','Offices across all regions')},
+  {id:'products',    group:'tech',  icon:'products',    route:null, title:L('Цифрлық өнімдер','Цифровые продукты','Digital products'),sub:L('Қосымшалар, сайттар және платформалар','Приложения, сайты и платформы','Apps, websites and platforms')},
+  {id:'tour',        group:'tour',  icon:'tour',        route:null, title:L('360° виртуалды тур','360° виртуальный тур','360° virtual tour'),sub:L('Ғимаратты кең панорамамен аралаңыз','Прогулка по зданию в панораме','Explore the building in panorama')}
 ];
 
 const QUICK_ACTIONS = [

@@ -413,7 +413,7 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 
 /* 360° виртуалды тур: панорама сырғиды, орбита айналады */
 .g-tour{background:var(--green-d);border-color:transparent;grid-column:3 / span 2;position:relative}
-.g-tour .pano{position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,40,29,.9),rgba(6,40,29,.45) 60%,rgba(6,40,29,.75)),url("../assets/qmdb-building.jpeg");
+.g-tour .pano{position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,40,29,.96) 0%,rgba(6,40,29,.72) 45%,rgba(6,40,29,.5) 100%),url("../assets/qmdb-building.jpeg");
   background-size:auto 100%,auto 150%;background-repeat:no-repeat,repeat-x;animation:panSlide 40s linear infinite}
 @keyframes panSlide{from{background-position:0 0,0 40%}to{background-position:0 0,-1400px 40%}}
 .g-tour h3{color:#fff;position:relative;margin-top:auto}
@@ -424,3 +424,10 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 .g-tour .b360{position:absolute;right:22px;top:20px;font-family:var(--fh);font-size:44px;line-height:1;letter-spacing:.04em;color:#e8cf8f;text-shadow:0 0 18px rgba(232,207,143,.6);animation:badge360 3s ease-in-out infinite}
 @keyframes badge360{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.06)}}
 .g-tour .go{background:rgba(255,255,255,.14);color:#e8cf8f}
+
+/* карточка сипаттамасы: жұқа, кішкентай */
+.k-card:not(.feature) .tx{padding-right:46px}
+.k-card:not(.feature) h3{padding-right:0}
+.k-card:not(.feature) .tx p{margin:6px 0 0;font-size:14.5px;font-weight:300;line-height:1.35;color:var(--muted);letter-spacing:.005em}
+.g-tour .tx{position:relative;margin-top:auto}
+.g-tour .tx p{color:rgba(255,255,255,.92)}

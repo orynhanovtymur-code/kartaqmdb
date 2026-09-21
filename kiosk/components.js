@@ -118,7 +118,7 @@ function MenuCard(item, lang, i){
     <button class="k-card g-${item.group} m-${item.id} anim" data-nav="menu:${item.id}" style="animation-delay:${0.2+i*0.06}s">
       ${item.group==='tour' ? '<div class="pano" aria-hidden="true"></div><i class="spinring"></i><span class="b360">360°</span>' : ''}
       <div class="ic">${icon(item.icon)}</div>
-      <h3>${tr(item.title, lang)}</h3>
+      <div class="tx"><h3>${tr(item.title, lang)}</h3>${item.sub ? `<p>${tr(item.sub, lang)}</p>` : ''}</div>
       <span class="go">${icon('arrow')}</span>
     </button>`;
 }
