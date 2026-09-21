@@ -4,6 +4,13 @@ const D = window.KIOSK_DATA, U = window.KIOSK_UI;
 const state = {lang: (function(){try{return localStorage.getItem('kiosk-lang')}catch(e){}})() || 'kk', times:null};
 
 const $ = id => document.getElementById(id);
+
+/* ── Түнгі / жарық режим ── */
+function applyTheme(t){
+  document.documentElement.dataset.theme = t;
+  try{ localStorage.setItem('kiosk-theme', t); }catch(e){}
+}
+applyTheme((function(){ try{ return localStorage.getItem('kiosk-theme'); }catch(e){} })() === 'dark' ? 'dark' : 'light');
 const pad = n => String(n).padStart(2,'0');
 
 /* ── Рендер ── */
@@ -152,6 +159,7 @@ document.addEventListener('click', e=>{
   }
   const act = e.target.closest('[data-act]');
   if (act){
+    if (act.dataset.act === 'theme') applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
     if (act.dataset.act === 'focus-search') $('kSearch').focus();
     if (act.dataset.act === 'search') toast(U.T('searchSoon', state.lang));
   }

@@ -32,6 +32,8 @@ const ICONS = {
   isha:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/><path d="M17 3v3M15.5 4.5h3"/>',
   pin:'<path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
   calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 15h3"/>',
+  moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
   arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
   link:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'
 };
@@ -44,7 +46,7 @@ const MENU = [
   {id:'leadership',  group:'info',  icon:'leadership',  route:null, title:L('Басшылық құрам','Руководящий состав','Leadership team'),sub:L('Бас мүфти және орынбасарлары','Верховный муфтий и его заместители','The Grand Mufti and deputies')},
   {id:'departments', group:'info',  icon:'departments', route:null, title:L('Бөлімдер','Отделы','Departments'),sub:L('Әр бөлімнің міндеті мен байланысы','Задачи и контакты каждого отдела','Roles and contacts of each department')},
   {id:'services',    group:'place', icon:'services',    route:null, title:L('Қызметтер','Услуги','Services'),sub:L('Азаматтарға көрсетілетін қызметтер','Услуги для граждан','Services available to citizens')},
-  {id:'regions',     group:'place', icon:'regions',     route:null, title:L('Облыстық өкілдіктер','Областные представительства','Regional offices'),sub:L('Барлық облыстардағы өкілдіктер','Представительства во всех областях','Offices across all regions')},
+  {id:'regions',     group:'place', icon:'regions',     route:null, title:L('Өкілдіктер','Представительства','Offices'),sub:L('Барлық облыстардағы өкілдіктер','Представительства во всех областях','Offices across all regions')},
   {id:'products',    group:'tech',  icon:'products',    route:null, title:L('Цифрлық өнімдер','Цифровые продукты','Digital products'),sub:L('Қосымшалар, сайттар және платформалар','Приложения, сайты и платформы','Apps, websites and platforms')},
   {id:'munara',     group:'media', icon:'tv',          route:null, title:L('Munara TV','Munara TV','Munara TV'),sub:L('Тікелей эфир және медиа','Прямой эфир и медиа','Live broadcast and media')},
   {id:'tour',        group:'tour',  icon:'tour',        route:null, title:L('360° виртуалды тур','360° виртуальный тур','360° virtual tour'),sub:L('Ғимаратты кең панорамамен аралаңыз','Прогулка по зданию в панораме','Explore the building in panorama')}
@@ -135,6 +137,8 @@ const I18N = {
     schools:L('оқу орны','учебных заведений','schools'),
     qari:L('қари орталығы','центров қари','qari centers'),
     ph:[L('Мешітті іздеңіз...','Найдите мечеть...','Search a mosque...'),L('Бөлімді табыңыз...','Найдите отдел...','Find a department...'),L('Қызметкерді іздеңіз...','Найдите сотрудника...','Look up an employee...'),L('Кабинетті табыңыз...','Найдите кабинет...','Find an office...')],
+    themeToDark:L('Түнгі режим','Тёмная тема','Dark mode'),
+    themeToLight:L('Жарық режим','Светлая тема','Light mode'),
     openMap:L('Картаны ашу','Открыть карту','Open the map')
   }
 };

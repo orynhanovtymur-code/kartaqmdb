@@ -526,3 +526,57 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 .g-media .live{background:rgba(15,107,87,.10);color:#0f6b57}
 .g-media .go{background:rgba(14,75,54,.08);color:var(--green)}
 .g-media .wave{display:none}
+
+/* ══ Түнгі / жарық режим ауыстырғышы ══ */
+.k-theme{position:relative;width:56px;height:56px;border-radius:18px;background:#fff;box-shadow:var(--card);color:var(--green-d);display:grid;place-items:center;font-size:26px;overflow:hidden;transition:transform .2s var(--e),background .4s}
+.k-theme:active{transform:scale(.92)}
+.k-theme .i{grid-area:1/1;transition:transform .5s var(--e),opacity .35s}
+.k-theme .ti-sun{transform:rotate(-90deg) scale(.4);opacity:0;color:#e8cf8f}
+html[data-theme=dark] .k-theme .ti-moon{transform:rotate(90deg) scale(.4);opacity:0}
+html[data-theme=dark] .k-theme .ti-sun{transform:none;opacity:1}
+
+html[data-theme=dark]{
+  --ink:#e8f0eb;--muted:#98aba0;--line:rgba(255,255,255,.09);--mint:#1c2d25;
+  --green:#2f8f69;--green-d:#d3eadf;--green-l:#5cbf95;
+  --card:0 14px 40px rgba(0,0,0,.35),0 2px 6px rgba(0,0,0,.25);--card-h:0 22px 60px rgba(0,0,0,.5),0 3px 8px rgba(0,0,0,.3);
+  color-scheme:dark;
+}
+html[data-theme=dark],html[data-theme=dark] body{background:#060b09}
+html[data-theme=dark] #screen{
+  background:radial-gradient(1200px 600px at 88% -12%,rgba(47,143,105,.16),transparent 62%),radial-gradient(900px 520px at -6% 108%,rgba(47,143,105,.10),transparent 60%),#0c1511;
+  box-shadow:0 30px 90px rgba(0,0,0,.6)}
+html[data-theme=dark] #screen::before{opacity:.06;filter:invert(1)}
+html[data-theme=dark] .k-hsearch,html[data-theme=dark] .k-lang,html[data-theme=dark] .k-loc,html[data-theme=dark] .k-theme,
+html[data-theme=dark] .k-namaz,html[data-theme=dark] .k-today,html[data-theme=dark] .k-search,html[data-theme=dark] .k-newsbox,
+html[data-theme=dark] .k-reception,html[data-theme=dark] .k-content,html[data-theme=dark] .k-card{background:#15211b}
+html[data-theme=dark] .k-card{border-color:rgba(255,255,255,.07)}
+html[data-theme=dark] .k-lang button{color:#94a89d}
+html[data-theme=dark] .k-lang button.on{background:#2f8f69;color:#fff}
+html[data-theme=dark] .k-theme{color:#e8cf8f}
+html[data-theme=dark] .k-time.past b{color:#5f7268}
+html[data-theme=dark] .k-time.past .i{color:#4a5b52}
+html[data-theme=dark] .k-time.next{background:#1c2d25}
+html[data-theme=dark] .k-card .go{background:rgba(255,255,255,.08);color:#5cbf95}
+html[data-theme=dark] .g-info .ic{background:#1f3329;color:#5cbf95}
+html[data-theme=dark] .g-place,html[data-theme=dark] .k-card.g-place{background:#211d13}
+html[data-theme=dark] .g-place .ic{background:rgba(232,207,143,.18);color:#e3c476}
+html[data-theme=dark] .g-place .go{background:rgba(232,207,143,.14);color:#e3c476}
+html[data-theme=dark] .k-card.g-tech,html[data-theme=dark] .k-grid .k-card.g-media{background:#12241f;border-color:rgba(255,255,255,.07)}
+html[data-theme=dark] .g-tech .ic,html[data-theme=dark] .k-grid .k-card.g-media .ic{background:#1d3a33;color:#6fd0b3}
+html[data-theme=dark] .g-media .live{background:rgba(111,208,179,.14);color:#6fd0b3}
+html[data-theme=dark] .g-media .go{background:rgba(255,255,255,.08);color:#6fd0b3}
+html[data-theme=dark] .g-media .tv::before{background:repeating-linear-gradient(0deg,rgba(111,208,179,.05) 0 2px,transparent 2px 5px)}
+html[data-theme=dark] .k-reception .role{color:#d9b968}
+html[data-theme=dark] .k-reception .ph{background:#15211b}
+html[data-theme=dark] .k-reception .ph img{filter:brightness(.95)}
+html[data-theme=dark] .k-reception::before{background:#2f8f69}
+html[data-theme=dark] .k-newsbox .d{color:#5cbf95}
+html[data-theme=dark] .k-toast{background:#0e4b36}
+html[data-theme=dark] .k-time span{color:#98aba0}
+html[data-theme=dark] .k-brand small,html[data-theme=dark] .k-clock span{color:#98aba0}
+@keyframes auraDark{0%,100%{box-shadow:0 0 14px 2px rgba(232,207,143,.35),0 0 0 6px #15211b}50%{box-shadow:0 0 30px 10px rgba(232,207,143,.7),0 0 0 6px #15211b}}
+html[data-theme=dark] .k-reception .ph{animation-name:auraDark}
+
+/* түнгі режим: үлкен жасыл карточкалар өз градиентін сақтайды */
+html[data-theme=dark] .k-card.feature{background:radial-gradient(500px 300px at 90% 0%,rgba(232,207,143,.20),transparent 60%),linear-gradient(150deg,#0a3527,#0e4b36 60%,#146447)}
+html[data-theme=dark] .k-grid .g-tour{background:radial-gradient(600px 220px at 85% 50%,rgba(232,207,143,.16),transparent 65%),linear-gradient(115deg,#062a1e,#0b4634 60%,#0a3a2a)}
