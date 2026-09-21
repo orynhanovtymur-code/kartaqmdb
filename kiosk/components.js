@@ -22,6 +22,20 @@ function Header(lang){
 }
 
 /* Сол жақ панель: сурет + қош келдіңіз, намаз, бүгінгі іс-шаралар */
+
+/* 360° тур: сурет орнына сызықты панорама (мешіт, мұнаралар, ғимараттар) */
+function SkylineSVG(){
+  return `<svg viewBox="0 0 600 120" width="600" height="120" preserveAspectRatio="none"><g fill="currentColor">
+    <rect x="0" y="82" width="58" height="38"/><rect x="62" y="30" width="9" height="90"/><path d="M60 30l6.5-16 6.5 16z"/>
+    <rect x="86" y="72" width="124" height="48"/><path d="M104 72a43 43 0 0 1 88 0z"/><rect x="146" y="14" width="3" height="16"/>
+    <rect x="222" y="34" width="9" height="86"/><path d="M220 34l6.5-17 6.5 17z"/>
+    <rect x="244" y="66" width="56" height="54"/><rect x="304" y="88" width="40" height="32"/>
+    <rect x="352" y="84" width="84" height="36"/><path d="M362 84a32 32 0 0 1 64 0z"/>
+    <rect x="452" y="42" width="20" height="78"/><path d="M450 42l12-20 12 20z"/>
+    <rect x="484" y="76" width="56" height="44"/><rect x="544" y="94" width="56" height="26"/>
+  </g></svg>`;
+}
+
 function BuildingVisual(lang){
   return `
     <div class="k-visual">
@@ -53,9 +67,23 @@ function SkyScene(){
   </div>`;
 }
 
+
+/* Түрлі-түсті намаз иконкалары */
+const PRAYER_GLYPH = {
+  fajr:'<path d="M7 13a5 5 0 0 1 10 0z" fill="#fff"/><rect x="5" y="15" width="14" height="1.6" rx=".8" fill="#fff"/><rect x="8" y="18" width="8" height="1.6" rx=".8" fill="#fff" opacity=".7"/>',
+  sunrise:'<path d="M7 14.5a5 5 0 0 1 10 0z" fill="#c9d8ff"/><path d="M12 11V5.5M9.6 7.9 12 5.5l2.4 2.4" stroke="#fff" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="5" y="16.4" width="14" height="1.6" rx=".8" fill="#fff"/><rect x="8" y="19" width="8" height="1.4" rx=".7" fill="#fff" opacity=".7"/>',
+  dhuhr:'<circle cx="12" cy="12" r="3.6" fill="#fff"/><path d="M12 4v2.2M12 17.8V20M4 12h2.2M17.8 12H20M6.3 6.3l1.5 1.5M16.2 16.2l1.5 1.5M6.3 17.7l1.5-1.5M16.2 7.8l1.5-1.5" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>',
+  asr:'<circle cx="12" cy="12" r="4.4" fill="#fff"/><path d="M12 3.5v2M12 18.5v2M3.5 12h2M18.5 12h2M6 6l1.4 1.4M16.6 16.6 18 18M6 18l1.4-1.4M16.6 7.4 18 6" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>',
+  maghrib:'<path d="M7 14.5a5 5 0 0 1 10 0z" fill="#ffd0d3"/><path d="M12 5.5V11M9.6 9.1 12 11.5l2.4-2.4" stroke="#fff" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="5" y="16.4" width="14" height="1.6" rx=".8" fill="#fff"/><rect x="8" y="19" width="8" height="1.4" rx=".7" fill="#fff" opacity=".7"/>',
+  isha:'<path d="M15.8 15.6A6.2 6.2 0 1 1 10.4 6.3a5 5 0 0 0 5.4 9.3z" fill="#b9b4f4"/><path d="M17.5 5.2v3M16 6.7h3M19.5 10.4v1.6M18.7 11.2h1.6" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/>'
+};
+function PrayerIcon(k){
+  return `<span class="pi pi-${k}"><svg viewBox="0 0 24 24" aria-hidden="true">${PRAYER_GLYPH[k]}</svg></span>`;
+}
+
 function NamazTimesWidget(lang, times){
   const cells = D.PRAYER_ORDER.map(k => `
-    <div class="k-time" data-p="${k}">${icon(k)}<span>${tr(D.PRAYER_NAMES[k], lang)}</span><b>${times ? times[k] : '--:--'}</b></div>`).join('');
+    <div class="k-time" data-p="${k}">${PrayerIcon(k)}<span>${tr(D.PRAYER_NAMES[k], lang)}</span><b>${times ? times[k] : '--:--'}</b></div>`).join('');
   return `
     <div class="k-namaz">
       <div class="k-next">
@@ -118,9 +146,17 @@ function MenuCard(item, lang, i){
   return `
     <button class="k-card g-${item.group} m-${item.id} anim" data-nav="menu:${item.id}" style="animation-delay:${0.2+i*0.06}s">
       ${item.group==='media' ? `<div class="tv" aria-hidden="true"></div><span class="live"><i></i>${T('live', lang)}</span>` : ''}
+      ${item.group==='tour' ? `<div class="vt" aria-hidden="true">
+        <div class="sk far"><div class="trk">${SkylineSVG()}${SkylineSVG()}</div></div>
+        <div class="sk near"><div class="trk">${SkylineSVG()}${SkylineSVG()}</div></div>
+        <i class="hs h1"><b>+</b></i><i class="hs h2"><b>+</b></i><i class="hs h3"><b>+</b></i>
+        <div class="tape"></div><i class="tri"></i>
+        <i class="br tl"></i><i class="br tr"></i><i class="br bl"></i><i class="br rb"></i>
+        <i class="chev l"></i><i class="chev r"></i>
+      </div>` : ''}
       <div class="ic">${icon(item.icon)}${item.group==='tour' ? '<i class="spinring"></i>' : ''}</div>
       <div class="tx"><h3>${tr(item.title, lang)}</h3></div>
-      ${item.group==='tour' ? '<span class="b360">360°</span>' : ''}
+      ${item.group==='tour' ? '<span class="b360"><b id="kHead">000</b>°</span>' : ''}
       <span class="go">${icon('arrow')}</span>
     </button>`;
 }

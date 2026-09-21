@@ -198,6 +198,8 @@ D.PrayerService.get().then(t=>{ state.times = t; render(); });
 setInterval(()=>{ tickClock(); tickPrayer(); }, 1000);
 setInterval(rotateGreeting, 5000);
 setInterval(rotateDate, 4500);
+let heading = 0;
+setInterval(()=>{ const el = $('kHead'); if (!el) return; heading = (heading + 1.4) % 360; el.textContent = String(Math.floor(heading)).padStart(3,'0'); }, 60);
 setInterval(rotatePlaceholder, 3500);
 Idle.start();
 })();

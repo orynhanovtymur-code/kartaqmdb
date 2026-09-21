@@ -580,3 +580,57 @@ html[data-theme=dark] .k-reception .ph{animation-name:auraDark}
 /* түнгі режим: үлкен жасыл карточкалар өз градиентін сақтайды */
 html[data-theme=dark] .k-card.feature{background:radial-gradient(500px 300px at 90% 0%,rgba(232,207,143,.20),transparent 60%),linear-gradient(150deg,#0a3527,#0e4b36 60%,#146447)}
 html[data-theme=dark] .k-grid .g-tour{background:radial-gradient(600px 220px at 85% 50%,rgba(232,207,143,.16),transparent 65%),linear-gradient(115deg,#062a1e,#0b4634 60%,#0a3a2a)}
+
+/* ══ 360° виртуалды тур: панорама көрермені (viewfinder) ══ */
+.k-grid .g-tour{overflow:hidden;background:linear-gradient(180deg,#07281d 0%,#0c4433 55%,#1b6a4c 100%)}
+.g-tour .vt{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;color:#e8cf8f}
+/* аспан жарығы */
+.g-tour .vt::before{content:"";position:absolute;left:55%;top:30%;width:260px;height:260px;margin:-130px;border-radius:50%;background:radial-gradient(circle,rgba(232,207,143,.30),transparent 68%);animation:sunDrift 18s ease-in-out infinite alternate}
+@keyframes sunDrift{to{transform:translateX(220px)}}
+/* горизонт сызығы */
+.g-tour .vt::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34px;background:linear-gradient(to top,rgba(4,26,19,.85),transparent)}
+.vt .sk{position:absolute;left:0;bottom:0;height:120px;width:100%;overflow:hidden}
+.vt .trk{display:flex;width:max-content;height:100%;animation:skySlide linear infinite}
+.vt .trk svg{flex:none;display:block}
+.vt .sk.far{height:96px;opacity:.16}.vt .sk.far .trk{animation-duration:70s}
+.vt .sk.far svg{width:480px;height:96px}
+.vt .sk.near{opacity:.34}.vt .sk.near .trk{animation-duration:36s}
+@keyframes skySlide{to{transform:translateX(-50%)}}
+/* белсенді нүктелер (hotspot) */
+.vt .hs{position:absolute;width:30px;height:30px;border-radius:50%;background:rgba(232,207,143,.9);color:#083425;display:grid;place-items:center;font-style:normal;
+  box-shadow:0 0 0 0 rgba(232,207,143,.7);animation:hsPulse 2.4s ease-out infinite}
+.vt .hs b{font-size:20px;line-height:1;font-weight:600}
+.vt .hs.h1{left:47%;bottom:62px}.vt .hs.h2{left:66%;bottom:88px;animation-delay:.8s}.vt .hs.h3{left:82%;bottom:50px;animation-delay:1.6s}
+@keyframes hsPulse{0%{box-shadow:0 0 0 0 rgba(232,207,143,.65)}70%,100%{box-shadow:0 0 0 20px rgba(232,207,143,0)}}
+/* компас лентасы */
+.vt .tape{position:absolute;left:0;right:0;top:0;height:22px;opacity:.7;
+  background:repeating-linear-gradient(90deg,rgba(232,207,143,.75) 0 2px,transparent 2px 22px) 0 0/44px 10px repeat-x,repeating-linear-gradient(90deg,rgba(232,207,143,.45) 0 1px,transparent 1px 22px) 11px 0/22px 6px repeat-x;animation:tape 4s linear infinite}
+@keyframes tape{to{background-position:44px 0,33px 0}}
+.vt .tri{position:absolute;left:50%;top:12px;width:0;height:0;margin-left:-6px;border-left:6px solid transparent;border-right:6px solid transparent;border-top:9px solid #e8cf8f}
+/* viewfinder бұрыштары */
+.vt .br{position:absolute;width:26px;height:26px;border:2px solid rgba(232,207,143,.85)}
+.vt .br.tl{left:12px;top:30px;border-right:0;border-bottom:0;border-radius:8px 0 0 0}
+.vt .br.tr{right:12px;top:30px;border-left:0;border-bottom:0;border-radius:0 8px 0 0}
+.vt .br.bl{left:12px;bottom:12px;border-right:0;border-top:0;border-radius:0 0 0 8px}
+.vt .br.rb{right:12px;bottom:12px;border-left:0;border-top:0;border-radius:0 0 8px 0}
+/* бұру көрсеткілері */
+.vt .chev{position:absolute;top:50%;width:14px;height:14px;border-top:3px solid rgba(232,207,143,.8);border-right:3px solid rgba(232,207,143,.8);animation:chev 1.8s ease-in-out infinite}
+.vt .chev.r{right:22px;transform:rotate(45deg)}.vt .chev.l{left:22px;transform:rotate(-135deg)}
+@keyframes chev{0%,100%{opacity:.25}50%{opacity:1}}
+.k-grid .g-tour .ic,.k-grid .g-tour .tx,.k-grid .g-tour .b360,.k-grid .g-tour .go{position:relative;z-index:2}
+.k-grid .g-tour .go{position:absolute}
+/* бағыт көрсеткіші: ағымдағы градус */
+.k-grid .g-tour .b360{font-size:58px;margin-right:64px;text-shadow:0 0 18px rgba(232,207,143,.55);animation:none;font-variant-numeric:tabular-nums}
+.k-grid .g-tour .b360 b{font-weight:400}
+.g-tour h3{text-shadow:0 2px 14px rgba(0,0,0,.5)}
+
+/* түрлі-түсті намаз иконкалары */
+.k-time .pi{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;margin-bottom:3px;box-shadow:0 6px 14px rgba(0,0,0,.18);transition:transform .3s var(--e),opacity .3s}
+.k-time .pi svg{width:24px;height:24px;display:block}
+.pi-fajr{background:#7047e0}.pi-sunrise{background:#3a6df0}.pi-dhuhr{background:#ffb000}.pi-asr{background:#f08a1c}.pi-maghrib{background:#d9505a}.pi-isha{background:#1b1670}
+.k-time.past .pi{opacity:.4;filter:saturate(.6)}
+.k-time.next .pi{animation:floaty 3s ease-in-out infinite;box-shadow:0 8px 20px rgba(14,75,54,.35)}
+.k-namaz .k-time{padding:8px 0}
+/* 360° тур: мәтінмен қиылыспау */
+.vt .hs.h1{left:38%;bottom:26px}.vt .hs.h2{left:60%;bottom:44px;animation-delay:.8s}.vt .hs.h3{left:80%;bottom:26px;animation-delay:1.6s}
+.vt .chev.l{display:none}
