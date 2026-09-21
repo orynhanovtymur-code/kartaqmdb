@@ -118,7 +118,7 @@ function MenuCard(item, lang, i){
     <button class="k-card g-${item.group} m-${item.id} anim" data-nav="menu:${item.id}" style="animation-delay:${0.2+i*0.06}s">
       ${item.group==='media' ? `<div class="tv" aria-hidden="true"><i class="wave"></i><i class="wave w2"></i><i class="wave w3"></i></div><span class="live"><i></i>${T('live', lang)}</span>` : ''}
       <div class="ic">${icon(item.icon)}${item.group==='tour' ? '<i class="spinring"></i>' : ''}</div>
-      <div class="tx"><h3>${tr(item.title, lang)}</h3>${item.sub ? `<p>${tr(item.sub, lang)}</p>` : ''}</div>
+      <div class="tx"><h3>${tr(item.title, lang)}</h3></div>
       ${item.group==='tour' ? '<span class="b360">360°</span>' : ''}
       <span class="go">${icon('arrow')}</span>
     </button>`;
