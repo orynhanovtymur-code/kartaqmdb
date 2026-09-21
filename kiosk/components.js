@@ -36,6 +36,22 @@ function SkylineSVG(){
   </g></svg>`;
 }
 
+
+/* 360° тур: минималистік циферблат — айналатын градус белгілері және орбитадағы нүкте */
+function Dial360(){
+  let ticks = '';
+  for (let i = 0; i < 72; i++){
+    const long = i % 6 === 0, a = i * 5, len = long ? 14 : 7;
+    ticks += `<line x1="100" y1="6" x2="100" y2="${6 + len}" transform="rotate(${a} 100 100)" stroke-width="${long ? 2.2 : 1.2}"/>`;
+  }
+  return `<div class="dial" aria-hidden="true"><svg viewBox="0 0 200 200">
+    <g class="ticks">${ticks}</g>
+    <circle class="orbit" cx="100" cy="100" r="66"/>
+    <g class="odot"><circle cx="100" cy="34" r="6"/></g>
+    <text x="100" y="112" text-anchor="middle" class="dl">360°</text>
+  </svg></div>`;
+}
+
 function BuildingVisual(lang){
   return `
     <div class="k-visual">
@@ -144,17 +160,10 @@ function MenuCard(item, lang, i){
   return `
     <button class="k-card g-${item.group} m-${item.id} anim" data-nav="menu:${item.id}" style="animation-delay:${0.2+i*0.06}s">
       ${item.group==='media' ? `<div class="tv" aria-hidden="true"></div><span class="live"><i></i>${T('live', lang)}</span>` : ''}
-      ${item.group==='tour' ? `<div class="vt" aria-hidden="true">
-        <div class="sk far"><div class="trk">${SkylineSVG()}${SkylineSVG()}</div></div>
-        <div class="sk near"><div class="trk">${SkylineSVG()}${SkylineSVG()}</div></div>
-        <i class="hs h1"><b>+</b></i><i class="hs h2"><b>+</b></i><i class="hs h3"><b>+</b></i>
-        <div class="tape"></div><i class="tri"></i>
-        <i class="br tl"></i><i class="br tr"></i><i class="br bl"></i><i class="br rb"></i>
-        <i class="chev l"></i><i class="chev r"></i>
-      </div>` : ''}
-      <div class="ic">${icon(item.icon)}${item.group==='tour' ? '<i class="spinring"></i>' : ''}</div>
+      ${item.group==='tour' ? Dial360() : ''}
+      ${item.group==='tour' ? '' : `<div class="ic">${icon(item.icon)}</div>`}
       <div class="tx"><h3>${tr(item.title, lang).replace('\n','<br>')}</h3></div>
-      ${item.group==='tour' ? '<span class="b360"><b id="kHead">000</b>°</span>' : ''}
+      
       <span class="go">${icon('arrow')}</span>
     </button>`;
 }

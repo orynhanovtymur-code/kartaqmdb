@@ -659,3 +659,19 @@ html[data-theme=dark] .k-grid .g-tour{background:radial-gradient(600px 220px at 
 .g-tour h3{white-space:nowrap;font-size:25px}
 .k-grid .g-tour .b360{font-size:40px;margin-right:54px}
 .k-grid .g-tour{gap:16px}
+
+/* ══ 360° тур: минимализм ══ */
+.k-grid .g-tour{background:radial-gradient(420px 260px at 82% 50%,rgba(232,207,143,.12),transparent 70%),#0a3a2a;justify-content:flex-start;padding:22px 32px;overflow:hidden}
+.g-tour .vt,.g-tour .pano{display:none}
+.k-grid .g-tour .tx{flex:none;z-index:2}
+.g-tour h3{font-size:30px;line-height:1.2;font-weight:600;letter-spacing:.005em;white-space:nowrap}
+.g-tour .dial{position:absolute;right:74px;top:50%;width:176px;height:176px;margin-top:-88px;z-index:1;pointer-events:none}
+.g-tour .dial svg{width:100%;height:100%;overflow:visible}
+.g-tour .dial .ticks{stroke:#e8cf8f;stroke-linecap:round;opacity:.7;transform-origin:100px 100px;animation:dialSpin 60s linear infinite reverse}
+.g-tour .dial .orbit{fill:none;stroke:rgba(232,207,143,.28);stroke-width:1.2;stroke-dasharray:2 5}
+.g-tour .dial .odot{transform-origin:100px 100px;animation:dialSpin 9s linear infinite}
+.g-tour .dial .odot circle{fill:#e8cf8f;filter:drop-shadow(0 0 6px rgba(232,207,143,.9))}
+.g-tour .dial .dl{font-family:var(--fh);font-size:36px;fill:#fff;letter-spacing:.04em}
+@keyframes dialSpin{to{transform:rotate(360deg)}}
+.g-tour h3{font-size:26px}
+.g-tour .dial{right:62px;width:160px;height:160px;margin-top:-80px}
