@@ -126,7 +126,7 @@ function go(item){
   if (item.route){
     $('screen').classList.add('leaving');
     setTimeout(()=>{ location.href = item.route; }, 280);
-  } else toast(U.T('soon', state.lang));
+  }
 }
 
 const PH_OF = {fajr:'fajr', sunrise:'sunrise', dhuhr:'noon', asr:'asr', maghrib:'sunset', isha:'night'};
