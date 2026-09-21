@@ -234,54 +234,26 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 .k-time.past .i{color:#b4beb8}
 .k-time{padding-top:14px}
 
-/* ══ Намаз панелінің динамикалық аспан фоны ══ */
-.k-next{overflow:hidden;isolation:isolate;text-shadow:0 1px 10px rgba(0,20,50,.35)}
+/* ══ Намаз панелінің минималистік градиент фоны (мезгілге қарай) ══ */
+.k-next{overflow:hidden;isolation:isolate;text-shadow:0 1px 8px rgba(0,20,40,.25)}
 .k-next>*:not(.scene){position:relative;z-index:2}
 .scene{position:absolute;inset:0;z-index:0}
 .sc{position:absolute;inset:0;opacity:0;transition:opacity 2s ease;overflow:hidden}
 .sc.on{opacity:1}
-.sc[data-ph=night]  {background:linear-gradient(165deg,#040a1c 0%,#0a1638 50%,#1a2a5c 100%)}
-.sc[data-ph=fajr]   {background:linear-gradient(180deg,#0c1738 0%,#26356b 42%,#7a6a9e 72%,#e9a892 100%)}
-.sc[data-ph=sunrise]{background:linear-gradient(180deg,#3b68ad 0%,#8a8fb8 38%,#f0a072 68%,#ffd58a 100%)}
-.sc[data-ph=noon]   {background:linear-gradient(180deg,#1573d1 0%,#3f9bea 55%,#9fd7ff 100%)}
-.sc[data-ph=asr]    {background:linear-gradient(180deg,#3a86c9 0%,#86bcd9 45%,#f4dc9f 100%)}
-.sc[data-ph=sunset] {background:linear-gradient(180deg,#25275f 0%,#8e3f6b 38%,#ee7448 72%,#ffbb5c 100%)}
-
-/* жұлдыздар */
-.stars{position:absolute;inset:0;background-repeat:no-repeat;animation:twinkle 3.2s ease-in-out infinite;
-  background-image:radial-gradient(1.6px 1.6px at 8% 22%,#fff,transparent),radial-gradient(1.2px 1.2px at 18% 60%,#fff,transparent),radial-gradient(2px 2px at 30% 14%,#fff,transparent),
-  radial-gradient(1.2px 1.2px at 42% 48%,#fff,transparent),radial-gradient(1.6px 1.6px at 55% 20%,#fff,transparent),radial-gradient(1.2px 1.2px at 66% 62%,#fff,transparent),
-  radial-gradient(2px 2px at 76% 12%,#fff,transparent),radial-gradient(1.2px 1.2px at 88% 40%,#fff,transparent),radial-gradient(1.6px 1.6px at 95% 70%,#fff,transparent),radial-gradient(1.2px 1.2px at 24% 84%,#fff,transparent)}
-.stars.s2{animation-delay:1.6s;background-image:radial-gradient(1.4px 1.4px at 12% 40%,#fff,transparent),radial-gradient(1.8px 1.8px at 36% 30%,#fff,transparent),radial-gradient(1.2px 1.2px at 48% 76%,#fff,transparent),
-  radial-gradient(1.6px 1.6px at 62% 34%,#fff,transparent),radial-gradient(1.2px 1.2px at 82% 22%,#fff,transparent),radial-gradient(1.6px 1.6px at 92% 56%,#fff,transparent)}
-.sc[data-ph=fajr] .stars{opacity:.5}
-@keyframes twinkle{0%,100%{opacity:1}50%{opacity:.25}}
-.moon{position:absolute;width:64px;height:64px;left:47%;top:14px;filter:drop-shadow(0 0 14px rgba(246,240,207,.55));animation:floaty 6s ease-in-out infinite}
-
-/* күн */
-.sun{position:absolute;left:46%;width:70px;height:70px;border-radius:50%;
-  background:radial-gradient(circle,#fffbe0 0%,#ffe27a 45%,#ffb43a 75%,rgba(255,180,58,0) 76%);box-shadow:0 0 50px 20px rgba(255,214,110,.55)}
-.sc[data-ph=sunrise] .sun{top:100px;animation:sunrise 14s ease-in-out infinite alternate}
-.sc[data-ph=noon] .sun{top:8px;width:78px;height:78px;box-shadow:0 0 70px 30px rgba(255,244,190,.6);animation:floaty 7s ease-in-out infinite}
-.sc[data-ph=asr] .sun{top:44px;left:52%;animation:floaty 8s ease-in-out infinite}
-.sc[data-ph=sunset] .sun{top:96px;left:44%;background:radial-gradient(circle,#fff0c0 0%,#ffb45a 45%,#ff6a3a 75%,rgba(255,106,58,0) 76%);box-shadow:0 0 60px 26px rgba(255,120,60,.55);animation:sunset 14s ease-in-out infinite alternate}
-@keyframes sunrise{from{top:118px}to{top:78px}}
-@keyframes sunset{from{top:70px}to{top:112px}}
-.glow{position:absolute;left:-10%;right:-10%;bottom:-40px;height:110px;background:radial-gradient(ellipse at 50% 100%,rgba(255,190,110,.65),transparent 70%)}
-.sc[data-ph=fajr] .glow{background:radial-gradient(ellipse at 50% 100%,rgba(255,150,130,.5),transparent 70%)}
-.sc[data-ph=sunset] .glow{background:radial-gradient(ellipse at 50% 100%,rgba(255,110,60,.7),transparent 70%)}
-
-/* бұлттар */
-.cloud{position:absolute;height:22px;border-radius:99px;background:rgba(255,255,255,.55);filter:blur(3px);animation:drift 26s linear infinite}
-.cloud.c1{width:110px;top:26px;left:-130px}
-.cloud.c2{width:80px;top:72px;left:-100px;animation-duration:34s;animation-delay:-14s;height:18px}
-.cloud.c3{width:130px;top:112px;left:-140px;animation-duration:42s;animation-delay:-28s;opacity:.7}
-.sc[data-ph=sunrise] .cloud{background:rgba(255,214,190,.5)}
-.sc[data-ph=sunset] .cloud{background:rgba(255,170,130,.45)}
-.sc[data-ph=asr] .cloud{background:rgba(255,246,220,.55)}
-@keyframes drift{to{transform:translateX(720px)}}
-
-/* тест: намаз ұяшықтарын басып фонды көру */
-.k-time{cursor:pointer;transition:background .3s,transform .2s var(--e)}
-.k-time:active{transform:scale(.94)}
-.k-time.preview{box-shadow:inset 0 -3px 0 var(--gold)}
+.sc[data-ph=night]  {background:linear-gradient(135deg,#070d22 0%,#111d45 55%,#243266 100%)}
+.sc[data-ph=fajr]   {background:linear-gradient(135deg,#101a3f 0%,#3a4880 55%,#b48aa6 100%)}
+.sc[data-ph=sunrise]{background:linear-gradient(135deg,#46639f 0%,#c58f9c 55%,#f3b98a 100%)}
+.sc[data-ph=noon]   {background:linear-gradient(135deg,#1c6fc4 0%,#3d98e0 55%,#8fd0f4 100%)}
+.sc[data-ph=asr]    {background:linear-gradient(135deg,#2f78b5 0%,#78b0c8 55%,#e9cf98 100%)}
+.sc[data-ph=sunset] {background:linear-gradient(135deg,#2b2a63 0%,#9a4470 55%,#f08a56 100%)}
+/* нәзік жарық дақ */
+.sc::after{content:"";position:absolute;right:-60px;top:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 68%)}
+.sc[data-ph=night]::after,.sc[data-ph=fajr]::after{background:radial-gradient(circle,rgba(190,205,255,.14),transparent 68%)}
+/* түнде және таңда — сирек жұлдыздар ғана */
+.stars{position:absolute;inset:0;background-repeat:no-repeat;animation:twinkle 4s ease-in-out infinite;
+  background-image:radial-gradient(1.4px 1.4px at 14% 24%,#fff,transparent),radial-gradient(1.2px 1.2px at 38% 70%,#fff,transparent),radial-gradient(1.6px 1.6px at 58% 18%,#fff,transparent),
+  radial-gradient(1.2px 1.2px at 80% 52%,#fff,transparent),radial-gradient(1.4px 1.4px at 92% 16%,#fff,transparent)}
+.stars.s2,.sun,.cloud,.moon,.glow{display:none}
+.sc[data-ph=fajr] .stars{opacity:.35}
+@keyframes twinkle{0%,100%{opacity:.9}50%{opacity:.3}}
+.k-next .tm{color:#fff}
