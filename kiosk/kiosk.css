@@ -338,3 +338,20 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 .k-namaz .k-next .bar{margin-top:0}
 .k-namaz .k-next .nm,.k-namaz .k-next .tm{font-size:36px}
 .k-next .cd{font-weight:400}
+
+/* ══ Қабылдауға жазылу картасы (Бас мүфти) ══ */
+.k-reception{flex:none;position:relative;display:flex;align-items:center;gap:16px;padding:14px 16px 14px 20px;border-radius:26px;background:#fff;
+  box-shadow:var(--card);overflow:hidden}
+.k-reception::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--green)}
+.k-reception .ph{flex:none;width:92px;height:92px;border-radius:50%;padding:4px;background:#fff;
+  box-shadow:0 0 0 3px #c9a95b,0 0 0 9px #fff,0 8px 22px rgba(176,141,67,.35)}
+.k-reception .ph img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.k-reception .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;padding-left:8px}
+.k-reception .role{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7a5c1e;line-height:1.25}
+.k-reception .nm{font-size:20px;font-weight:700;line-height:1.15;color:var(--ink)}
+.k-reception .sub{font-size:14px;color:var(--muted)}
+.k-reception .rbtn{flex:none;width:118px;height:76px;padding:8px;border-radius:20px;background:var(--green);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  font-size:14px;font-weight:600;line-height:1.15;text-align:center;box-shadow:0 10px 24px rgba(14,75,54,.28);transition:transform .2s var(--e);position:relative;overflow:hidden}
+.k-reception .rbtn .i{font-size:22px;color:#e8cf8f}
+.k-reception .rbtn:active,.k-reception .rbtn.pressed{transform:scale(.94)}
+.k-reception .rbtn::after{content:"";position:absolute;top:0;bottom:0;width:40px;left:-60px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);animation:shine 4.2s ease-in-out infinite}

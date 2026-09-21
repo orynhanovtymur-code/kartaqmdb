@@ -115,6 +115,7 @@ const REGISTRY = {};
 D.MENU.forEach(m => REGISTRY['menu:'+m.id] = m);
 D.QUICK_ACTIONS.forEach(m => REGISTRY['quick:'+m.id] = m);
 D.SECONDARY.forEach(m => REGISTRY['secondary:'+m.id] = m);
+REGISTRY['reception:'+D.RECEPTION.id] = D.RECEPTION;
 
 let toastTimer;
 function toast(msg){

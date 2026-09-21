@@ -26,6 +26,7 @@ const ICONS = {
   maghrib:'<path d="M3 19h18"/><path d="M7 19a5 5 0 0 1 10 0"/><path d="M12 3v6M9.5 6.5 12 9l2.5-2.5"/><path d="M4.9 11l1.8 1.8M19.1 11l-1.8 1.8"/>',
   isha:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/><path d="M17 3v3M15.5 4.5h3"/>',
   pin:'<path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+  calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 15h3"/>',
   arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
   link:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'
 };
@@ -52,6 +53,14 @@ const QUICK_ACTIONS = [
 
 const SECONDARY = [
 ];
+
+const RECEPTION = {
+  id:'reception', route:null, photo:'./assets/mufti.jpg',
+  role:L('ҚМДБ төрағасы, Бас мүфти','Председатель ДУМК, Верховный муфтий','SAMK Chairman, Grand Mufti'),
+  name:L('Наурызбай қажы Тағанұлы','Наурызбай хаджи Таганулы','Nauryzbay Hajji Taganuly'),
+  sub:L('Жеке қабылдау · Астана','Личный приём · Астана','Personal reception · Astana'),
+  action:L('Қабылдауға жазылу','Записаться на приём','Book a reception')
+};
 
 const NEWS = [
   {date:'20.09.2026', title:L('Астанада жаңа мешіттің іргетасы қаланды','В Астане заложен фундамент новой мечети','Foundation laid for a new mosque in Astana')},
@@ -134,5 +143,5 @@ const IDLE_CONFIG = {
   slideMs:12000
 };
 
-window.KIOSK_DATA = {ICONS, MENU, QUICK_ACTIONS, SECONDARY, NEWS, EVENTS, STATS, PRAYER_NAMES, PRAYER_ORDER, PrayerService, I18N, IDLE_CONFIG};
+window.KIOSK_DATA = {ICONS, MENU, QUICK_ACTIONS, SECONDARY, NEWS, EVENTS, RECEPTION, STATS, PRAYER_NAMES, PRAYER_ORDER, PrayerService, I18N, IDLE_CONFIG};
 })();

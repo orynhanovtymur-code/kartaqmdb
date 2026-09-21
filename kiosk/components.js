@@ -78,7 +78,7 @@ function TodayEvents(lang){
 }
 
 function SidePanel(lang, times){
-  return BuildingVisual(lang) + NewsSection(lang);
+  return BuildingVisual(lang) + ReceptionCard(lang) + NewsSection(lang);
 }
 
 /* Оң жақ: іздеу + жылдам чиптер */
@@ -135,6 +135,20 @@ function SecondaryActions(lang){
   </div>`;
 }
 
+function ReceptionCard(lang){
+  const r = D.RECEPTION;
+  return `
+    <div class="k-reception">
+      <div class="ph"><img src="${r.photo}" alt="" onerror="this.remove()"></div>
+      <div class="tx">
+        <span class="role">${tr(r.role, lang)}</span>
+        <b class="nm">${tr(r.name, lang)}</b>
+        <span class="sub">${tr(r.sub, lang)}</span>
+      </div>
+      <button class="rbtn" data-nav="reception:${r.id}">${icon('calendar')}<span>${tr(r.action, lang)}</span></button>
+    </div>`;
+}
+
 function NewsSection(lang){
   return `
     <div class="k-newsbox">
@@ -151,5 +165,5 @@ function Footer(lang){
     <div class="fi">${T('rights', lang)}</div>`;
 }
 
-window.KIOSK_UI = {icon, tr, T, Header, HeroSection, GlobalSearch, NamazTimesWidget, MenuCard, MainMenuGrid, QuickActions, SecondaryActions, BuildingVisual, SidePanel, NewsSection, TodayEvents, Footer};
+window.KIOSK_UI = {icon, tr, T, Header, HeroSection, GlobalSearch, NamazTimesWidget, MenuCard, MainMenuGrid, QuickActions, SecondaryActions, ReceptionCard, BuildingVisual, SidePanel, NewsSection, TodayEvents, Footer};
 })();
