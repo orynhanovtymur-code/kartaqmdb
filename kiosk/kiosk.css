@@ -510,3 +510,7 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke
 .k-grid .k-card.m-munara .wave{width:64px;height:64px}
 .k-grid .k-card.m-products h3,.k-grid .k-card.m-munara h3{font-size:28px}
 .k-grid .k-card.m-munara .live{top:28px}
+
+/* Munara TV: жасыл емес, қою көк-графит эфир фоны */
+.k-grid .k-card.g-media{background:#0e1320}
+.g-media .tv{background:linear-gradient(115deg,#0b0f1b,#1a2340,#101729,#232d52);background-size:300% 100%}
