@@ -48,12 +48,57 @@ function NewsSection(lang){
   return `
     <div class="k-newsbox">
       <h4>${T('news', lang)}</h4>
-      ${D.NEWS.map(n => `<div class="ni"><span class="d">${n.date}</span><span class="t">${tr(n.title, lang)}</span></div>`).join('')}
+      ${D.NEWS.map((n, i) => `<div class="ni" data-news="${i}"><span class="d">${n.date}</span><span class="t">${tr(n.title, lang)}</span></div>`).join('')}
+    </div>`;
+}
+
+function NewsModal(){
+  return `
+    <div class="news-overlay" id="newsOverlay">
+      <div class="news-card" role="dialog" aria-modal="true">
+        <button class="news-close" id="newsClose" aria-label="Жабу">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+        <div class="news-hero" id="newsHero"></div>
+        <div class="news-body">
+          <span class="news-date" id="newsDate"></span>
+          <h2 class="news-title" id="newsTitle"></h2>
+          <p class="news-text" id="newsText"></p>
+        </div>
+      </div>
     </div>`;
 }
 
 function SidePanel(lang){
   return BuildingVisual(lang) + ReceptionCard(lang) + NewsSection(lang);
+}
+
+function GalleryModal(){
+  return `
+    <div class="gal-overlay" id="galOverlay">
+      <div class="gal-card" role="dialog" aria-modal="true">
+        <button class="gal-close" id="galClose" aria-label="Жабу">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+        <div class="gal-stage">
+          <div class="gal-track" id="galTrack"></div>
+          <button class="gal-arrow prev" id="galPrev" aria-label="Алдыңғы">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+          </button>
+          <button class="gal-arrow next" id="galNext" aria-label="Келесі">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <div class="gal-foot">
+          <span class="gal-caption" id="galCaption"></span>
+          <div class="gal-dots" id="galDots"></div>
+          <button class="gal-play" id="galPlay" aria-label="Автоойнату">
+            <svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+            <svg class="ic-play" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>`;
 }
 
 /* Намаз панелі: мезгілге қарай аспан фоны (night/fajr — жұлдыздармен) */
@@ -127,5 +172,5 @@ function MenuCard(item, lang, i){
 
 const MainMenuGrid = lang => `<div class="k-grid">${D.MENU.map((m, i) => MenuCard(m, lang, i)).join('')}</div>`;
 
-window.KIOSK_UI = {tr, T, SidePanel, NamazTimesWidget, MainMenuGrid, Header};
+window.KIOSK_UI = {tr, T, SidePanel, NamazTimesWidget, MainMenuGrid, Header, NewsModal, GalleryModal};
 })();

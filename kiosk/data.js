@@ -26,23 +26,33 @@ const MENU = [
        sub:L('Қазақстан мешіттері мен діни оқу орындары','Мечети и религиозные учебные заведения Казахстана','Mosques and religious educational institutions of Kazakhstan')},
   {id:'structure',   icon:'structure',   route:null, title:L('ҚМДБ құрылымы','Структура ДУМК','SAMK structure'),
        sub:L('Басқарма мен бөлімдердің иерархиясы','Иерархия управления и отделов','Hierarchy of management and departments')},
-  {id:'leadership',  icon:'leadership',  route:null, title:L('Басшылық құрам','Руководящий состав','Leadership team'),
+  {id:'leadership',  icon:'leadership',  route:'./leadership.html', title:L('Басшылық құрам','Руководящий состав','Leadership team'),
        sub:L('Басқарма мүшелерінің тізімі мен байланысы','Список и контакты членов управления','List and contacts of the board members')},
-  {id:'departments', icon:'departments', route:null, title:L('Бөлімдер','Отделы','Departments'),
+  {id:'departments', icon:'departments', route:'./departments.html', title:L('Бөлімдер','Отделы','Departments'),
        sub:L('Құрылымдық бөлімдер мен секторлар тізімі','Список структурных отделов и секторов','List of structural departments and sectors')},
-  {id:'services',    icon:'services',    route:null, title:L('Қызметтер','Услуги','Services'),
+  {id:'services',    icon:'services',    route:'./services.html', title:L('Қызметтер','Услуги','Services'),
        sub:L('ҚМДБ-ға қарасты қорлар мен мекемелер қызметі','Деятельность фондов и учреждений при ДУМК','Activities of funds and institutions under SAMK')},
-  {id:'regions',     icon:'regions',     route:null, title:L('Өкілдіктер','Представительства','Offices'),
+  {id:'regions',     icon:'regions',     route:'./regions.html', title:L('Өкілдіктер','Представительства','Offices'),
        sub:L('Облыстық өкілдіктер мен байланыстар','Областные представительства и контакты','Regional offices and contacts')},
   {id:'products',    icon:'products',    route:null, embed:'https://digital.muftyat.kz', title:L('Цифрлық өнімдер','Цифровые продукты','Digital products'),
        sub:L('Мобильді қосымшалар мен онлайн қызметтер','Мобильные приложения и онлайн-сервисы','Mobile apps and online services')},
-  {id:'munara',      icon:'tv',          route:null, title:L('Фотокөрме','Фотогалерея','Photo exhibition'),
+  {id:'munara',      icon:'tv',          route:null, gallery:true, title:L('Фотокөрме','Фотогалерея','Photo exhibition'),
        sub:L('ҚМДБ-ның 35 жылдығына арналған «Дін мен Дәуір» фотокөрмесі','Фотовыставка «Дін мен Дәуір», посвящённая 35-летию ДУМК','"Din men Dauir" photo exhibition dedicated to SAMK\'s 35th anniversary')},
-  {id:'tour',        icon:'tour',        route:null, title:L('360° виртуалды тур','360° виртуальный тур','360° virtual tour'),
+  {id:'tour',        icon:'tour',        route:null, embed:'https://3d.muftyat.kz/', title:L('360° виртуалды тур','360° виртуальный тур','360° virtual tour'),
        sub:L('ҚМДБ орталық аппаратына виртуалды саяхат жасаңыз','Виртуальное путешествие по центральному аппарату ДУМК','Take a virtual tour of SAMK\'s central office')}
 ];
 
 const STATS = [{n:2977,label:'mosques'},{n:9,label:'schools'},{n:18,label:'qari'}];
+
+/* «Дін мен Дәуір» фотокөрмесі (ҚМДБ-ның 35 жылдығына арналған) — слайдер суреттері */
+const GALLERY = [
+  {photo:'./assets/qmdb-building.jpeg', caption:L('ҚМДБ орталық ғимараты','Центральное здание ДУМК','SAMK central building')},
+  {photo:null, caption:L('Мешіт салу рәсімі','Церемония закладки мечети','Mosque foundation ceremony')},
+  {photo:null, caption:L('Қари дайындау орталығы','Центр подготовки қари','Qari training center')},
+  {photo:null, caption:L('Жастар кездесуі','Встреча с молодёжью','Youth gathering')},
+  {photo:null, caption:L('Қажылық сапары','Паломничество (хадж)','Hajj pilgrimage')},
+  {photo:null, caption:L('ҚМДБ-ның 35 жылдығы','35-летие ДУМК','SAMK\'s 35th anniversary')}
+];
 
 const RECEPTION = {
   photo:'./assets/mufti.jpg',
@@ -51,10 +61,26 @@ const RECEPTION = {
 };
 
 const NEWS = [
-  {date:'20.09.2026', title:L('Астанада жаңа мешіттің іргетасы қаланды','В Астане заложен фундамент новой мечети','Foundation laid for a new mosque in Astana')},
-  {date:'18.09.2026', title:L('Қари дайындау орталықтарында жаңа оқу маусымы басталды','В центрах подготовки қари начался новый учебный сезон','New academic season begins at qari training centers')},
-  {date:'16.09.2026', title:L('Мешіттерде жастарға арналған дәрістер циклі өтеді','В мечетях пройдёт цикл лекций для молодёжи','A lecture series for young people will be held in mosques')},
-  {date:'15.09.2026', title:L('ҚМДБ жаңа мобильді қосымшасы іске қосылды','Запущено новое мобильное приложение ДУМК','New SAMK mobile app launched')}
+  {date:'20.09.2026', photo:'./assets/qmdb-building.jpeg',
+   title:L('Астанада жаңа мешіттің іргетасы қаланды','В Астане заложен фундамент новой мечети','Foundation laid for a new mosque in Astana'),
+   body:L('Астана қаласында жаңа мешіттің құрылысы басталды: іргетас қалау рәсіміне ҚМДБ өкілдері мен қала тұрғындары қатысты. Жаңа мешіт бірнеше мың адамды сыйдыратын етіп жобаланған, құрылыс жұмыстары кезең-кезеңімен жүргізіледі.',
+     'В Астане началось строительство новой мечети: в церемонии закладки фундамента приняли участие представители ДУМК и жители города. Новая мечеть рассчитана на несколько тысяч человек, строительные работы будут вестись поэтапно.',
+     'Construction of a new mosque has begun in Astana: SAMK representatives and city residents took part in the foundation-laying ceremony. The new mosque is designed to accommodate several thousand worshippers, with construction proceeding in stages.')},
+  {date:'18.09.2026', photo:'./assets/qmdb-building.jpeg',
+   title:L('Қари дайындау орталықтарында жаңа оқу маусымы басталды','В центрах подготовки қари начался новый учебный сезон','New academic season begins at qari training centers'),
+   body:L('Еліміздің қари дайындау орталықтарында жаңа оқу маусымы ашылды. Оқушылар Құранды жатқа білу және таджуид ілімін меңгеру бағдарламасы бойынша сабақ бастады, оқу барысы білікті ұстаздардың басшылығымен жүргізіледі.',
+     'В центрах подготовки қари страны открылся новый учебный сезон. Учащиеся приступили к занятиям по программе заучивания Корана наизусть и изучения таджвида под руководством квалифицированных преподавателей.',
+     'A new academic season has opened at the country\'s qari training centers. Students have begun classes in Quran memorization and tajwid under the guidance of qualified instructors.')},
+  {date:'16.09.2026', photo:'./assets/qmdb-building.jpeg',
+   title:L('Мешіттерде жастарға арналған дәрістер циклі өтеді','В мечетях пройдёт цикл лекций для молодёжи','A lecture series for young people will be held in mosques'),
+   body:L('Еліміздің мешіттерінде жастарға арналған дәрістер циклі басталады. Кездесулерде дін негіздері, адамгершілік құндылықтар және қоғамдағы өзекті мәселелер талқыланады, дәрістерді білікті имамдар мен теолог-мамандар жүргізеді.',
+     'В мечетях страны стартует цикл лекций для молодёжи. На встречах будут обсуждаться основы религии, нравственные ценности и актуальные вопросы общества, лекции проведут квалифицированные имамы и специалисты-теологи.',
+     'A lecture series for young people is starting in mosques across the country. The sessions will cover the fundamentals of religion, moral values and topical social issues, led by qualified imams and theology specialists.')},
+  {date:'15.09.2026', photo:'./assets/qmdb-building.jpeg',
+   title:L('ҚМДБ жаңа мобильді қосымшасы іске қосылды','Запущено новое мобильное приложение ДУМК','New SAMK mobile app launched'),
+   body:L('ҚМДБ намаз уақыттарын, жақын маңдағы мешіттерді және діни ақпаратты бір қосымшада біріктірген жаңа мобильді қосымшасын іске қосты. Қосымша қазақ, орыс және ағылшын тілдерінде қолжетімді, оны App Store және Google Play дүкендерінен тегін жүктеп алуға болады.',
+     'ДУМК запустило новое мобильное приложение, объединяющее время намаза, ближайшие мечети и религиозную информацию в одном сервисе. Приложение доступно на казахском, русском и английском языках, скачать его можно бесплатно в App Store и Google Play.',
+     'SAMK has launched a new mobile app that brings together prayer times, nearby mosques and religious information in one place. The app is available in Kazakh, Russian and English and can be downloaded free from the App Store and Google Play.')}
 ];
 
 const PRAYER_NAMES = {
@@ -102,5 +128,5 @@ const I18N = {
 /* Idle режим (болашақ): әрекетсіздіктен кейін welcome / Munara TV / жаңалық / намаз экрандары кезектеседі. Әзірге өшірулі. */
 const IDLE_CONFIG = {enabled:false, timeoutMs:120000, screens:['welcome','munara','news','digital-projects','prayer-times'], slideMs:12000};
 
-window.KIOSK_DATA = {ICONS, MENU, STATS, RECEPTION, NEWS, PRAYER_NAMES, PRAYER_ORDER, PrayerService, I18N, IDLE_CONFIG};
+window.KIOSK_DATA = {ICONS, MENU, STATS, RECEPTION, NEWS, GALLERY, PRAYER_NAMES, PRAYER_ORDER, PrayerService, I18N, IDLE_CONFIG};
 })();

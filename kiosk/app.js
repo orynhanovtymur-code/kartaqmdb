@@ -133,6 +133,68 @@ function openEmbed(url){
   ($('screen') || document.body).appendChild(m);
 }
 
+/* ── Жаңалық модалкасы: толық ақпарат (сурет, тақырып, мәтін) ── */
+if (!$('newsOverlay')){ $('screen').insertAdjacentHTML('beforeend', U.NewsModal()); }
+function openNews(n){
+  $('newsHero').style.backgroundImage = n.photo ? `url('${n.photo}')` : '';
+  $('newsDate').textContent = n.date;
+  $('newsTitle').textContent = U.tr(n.title, state.lang);
+  $('newsText').textContent = U.tr(n.body, state.lang) || '';
+  $('newsOverlay').classList.add('show');
+}
+function closeNews(){ $('newsOverlay').classList.remove('show'); }
+$('newsClose').addEventListener('click', closeNews);
+$('newsOverlay').addEventListener('click', e => { if (e.target.id === 'newsOverlay') closeNews(); });
+
+/* ── Фотокөрме слайдері: үлкен модалка, автоойнату немесе қолмен ауыстыру ── */
+if (!$('galOverlay')){ $('screen').insertAdjacentHTML('beforeend', U.GalleryModal()); }
+const galPhotoIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="4" width="18" height="15" rx="2"/><circle cx="8.5" cy="10" r="1.8"/><path d="m21 16-5.5-5.5L9 17"/></svg>`;
+let galIdx = 0, galTimer = null, galPlaying = true;
+const GAL_MS = 4500;
+
+function galRender(){
+  const g = D.GALLERY;
+  $('galTrack').innerHTML = g.map(s => `<div class="gal-slide">${
+    s.photo ? `<img src="${s.photo}" alt="">` : `<div class="gal-placeholder">${galPhotoIcon}</div>`
+  }</div>`).join('');
+  $('galDots').innerHTML = g.map((_, i) => `<button class="gal-dot" data-gi="${i}" aria-label="${i + 1}"></button>`).join('');
+  galGoTo(0, true);
+}
+function galGoTo(i, instant){
+  const g = D.GALLERY;
+  galIdx = (i + g.length) % g.length;
+  $('galTrack').style.transition = instant ? 'none' : '';
+  $('galTrack').style.transform = `translateX(-${galIdx * 100}%)`;
+  $('galCaption').textContent = U.tr(g[galIdx].caption, state.lang);
+  document.querySelectorAll('.gal-dot').forEach((d, i2) => d.classList.toggle('on', i2 === galIdx));
+}
+function galNext(){ galGoTo(galIdx + 1); }
+function galPrev(){ galGoTo(galIdx - 1); }
+function galAutoStart(){ clearInterval(galTimer); galTimer = setInterval(galNext, GAL_MS); }
+function galAutoStop(){ clearInterval(galTimer); }
+function galSetPlaying(on){
+  galPlaying = on;
+  $('galPlay').classList.toggle('paused', !on);
+  $('galPlay').querySelector('.ic-pause').style.display = on ? '' : 'none';
+  $('galPlay').querySelector('.ic-play').style.display = on ? 'none' : '';
+  if (on) galAutoStart(); else galAutoStop();
+}
+function openGallery(){
+  galRender();
+  galSetPlaying(true);
+  $('galOverlay').classList.add('show');
+}
+function closeGallery(){ $('galOverlay').classList.remove('show'); galAutoStop(); }
+$('galClose').addEventListener('click', closeGallery);
+$('galOverlay').addEventListener('click', e => { if (e.target.id === 'galOverlay') closeGallery(); });
+$('galNext').addEventListener('click', () => { galNext(); if (galPlaying) galAutoStart(); });
+$('galPrev').addEventListener('click', () => { galPrev(); if (galPlaying) galAutoStart(); });
+$('galDots').addEventListener('click', e => {
+  const d = e.target.closest('.gal-dot'); if (!d) return;
+  galGoTo(+d.dataset.gi); if (galPlaying) galAutoStart();
+});
+$('galPlay').addEventListener('click', () => galSetPlaying(!galPlaying));
+
 /* ── Басу оқиғалары ── */
 document.addEventListener('click', e => {
   const t = e.target;
@@ -142,9 +204,12 @@ document.addEventListener('click', e => {
     document.querySelectorAll('.k-time').forEach(el => el.classList.toggle('preview', !!state.preview && PHASE[el.dataset.p] === state.preview));
     tickPrayer(true); return;
   }
+  const newsItem = t.closest('.ni');
+  if (newsItem){ openNews(D.NEWS[+newsItem.dataset.news]); return; }
   const nav = t.closest('[data-nav]');
   if (nav){
     const item = D.MENU.find(m => m.id === nav.dataset.nav);
+    if (item && item.gallery){ openGallery(); return; }
     if (item && item.embed){ openEmbed(item.embed); return; }
     if (item && item.route){ $('screen').classList.add('leaving'); setTimeout(() => { location.href = item.route; }, 280); }
     return;
