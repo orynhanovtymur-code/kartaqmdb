@@ -184,6 +184,9 @@ html[data-theme=dark] .k-card .go{color:var(--green-l)}
 .k-card.feature{padding:32px;border:0;color:#fff;
   background:radial-gradient(500px 300px at 90% 0%,rgba(232,207,143,.22),transparent 60%),linear-gradient(150deg,#0b3d2c,#0e4b36 60%,#146447)}
 .k-card.feature::before{display:none}
+.pings{position:absolute;inset:0;pointer-events:none}
+.pings i{position:absolute;width:14px;height:14px;border-radius:50%;background:#e8cf8f;box-shadow:0 0 0 0 rgba(232,207,143,.6);animation:ping 2.8s ease-out infinite}
+@keyframes ping{0%{transform:scale(.4);opacity:1;box-shadow:0 0 0 0 rgba(232,207,143,.6)}70%{opacity:.15}100%{transform:scale(1);opacity:0;box-shadow:0 0 0 22px rgba(232,207,143,0)}}
 .feature .ic{width:92px;height:92px;border-radius:28px;font-size:52px;background:rgba(255,255,255,.12);color:#e8cf8f}
 .feature .stats{display:flex;gap:34px;margin:auto 0 22px}
 .feature .stats div{display:flex;flex-direction:column}

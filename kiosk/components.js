@@ -110,6 +110,7 @@ function MenuCard(item, lang, i){
   const delay = `style="animation-delay:${(0.15 + i * 0.05).toFixed(2)}s"`;
   if (item.id === 'map') return `
     <button class="k-card feature m-map anim" data-nav="${item.id}" ${delay}>
+      <div class="pings" aria-hidden="true"><i style="left:60%;top:12%"></i><i style="left:82%;top:9%;animation-delay:.7s"></i><i style="left:91%;top:30%;animation-delay:1.4s"></i><i style="left:72%;top:24%;animation-delay:2.1s"></i><i style="left:94%;top:58%;animation-delay:1s"></i></div>
       <div class="ic">${icon(item.icon)}</div>
       <div class="stats">${D.STATS.map(x => `<div><b data-count="${x.n}">0</b><span>${T(x.label, lang)}</span></div>`).join('')}</div>
       <div class="tx"><h3>${tr(item.title, lang)}</h3><p>${tr(item.sub, lang)}</p></div>
