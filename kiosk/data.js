@@ -12,7 +12,7 @@ const ICONS = {
   services:'<g class="gear"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="6.6"/><path d="M12 2.4v3M12 18.6v3M2.4 12h3M18.6 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M5.2 18.8l2.1-2.1M16.7 7.3l2.1-2.1"/></g>',
   regions:'<ellipse class="rip" cx="12" cy="21.4" rx="6" ry="1.5"/><g class="pin"><path d="M12 19s6-5.2 6-9.8A6 6 0 0 0 6 9.2c0 4.6 6 9.8 6 9.8z"/><circle cx="12" cy="9.2" r="2.2"/></g>',
   products:'<g class="ph"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 19h2"/><path class="scr" d="M10 7h4M10 10h4M10 13h2.5"/></g><circle class="bd" cx="18" cy="4" r="2.4" fill="currentColor" stroke="none"/>',
-  tv:'<rect x="3" y="5" width="18" height="13" rx="2"/><path d="M10 9.5v4l4-2z"/><path d="M8 21h8"/>',
+  tv:'<rect x="3" y="3" width="18" height="18" rx="2.5"/><circle cx="12" cy="12" r="3.5"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="16.6" cy="7.4" r="1" fill="currentColor" stroke="none"/>',
   tour:'<g class="vr"><path d="M4.5 8h15A2.5 2.5 0 0 1 22 10.5v4a2.5 2.5 0 0 1-2.5 2.5h-3.3c-1 0-1.6-.7-2.2-1.5-.4-.6-1.1-1-2-1s-1.6.4-2 1c-.6.8-1.2 1.5-2.2 1.5H4.5A2.5 2.5 0 0 1 2 14.5v-4A2.5 2.5 0 0 1 4.5 8z"/><circle class="pl" cx="7.5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle class="pl" cx="16.5" cy="12" r="1.5" fill="currentColor" stroke="none"/></g>',
   pin:'<path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
   moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
@@ -24,14 +24,22 @@ const ICONS = {
 const MENU = [
   {id:'map', icon:'map', route:'./map.html', title:L('Интерактивті карта','Интерактивная карта','Interactive map'),
        sub:L('Қазақстан мешіттері мен діни оқу орындары','Мечети и религиозные учебные заведения Казахстана','Mosques and religious educational institutions of Kazakhstan')},
-  {id:'structure',   icon:'structure',   route:null, title:L('ҚМДБ құрылымы','Структура ДУМК','SAMK structure')},
-  {id:'leadership',  icon:'leadership',  route:null, title:L('Басшылық құрам','Руководящий состав','Leadership team')},
-  {id:'departments', icon:'departments', route:null, title:L('Бөлімдер','Отделы','Departments')},
-  {id:'services',    icon:'services',    route:null, title:L('Қызметтер','Услуги','Services')},
-  {id:'regions',     icon:'regions',     route:null, title:L('Өкілдіктер','Представительства','Offices')},
-  {id:'products',    icon:'products',    route:null, embed:'https://digital.muftyat.kz', title:L('Цифрлық өнімдер','Цифровые продукты','Digital products')},
-  {id:'munara',      icon:'tv',          route:null, title:L('Munara TV','Munara TV','Munara TV')},
-  {id:'tour',        icon:'tour',        route:null, title:L('360° виртуалды тур','360° виртуальный тур','360° virtual tour')}
+  {id:'structure',   icon:'structure',   route:null, title:L('ҚМДБ құрылымы','Структура ДУМК','SAMK structure'),
+       sub:L('Басқарма мен бөлімдердің иерархиясы','Иерархия управления и отделов','Hierarchy of management and departments')},
+  {id:'leadership',  icon:'leadership',  route:null, title:L('Басшылық құрам','Руководящий состав','Leadership team'),
+       sub:L('Басқарма мүшелерінің тізімі мен байланысы','Список и контакты членов управления','List and contacts of the board members')},
+  {id:'departments', icon:'departments', route:null, title:L('Бөлімдер','Отделы','Departments'),
+       sub:L('Құрылымдық бөлімдер мен секторлар тізімі','Список структурных отделов и секторов','List of structural departments and sectors')},
+  {id:'services',    icon:'services',    route:null, title:L('Қызметтер','Услуги','Services'),
+       sub:L('ҚМДБ-ға қарасты қорлар мен мекемелер қызметі','Деятельность фондов и учреждений при ДУМК','Activities of funds and institutions under SAMK')},
+  {id:'regions',     icon:'regions',     route:null, title:L('Өкілдіктер','Представительства','Offices'),
+       sub:L('Облыстық өкілдіктер мен байланыстар','Областные представительства и контакты','Regional offices and contacts')},
+  {id:'products',    icon:'products',    route:null, embed:'https://digital.muftyat.kz', title:L('Цифрлық өнімдер','Цифровые продукты','Digital products'),
+       sub:L('Мобильді қосымшалар мен онлайн қызметтер','Мобильные приложения и онлайн-сервисы','Mobile apps and online services')},
+  {id:'munara',      icon:'tv',          route:null, title:L('Фотокөрме','Фотогалерея','Photo exhibition'),
+       sub:L('ҚМДБ-ның 35 жылдығына арналған «Дін мен Дәуір» фотокөрмесі','Фотовыставка «Дін мен Дәуір», посвящённая 35-летию ДУМК','"Din men Dauir" photo exhibition dedicated to SAMK\'s 35th anniversary')},
+  {id:'tour',        icon:'tour',        route:null, title:L('360° виртуалды тур','360° виртуальный тур','360° virtual tour'),
+       sub:L('ҚМДБ орталық аппаратына виртуалды саяхат жасаңыз','Виртуальное путешествие по центральному аппарату ДУМК','Take a virtual tour of SAMK\'s central office')}
 ];
 
 const STATS = [{n:2977,label:'mosques'},{n:9,label:'schools'},{n:18,label:'qari'}];

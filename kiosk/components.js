@@ -120,7 +120,7 @@ function MenuCard(item, lang, i){
     <button class="k-card m-${item.id} anim" data-nav="${item.id}" ${delay}>
       ${item.id === 'tour' ? PlanTour() : '<svg class="frame" aria-hidden="true"></svg>'}
       <div class="ic">${icon(item.icon)}</div>
-      <div class="tx"><h3>${tr(item.title, lang)}</h3></div>
+      <div class="tx"><h3>${tr(item.title, lang)}</h3>${item.sub ? `<p>${tr(item.sub, lang)}</p>` : ''}</div>
       <span class="go">${icon('arrow')}</span>
     </button>`;
 }
