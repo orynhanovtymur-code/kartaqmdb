@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<script>try{if(localStorage.getItem('kiosk-theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}</script>
+<title>Интернет ресурстар — ҚМДБ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0f1d17; --muted:#66756e; --line:rgba(15,29,23,.08);
+    --green:#0e4b36; --green-d:#083425; --green-l:#2f7a5c;
+    --mint:#eef5f1; --gold:#b08d43; --surface:#fff;
+    --fh:"Oswald",system-ui,sans-serif; --fb:"IBM Plex Sans",system-ui,sans-serif;
+    --card:0 14px 40px rgba(9,42,30,.07), 0 2px 6px rgba(9,42,30,.04);
+    --card-h:0 22px 60px rgba(9,42,30,.13), 0 3px 8px rgba(9,42,30,.06);
+    --e:cubic-bezier(.22,.8,.28,1);
+  }
+  html[data-theme=dark]{
+    --ink:#e8f0eb; --muted:#98aba0; --line:rgba(255,255,255,.09);
+    --surface:#0f1a15; --mint:#132420;
+    --card:0 14px 40px rgba(0,0,0,.35), 0 2px 6px rgba(0,0,0,.25);
+    --card-h:0 22px 60px rgba(0,0,0,.45), 0 3px 8px rgba(0,0,0,.3);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;overflow:hidden;touch-action:pan-x pan-y;background:#dfe5e2}
+  html[data-theme=dark] body{background:#060b09}
+  button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
+  #stage{position:fixed;inset:0}
+  #screen{
+    position:absolute;top:50%;left:50%;transform-origin:center center;
+    width:1920px;height:1080px;padding:36px 60px 30px;display:flex;flex-direction:column;
+    font-family:var(--fb);color:var(--ink);border-radius:4px;overflow:hidden;
+    background:
+      radial-gradient(1200px 600px at 88% -12%, rgba(14,75,54,.10), transparent 62%),
+      radial-gradient(900px 520px at -6% 108%, rgba(14,75,54,.07), transparent 60%),
+      #fbfcfb;
+    box-shadow:0 30px 90px rgba(9,42,30,.2);
+    transition:background .3s var(--e)
+  }
+  html[data-theme=dark] #screen{background:radial-gradient(1200px 600px at 88% -12%,rgba(47,143,105,.16),transparent 62%),radial-gradient(900px 520px at -6% 108%,rgba(47,143,105,.09),transparent 60%),#060b09}
+  #screen>*{position:relative}
+  h1,h2,h3{font-family:var(--fh);margin:0;font-weight:400}
+
+  @keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+  .anim{animation:up .55s var(--e) backwards}
+
+  /* ── Header ── */
+  header.top{display:flex;align-items:center;justify-content:space-between;gap:32px;
+    padding-bottom:16px;border-bottom:1px solid var(--line);flex:none}
+  .headleft{display:flex;align-items:center;gap:18px;min-width:0}
+  .crest{width:56px;height:56px;flex:none;display:grid;place-items:center;border-radius:16px;background:var(--mint)}
+  .crest img{width:100%;height:100%;object-fit:contain;border-radius:inherit}
+  .kicker{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--green-l);font-weight:500;
+    margin-bottom:5px;display:flex;align-items:center;gap:8px}
+  .kicker::before{content:"";width:6px;height:6px;border-radius:2px;background:var(--gold);flex:none}
+  h1.pagetitle{font-size:28px;letter-spacing:.02em}
+  .pagetitle small{display:block;font-family:var(--fb);font-size:14.5px;color:var(--muted);letter-spacing:0;margin-top:4px;font-weight:400}
+  .navbtns{display:flex;align-items:center;gap:12px;flex:none}
+  .nbtn{display:inline-flex;align-items:center;gap:9px;height:46px;padding:0 22px;border-radius:999px;
+    font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;
+    transition:transform .25s var(--e),box-shadow .25s var(--e);white-space:nowrap}
+  .nbtn:active{transform:scale(.96)}
+  .nbtn svg{width:16px;height:16px;flex:none}
+  .nbtn.ghost{background:var(--surface);color:var(--ink);box-shadow:var(--card);border:1px solid var(--line)}
+  .nbtn.solid{background:linear-gradient(140deg,var(--green-l),var(--green) 65%,var(--green-d));color:#fff;box-shadow:0 14px 30px rgba(14,75,54,.3)}
+
+  /* ── Scroll аймағы ── */
+  .scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:16px 4px 30px 0}
+  .scroll::-webkit-scrollbar{width:8px}
+  .scroll::-webkit-scrollbar-thumb{background:rgba(14,75,54,.22);border-radius:99px}
+  html[data-theme=dark] .scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14)}
+
+  .section-lab{display:flex;align-items:center;gap:10px;margin:24px 0 14px;font-size:12.5px;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .section-lab:first-child{margin-top:2px}
+  .section-lab::after{content:"";flex:1;height:1px;background:var(--line)}
+
+  /* ── Ресурс карточкалары ── */
+  .res-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .res-grid.cols3{grid-template-columns:repeat(3,1fr)}
+  .res-grid.cols5{grid-template-columns:repeat(5,1fr)}
+  .res-card{position:relative;overflow:hidden;text-align:left;border-radius:20px;
+    background:var(--surface);border:1px solid var(--line);box-shadow:var(--card);
+    padding:20px;display:flex;flex-direction:column;gap:14px;
+    transition:transform .2s var(--e),box-shadow .2s var(--e)}
+  .res-card:active{transform:scale(.97)}
+  .res-top{display:flex;align-items:center;gap:13px}
+  .res-ic{width:50px;height:50px;flex:none;border-radius:14px;background:var(--mint);color:var(--green-l);
+    display:grid;place-items:center}
+  html[data-theme=dark] .res-ic{color:var(--green-l)}
+  .res-ic svg{width:25px;height:25px}
+  .res-ic.brand{background:var(--brand-bg,var(--mint));color:var(--brand,var(--green-l))}
+  html[data-theme=dark] .res-ic.brand{color:var(--brand,var(--green-l))}
+  .res-tx{min-width:0}
+  .res-title{font-size:15px;font-weight:600;line-height:1.25}
+  .res-desc{font-size:12px;color:var(--muted);line-height:1.35;margin-top:3px;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .res-acc{font-size:12px;color:var(--green-l);font-weight:500;padding-top:10px;border-top:1px solid var(--line)}
+  html[data-theme=dark] .res-acc{color:var(--green-l)}
+  .res-acc.ph{color:var(--muted);font-style:italic;font-weight:400}
+  .res-open{display:flex;align-items:center;justify-content:center;gap:8px;height:42px;border-radius:12px;
+    background:var(--mint);color:var(--green);font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;font-weight:500}
+  html[data-theme=dark] .res-open{color:var(--green-l)}
+  .res-open svg{width:14px;height:14px}
+
+  /* ── 1511 hero ── */
+  .hotline-hero{position:relative;overflow:hidden;border-radius:22px;padding:26px 32px;
+    display:flex;align-items:center;gap:24px;color:#fff;margin-bottom:18px;
+    background:linear-gradient(150deg,#0b3d2c,#0e4b36 60%,#146447);box-shadow:0 20px 44px rgba(14,75,54,.3)}
+  .hotline-ic{width:76px;height:76px;flex:none;border-radius:22px;background:rgba(255,255,255,.14);
+    display:grid;place-items:center}
+  .hotline-ic svg{width:36px;height:36px;color:#e8cf8f}
+  .hotline-num{font-family:var(--fh);font-size:44px;font-weight:500;line-height:1}
+  .hotline-lab{font-size:15px;color:rgba(255,255,255,.85);margin-top:6px}
+  .hotline-badge{margin-left:auto;flex:none;display:flex;align-items:center;gap:8px;padding:10px 18px;
+    border-radius:999px;background:rgba(255,255,255,.14);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase}
+  .hotline-badge i{width:7px;height:7px;border-radius:50%;background:#7fe0ab;animation:pulseDot 1.6s ease-in-out infinite}
+  @keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.3}}
+
+  /* ── Байланыс тайлдары ── */
+  .contact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .contact-tile{display:flex;align-items:center;gap:14px;padding:18px 20px;border-radius:18px;
+    background:var(--surface);border:1px solid var(--line);box-shadow:var(--card)}
+  .contact-ic{width:44px;height:44px;flex:none;border-radius:13px;background:var(--mint);color:var(--green-l);
+    display:grid;place-items:center}
+  html[data-theme=dark] .contact-ic{color:var(--green-l)}
+  .contact-ic svg{width:21px;height:21px}
+  .contact-lab{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .contact-val{font-size:14.5px;font-weight:600}
+  .contact-val.ph{color:var(--muted);font-style:italic;font-weight:400}
+
+  .footnote{flex:none;margin-top:22px;padding:16px 22px;border-radius:16px;background:var(--mint);
+    color:var(--muted);font-size:13px;text-align:center;letter-spacing:.01em}
+
+  /* ── Detail Modal ── */
+  #screen>.res-overlay{position:absolute}
+  .res-overlay{inset:0;z-index:300;display:flex;align-items:center;justify-content:center;
+    background:rgba(3,10,7,.6);opacity:0;pointer-events:none;transition:opacity .3s var(--e)}
+  .res-overlay.show{opacity:1;pointer-events:auto}
+  .res-modal{width:560px;max-width:92%;max-height:88%;display:flex;flex-direction:column;overflow:hidden;
+    background:var(--surface);border-radius:28px;box-shadow:var(--card-h);
+    transform:translateY(18px) scale(.97);opacity:0;transition:transform .35s var(--e),opacity .35s var(--e)}
+  .res-overlay.show .res-modal{transform:none;opacity:1}
+  .res-hero{flex:none;position:relative;padding:28px 60px 22px 28px;color:#fff;text-align:center;
+    background:linear-gradient(150deg,#0b3d2c,#0e4b36 60%,#146447)}
+  .res-close{position:absolute;top:18px;right:18px;width:40px;height:40px;border-radius:14px;
+    background:rgba(255,255,255,.14);color:#fff;display:grid;place-items:center}
+  .res-close svg{width:17px;height:17px}
+  .res-hero-ic{width:58px;height:58px;border-radius:17px;background:rgba(255,255,255,.14);color:#e8cf8f;
+    display:grid;place-items:center;margin:0 auto 14px}
+  .res-hero-ic.brand{background:rgba(255,255,255,.94);color:var(--brand,#e8cf8f)}
+  .res-hero-ic svg{width:28px;height:28px}
+  .res-hero h2{font-size:22px}
+  .res-modal-body{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:26px 28px 28px;text-align:center}
+  .res-modal-desc{font-size:14px;line-height:1.6;color:var(--muted);margin-bottom:22px}
+  .qr-box{width:190px;height:190px;margin:0 auto 18px;border-radius:20px;background:var(--mint);
+    display:grid;place-items:center;color:var(--green-l);border:1px solid var(--line)}
+  html[data-theme=dark] .qr-box{color:var(--green-l)}
+  .qr-box svg{width:100px;height:100px}
+  .qr-box img{width:100%;height:100%;border-radius:20px;object-fit:contain;padding:12px}
+  .qr-note{font-size:12px;color:var(--muted);margin-bottom:22px}
+  .link-val{font-size:14px;font-weight:600;color:var(--green-l);word-break:break-all;margin-bottom:22px}
+  html[data-theme=dark] .link-val{color:var(--green-l)}
+  .link-val.ph{color:var(--muted);font-style:italic;font-weight:400}
+  .res-btn{display:flex;align-items:center;justify-content:center;gap:9px;height:54px;border-radius:16px;width:100%;
+    font-size:13.5px;letter-spacing:.03em;text-transform:uppercase;font-weight:500;
+    background:linear-gradient(140deg,var(--green-l),var(--green) 65%,var(--green-d));color:#fff;
+    box-shadow:0 14px 30px rgba(14,75,54,.28)}
+  .res-btn svg{width:17px;height:17px}
+</style>
+</head>
+<body>
+<div id="stage"><div id="screen">
+
+  <header class="top anim" style="animation-delay:.05s">
+    <div class="headleft">
+      <div class="crest"><img src="./assets/logo-qmdb.png" alt="ҚМДБ"></div>
+      <div style="min-width:0">
+        <div class="kicker">Қазақстан мұсылмандары діни басқармасы</div>
+        <h1 class="pagetitle">ИНТЕРНЕТ РЕСУРСТАР<small>ҚМДБ-ның ресми цифрлық ресурстары мен байланыс арналары</small></h1>
+      </div>
+    </div>
+    <div class="navbtns">
+      <a class="nbtn ghost" href="./index.html" style="text-decoration:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        Артқа
+      </a>
+      <a class="nbtn solid" href="./index.html" style="text-decoration:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-9"/></svg>
+        Басты бет
+      </a>
+    </div>
+  </header>
+
+  <div class="scroll anim" style="animation-delay:.1s">
+
+    <div class="section-lab">Ресми цифрлық ресурстар</div>
+    <div class="res-grid cols3" id="gridDigital"></div>
+
+    <div class="section-lab">Ресми арналар</div>
+    <div class="res-grid cols3" id="gridChannels"></div>
+
+    <div class="section-lab">Әлеуметтік желілер</div>
+    <div class="res-grid cols5" id="gridSocial"></div>
+
+    <div class="section-lab">Байланыс</div>
+    <div class="hotline-hero">
+      <div class="hotline-ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .7 3a2 2 0 0 1-.4 2.1L8 10.2a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.1-.4c1 .4 2 .6 3 .7a2 2 0 0 1 1.7 2Z"/></svg>
+      </div>
+      <div>
+        <div class="hotline-num">1511</div>
+        <div class="hotline-lab">Діни сұрақтар бойынша ақпарат беру орталығы — 24/7</div>
+      </div>
+      <div class="hotline-badge"><i></i>Тегін, тәулік бойы</div>
+    </div>
+    <div class="contact-grid" id="gridContact"></div>
+
+    <div class="footnote">Осы бетте көрсетілген ресурстар — ҚМДБ-ның ресми ақпараттық арналары</div>
+
+  </div>
+
+  <div class="res-overlay" id="resOverlay">
+    <div class="res-modal" role="dialog" aria-modal="true">
+      <div class="res-hero">
+        <button class="res-close" id="resClose" aria-label="Жабу">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+        <div class="res-hero-ic" id="mIcon"></div>
+        <h2 id="mTitle"></h2>
+      </div>
+      <div class="res-modal-body">
+        <div class="res-modal-desc" id="mDesc"></div>
+        <div class="qr-box" id="mQr"></div>
+        <div class="qr-note" id="mQrNote"></div>
+        <div class="link-val" id="mLink"></div>
+        <span class="res-btn" id="mGoBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          Ресурсқа өту
+        </span>
+      </div>
+    </div>
+  </div>
+
+</div></div>
+
+<script>
+/* ══ Деректер: барлық ресурстар бір құрылымда — кейін оңай толтыруға болады ══ */
+const DIGITAL = [
+  {id:'site', title:'ҚМДБ ресми сайты', desc:'ҚМДБ-ның негізгі ресми интернет-сайты', account:'muftyat.kz', url:'https://muftyat.kz', icon:'globe'},
+  {id:'app', title:'Muftyat App', desc:'ҚМДБ-ның ресми мобильді қосымшасы', account:null, url:null, icon:'smartphone'},
+  {id:'bot', title:'Telegram Bot', desc:'Діни сұрақтарға жауап алатын ресми Telegram-бот', account:null, url:null, icon:'bot'}
+];
+const CHANNELS = [
+  {id:'whatsapp', title:'WhatsApp арнасы', desc:'ҚМДБ-ның ресми WhatsApp ақпараттық арнасы', account:null, url:null, icon:'whatsapp'},
+  {id:'telegram', title:'Telegram арнасы', desc:'ҚМДБ-ның ресми Telegram ақпараттық арнасы', account:null, url:null, icon:'telegram'}
+];
+const SOCIAL = [
+  {id:'instagram', title:'Instagram', desc:'ҚМДБ-ның ресми Instagram парақшасы', account:null, url:null, icon:'instagram'},
+  {id:'youtube', title:'YouTube', desc:'ҚМДБ-ның ресми YouTube арнасы', account:null, url:null, icon:'youtube'},
+  {id:'tiktok', title:'TikTok', desc:'ҚМДБ-ның ресми TikTok парақшасы', account:null, url:null, icon:'tiktok'},
+  {id:'facebook', title:'Facebook', desc:'ҚМДБ-ның ресми Facebook парақшасы', account:null, url:null, icon:'facebook'},
+  {id:'threads', title:'Threads', desc:'ҚМДБ-ның ресми Threads парақшасы', account:null, url:null, icon:'threads'}
+];
+const CONTACT = {phone:null, email:null, address:null, workingHours:null};
+
+const ALL = [...DIGITAL, ...CHANNELS, ...SOCIAL];
+
+const ICONS = {
+  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+  smartphone:'<rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/>',
+  bot:'<rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4"/><circle cx="12" cy="3" r="1.3" fill="currentColor" stroke="none"/><circle cx="9" cy="14" r="1.3" fill="currentColor" stroke="none"/><circle cx="15" cy="14" r="1.3" fill="currentColor" stroke="none"/>',
+  whatsapp:'<path fill="currentColor" stroke="none" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.493-.669-.503-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26C2.167 6.443 6.6 2.01 12.05 2.01c2.64 0 5.122 1.028 6.988 2.897a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884M20.463 3.488A11.815 11.815 0 0 0 12.05.5C5.495.5.16 5.835.157 12.392c0 2.096.547 4.142 1.588 5.945L.057 24.5l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 0 0-3.48-8.413"/>',
+  telegram:'<path fill="currentColor" stroke="none" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20m4.658 6.87-1.657 7.81c-.125.56-.452.697-.916.434l-2.53-1.866-1.222 1.176c-.135.135-.249.249-.51.249l.183-2.583 4.702-4.248c.204-.182-.045-.283-.317-.101l-5.813 3.66-2.504-.783c-.544-.17-.554-.544.114-.805l9.786-3.77c.454-.164.85.11.684.827"/>',
+  instagram:'<path fill="currentColor" stroke="none" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069M12 0C8.74 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.74 0 12s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.74 24 12 24s3.667-.014 4.947-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.687.073-4.947 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.667.014 15.26 0 12 0m0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324M12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8m6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881"/>',
+  youtube:'<path fill="currentColor" stroke="none" d="M23.498 6.186a3.013 3.013 0 0 0-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.013 3.013 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.013 3.013 0 0 0 2.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.013 3.013 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/>',
+  tiktok:'<path fill="currentColor" stroke="none" d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48"/>',
+  facebook:'<path fill="currentColor" stroke="none" d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.907-.02c-.5 0-.976.098-1.309.406-.334.309-.478.809-.478 1.588v1.583h3.234l-.508 3.667h-2.726v7.98C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 6.135 4.603 11.194 10.101 11.647"/>',
+  threads:'<path fill="currentColor" stroke="none" d="M17.804 10.937q-.13-.061-.261-.117c-.153-3.083-1.822-4.85-4.634-4.868-1.494-.01-2.82.618-3.628 1.87l1.55 1.063c.585-.914 1.503-1.109 2.077-1.109h.014c.71.004 1.246.21 1.594.611.253.293.422.697.505 1.208a10 10 0 0 0-2.099-.132c-2.113.121-3.47 1.365-3.378 3.096.047.879.474 1.635 1.202 2.129.615.417 1.406.622 2.228.577 1.084-.06 1.935-.474 2.53-1.235.452-.575.738-1.32.865-2.257.52.314.906.727 1.12 1.221.365.848.386 2.24-.75 3.375-.996.995-2.194 1.426-4.01 1.439-2.011-.015-3.531-.66-4.52-1.917-.925-1.176-1.402-2.876-1.418-5.052.016-2.176.493-3.876 1.418-5.052.989-1.256 2.509-1.902 4.52-1.917 2.026.015 3.573.664 4.598 1.928.503.62.882 1.4 1.132 2.313l1.783-.475c-.303-1.128-.786-2.1-1.443-2.909-1.362-1.68-3.36-2.542-5.934-2.559h-.014c-2.568.017-4.545.883-5.877 2.575C4.13 6.194 3.482 8.39 3.464 11.14v.023c.018 2.75.665 4.947 1.925 6.531 1.332 1.692 3.309 2.558 5.877 2.575h.014c2.19-.015 3.734-.588 5.006-1.858 1.657-1.656 1.607-3.732 1.061-5.007-.393-.912-1.14-1.652-2.163-2.14zm-4.987 4.007c-.912.052-1.86-.359-1.907-1.235-.035-.649.462-1.373 1.965-1.46q.259-.014.512-.014c.55 0 1.065.053 1.531.155-.174 2.175-1.196 2.507-2.1 2.554"/>',
+  phone:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .7 3a2 2 0 0 1-.4 2.1L8 10.2a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.1-.4c1 .4 2 .6 3 .7a2 2 0 0 1 1.7 2Z"/>',
+  mail:'<rect x="2" y="4" width="20" height="16" rx="2.5"/><path d="m3 6.5 9 6 9-6"/>',
+  pin:'<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.6"/>',
+  calendar:'<rect x="3" y="4" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2v4M16 2v4"/>',
+  qr:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 14h2v2h-2zM14 19h2v2h-2zM19 19h2v2h-2z" fill="currentColor" stroke="none"/>',
+  arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>'
+};
+const iconSvg = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${ICONS[k] || ICONS.globe}</svg>`;
+
+const BRAND_COLORS = {
+  whatsapp:  ['#25D366', 'rgba(37,211,102,.14)'],
+  telegram:  ['#26A5E4', 'rgba(38,165,228,.14)'],
+  instagram: ['#D6249F', 'rgba(214,36,159,.14)'],
+  youtube:   ['#FF0000', 'rgba(255,0,0,.12)'],
+  tiktok:    ['#111111', 'rgba(17,17,17,.10)'],
+  facebook:  ['#1877F2', 'rgba(24,119,242,.14)'],
+  threads:   ['#111111', 'rgba(17,17,17,.10)']
+};
+
+function brandStyle(icon){
+  const b = BRAND_COLORS[icon];
+  return b ? ` style="--brand:${b[0]};--brand-bg:${b[1]}"` : '';
+}
+
+function resCard(r){
+  const acc = r.account
+    ? `<div class="res-acc">${r.account}</div>`
+    : `<div class="res-acc ph">Аккаунт жарияланады</div>`;
+  const brandCls = BRAND_COLORS[r.icon] ? ' brand' : '';
+  return `
+    <button class="res-card" data-id="${r.id}">
+      <div class="res-top">
+        <div class="res-ic${brandCls}"${brandStyle(r.icon)}>${iconSvg(r.icon)}</div>
+        <div class="res-tx">
+          <div class="res-title">${r.title}</div>
+          <div class="res-desc">${r.desc}</div>
+        </div>
+      </div>
+      ${acc}
+      <span class="res-open">${iconSvg('arrow')}Ашу</span>
+    </button>`;
+}
+
+document.getElementById('gridDigital').innerHTML = DIGITAL.map(resCard).join('');
+document.getElementById('gridChannels').innerHTML = CHANNELS.map(resCard).join('');
+document.getElementById('gridSocial').innerHTML = SOCIAL.map(resCard).join('');
+
+const CONTACT_ROWS = [
+  {key:'phone', lab:'Телефон', icon:'phone'},
+  {key:'email', lab:'E-mail', icon:'mail'},
+  {key:'address', lab:'Мекенжай', icon:'pin'},
+  {key:'workingHours', lab:'Жұмыс уақыты', icon:'calendar'}
+];
+document.getElementById('gridContact').innerHTML = CONTACT_ROWS.map(r => `
+  <div class="contact-tile">
+    <div class="contact-ic">${iconSvg(r.icon)}</div>
+    <div>
+      <div class="contact-lab">${r.lab}</div>
+      <div class="contact-val${CONTACT[r.key] ? '' : ' ph'}">${CONTACT[r.key] || 'Жарияланады'}</div>
+    </div>
+  </div>`).join('');
+
+/* ── Detail Modal ── */
+const overlay = document.getElementById('resOverlay');
+function openResource(r){
+  const mIcon = document.getElementById('mIcon');
+  mIcon.innerHTML = iconSvg(r.icon);
+  mIcon.className = 'res-hero-ic' + (BRAND_COLORS[r.icon] ? ' brand' : '');
+  mIcon.setAttribute('style', BRAND_COLORS[r.icon] ? `--brand:${BRAND_COLORS[r.icon][0]}` : '');
+  document.getElementById('mTitle').textContent = r.title;
+  document.getElementById('mDesc').textContent = r.desc;
+
+  const qr = document.getElementById('mQr');
+  const qrNote = document.getElementById('mQrNote');
+  if (r.url){
+    qr.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(r.url)}" alt="QR">`;
+    qrNote.textContent = 'QR кодты сканерлеп ашыңыз';
+  } else {
+    qr.innerHTML = iconSvg('qr');
+    qrNote.textContent = 'QR код жарияланады';
+  }
+
+  const link = document.getElementById('mLink');
+  link.textContent = r.url || 'Сілтеме жарияланады';
+  link.className = 'link-val' + (r.url ? '' : ' ph');
+
+  const btn = document.getElementById('mGoBtn');
+  btn.style.opacity = r.url ? '1' : '.5';
+
+  overlay.classList.add('show');
+}
+function closeResource(){ overlay.classList.remove('show'); }
+
+document.querySelectorAll('.res-grid').forEach(g => {
+  g.addEventListener('click', e => {
+    const card = e.target.closest('.res-card'); if (!card) return;
+    const r = ALL.find(x => x.id === card.dataset.id);
+    if (r) openResource(r);
+  });
+});
+document.getElementById('resClose').addEventListener('click', closeResource);
+overlay.addEventListener('click', e => { if (e.target === overlay) closeResource(); });
+
+function fit(){
+  const s = Math.min(innerWidth/1920, innerHeight/1080);
+  document.getElementById('screen').style.transform = 'translate(-50%,-50%) scale('+s+')';
+}
+addEventListener('resize', fit); fit();
+addEventListener('wheel',e=>{if(e.ctrlKey)e.preventDefault()},{passive:false});
+addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&['+','-','=','0','_'].includes(e.key))e.preventDefault()});
+addEventListener('touchstart',e=>{if(e.touches.length>1)e.preventDefault()},{passive:false});
+['gesturestart','gesturechange','gestureend'].forEach(t=>addEventListener(t,e=>e.preventDefault()));
+</script>
+</body>
+</html>

@@ -13,6 +13,9 @@ function Header(lang){
       <div><h1>${T('orgName', lang)}</h1><small>${T('terminal', lang)}</small></div>
     </div>
     <div class="k-loc">${icon('pin')}<span>${tr(D.PrayerService.city, lang)}</span></div>
+    <div class="k-hotline"><i class="ring"></i><span class="ic">${icon('phone')}</span>
+      <div class="tx"><b>1511</b><span>${T('hotline', lang)}</span></div>
+    </div>
     <div class="k-lang" role="group" aria-label="Тіл / Язык">${langBtn('kk','KAZ')}${langBtn('ru','РУС')}${langBtn('en','ENG')}</div>
     <div class="k-mode" role="group">
       <button data-theme-set="light" aria-label="${T('themeLight', lang)}">${icon('sun')}</button>
@@ -170,7 +173,13 @@ function MenuCard(item, lang, i){
     </button>`;
 }
 
-const MainMenuGrid = lang => `<div class="k-grid">${D.MENU.map((m, i) => MenuCard(m, lang, i)).join('')}</div>`;
+const QUAD_IDS = ['structure', 'services', 'webresources', 'munaratv'];
+function MainMenuGrid(lang){
+  const cards = D.MENU.map((m, i) => MenuCard(m, lang, i));
+  const quad = D.MENU.map((m, i) => QUAD_IDS.includes(m.id) ? cards[i] : '').filter(Boolean).join('');
+  const rest = D.MENU.map((m, i) => QUAD_IDS.includes(m.id) ? '' : cards[i]).join('');
+  return `<div class="k-grid">${rest}<div class="quad">${quad}</div></div>`;
+}
 
 window.KIOSK_UI = {tr, T, SidePanel, NamazTimesWidget, MainMenuGrid, Header, NewsModal, GalleryModal};
 })();

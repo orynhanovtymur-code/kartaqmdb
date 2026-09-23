@@ -87,7 +87,7 @@ function runCounters(){
 
 /* Айналатын алтын рамка: жұмсақ градиент жарығы карточка жиегін бойлай баяу айналады.
    [ұзақтығы (с), бағыты (1 / -1), бастапқы фазасы (с)] — әр карточкада әртүрлі */
-const FRAME = {structure:[7,1,0], leadership:[9,-1,-2], departments:[6,1,-4], services:[8,-1,-1], regions:[10,1,-6], products:[7.5,-1,-3], munara:[6.5,1,-5]};
+const FRAME = {structure:[7,1,0], services:[8,-1,-1], webresources:[9,-1,-2], munaratv:[10,1,-6], products:[7.5,-1,-3], munara:[6.5,1,-5]};
 function fitFrames(){
   document.querySelectorAll('.k-card').forEach(card => {
     const svg = card.querySelector('.frame'), cfg = FRAME[card.dataset.nav]; if (!svg || !cfg) return;

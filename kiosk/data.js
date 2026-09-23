@@ -13,8 +13,11 @@ const ICONS = {
   regions:'<ellipse class="rip" cx="12" cy="21.4" rx="6" ry="1.5"/><g class="pin"><path d="M12 19s6-5.2 6-9.8A6 6 0 0 0 6 9.2c0 4.6 6 9.8 6 9.8z"/><circle cx="12" cy="9.2" r="2.2"/></g>',
   products:'<g class="ph"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 19h2"/><path class="scr" d="M10 7h4M10 10h4M10 13h2.5"/></g><circle class="bd" cx="18" cy="4" r="2.4" fill="currentColor" stroke="none"/>',
   tv:'<rect x="3" y="3" width="18" height="18" rx="2.5"/><circle cx="12" cy="12" r="3.5"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="16.6" cy="7.4" r="1" fill="currentColor" stroke="none"/>',
+  webres:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+  tvscreen:'<rect x="3" y="5" width="18" height="13" rx="2"/><path d="M10 9.5v4l4-2z"/><path d="M8 21h8"/>',
   tour:'<g class="vr"><path d="M4.5 8h15A2.5 2.5 0 0 1 22 10.5v4a2.5 2.5 0 0 1-2.5 2.5h-3.3c-1 0-1.6-.7-2.2-1.5-.4-.6-1.1-1-2-1s-1.6.4-2 1c-.6.8-1.2 1.5-2.2 1.5H4.5A2.5 2.5 0 0 1 2 14.5v-4A2.5 2.5 0 0 1 4.5 8z"/><circle class="pl" cx="7.5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle class="pl" cx="16.5" cy="12" r="1.5" fill="currentColor" stroke="none"/></g>',
   pin:'<path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+  phone:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .7 3a2 2 0 0 1-.4 2.1L8 10.2a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.1-.4c1 .4 2 .6 3 .7a2 2 0 0 1 1.7 2Z"/>',
   moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
   sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
   arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>'
@@ -24,20 +27,18 @@ const ICONS = {
 const MENU = [
   {id:'map', icon:'map', route:'./map.html', title:L('Интерактивті карта','Интерактивная карта','Interactive map'),
        sub:L('Қазақстан мешіттері мен діни оқу орындары','Мечети и религиозные учебные заведения Казахстана','Mosques and religious educational institutions of Kazakhstan')},
-  {id:'structure',   icon:'structure',   route:null, title:L('ҚМДБ құрылымы','Структура ДУМК','SAMK structure'),
-       sub:L('Басқарма мен бөлімдердің иерархиясы','Иерархия управления и отделов','Hierarchy of management and departments')},
-  {id:'leadership',  icon:'leadership',  route:'./leadership.html', title:L('Басшылық құрам','Руководящий состав','Leadership team'),
-       sub:L('Басқарма мүшелерінің тізімі мен байланысы','Список и контакты членов управления','List and contacts of the board members')},
-  {id:'departments', icon:'departments', route:'./departments.html', title:L('Бөлімдер','Отделы','Departments'),
-       sub:L('Құрылымдық бөлімдер мен секторлар тізімі','Список структурных отделов и секторов','List of structural departments and sectors')},
+  {id:'structure',   icon:'structure',   route:'./structure.html', title:L('ҚМДБ құрылымы','Структура ДУМК','SAMK structure'),
+       sub:L('Басшылық құрам, бөлімдер, өкілдіктер мен мекемелер','Руководство, отделы, представительства и учреждения','Leadership, departments, offices and institutions')},
   {id:'services',    icon:'services',    route:'./services.html', title:L('Қызметтер','Услуги','Services'),
        sub:L('ҚМДБ-ға қарасты қорлар мен мекемелер қызметі','Деятельность фондов и учреждений при ДУМК','Activities of funds and institutions under SAMK')},
-  {id:'regions',     icon:'regions',     route:'./regions.html', title:L('Өкілдіктер','Представительства','Offices'),
-       sub:L('Облыстық өкілдіктер мен байланыстар','Областные представительства и контакты','Regional offices and contacts')},
+  {id:'webresources', icon:'webres',      route:'./webresources.html', title:L('Интернет ресурстар','Интернет-ресурсы','Web resources'),
+       sub:L('ҚМДБ-ның ресми сайттары мен порталдары','Официальные сайты и порталы ДУМК','SAMK\'s official websites and portals')},
+  {id:'munaratv',     icon:'tvscreen',    route:'https://www.youtube.com/@MUNARA_TV/videos', title:L('Munara TV','Munara TV','Munara TV'),
+       sub:L('ҚМДБ телеарнасының эфирі мен бейнежазбалары','Эфир и видео телеканала ДУМК','SAMK TV channel broadcast and videos')},
   {id:'products',    icon:'products',    route:null, embed:'https://digital.muftyat.kz', title:L('Цифрлық өнімдер','Цифровые продукты','Digital products'),
        sub:L('Мобильді қосымшалар мен онлайн қызметтер','Мобильные приложения и онлайн-сервисы','Mobile apps and online services')},
-  {id:'munara',      icon:'tv',          route:null, gallery:true, title:L('Фотокөрме','Фотогалерея','Photo exhibition'),
-       sub:L('ҚМДБ-ның 35 жылдығына арналған «Дін мен Дәуір» фотокөрмесі','Фотовыставка «Дін мен Дәуір», посвящённая 35-летию ДУМК','"Din men Dauir" photo exhibition dedicated to SAMK\'s 35th anniversary')},
+  {id:'munara',      icon:'tv',          route:null, gallery:true, title:L('Фотогаллерея','Фотогалерея','Photo gallery'),
+       sub:L('ҚМДБ орталық аппаратының кеңселері','Кабинеты центрального аппарата ДУМК','Offices of SAMK\'s central apparatus')},
   {id:'tour',        icon:'tour',        route:null, embed:'https://3d.muftyat.kz/', title:L('360° виртуалды тур','360° виртуальный тур','360° virtual tour'),
        sub:L('ҚМДБ орталық аппаратына виртуалды саяхат жасаңыз','Виртуальное путешествие по центральному аппарату ДУМК','Take a virtual tour of SAMK\'s central office')}
 ];
@@ -121,7 +122,8 @@ const I18N = {
     themeDark:L('Түнгі режим','Тёмная тема','Dark mode'),
     mosques:L('мешіт','мечетей','mosques'),
     schools:L('медресе','медресе','madrasahs'),
-    qari:L('қарилар орталығы','центры қари','qari centers')
+    qari:L('қарилар орталығы','центры қари','qari centers'),
+    hotline:L('Call-орталық, 24/7','Call-центр, 24/7','Call center, 24/7')
   }
 };
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <script>try{if(localStorage.getItem('kiosk-theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}</script>
-<title>ҚМДБ-ға қарасты мекемелер</title>
+<title>Қызметтер — ҚМДБ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -31,7 +31,7 @@
   #stage{position:fixed;inset:0}
   #screen{
     position:absolute;top:50%;left:50%;transform-origin:center center;
-    width:1920px;height:1080px;padding:40px 60px 30px;display:flex;flex-direction:column;
+    width:1920px;height:1080px;padding:36px 60px 30px;display:flex;flex-direction:column;
     font-family:var(--fb);color:var(--ink);border-radius:4px;overflow:hidden;
     background:
       radial-gradient(1200px 600px at 88% -12%, rgba(14,75,54,.10), transparent 62%),
@@ -45,117 +45,124 @@
   h1,h2,h3{font-family:var(--fh);margin:0;font-weight:400}
 
   @keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-  .anim{animation:up .6s var(--e) backwards}
+  .anim{animation:up .55s var(--e) backwards}
 
   /* ── Header ── */
-  header.top{display:flex;align-items:center;justify-content:space-between;gap:40px;
-    padding-bottom:18px;border-bottom:1px solid var(--line);flex:none}
-  .headleft{display:flex;align-items:center;gap:20px;min-width:0}
-  .crest{width:60px;height:60px;flex:none;display:grid;place-items:center;border-radius:16px;background:var(--mint)}
+  header.top{display:flex;align-items:center;justify-content:space-between;gap:32px;
+    padding-bottom:16px;border-bottom:1px solid var(--line);flex:none}
+  .headleft{display:flex;align-items:center;gap:18px;min-width:0}
+  .crest{width:56px;height:56px;flex:none;display:grid;place-items:center;border-radius:16px;background:var(--mint)}
   .crest img{width:100%;height:100%;object-fit:contain;border-radius:inherit}
-  .kicker{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--green-l);font-weight:500;
+  .kicker{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--green-l);font-weight:500;
     margin-bottom:5px;display:flex;align-items:center;gap:8px}
   .kicker::before{content:"";width:6px;height:6px;border-radius:2px;background:var(--gold);flex:none}
-  h1.pagetitle{font-size:30px;letter-spacing:.02em}
+  h1.pagetitle{font-size:28px;letter-spacing:.02em}
+  .pagetitle small{display:block;font-family:var(--fb);font-size:14.5px;color:var(--muted);letter-spacing:0;margin-top:4px;font-weight:400}
   .navbtns{display:flex;align-items:center;gap:12px;flex:none}
-  .nbtn{display:inline-flex;align-items:center;gap:9px;height:48px;padding:0 22px;border-radius:999px;
-    font-size:13.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;
+  .nbtn{display:inline-flex;align-items:center;gap:9px;height:46px;padding:0 22px;border-radius:999px;
+    font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;
     transition:transform .25s var(--e),box-shadow .25s var(--e);white-space:nowrap}
   .nbtn:active{transform:scale(.96)}
-  .nbtn svg{width:17px;height:17px;flex:none}
+  .nbtn svg{width:16px;height:16px;flex:none}
   .nbtn.ghost{background:var(--surface);color:var(--ink);box-shadow:var(--card);border:1px solid var(--line)}
   .nbtn.solid{background:linear-gradient(140deg,var(--green-l),var(--green) 65%,var(--green-d));color:#fff;box-shadow:0 14px 30px rgba(14,75,54,.3)}
 
+  /* ── Іздеу + категория фильтрі (бір қатарда) ── */
+  .searchwrap{flex:none;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:16px 0 2px}
+  .search{display:flex;align-items:center;gap:12px;height:52px;padding:0 20px;border-radius:16px;
+    background:var(--surface);box-shadow:var(--card);border:1px solid var(--line);width:380px;flex:none;margin-left:auto}
+  .search svg{width:18px;height:18px;color:var(--muted);flex:none}
+  .search input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-family:var(--fb);font-size:15.5px;color:var(--ink)}
+  .search input::placeholder{color:var(--muted)}
+  .rescount{margin-top:8px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+  .cat-tabs{flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:8px}
+  .cat-tab{display:flex;align-items:center;height:46px;padding:0 20px;border-radius:14px;
+    background:var(--surface);border:1px solid var(--line);box-shadow:var(--card);color:var(--muted);
+    font-size:13.5px;font-weight:500;transition:background .25s var(--e),color .25s var(--e),box-shadow .25s var(--e)}
+  .cat-tab.on{background:linear-gradient(140deg,var(--green-l),var(--green) 65%,var(--green-d));color:#fff;
+    box-shadow:0 14px 30px rgba(14,75,54,.28)}
+
   /* ── Scroll аймағы ── */
-  .scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:20px 4px 30px 0}
+  .scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:14px 4px 30px 0}
   .scroll::-webkit-scrollbar{width:8px}
   .scroll::-webkit-scrollbar-thumb{background:rgba(14,75,54,.22);border-radius:99px}
   html[data-theme=dark] .scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14)}
 
-  /* ── Мекеме карточкалары (үлкен, 2 баған) ── */
-  .org-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
-  .org-card{position:relative;overflow:hidden;text-align:left;border-radius:26px;
+  .section-lab{display:flex;align-items:center;gap:10px;margin:22px 0 14px;font-size:12.5px;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .section-lab:first-child{margin-top:2px}
+  .section-lab::after{content:"";flex:1;height:1px;background:var(--line)}
+  .section-lab.hide{display:none}
+
+  /* ── Қызмет карточкалары ── */
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .svc-card{position:relative;overflow:hidden;text-align:left;border-radius:20px;
     background:var(--surface);border:1px solid var(--line);box-shadow:var(--card);
-    padding:26px 66px 26px 26px;display:flex;align-items:center;gap:20px;
-    transition:transform .22s var(--e),box-shadow .22s var(--e)}
-  .org-card:active{transform:scale(.98)}
-  .org-logo{width:72px;height:72px;border-radius:20px;flex:none;display:grid;place-items:center;
-    background:var(--mint);color:var(--green-l);overflow:hidden;box-shadow:0 0 0 1px var(--line)}
-  html[data-theme=dark] .org-logo{color:var(--green-l)}
-  .org-logo img{width:100%;height:100%;object-fit:contain}
-  .org-logo svg{width:34px;height:34px}
-  .org-body{min-width:0;flex:1}
-  .org-name{font-size:18px;font-weight:600;line-height:1.28;margin-bottom:10px}
-  .org-lead{display:flex;align-items:center;gap:10px}
-  .lead-photo{width:38px;height:38px;border-radius:50%;flex:none;overflow:hidden;background:var(--mint);
-    display:grid;place-items:center;box-shadow:0 0 0 2px var(--surface),0 0 0 3px var(--line)}
-  .lead-photo img{width:100%;height:100%;object-fit:cover}
-  .lead-photo svg{width:18px;height:18px;color:var(--muted);opacity:.6}
-  .lead-tx{min-width:0}
-  .lead-name{font-size:13.5px;font-weight:500;line-height:1.25}
-  .lead-name.ph{color:var(--muted);font-style:italic;font-weight:400}
-  .lead-pos{font-size:11.5px;color:var(--green-l);letter-spacing:.02em}
-  html[data-theme=dark] .lead-pos{color:var(--green-l)}
-  .org-go{position:absolute;right:20px;top:50%;margin-top:-19px;width:38px;height:38px;border-radius:50%;
-    display:grid;place-items:center;background:var(--mint);color:var(--green)}
-  html[data-theme=dark] .org-go{color:var(--green-l)}
-  .org-go svg{width:17px;height:17px}
-
-  /* ── Detail Side Panel ── */
-  #screen>.panel-overlay{position:absolute}
-  .panel-overlay{inset:0;z-index:200;background:rgba(3,10,7,.55);
-    opacity:0;pointer-events:none;transition:opacity .3s var(--e)}
-  .panel-overlay.show{opacity:1;pointer-events:auto}
-  .side-panel{position:absolute;top:0;right:0;bottom:0;width:640px;max-width:92%;
-    background:var(--surface);box-shadow:-30px 0 80px rgba(9,42,30,.28);
-    transform:translateX(100%);transition:transform .4s var(--e);
-    display:flex;flex-direction:column;overflow:hidden}
-  .panel-overlay.show .side-panel{transform:translateX(0)}
-  .panel-hero{flex:none;padding:34px 34px 26px;background:linear-gradient(150deg,#0b3d2c,#0e4b36 60%,#146447);color:#fff;position:relative}
-  .panel-close{position:absolute;top:22px;right:22px;width:42px;height:42px;border-radius:14px;
-    background:rgba(255,255,255,.14);color:#fff;display:grid;place-items:center}
-  .panel-close svg{width:18px;height:18px}
-  .panel-logo{width:76px;height:76px;border-radius:20px;background:rgba(255,255,255,.14);display:grid;place-items:center;margin-bottom:16px;overflow:hidden}
-  .panel-logo img{width:100%;height:100%;object-fit:contain}
-  .panel-logo svg{width:36px;height:36px;color:#e8cf8f}
-  .panel-name{font-size:25px;line-height:1.25;padding-right:50px}
-
-  .panel-body{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:28px 34px 34px}
-  .panel-body::-webkit-scrollbar{width:7px}
-  .panel-body::-webkit-scrollbar-thumb{background:rgba(14,75,54,.2);border-radius:99px}
-
-  .p-sec{margin-bottom:26px}
-  .p-sec-lab{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);
-    font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-
-  .p-lead{display:flex;align-items:center;gap:16px;padding:16px;border-radius:18px;background:var(--mint)}
-  .p-lead-photo{width:64px;height:64px;border-radius:50%;flex:none;overflow:hidden;background:var(--surface);
-    display:grid;place-items:center;box-shadow:0 0 0 3px var(--surface),0 0 0 4px var(--line)}
-  .p-lead-photo img{width:100%;height:100%;object-fit:cover}
-  .p-lead-photo svg{width:28px;height:28px;color:var(--muted);opacity:.6}
-  .p-lead-name{font-size:16px;font-weight:600;margin-bottom:3px}
-  .p-lead-name.ph{color:var(--muted);font-style:italic;font-weight:400;font-size:14.5px}
-  .p-lead-pos{font-size:13px;color:var(--muted)}
-
-  .p-desc{font-size:14.5px;line-height:1.6;color:var(--ink)}
-  .p-desc.ph{color:var(--muted);font-style:italic}
-
-  .p-row{display:flex;align-items:center;gap:14px;padding:13px 0;border-top:1px solid var(--line)}
-  .p-row:first-child{border-top:0}
-  .p-row-ic{width:38px;height:38px;flex:none;border-radius:12px;background:var(--mint);color:var(--green-l);
+    padding:20px 56px 20px 20px;display:flex;align-items:center;gap:16px;min-height:104px;
+    transition:transform .2s var(--e),box-shadow .2s var(--e)}
+  .svc-card:active{transform:scale(.97)}
+  .svc-card.hide{display:none}
+  .svc-ic{width:52px;height:52px;flex:none;border-radius:15px;background:var(--mint);color:var(--green-l);
     display:grid;place-items:center}
-  html[data-theme=dark] .p-row-ic{color:var(--green-l)}
-  .p-row-ic svg{width:18px;height:18px}
-  .p-row-lab{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
-  .p-row-val{font-size:14.5px;font-weight:500}
-  .p-row-val.ph{color:var(--muted);font-style:italic;font-weight:400}
+  html[data-theme=dark] .svc-ic{color:var(--green-l)}
+  .svc-ic svg{width:26px;height:26px}
+  .svc-body{min-width:0}
+  .svc-title{font-size:15.5px;font-weight:600;line-height:1.28;margin-bottom:4px}
+  .svc-desc{font-size:12.5px;color:var(--muted);line-height:1.35;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .svc-go{position:absolute;right:16px;top:50%;margin-top:-18px;width:36px;height:36px;border-radius:50%;
+    display:grid;place-items:center;background:var(--mint);color:var(--green)}
+  html[data-theme=dark] .svc-go{color:var(--green-l)}
+  .svc-go svg{width:16px;height:16px}
 
-  .p-actions{display:flex;gap:12px;margin-top:6px}
-  .p-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:9px;height:54px;border-radius:16px;
-    font-size:13.5px;letter-spacing:.04em;text-transform:uppercase;font-weight:500}
-  .p-btn svg{width:17px;height:17px}
-  .p-btn.primary{background:linear-gradient(140deg,var(--green-l),var(--green) 65%,var(--green-d));color:#fff;box-shadow:0 14px 30px rgba(14,75,54,.28)}
-  .p-btn.ghost{background:var(--mint);color:var(--ink)}
+  .noresult{display:none;padding:40px 0;text-align:center;color:var(--muted);font-size:15px}
+
+  /* ── Detail Modal ── */
+  #screen>.svc-overlay{position:absolute}
+  .svc-overlay{inset:0;z-index:300;display:flex;align-items:center;justify-content:center;
+    background:rgba(3,10,7,.6);opacity:0;pointer-events:none;transition:opacity .3s var(--e)}
+  .svc-overlay.show{opacity:1;pointer-events:auto}
+  .svc-modal{width:800px;max-width:92%;max-height:87%;display:flex;flex-direction:column;
+    background:var(--surface);border-radius:28px;box-shadow:var(--card-h);
+    transform:translateY(18px) scale(.97);opacity:0;transition:transform .35s var(--e),opacity .35s var(--e);overflow:hidden}
+  .svc-overlay.show .svc-modal{transform:none;opacity:1}
+  .svc-hero{flex:none;position:relative;padding:30px 70px 26px 30px;color:#fff;
+    background:linear-gradient(150deg,#0b3d2c,#0e4b36 60%,#146447)}
+  .svc-close{position:absolute;top:20px;right:20px;width:42px;height:42px;border-radius:14px;
+    background:rgba(255,255,255,.14);color:#fff;display:grid;place-items:center}
+  .svc-close svg{width:18px;height:18px}
+  .svc-hero-ic{width:60px;height:60px;border-radius:18px;background:rgba(255,255,255,.14);color:#e8cf8f;
+    display:grid;place-items:center;margin-bottom:14px}
+  .svc-hero-ic svg{width:30px;height:30px}
+  .svc-hero h2{font-size:25px;line-height:1.25}
+  .svc-hero .dept{margin-top:7px;font-size:13.5px;color:rgba(255,255,255,.75)}
+
+  .svc-body-scroll{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:26px 30px 30px}
+  .svc-body-scroll::-webkit-scrollbar{width:7px}
+  .svc-body-scroll::-webkit-scrollbar-thumb{background:rgba(14,75,54,.2);border-radius:99px}
+
+  .svc-desc-full{font-size:15px;line-height:1.65;color:var(--ink);margin-bottom:24px}
+
+  .svc-sec-lab{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);
+    font-weight:600;margin-bottom:12px}
+  .svc-rows{margin-bottom:24px}
+  .svc-row{display:flex;align-items:center;gap:14px;padding:13px 0;border-top:1px solid var(--line)}
+  .svc-row:first-child{border-top:0}
+  .svc-row-ic{width:38px;height:38px;flex:none;border-radius:12px;background:var(--mint);color:var(--green-l);
+    display:grid;place-items:center}
+  html[data-theme=dark] .svc-row-ic{color:var(--green-l)}
+  .svc-row-ic svg{width:18px;height:18px}
+  .svc-row-lab{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+  .svc-row-val{font-size:14.5px;font-weight:500}
+  .svc-row-val.ph{color:var(--muted);font-style:italic;font-weight:400}
+
+  .svc-actions{display:flex;flex-wrap:wrap;gap:11px}
+  .svc-btn{flex:1;min-width:180px;display:flex;align-items:center;justify-content:center;gap:9px;height:54px;border-radius:16px;
+    font-size:13.5px;letter-spacing:.03em;text-transform:uppercase;font-weight:500}
+  .svc-btn svg{width:17px;height:17px}
+  .svc-btn.primary{background:linear-gradient(140deg,var(--green-l),var(--green) 65%,var(--green-d));color:#fff;box-shadow:0 14px 30px rgba(14,75,54,.28)}
+  .svc-btn.ghost{background:var(--mint);color:var(--ink)}
 </style>
 </head>
 <body>
@@ -166,7 +173,7 @@
       <div class="crest"><img src="./assets/logo-qmdb.png" alt="ҚМДБ"></div>
       <div style="min-width:0">
         <div class="kicker">Қазақстан мұсылмандары діни басқармасы</div>
-        <h1 class="pagetitle">ҚМДБ-ҒА ҚАРАСТЫ МЕКЕМЕЛЕР</h1>
+        <h1 class="pagetitle">ҚЫЗМЕТТЕР<small>Қажетті қызметті таңдаңыз</small></h1>
       </div>
     </div>
     <div class="navbtns">
@@ -181,80 +188,39 @@
     </div>
   </header>
 
-  <div class="scroll anim" style="animation-delay:.1s">
-    <div class="org-grid" id="orgGrid"></div>
+  <div class="searchwrap anim" style="animation-delay:.08s">
+    <div class="cat-tabs" id="catTabs">
+      <button class="cat-tab on" data-cat="all">Барлығы</button>
+      <button class="cat-tab" data-cat="top">Топ қызметтер</button>
+      <button class="cat-tab" data-cat="paid">Ақылы қызметтер</button>
+      <button class="cat-tab" data-cat="digital">Цифрлық ресурстар</button>
+      <button class="cat-tab" data-cat="charity">Қайырымдылық</button>
+      <button class="cat-tab" data-cat="other">Басқа</button>
+    </div>
+    <label class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="text" placeholder="Қандай қызмет іздеп тұрсыз?">
+    </label>
   </div>
+  <div class="rescount" id="resCount"></div>
 
-  <div class="panel-overlay" id="panelOverlay">
-    <div class="side-panel" role="dialog" aria-modal="true">
-      <div class="panel-hero">
-        <button class="panel-close" id="panelClose" aria-label="Жабу">
+  <div class="scroll anim" style="animation-delay:.12s" id="svcScroll"></div>
+
+  <div class="svc-overlay" id="svcOverlay">
+    <div class="svc-modal" role="dialog" aria-modal="true">
+      <div class="svc-hero">
+        <button class="svc-close" id="svcClose" aria-label="Жабу">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
         </button>
-        <div class="panel-logo" id="pLogo"></div>
-        <h2 class="panel-name" id="pName"></h2>
+        <div class="svc-hero-ic" id="mIcon"></div>
+        <h2 id="mTitle"></h2>
+        <div class="dept" id="mDept"></div>
       </div>
-      <div class="panel-body">
-
-        <div class="p-sec">
-          <div class="p-sec-lab">Басшысы</div>
-          <div class="p-lead">
-            <div class="p-lead-photo" id="pLeadPhoto"></div>
-            <div>
-              <div id="pLeadName"></div>
-              <div class="p-lead-pos" id="pLeadPos"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="p-sec">
-          <div class="p-sec-lab">Мекеме туралы</div>
-          <div id="pDesc"></div>
-        </div>
-
-        <div class="p-sec">
-          <div class="p-sec-lab">Байланыс</div>
-          <div class="p-row">
-            <div class="p-row-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .7 3a2 2 0 0 1-.4 2.1L8 10.2a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.1-.4c1 .4 2 .6 3 .7a2 2 0 0 1 1.7 2Z"/></svg></div>
-            <div><div class="p-row-lab">Телефон</div><div class="p-row-val" id="pPhone"></div></div>
-          </div>
-          <div class="p-row">
-            <div class="p-row-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2.5"/><path d="m3 6.5 9 6 9-6"/></svg></div>
-            <div><div class="p-row-lab">E-mail</div><div class="p-row-val" id="pEmail"></div></div>
-          </div>
-          <div class="p-row">
-            <div class="p-row-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
-            <div><div class="p-row-lab">Ресми сайт</div><div class="p-row-val" id="pWeb"></div></div>
-          </div>
-          <div class="p-row">
-            <div class="p-row-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="16.8" cy="7.2" r="1"/></svg></div>
-            <div><div class="p-row-lab">Әлеуметтік желі</div><div class="p-row-val" id="pSocial"></div></div>
-          </div>
-        </div>
-
-        <div class="p-sec">
-          <div class="p-sec-lab">Орналасқан жері</div>
-          <div class="p-row">
-            <div class="p-row-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
-            <div><div class="p-row-lab">Мекенжай</div><div class="p-row-val" id="pAddress"></div></div>
-          </div>
-          <div class="p-row">
-            <div class="p-row-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V11l9-7 9 7v10"/><path d="M9 21v-6h6v6"/></svg></div>
-            <div><div class="p-row-lab">Қабат / кеңсе</div><div class="p-row-val" id="pOffice"></div></div>
-          </div>
-        </div>
-
-        <div class="p-actions">
-          <span class="p-btn primary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
-            Сайтқа өту
-          </span>
-          <span class="p-btn ghost">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.6"/></svg>
-            Орналасқан жерін көрсету
-          </span>
-        </div>
-
+      <div class="svc-body-scroll">
+        <div class="svc-desc-full" id="mDesc"></div>
+        <div class="svc-sec-lab">Байланыс</div>
+        <div class="svc-rows" id="mRows"></div>
+        <div class="svc-actions" id="mActions"></div>
       </div>
     </div>
   </div>
@@ -262,144 +228,272 @@
 </div></div>
 
 <script>
-/* ══ Деректер: кейін нақты дерек осында толтырылады ══ */
-const INSTITUTIONS = [
-  {
-    logo:null,
-    name:'«Муфтият» баспасы',
-    leaderName:null, leaderPosition:'Баспа басшысы', leaderImage:null,
-    description:null,
-    phone:null, email:null, website:null, office:null, floor:null, address:null
-  },
-  {
-    logo:null,
-    name:'«Иман» журналы',
-    leaderName:null, leaderPosition:'Бас редактор', leaderImage:null,
-    description:null,
-    phone:null, email:null, website:null, office:null, floor:null, address:null
-  },
-  {
-    logo:null,
-    name:'«Мұнара» газеті',
-    leaderName:null, leaderPosition:'Бас редактор', leaderImage:null,
-    description:null,
-    phone:null, email:null, website:null, office:null, floor:null, address:null
-  },
-  {
-    logo:null,
-    name:'«Мұнара TV» телеарнасы',
-    leaderName:null, leaderPosition:'Телеарна басшысы', leaderImage:null,
-    description:null,
-    phone:null, email:null, website:null, office:null, floor:null, address:null
-  },
-  {
-    logo:null,
-    name:'«Халал Даму» мекемесі',
-    leaderName:null, leaderPosition:'Мекеме басшысы', leaderImage:null,
-    description:null,
-    phone:null, email:null, website:null, office:null, floor:null, address:null
-  },
-  {
-    logo:null,
-    name:'«Зекет және қайырымдылық» қоры',
-    leaderName:null, leaderPosition:'Қор басшысы', leaderImage:null,
-    description:null,
-    phone:null, email:null, website:null, office:null, floor:null, address:null
-  },
-  {
-    logo:null,
-    name:'«Уақып» қоры',
-    leaderName:null, leaderPosition:'Қор басшысы', leaderImage:null,
-    description:null,
-    phone:null, email:null, website:null, office:null, floor:null, address:null
-  },
-  {
-    logo:null,
-    name:'«Qamqor Sharapat» орталығы',
-    leaderName:null, leaderPosition:'Орталық басшысы', leaderImage:null,
-    description:null,
-    phone:null, email:null, website:null, office:null, floor:null, address:null
-  },
-  {
-    logo:null,
-    name:'«Тауаф» турфирмасы',
-    leaderName:null, leaderPosition:'Директор', leaderImage:null,
-    description:null,
-    phone:null, email:null, website:null, office:null, floor:null, address:null
-  },
-  {
-    logo:null,
-    name:'«Дархан Дала» отандық туризм',
-    leaderName:null, leaderPosition:'Директор', leaderImage:null,
-    description:null,
-    phone:null, email:null, website:null, office:null, floor:null, address:null
-  }
+/* ══ Деректер: барлық қызметтер бір массивте ══ */
+const SERVICES = [
+  {id:'hotline', category:'top', title:'Діни ақпарат беру орталығы 24/7', shortDescription:'1511 Call Center арқылы діни сұрақтарға жауап алу',
+   description:'Діни ақпарат беру орталығы тәулік бойы 1511 нөмірі арқылы дін мәселелері бойынша сұрақтарға жауап береді.',
+   icon:'phone', department:'Ақпарат және қоғаммен байланыс бөлімі', phone:'1511', email:null, workingHours:'24/7',
+   actionType:['call']},
+
+  {id:'written', category:'top', title:'Жазбаша діни сұрақ қою', shortDescription:'Діни сұрақты онлайн жолдау / Telegram-бот',
+   description:'Дін мәселелері бойынша сұрағыңызды онлайн нысан немесе Telegram-бот арқылы жазбаша жолдап, маман жауабын алуға болады.',
+   icon:'chat', department:'Шариғат және пәтуа бөлімі', website:null, email:null,
+   actionType:['website']},
+
+  {id:'family', category:'top', title:'Отбасы мәселесі бойынша кеңес', shortDescription:'Шариғат және пәтуа бөлімі мамандарының қабылдауы',
+   description:'Неке, ажырасу және отбасылық қатынастарға қатысты шариғат тұрғысынан кеңес алу үшін мамандар қабылдауына жазылуға болады.',
+   icon:'family', department:'Шариғат және пәтуа бөлімі', office:null, floor:null, phone:null, workingHours:null, address:null,
+   actionType:['appointment','location']},
+
+  {id:'reception', category:'top', title:'ҚМДБ қабылдауына жазылу', shortDescription:'Қажетті маман немесе бөлім қабылдауына жазылу',
+   description:'ҚМДБ басшылығы немесе тиісті бөлім маманының қабылдауына алдын ала жазылу қызметі.',
+   icon:'calendar', department:null, office:null, floor:null, phone:null, workingHours:null, address:null,
+   actionType:['appointment','location']},
+
+  {id:'halal', category:'paid', title:'Халал сертификат алу', shortDescription:'«Халал Даму» сертификаттау орталығы',
+   description:'Азық-түлік және басқа өнімдерге «халал» сертификатын ресімдеу қызметі «Халал Даму» мекемесі арқылы жүзеге асырылады.',
+   icon:'badge', department:'«Халал Даму» мекемесі', phone:null, email:null, website:null, workingHours:null, address:null,
+   actionType:['call','website']},
+
+  {id:'hajj', category:'other', title:'Қажылық және ұмра', shortDescription:'Қажылық пен ұмраға қатысты ақпарат және кеңес',
+   description:'Қажылық және ұмра сапарына дайындық, тіркеу мерзімдері мен шарттары бойынша ақпарат және кеңес беру қызметі.',
+   icon:'kaaba', department:'Қажылық бөлімі', phone:null, office:null, workingHours:null, address:null,
+   actionType:['appointment','location']},
+
+  {id:'expertise', category:'top', title:'Діни сараптама алу', shortDescription:'Діни материалдар мен әдебиеттерге қатысты сараптама',
+   description:'Діни әдебиет, материал және өнімдерге дінтану сараптамасын жүргізу қызметі.',
+   icon:'search-doc', department:'Діни сараптама бөлімі', phone:null,
+   actionType:['call']},
+
+  {id:'mosque-reg', category:'other', title:'Мешіттерді тіркеу', shortDescription:'Мешіт қызметіне қатысты мәселелер',
+   description:'Жаңа мешіт ашу, тіркеу және мешіт қызметіне қатысты өзге де мәселелер бойынша қызмет.',
+   icon:'mosque', department:'Мешіт істері бөлімі', phone:null, email:null,
+   actionType:['call']},
+
+  {id:'edu', category:'other', title:'Діни білім және кадр дайындау', shortDescription:'Медреселер, діни оқу орындары және білім беру мәселелері',
+   description:'Медреселер мен діни оқу орындарына түсу, білім беру бағдарламалары және кадр дайындау мәселелері бойынша қызмет.',
+   icon:'grad', department:'Діни білім және кадр дайындау бөлімі', phone:null, office:null,
+   actionType:['call']},
+
+  {id:'docs', category:'top', title:'Құжаттамалық қамтамасыз ету', shortDescription:'Құжаттарды қабылдау, тіркеу және кадр мәселелері',
+   description:'Мекемеге түскен құжаттарды қабылдау, тіркеу және кадр мәселелерін жүргізу қызметі.',
+   icon:'folder', department:'Құжаттамалық қамтамасыз ету бөлімі', phone:null, office:null,
+   actionType:['call']},
+
+  {id:'sadaqa', category:'charity', title:'Садақа', shortDescription:'Садақа беру және қайырымдылық жобаларына қатысу',
+   description:'Садақа беру, оны тапсыру тәртібі және қайырымдылық жобаларына қатысу бойынша қызмет.',
+   icon:'heart', department:'«Зекет және қайырымдылық» қоры', phone:null, website:null,
+   actionType:['call','website']},
+
+  {id:'sacrifice', category:'charity', title:'Онлайн құрбандық жобасы', shortDescription:'Құрбан айт күндері діни рәсімге онлайн тапсырыс беріңіз',
+   description:'Құрбан айт мейрамы күндері діни талаптарға сай құрбандық шалу рәсіміне онлайн тапсырыс беру қызметі.',
+   icon:'gift', website:null, phone:null,
+   actionType:['website']},
+
+  {id:'zakat', category:'charity', title:'Зекет және қайырымдылық', shortDescription:'Зекет, садақа және қайырымдылық қызметтері',
+   description:'Зекет пен садақаны есептеу, тапсыру және қайырымдылық жобаларына қатысу қызметтері.',
+   icon:'heart', department:'«Зекет және қайырымдылық» қоры', phone:null, website:null, address:null,
+   actionType:['call','website']},
+
+  {id:'waqf', category:'charity', title:'Уақып', shortDescription:'Уақып мәселелері бойынша ақпарат',
+   description:'Уақып мүлкін ресімдеу және басқаруға қатысты мәселелер бойынша ақпараттық қызмет.',
+   icon:'building2', department:'«Уақып» қоры', phone:null, email:null,
+   actionType:['call']},
+
+  {id:'qamqor', category:'paid', title:'«Qamqor Sharapat» орталығы', shortDescription:'Жаназа және жерлеу рәсімдеріне қатысты қызметтер',
+   description:'Жаназа шығару және жерлеу рәсімдерін дұрыс, шариғат талаптарына сай ұйымдастыруға көмек көрсету орталығы.',
+   icon:'shield', department:'«Qamqor Sharapat» орталығы', phone:null, workingHours:null, address:null,
+   actionType:['call','location']},
+
+  {id:'tauaf', category:'paid', title:'«Тауаф» қажылық фирмасы', shortDescription:'Қажылық және ұмра сапарларын ұйымдастыру',
+   description:'Қажылық және ұмра сапарларын толық ұйымдастыратын ресми турфирма қызметі.',
+   icon:'plane', department:'«Тауаф» турфирмасы', phone:null, website:null, office:null, address:null,
+   actionType:['call','website']},
+
+  {id:'darkhan', category:'paid', title:'«Дархан Дала» отандық туризм', shortDescription:'Рухани-танымдық және отандық туризм',
+   description:'Қазақстан бойынша рухани-танымдық және отандық туристік бағыттар ұсынатын турфирма қызметі.',
+   icon:'plane2', department:'«Дархан Дала» отандық туризм', phone:null, website:null, address:null,
+   actionType:['call','website']},
+
+  {id:'muftiyat-pub', category:'paid', title:'«Муфтият» баспасы', shortDescription:'Діни әдебиеттер мен баспа өнімдері',
+   description:'Діни-ағартушылық әдебиет пен баспа өнімдерін дайындайтын ресми баспа қызметі.',
+   icon:'book', department:'«Муфтият» баспасы', phone:null, email:null, website:null,
+   actionType:['call','website']},
+
+  {id:'iman', category:'paid', title:'«Иман» журналы', shortDescription:'ҚМДБ-ның ресми журналы',
+   description:'ҚМДБ-ның ресми діни-танымдық журналы, жазылу және материал ұсыну мәселелері.',
+   icon:'magazine', department:'«Иман» журналы', website:null, email:null,
+   actionType:['website']},
+
+  {id:'munara-paper', category:'paid', title:'«Мұнара» газеті', shortDescription:'ҚМДБ-ның ресми басылымы',
+   description:'ҚМДБ-ның ресми газеті, жазылу және материал ұсыну мәселелері.',
+   icon:'newspaper', department:'«Мұнара» газеті', website:null, email:null,
+   actionType:['website']},
+
+  {id:'munara-tv', category:'digital', title:'«Мұнара TV» телеарнасы', shortDescription:'Ресми діни-ағартушылық телеарна',
+   description:'ҚМДБ-ның ресми діни-ағартушылық телеарнасы, эфир және бейнежазбалар.',
+   icon:'tv', department:'«Мұнара TV» телеарнасы', website:'https://www.youtube.com/@MUNARA_TV/videos',
+   actionType:['website']},
+
+  {id:'apps', category:'digital', title:'Ресми мобильді қосымшалар', shortDescription:'Muftyat App және басқа ресми қосымшалар',
+   description:'ҚМДБ-ның Muftyat App және басқа да ресми мобильді қосымшаларын жүктеп алуға болатын қызмет.',
+   icon:'smartphone', website:null,
+   actionType:['website']},
+
+  {id:'sites', category:'digital', title:'Ресми сайттар', shortDescription:'ҚМДБ және қарасты мекемелердің ресми сайттары',
+   description:'ҚМДБ мен оған қарасты мекемелердің барлық ресми сайттарына сілтемелер осы жерде жинақталған.',
+   icon:'globe', website:'https://muftyat.kz',
+   actionType:['website']},
+
+  {id:'social', category:'digital', title:'Әлеуметтік желілер', shortDescription:'ҚМДБ-ның ресми әлеуметтік желідегі парақшалары',
+   description:'ҚМДБ-ның Instagram, Facebook, TikTok және басқа әлеуметтік желілердегі ресми парақшалары.',
+   icon:'share', website:null,
+   actionType:['website']}
 ];
 
-const bldIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V11l8-6 8 6v10"/><path d="M9 21v-8h6v8"/></svg>`;
-const personIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8.5" r="4"/><path d="M4.5 21c0-4.1 3.4-7 7.5-7s7.5 2.9 7.5 7"/></svg>`;
-const arrowIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
+const ICONS = {
+  phone:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .7 3a2 2 0 0 1-.4 2.1L8 10.2a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.1-.4c1 .4 2 .6 3 .7a2 2 0 0 1 1.7 2Z"/>',
+  chat:'<path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+  family:'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M2.5 21c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><path d="M15.5 15.3c2.7.4 4.5 2.4 4.5 5.7"/>',
+  calendar:'<rect x="3" y="4" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2v4M16 2v4"/><path d="m8.5 14 2 2 4-4"/>',
+  badge:'<circle cx="12" cy="9" r="5.5"/><path d="M8.5 13.8 7 21l5-2.5L17 21l-1.5-7.2"/>',
+  kaaba:'<path d="M4 8v11h16V8l-8-5Z"/><path d="M4 12h16M9 8v11"/>',
+  'search-doc':'<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9"/><path d="M14 3v5h5"/><circle cx="15.5" cy="16.5" r="3"/><path d="m19.5 20.5-2-2"/>',
+  mosque:'<path d="M4 21h16"/><path d="M6 21v-6a6 6 0 0 1 12 0v6"/><path d="M12 9V5"/><circle cx="12" cy="4" r="1"/>',
+  grad:'<path d="m22 10-10-5L2 10l10 5 10-5Z"/><path d="M6 12v5c2.5 2 9.5 2 12 0v-5"/><path d="M22 10v6"/>',
+  folder:'<path d="M3 7a2 2 0 0 1 2-2h4l2 2.5h8A2 2 0 0 1 21 9.5V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/>',
+  gift:'<rect x="3" y="9" width="18" height="12" rx="1.5"/><path d="M3 9h18v4H3z" opacity="0"/><path d="M12 9v12M3 9h18"/><path d="M12 9c-1.8 0-4-1-4-3.2A2.3 2.3 0 0 1 10.3 3C12 3 12 6 12 9Z"/><path d="M12 9c1.8 0 4-1 4-3.2A2.3 2.3 0 0 0 13.7 3C12 3 12 6 12 9Z"/>',
+  heart:'<path d="M20.8 8.6a5.5 5.5 0 0 0-9.3-4A5.5 5.5 0 0 0 2 8.6c0 6 9.5 11.4 9.5 11.4S20.8 14.6 20.8 8.6Z"/>',
+  building2:'<path d="M4 21V11l8-6 8 6v10"/><path d="M9 21v-8h6v8"/>',
+  shield:'<path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6l-9-4Z"/>',
+  plane:'<path d="M22 12 3 4l4 8-4 8 19-8Z"/>',
+  plane2:'<path d="M22 12 3 4l4 8-4 8 19-8Z"/>',
+  book:'<path d="M2 4.5A2.5 2.5 0 0 1 4.5 2H9a3 3 0 0 1 3 3v14a2 2 0 0 0-2-2H2Z"/><path d="M22 4.5A2.5 2.5 0 0 0 19.5 2H15a3 3 0 0 0-3 3v14a2 2 0 0 1 2-2h8Z"/>',
+  magazine:'<rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M8 7h8M8 11h8M8 15h5"/>',
+  newspaper:'<path d="M4 4h13a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M8 8h7M8 12h7M8 16h4"/>',
+  tv:'<rect x="3" y="5" width="18" height="13" rx="2.5"/><circle cx="12" cy="12" r="3.5"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/>',
+  smartphone:'<rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/>',
+  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+  share:'<circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="6" r="2.6"/><circle cx="18" cy="18" r="2.6"/><path d="m8.3 10.7 7.4-3.4M8.3 13.3l7.4 3.4"/>'
+};
+const iconSvg = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${ICONS[k] || ICONS.globe}</svg>`;
+const arrowSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
 
-function orgCard(o, i){
-  const logo = o.logo ? `<img src="${o.logo}" alt="">` : bldIcon;
-  const leadPhoto = o.leaderImage ? `<img src="${o.leaderImage}" alt="">` : personIcon;
-  const leadName = o.leaderName
-    ? `<div class="lead-name">${o.leaderName}</div>`
-    : `<div class="lead-name ph">Басшысы жарияланады</div>`;
+const CATEGORIES = [
+  {key:'top',     label:'Топ қызметтер'},
+  {key:'paid',    label:'Ақылы қызметтер'},
+  {key:'digital', label:'Цифрлық ресурстар'},
+  {key:'charity', label:'Қайырымдылық'},
+  {key:'other',   label:'Басқа'}
+];
+
+function svcCard(s){
+  const i = SERVICES.indexOf(s);
   return `
-    <button class="org-card" data-i="${i}">
-      <div class="org-logo">${logo}</div>
-      <div class="org-body">
-        <div class="org-name">${o.name}</div>
-        <div class="org-lead">
-          <div class="lead-photo">${leadPhoto}</div>
-          <div class="lead-tx">
-            ${leadName}
-            <div class="lead-pos">${o.leaderPosition || ''}</div>
-          </div>
-        </div>
+    <button class="svc-card" data-i="${i}" data-cat="${s.category}" data-q="${(s.title + ' ' + s.shortDescription).toLowerCase()}">
+      <div class="svc-ic">${iconSvg(s.icon)}</div>
+      <div class="svc-body">
+        <div class="svc-title">${s.title}</div>
+        <div class="svc-desc">${s.shortDescription}</div>
       </div>
-      <span class="org-go">${arrowIcon}</span>
+      <span class="svc-go">${arrowSvg}</span>
     </button>`;
 }
 
-document.getElementById('orgGrid').innerHTML = INSTITUTIONS.map(orgCard).join('');
+const scrollEl = document.getElementById('svcScroll');
+scrollEl.innerHTML = CATEGORIES.map(c => {
+  const items = SERVICES.filter(s => s.category === c.key);
+  return `
+    <div class="section-lab" data-cat="${c.key}">${c.label}</div>
+    <div class="svc-grid" data-cat-grid="${c.key}">${items.map(svcCard).join('')}</div>`;
+}).join('') + '<div class="noresult" id="noResult">Ештеңе табылмады</div>';
 
-const overlay = document.getElementById('panelOverlay');
-const val = (v, ph) => v ? `<span class="p-row-val">${v}</span>` : `<span class="p-row-val ph">${ph}</span>`;
+const grid = scrollEl;
+const resCount = document.getElementById('resCount');
+const noResult = document.getElementById('noResult');
+let activeCat = 'all';
 
-function openPanel(o){
-  document.getElementById('pLogo').innerHTML = o.logo ? `<img src="${o.logo}" alt="">` : bldIcon;
-  document.getElementById('pName').textContent = o.name;
+function applyFilter(){
+  const v = document.getElementById('q').value.trim().toLowerCase();
+  let shown = 0;
+  document.querySelectorAll('.svc-card').forEach(el => {
+    const matchQ = !v || el.dataset.q.includes(v);
+    const matchCat = activeCat === 'all' || el.dataset.cat === activeCat;
+    const match = matchQ && matchCat;
+    el.classList.toggle('hide', !match);
+    if (match) shown++;
+  });
+  document.querySelectorAll('[data-cat-grid]').forEach(g => {
+    const any = [...g.children].some(c => !c.classList.contains('hide'));
+    g.previousElementSibling.classList.toggle('hide', !any);
+    g.classList.toggle('hide', !any);
+  });
+  noResult.style.display = shown === 0 ? 'block' : 'none';
+  resCount.textContent = v ? `${shown} нәтиже табылды` : '';
+}
 
-  document.getElementById('pLeadPhoto').innerHTML = o.leaderImage ? `<img src="${o.leaderImage}" alt="">` : personIcon;
-  document.getElementById('pLeadName').innerHTML = o.leaderName
-    ? `<div class="p-lead-name">${o.leaderName}</div>`
-    : `<div class="p-lead-name ph">Басшысы жарияланады</div>`;
-  document.getElementById('pLeadPos').textContent = o.leaderPosition || '';
+document.getElementById('q').addEventListener('input', applyFilter);
 
-  const desc = document.getElementById('pDesc');
-  if (o.description){ desc.className = 'p-desc'; desc.textContent = o.description; }
-  else { desc.className = 'p-desc ph'; desc.textContent = 'Мекеме туралы ақпарат жарияланады'; }
+document.getElementById('catTabs').addEventListener('click', e => {
+  const t = e.target.closest('.cat-tab'); if (!t) return;
+  activeCat = t.dataset.cat;
+  document.querySelectorAll('.cat-tab').forEach(b => b.classList.toggle('on', b === t));
+  applyFilter();
+});
 
-  document.getElementById('pPhone').outerHTML = `<div class="p-row-val${o.phone?'':' ph'}" id="pPhone">${o.phone || 'Жарияланады'}</div>`;
-  document.getElementById('pEmail').outerHTML = `<div class="p-row-val${o.email?'':' ph'}" id="pEmail">${o.email || 'Жарияланады'}</div>`;
-  document.getElementById('pWeb').outerHTML = `<div class="p-row-val${o.website?'':' ph'}" id="pWeb">${o.website || 'Жарияланады'}</div>`;
-  document.getElementById('pSocial').outerHTML = `<div class="p-row-val ph" id="pSocial">Жарияланады</div>`;
-  document.getElementById('pAddress').outerHTML = `<div class="p-row-val${o.address?'':' ph'}" id="pAddress">${o.address || 'Жарияланады'}</div>`;
-  const officeVal = [o.floor, o.office].filter(Boolean).join(', ');
-  document.getElementById('pOffice').outerHTML = `<div class="p-row-val${officeVal?'':' ph'}" id="pOffice">${officeVal || 'Жарияланады'}</div>`;
+/* ── Detail Modal ── */
+const overlay = document.getElementById('svcOverlay');
+
+const ROW_DEFS = [
+  {key:'office',       lab:'Кабинет',        icon:'building2'},
+  {key:'floor',        lab:'Қабат',          icon:'building2'},
+  {key:'phone',        lab:'Телефон',        icon:'phone'},
+  {key:'email',        lab:'E-mail',         icon:'chat'},
+  {key:'workingHours', lab:'Жұмыс уақыты',   icon:'calendar'},
+  {key:'website',      lab:'Ресми сайт',     icon:'globe'},
+  {key:'address',      lab:'Мекенжай',       icon:'kaaba'}
+];
+
+function openService(s){
+  document.getElementById('mIcon').innerHTML = iconSvg(s.icon);
+  document.getElementById('mTitle').textContent = s.title;
+  const dept = document.getElementById('mDept');
+  if (s.department){ dept.textContent = s.department; dept.style.display = ''; }
+  else { dept.style.display = 'none'; }
+  document.getElementById('mDesc').textContent = s.description;
+
+  const rows = ROW_DEFS.filter(r => Object.prototype.hasOwnProperty.call(s, r.key));
+  document.getElementById('mRows').innerHTML = rows.map(r => {
+    const val = s[r.key];
+    return `
+      <div class="svc-row">
+        <div class="svc-row-ic">${iconSvg(r.icon)}</div>
+        <div>
+          <div class="svc-row-lab">${r.lab}</div>
+          <div class="svc-row-val${val ? '' : ' ph'}">${val || 'Жарияланады'}</div>
+        </div>
+      </div>`;
+  }).join('');
+
+  const actions = [];
+  const at = s.actionType || [];
+  if (at.includes('call')) actions.push(`<span class="svc-btn primary">${iconSvg('phone')}Қоңырау шалу</span>`);
+  if (at.includes('website')) actions.push(`<span class="svc-btn primary">${iconSvg('globe')}Сайтқа өту</span>`);
+  if (at.includes('qr')) actions.push(`<span class="svc-btn ghost">QR арқылы ашу</span>`);
+  if (at.includes('appointment')) actions.push(`<span class="svc-btn ghost">${iconSvg('calendar')}Қабылдауға жазылу</span>`);
+  if (at.includes('location')) actions.push(`<span class="svc-btn ghost">${iconSvg('kaaba')}Орналасқан жерін көрсету</span>`);
+  document.getElementById('mActions').innerHTML = actions.join('');
 
   overlay.classList.add('show');
 }
-function closePanel(){ overlay.classList.remove('show'); }
+function closeService(){ overlay.classList.remove('show'); }
 
-document.getElementById('orgGrid').addEventListener('click', e => {
-  const card = e.target.closest('.org-card');
-  if (card) openPanel(INSTITUTIONS[+card.dataset.i]);
+grid.addEventListener('click', e => {
+  const card = e.target.closest('.svc-card');
+  if (card) openService(SERVICES[+card.dataset.i]);
 });
-document.getElementById('panelClose').addEventListener('click', closePanel);
-overlay.addEventListener('click', e => { if (e.target === overlay) closePanel(); });
+document.getElementById('svcClose').addEventListener('click', closeService);
+overlay.addEventListener('click', e => { if (e.target === overlay) closeService(); });
 
 function fit(){
   const s = Math.min(innerWidth/1920, innerHeight/1080);
