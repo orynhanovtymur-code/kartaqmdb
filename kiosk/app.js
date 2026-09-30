@@ -123,6 +123,7 @@ function render(){
 /* ── Сайтты модалкада ашу (беттен шықпайды) ── */
 function openEmbed(url){
   if (document.getElementById('embedModal')) return;
+  if (!navigator.onLine){ alert('Бұл бөлім интернетті қажет етеді (офлайн режимде қолжетімсіз).'); return; }
   const m = document.createElement('div');
   m.id = 'embedModal';
   m.style.cssText = 'position:absolute;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;background:rgba(3,10,7,.72)';

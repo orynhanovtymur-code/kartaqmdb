@@ -37,3 +37,11 @@ assets/             — логотип, фото, артқы фон сызықт
 ## Іске қосу
 
 Кез келген статикалық сервер немесе `index.html`-ді браузерде ашу жеткілікті. Kiosk үшін толық экран режимі ұсынылады (`chrome --kiosk index.html`).
+
+## Офлайн / PWA
+
+Сайт толық офлайн жұмыс істейтін PWA: `manifest.webmanifest`, `sw.js`, `precache-manifest.js`, `kiosk/pwa.js`.
+Барлық сыртқы ресурстар жобаның ішінде: `fonts/` (Oswald, IBM Plex Sans), `vendor/` (d3, topojson, QR, әлем картасы), `assets/mosques/` (2702 мешіт суреті, webp), `assets/audio/`.
+
+**Әр деплой алдында міндетті:** `node scripts/build-sw.js` — precache тізімі мен нұсқа хэшін жаңартады (файл өзгерсе, пайдаланушыларда жаңа нұсқа автоматты жүктеледі).
+Сурет қосу/өзгерту: `scripts/fetch-photos.sh urls.txt`. PWA үшін HTTPS (немесе localhost) қажет.
