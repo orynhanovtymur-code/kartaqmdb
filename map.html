@@ -283,11 +283,43 @@
   #regionModalGrid .modal-tile{flex-direction:row;align-items:center;gap:12px}
   #regionModalGrid .modal-tile svg{width:22px;height:22px;flex:none;color:var(--green-l)}
   #regionModalGrid .rt-text{display:flex;flex-direction:column;gap:3px}
+
+  /* ── Бұрыштағы батырмалар: басты бетке оралу + тіл ауыстыру ── */
+  #screen>.corner{position:absolute;top:7px;left:14px;z-index:30;display:flex;align-items:center;gap:8px}
+  .cbtn{width:30px;height:30px;border-radius:10px;border:1px solid rgba(14,75,54,.18);background:rgba(255,255,255,.85);color:var(--green);
+    display:grid;place-items:center;cursor:pointer;text-decoration:none;transition:background .2s,color .2s,transform .2s}
+  .cbtn:hover{background:var(--green);color:#fff;transform:translateY(-1px)}
+  .cbtn svg{width:16px;height:16px}
+  .langsw{display:flex;gap:2px;padding:2px;border-radius:11px;border:1px solid rgba(14,75,54,.18);background:rgba(255,255,255,.85)}
+  .langsw button{font:600 11.5px/1 var(--fb);letter-spacing:.08em;padding:0 10px;height:24px;border:0;border-radius:8px;background:transparent;
+    color:var(--green);cursor:pointer;transition:background .2s,color .2s}
+  .langsw button:hover{background:rgba(14,75,54,.09)}
+  .langsw button.on{background:var(--green);color:#fff}
+  #langLoader{position:absolute;inset:0;z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+    background:rgba(251,252,251,.82);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .25s}
+  #langLoader.show{opacity:1;pointer-events:auto}
+  #langLoader .spin{width:46px;height:46px;border-radius:50%;border:4px solid rgba(14,75,54,.15);border-top-color:var(--green);animation:lspin .8s linear infinite}
+  #langLoader .ltxt{font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--green)}
+  @keyframes lspin{to{transform:rotate(360deg)}}
+  html[lang=ru] h1{font-size:31px}
+  html[lang=en] h1{font-size:26px}
+  html[lang=ru] .kicker,html[lang=en] .kicker{letter-spacing:.14em}
+  html[data-theme=dark] .cbtn,html[data-theme=dark] .langsw{background:rgba(21,33,27,.92);border-color:rgba(92,191,149,.25);color:#7fd1ac}
+  html[data-theme=dark] .langsw button{color:#9ad9bb}
+  html[data-theme=dark] .langsw button.on,html[data-theme=dark] .cbtn:hover{background:#2f8f69;color:#fff}
+  html[data-theme=dark] #langLoader{background:rgba(12,21,17,.82)}
+  html[data-theme=dark] #langLoader .ltxt{color:#7fd1ac}
 </style>
 <link rel="stylesheet" href="./kiosk/map-dark.css">
 </head>
 <body>
 <div id="stage"><div id="screen">
+
+  <div class="corner">
+    <a class="cbtn" href="./index.html" data-i18n-aria="home" data-i18n-title="home" aria-label="Басты бет" title="Басты бет"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 20v-5.5h4V20"/></svg></a>
+    <div class="langsw" id="langSw" role="group" aria-label="Language"><button data-lang="kk">ҚАЗ</button><button data-lang="ru">РУС</button><button data-lang="en">ENG</button></div>
+  </div>
+  <div id="langLoader"><div class="spin"></div><div class="ltxt" id="langLoaderTxt">Жүктелуде…</div></div>
 
   <header class="top anim" style="animation-delay:.05s">
     <div class="headleft">
@@ -295,30 +327,30 @@
         <img src="./assets/logo-qmdb.png" alt="ҚМДБ" style="width:100%;height:100%;object-fit:contain;border-radius:inherit">
       </div>
       <div>
-        <div class="kicker">Қазақстан мұсылмандары діни басқармасы</div>
-        <h1>Қазақстан мешіттері мен діни оқу орындары</h1>
+        <div class="kicker" data-i18n="kicker">Қазақстан мұсылмандары діни басқармасы</div>
+        <h1 data-i18n="title">Қазақстан мешіттері мен діни оқу орындары</h1>
       </div>
     </div>
     <div class="stats">
       <div class="stat">
         <svg class="sicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V11l8-6 8 6v10"/><path d="M12 5V2"/><path d="M9 21v-5a3 3 0 0 1 6 0v5"/><path d="M4 21h16"/></svg>
-        <div><b>2 977</b><span title="Мешіт">Мешіт</span></div>
+        <div><b>2 977</b><span title="Мешіт" data-i18n="stMosque">Мешіт</span></div>
       </div>
       <div class="stat">
         <svg class="sicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V10l4-4 4 4v11"/><path d="M13 21V6l4-3 4 3v15"/></svg>
-        <div><b>1</b><span title="Университет">Университет</span></div>
+        <div><b>1</b><span title="Университет" data-i18n="stUniv">Университет</span></div>
       </div>
       <div class="stat">
         <svg class="sicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4.5A2.5 2.5 0 0 1 4.5 2H9a3 3 0 0 1 3 3v14a2 2 0 0 0-2-2H2Z"/><path d="M22 4.5A2.5 2.5 0 0 0 19.5 2H15a3 3 0 0 0-3 3v14a2 2 0 0 1 2-2h8Z"/></svg>
-        <div><b>4</b><span title="Институт">Институт</span></div>
+        <div><b>4</b><span title="Институт" data-i18n="stInst">Институт</span></div>
       </div>
       <div class="stat">
         <svg class="sicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 10-10-5L2 10l10 5 10-5Z"/><path d="M6 12v5c2.5 2 9.5 2 12 0v-5"/><path d="M22 10v6"/></svg>
-        <div><b>9</b><span title="Медресе-колледж">Медресе-колледж</span></div>
+        <div><b>9</b><span title="Медресе-колледж" data-i18n="stMed">Медресе-колледж</span></div>
       </div>
       <div class="stat">
         <svg class="sicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21 12 16 5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z"/></svg>
-        <div><b>18</b><span title="Қарилар дайындау орталығы">Қарилар дайындау орталығы</span></div>
+        <div><b>18</b><span title="Қарилар дайындау орталығы" data-i18n="stQari">Қарилар дайындау орталығы</span></div>
       </div>
     </div>
   </header>
@@ -326,12 +358,12 @@
   <div class="filters anim" style="animation-delay:.16s">
     <label class="search">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="searchInput" type="text" placeholder="Мешіт, медресе немесе қала атауын іздеңіз…">
+      <input id="searchInput" type="text" data-i18n-ph="search" placeholder="Мешіт, медресе немесе қала атауын іздеңіз…">
     </label>
     <div class="sel on" data-field="region" tabindex="0">
       <svg class="selicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21c-4-4.6-7-8-7-11a7 7 0 0 1 14 0c0 3-3 6.4-7 11Z"/></svg>
       <div class="selbody">
-        <div class="lab">Өңір</div>
+        <div class="lab" data-i18n="region">Өңір</div>
         <div class="val"><span class="valtxt">Барлық өңір</span>
           <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
         </div>
@@ -340,7 +372,7 @@
     <div class="sel" data-field="type" tabindex="0">
       <svg class="selicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5Z"/><path d="m3 13 9 5 9-5"/></svg>
       <div class="selbody">
-        <div class="lab">Нысан түрі</div>
+        <div class="lab" data-i18n="objType">Нысан түрі</div>
         <div class="val"><span class="valtxt">Барлығы</span>
           <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
         </div>
@@ -348,43 +380,43 @@
     </div>
     <button class="btn-find" id="findBtn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      Іздеу
+      <span data-i18n="find">Іздеу</span>
     </button>
   </div>
 
   <div class="body">
     <section class="panel anim" id="map" style="animation-delay:.28s">
-      <svg id="kzmap" aria-label="Қазақстан картасы"></svg>
+      <svg id="kzmap" data-i18n-aria="mapAria" aria-label="Қазақстан картасы"></svg>
       <div class="maphead">
         <div class="t" id="mapCatLabel">Мешіттер</div>
-        <div class="s">Нысандарды көру үшін маркерді таңдаңыз</div>
+        <div class="s" data-i18n="mapSub">Нысандарды көру үшін маркерді таңдаңыз</div>
       </div>
       <div class="maptoggle" id="mapToggle">
-        <div class="mt-opt on" data-cat="mosque" title="Мешіттер">Мешіттер</div>
-        <div class="mt-opt" data-cat="edu" title="Медресе-колледждер">Медресе-колледждер</div>
-        <div class="mt-opt" data-cat="qari" title="Қарилар дайындау орталықтары">Қарилар дайындау орт.</div>
+        <div class="mt-opt on" data-cat="mosque" data-i18n="catMosque" title="Мешіттер">Мешіттер</div>
+        <div class="mt-opt" data-cat="edu" data-i18n="catEdu" title="Медресе-колледждер">Медресе-колледждер</div>
+        <div class="mt-opt" data-cat="qari" data-i18n="catQariS" title="Қарилар дайындау орталықтары">Қарилар дайындау орт.</div>
       </div>
       <div id="pins"></div>
       <div id="eduPins" style="display:none"></div>
       <div id="qariPins" style="display:none"></div>
       <div class="legend">
-        <div><i class="lg-sq"></i> Жеке нысан</div>
-        <div><i class="lg-c"></i> Нысандар тобы</div>
-        <div><i class="lg-sq" style="box-shadow:0 0 0 2px var(--gold) inset"></i> Тарихи мұра</div>
+        <div><i class="lg-sq"></i> <span data-i18n="lgSingle">Жеке нысан</span></div>
+        <div><i class="lg-c"></i> <span data-i18n="lgGroup">Нысандар тобы</span></div>
+        <div><i class="lg-sq" style="box-shadow:0 0 0 2px var(--gold) inset"></i> <span data-i18n="lgHeritage">Тарихи мұра</span></div>
       </div>
-      <div class="scale"><i></i>250 км</div>
+      <div class="scale"><i></i><span data-i18n="scale">250 км</span></div>
     </section>
 
     <section class="panel list anim" style="animation-delay:.4s">
       <div class="lhead">
-        <h2>Нысандар тізімі</h2>
+        <h2 data-i18n="listTitle">Нысандар тізімі</h2>
         <div class="n">2977 мешіт табылды</div>
       </div>
       <div class="sortrow">
-        <div class="chip on" data-cat="all"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Барлығы</div>
-        <div class="chip" data-cat="mosque"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V11l8-6 8 6v10"/><path d="M12 5V2"/><path d="M9 21v-5a3 3 0 0 1 6 0v5"/></svg>Мешіттер</div>
-        <div class="chip" data-cat="edu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m22 10-10-5L2 10l10 5 10-5Z"/><path d="M6 12v5c2.5 2 9.5 2 12 0v-5"/></svg>Медресе-колледждер</div>
-        <div class="chip" data-cat="qari"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21 12 16 5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z"/></svg>Қарилар дайындау орталықтары</div>
+        <div class="chip on" data-cat="all"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span data-i18n="chipAll">Барлығы</span></div>
+        <div class="chip" data-cat="mosque"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V11l8-6 8 6v10"/><path d="M12 5V2"/><path d="M9 21v-5a3 3 0 0 1 6 0v5"/></svg><span data-i18n="chipMosque">Мешіттер</span></div>
+        <div class="chip" data-cat="edu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m22 10-10-5L2 10l10 5 10-5Z"/><path d="M6 12v5c2.5 2 9.5 2 12 0v-5"/></svg><span data-i18n="chipEdu">Медресе-колледждер</span></div>
+        <div class="chip" data-cat="qari"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21 12 16 5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z"/></svg><span data-i18n="chipQari">Қарилар дайындау орталықтары</span></div>
       </div>
       <div class="items" id="items"></div>
       <div class="lfoot">
@@ -395,14 +427,13 @@
   </div>
 
   <footer class="bot anim" style="animation-delay:.6s">
-    <div class="fitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/></svg>Қазақстан мұсылмандары діни басқармасы · Ақпараттық терминал</div>
-    <a href="./index.html" style="display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:999px;background:#0e4b36;color:#fff;text-decoration:none;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px"><path d="M15 18l-6-6 6-6"/></svg>Басты бет</a>
-    <div class="fitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Дерек көзі: ҚМДБ тізілімі · Жаңартылған: 10.09.2026</div>
+    <div class="fitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/></svg><span data-i18n="footMain">Қазақстан мұсылмандары діни басқармасы · Ақпараттық терминал</span></div>
+    <div class="fitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg><span data-i18n="footSrc">Дерек көзі: ҚМДБ тізілімі · Жаңартылған: 10.09.2026</span></div>
   </footer>
 
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-card" role="dialog" aria-modal="true">
-      <button class="modal-close" id="modalClose" aria-label="Жабу">
+      <button class="modal-close" id="modalClose" data-i18n-aria="close" aria-label="Жабу">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
       </button>
       <div class="modal-hero" id="modalHero"></div>
@@ -420,17 +451,17 @@
 
   <div class="modal-overlay" id="regionModalOverlay">
     <div class="modal-card" id="regionModalCard" role="dialog" aria-modal="true">
-      <button class="modal-close" id="regionModalClose" aria-label="Жабу">
+      <button class="modal-close" id="regionModalClose" data-i18n-aria="close" aria-label="Жабу">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
       </button>
       <div class="modal-body" style="padding-top:34px">
-        <span class="modal-type">Өңір</span>
+        <span class="modal-type" data-i18n="region">Өңір</span>
         <h2 class="modal-title" id="regionModalTitle"></h2>
         <div class="it-l" id="regionModalTotal" style="font-size:15px;color:#4d5c55;margin-bottom:20px"></div>
         <div class="modal-grid" id="regionModalGrid"></div>
         <button class="allbtn" id="regionModalFullBtn" style="width:100%;justify-content:center">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></svg>
-          <span>Толық тізімді көру</span>
+          <span data-i18n="fullListView">Толық тізімді көру</span>
         </button>
       </div>
     </div>
@@ -438,11 +469,11 @@
 
   <div class="modal-overlay" id="wcOverlay">
     <div class="wc-card" role="dialog" aria-modal="true">
-      <button class="modal-close" id="wcClose" aria-label="Жабу">
+      <button class="modal-close" id="wcClose" data-i18n-aria="close" aria-label="Жабу">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
       </button>
       <div class="wc-head">
-        <span class="modal-type">Мешіттер</span>
+        <span class="modal-type" data-i18n="catMosque">Мешіттер</span>
         <h2 class="modal-title" id="wcTitle"></h2>
       </div>
       <div class="wc-cloud" id="wcCloud"></div>
@@ -451,6 +482,7 @@
 
 </div></div>
 
+<script src="./kiosk/map-i18n.js"></script>
 <script>
 const OBJECTS = [
 {n:"Абай Құнанбайұлы мешіті",c:"Абай облысы, Семей қаласы, көшесі Қарқаралы, ғимарат 22Б, пошталық индексі 071400",region:"Абай облысы",t:"Облыстық мешіт",cat:"mosque",d:"2021 ж.",year:"2021",capacity:"2 500 адам",photo:"./assets/mosques/e9f4fb557a43.webp"},
@@ -3336,11 +3368,12 @@ QARI_LIST.forEach(o=> OBJECTS.push({n:o.name, c:o.address, region:o.region, t:"�
 // ── Тізім: сүзгілер, іздеу, чиптер, беттеу — барлығы OBJECTS үстінде жұмыс істейді ──
 const state = { q:'', region:null, type:null, cat:'all', page:1, showAll:false };
 const PAGE_SIZE = 10;
-const CAT_NOUN = { all:'нысан', mosque:'мешіт', edu:'медресе-колледж', qari:'орталық' };
+const CAT_NOUN = { all:'nounAll', mosque:'nounMosque', edu:'nounEdu', qari:'nounQari' };
+const T = (k)=> MI.ui(k);
 
 function applyFilters(){
   return OBJECTS.filter(o=>{
-    if (state.q && !(o.n.toLowerCase().includes(state.q) || o.c.toLowerCase().includes(state.q))) return false;
+    if (state.q && !(o.n.toLowerCase().includes(state.q) || o.c.toLowerCase().includes(state.q) || MI.haystack(o).includes(state.q))) return false;
     if (state.region && o.region !== state.region) return false;
     if (state.type && o.t !== state.type) return false;
     if (state.cat !== 'all' && o.cat !== state.cat) return false;
@@ -3362,7 +3395,7 @@ function renderList(){
   const start = (state.page - 1) * pageSize;
   const pageItems = filtered.slice(start, start + pageSize);
 
-  document.querySelector('.lhead .n').textContent = `${filtered.length} ${CAT_NOUN[state.cat]||'нысан'} табылды`;
+  document.querySelector('.lhead .n').textContent = MI.lang === 'ru' ? `${T('found')}: ${filtered.length} ${T(CAT_NOUN[state.cat])}` : `${filtered.length} ${T(CAT_NOUN[state.cat])} ${T('found')}`;
 
   const itemsEl = document.getElementById('items');
   itemsEl.innerHTML = pageItems.length ? pageItems.map((o,i)=>`
@@ -3370,14 +3403,14 @@ function renderList(){
       <div class="thumb"><div class="num">${String(start+i+1).padStart(2,'0')}</div>
         <div class="thumb-img"${o.photo?` style="background-image:url('${o.photo}')"`:''}></div></div>
       <div>
-        <h3 class="it-t">${o.n}</h3>
-        <div class="it-l" title="${o.c}">
+        <h3 class="it-t">${MI.name(o.n)}</h3>
+        <div class="it-l" title="${MI.addr(o.c)}">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.6"/></svg>
-          <span>${shortAddr(o.c, 4)}</span>
+          <span>${shortAddr(MI.addr(o.c), 4)}</span>
         </div>
-        <div class="it-row"><span class="type">${o.t}</span><span class="dist">${o.d}</span></div>
+        <div class="it-row"><span class="type">${MI.type(o.t)}</span><span class="dist">${MI.year(o.d)}</span></div>
       </div>
-    </article>`).join('') : `<div class="empty-list">Іздеу шарттарына сәйкес нысан табылмады</div>`;
+    </article>`).join('') : `<div class="empty-list">${T('empty')}</div>`;
 
   const pager = document.getElementById('pager');
   if (state.showAll || totalPages <= 1) {
@@ -3410,17 +3443,17 @@ document.getElementById('items').addEventListener('click', e=>{
 // ── Нысан жайлы толық ақпарат модалы ──
 const modalOverlay = document.getElementById('modalOverlay');
 function openModal(o){
-  document.getElementById('modalType').textContent = o.t;
-  document.getElementById('modalTitle').textContent = o.n;
-  document.querySelector('#modalLoc span').textContent = o.c;
+  document.getElementById('modalType').textContent = MI.type(o.t);
+  document.getElementById('modalTitle').textContent = MI.name(o.n);
+  document.querySelector('#modalLoc span').textContent = MI.addr(o.c);
   const modalHeroEl = document.getElementById('modalHero');
   modalHeroEl.style.backgroundImage = o.photo ? `url("${o.photo}")` : 'none';
   document.getElementById('modalGrid').innerHTML = (o.cat === 'edu' || o.cat === 'qari') ? `
-    <div class="modal-tile"><span class="mt-lab">Өңір</span><span class="mt-val">${o.region||'—'}</span></div>
-    <div class="modal-tile"><span class="mt-lab">Телефон</span><span class="mt-val">${o.phone||'—'}</span></div>
-    <div class="modal-tile" style="grid-column:1/-1"><span class="mt-lab">Электрондық пошта</span><span class="mt-val">${o.email||'—'}</span></div>` : `
-    <div class="modal-tile"><span class="mt-lab">Қолданысқа берілген жылы</span><span class="mt-val">${o.year||'—'}</span></div>
-    <div class="modal-tile"><span class="mt-lab">Сыйымдылығы</span><span class="mt-val">${o.capacity||'—'}</span></div>`;
+    <div class="modal-tile"><span class="mt-lab">${T('region')}</span><span class="mt-val">${o.region?MI.region(o.region):'—'}</span></div>
+    <div class="modal-tile"><span class="mt-lab">${T('phone')}</span><span class="mt-val">${o.phone||'—'}</span></div>
+    <div class="modal-tile" style="grid-column:1/-1"><span class="mt-lab">${T('email')}</span><span class="mt-val">${o.email||'—'}</span></div>` : `
+    <div class="modal-tile"><span class="mt-lab">${T('yearOpened')}</span><span class="mt-val">${o.year||'—'}</span></div>
+    <div class="modal-tile"><span class="mt-lab">${T('capacity')}</span><span class="mt-val">${MI.cap(o.capacity)||'—'}</span></div>`;
   modalOverlay.classList.add('show');
 }
 function closeModal(){ modalOverlay.classList.remove('show'); }
@@ -3430,27 +3463,27 @@ document.addEventListener('keydown', e=>{ if (e.key === 'Escape') closeModal(); 
 
 // ── Медресе-колледж карточкасы: картадан ашылатын толық ақпарат ──
 function openEduModal(o){
-  document.getElementById('modalType').textContent = 'Медресе-колледж';
-  document.getElementById('modalTitle').textContent = o.name;
-  document.querySelector('#modalLoc span').textContent = o.address;
+  document.getElementById('modalType').textContent = MI.type('Медресе-колледж');
+  document.getElementById('modalTitle').textContent = MI.name(o.name);
+  document.querySelector('#modalLoc span').textContent = MI.addr(o.address);
   document.getElementById('modalHero').style.backgroundImage = o.photo ? `url("${o.photo}")` : 'none';
   document.getElementById('modalGrid').innerHTML = `
-    <div class="modal-tile"><span class="mt-lab">Өңір</span><span class="mt-val">${o.region}</span></div>
-    <div class="modal-tile"><span class="mt-lab">Телефон</span><span class="mt-val">${o.phone||'—'}</span></div>
-    <div class="modal-tile" style="grid-column:1/-1"><span class="mt-lab">Электрондық пошта</span><span class="mt-val">${o.email||'—'}</span></div>`;
+    <div class="modal-tile"><span class="mt-lab">${T('region')}</span><span class="mt-val">${MI.region(o.region)}</span></div>
+    <div class="modal-tile"><span class="mt-lab">${T('phone')}</span><span class="mt-val">${o.phone||'—'}</span></div>
+    <div class="modal-tile" style="grid-column:1/-1"><span class="mt-lab">${T('email')}</span><span class="mt-val">${o.email||'—'}</span></div>`;
   modalOverlay.classList.add('show');
 }
 
 // ── Құран жаттау / қарилар дайындау орталығы карточкасы: картадан ашылатын толық ақпарат ──
 function openQariModal(o){
-  document.getElementById('modalType').textContent = 'Қарилар дайындау орталығы';
-  document.getElementById('modalTitle').textContent = o.name;
-  document.querySelector('#modalLoc span').textContent = o.address;
+  document.getElementById('modalType').textContent = MI.type('Қарилар дайындау орталығы');
+  document.getElementById('modalTitle').textContent = MI.name(o.name);
+  document.querySelector('#modalLoc span').textContent = MI.addr(o.address);
   document.getElementById('modalHero').style.backgroundImage = o.photo ? `url("${o.photo}")` : 'none';
   document.getElementById('modalGrid').innerHTML = `
-    <div class="modal-tile"><span class="mt-lab">Өңір</span><span class="mt-val">${o.region}</span></div>
-    <div class="modal-tile"><span class="mt-lab">Телефон</span><span class="mt-val">${o.phone||'—'}</span></div>
-    <div class="modal-tile" style="grid-column:1/-1"><span class="mt-lab">Электрондық пошта</span><span class="mt-val">${o.email||'—'}</span></div>`;
+    <div class="modal-tile"><span class="mt-lab">${T('region')}</span><span class="mt-val">${MI.region(o.region)}</span></div>
+    <div class="modal-tile"><span class="mt-lab">${T('phone')}</span><span class="mt-val">${o.phone||'—'}</span></div>
+    <div class="modal-tile" style="grid-column:1/-1"><span class="mt-lab">${T('email')}</span><span class="mt-val">${o.email||'—'}</span></div>`;
   modalOverlay.classList.add('show');
 }
 
@@ -3469,30 +3502,31 @@ const NUR_MUBARAK = {
 };
 // ── ҚМДБ: картадағы басты мекеме карточкасы ──
 function openQmdbModal(){
-  document.getElementById('modalType').textContent = 'Мекеме';
-  document.getElementById('modalTitle').textContent = 'Қазақстан мұсылмандары діни басқармасы';
-  document.querySelector('#modalLoc span').textContent = 'Астана қаласы';
+  document.getElementById('modalType').textContent = T('institution');
+  document.getElementById('modalTitle').textContent = T('qmdb');
+  document.querySelector('#modalLoc span').textContent = MI.region('Астана қаласы');
   document.getElementById('modalHero').style.backgroundImage = `url("./assets/qmdb-building.jpeg")`;
   document.getElementById('modalGrid').innerHTML = `
-    <div class="modal-tile"><span class="mt-lab">Бөлім</span><span class="mt-val">17</span></div>
-    <div class="modal-tile"><span class="mt-lab">Сектор</span><span class="mt-val">6</span></div>
-    <div class="modal-tile"><span class="mt-lab">Мекеме</span><span class="mt-val">10</span></div>`;
+    <div class="modal-tile"><span class="mt-lab">${T('dept')}</span><span class="mt-val">17</span></div>
+    <div class="modal-tile"><span class="mt-lab">${T('sector')}</span><span class="mt-val">6</span></div>
+    <div class="modal-tile"><span class="mt-lab">${T('inst2')}</span><span class="mt-val">10</span></div>`;
   modalOverlay.classList.add('show');
 }
 function openNurMubarakModal(){
   const o = NUR_MUBARAK;
-  document.getElementById('modalType').textContent = 'Университет';
-  document.getElementById('modalTitle').textContent = o.name;
-  document.querySelector('#modalLoc span').textContent = o.address;
+  document.getElementById('modalType').textContent = T('univ');
+  document.getElementById('modalTitle').textContent = MI.name(o.name);
+  document.querySelector('#modalLoc span').textContent = MI.addr(o.address);
   document.getElementById('modalHero').style.backgroundImage = `url("${o.photo}")`;
   document.getElementById('modalGrid').innerHTML = `
-    <div class="modal-tile" style="grid-column:1/-1"><span class="mt-lab">Өңір</span><span class="mt-val">${o.region}</span></div>
-    ${o.phones.map(p=>`<div class="modal-tile"><span class="mt-lab">${p.label}</span><span class="mt-val">${p.value}</span></div>`).join('')}
-    <div class="modal-tile" style="grid-column:1/-1"><span class="mt-lab">Электрондық пошта</span><span class="mt-val">${o.email}</span></div>`;
+    <div class="modal-tile" style="grid-column:1/-1"><span class="mt-lab">${T('region')}</span><span class="mt-val">${MI.region(o.region)}</span></div>
+    ${o.phones.map(p=>`<div class="modal-tile"><span class="mt-lab">${MI.name(p.label)}</span><span class="mt-val">${p.value}</span></div>`).join('')}
+    <div class="modal-tile" style="grid-column:1/-1"><span class="mt-lab">${T('email')}</span><span class="mt-val">${o.email}</span></div>`;
   modalOverlay.classList.add('show');
 }
 
-const MAP_CAT_LABELS = { mosque:'Мешіттер', edu:'Медресе-колледждер', qari:'Қарилар дайындау орталықтары' };
+const MAP_CAT_KEYS = { mosque:'catMosque', edu:'catEdu', qari:'catQari' };
+let curMapCat = 'mosque';
 const pinsEl = document.getElementById('pins');
 const eduPinsEl = document.getElementById('eduPins');
 const qariPinsEl = document.getElementById('qariPins');
@@ -3506,7 +3540,7 @@ function renderEduPins(){
     card.className = 'edu-card';
     card.style.left = x+'px'; card.style.top = (y-8)+'px';
     card.style.animationDelay = (0.1 + i*0.09)+'s';
-    card.innerHTML = `<div class="ec-photo" style="background-image:url('${o.photo}')"></div><div class="ec-lbl">${o.region}</div>`;
+    card.innerHTML = `<div class="ec-photo" style="background-image:url('${o.photo}')"></div><div class="ec-lbl" data-kk="${o.region}">${MI.region(o.region)}</div>`;
     card.addEventListener('click', ()=> openEduModal(o));
     eduPinsEl.appendChild(card);
   });
@@ -3554,7 +3588,7 @@ function renderQariPins(){
     card.className = 'edu-card';
     card.style.left = p.x+'px'; card.style.top = p.y+'px';
     card.style.animationDelay = (0.1 + i*0.06)+'s';
-    card.innerHTML = `<div class="ec-photo" style="background-image:url('${o.photo}')"></div><div class="ec-lbl">${o.region}</div>`;
+    card.innerHTML = `<div class="ec-photo" style="background-image:url('${o.photo}')"></div><div class="ec-lbl" data-kk="${o.region}">${MI.region(o.region)}</div>`;
     card.addEventListener('click', ()=> openQariModal(o));
     qariPinsEl.appendChild(card);
   });
@@ -3564,7 +3598,8 @@ document.getElementById('mapToggle').addEventListener('click', e=>{
   document.querySelectorAll('.mt-opt').forEach(n=>n.classList.remove('on'));
   opt.classList.add('on');
   const cat = opt.dataset.cat;
-  document.getElementById('mapCatLabel').textContent = MAP_CAT_LABELS[cat];
+  curMapCat = cat;
+  document.getElementById('mapCatLabel').textContent = T(MAP_CAT_KEYS[cat]);
   document.getElementById('mapEmptyNote')?.remove();
   pinsEl.style.display = cat === 'mosque' ? '' : 'none';
   eduPinsEl.style.display = cat === 'edu' ? '' : 'none';
@@ -3577,7 +3612,7 @@ document.getElementById('mapToggle').addEventListener('click', e=>{
     const note = document.createElement('div');
     note.id = 'mapEmptyNote';
     note.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:4;text-align:center;padding:0 60px;font-size:15px;color:var(--muted)';
-    note.textContent = MAP_CAT_LABELS[cat] + ' үшін карта деректері әзірге қосылмаған';
+    note.textContent = T(MAP_CAT_KEYS[cat]) + (MI.lang === 'kk' ? ' ' : '') + T('noMapData');
     document.getElementById('map').appendChild(note);
   }
 });
@@ -3609,14 +3644,14 @@ document.getElementById('findBtn').addEventListener('click', ()=>{
 const allBtn = document.getElementById('allBtn');
 allBtn.addEventListener('click', ()=>{
   state.showAll = !state.showAll; state.page = 1;
-  allBtn.querySelector('span').textContent = state.showAll ? 'Қысу' : 'Толық тізім';
+  allBtn.querySelector('span').textContent = state.showAll ? T('collapse') : T('fullList');
   renderList();
 });
 
 // ── Фильтр-ашылмалар (Өңір / Нысан түрі) ──
 const FIELD_OPTS = {
-  region: { placeholder:'Барлық өңір', list:[...PHOTO, ...CLUSTER].map(p=>p.region) },
-  type:   { placeholder:'Барлығы', list:[...new Set(OBJECTS.map(o=>o.t))] }
+  region: { ph:'allRegions', label:v=>MI.region(v), list:[...PHOTO, ...CLUSTER].map(p=>p.region) },
+  type:   { ph:'all', label:v=>MI.type(v), list:[...new Set(OBJECTS.map(o=>o.t))] }
 };
 
 // Бір ғана ортақ ашылмалы блок — #stage-ке тікелей тіркеледі (карта/тізім
@@ -3638,7 +3673,7 @@ function closeAllDropdowns(){
 function openDropdown(sel){
   const field = sel.dataset.field;
   const opts = FIELD_OPTS[field];
-  dropEl.innerHTML = [{v:'', label:opts.placeholder}, ...opts.list.map(v=>({v, label:v}))]
+  dropEl.innerHTML = [{v:'', label:T(opts.ph)}, ...opts.list.map(v=>({v, label:opts.label(v)}))]
     .map(o=>`<div class="sel-opt${o.v===(state[field]||'')?' sel-cur':''}" data-v="${o.v}">${o.label}</div>`).join('');
   dropEl.dataset.field = field;
   const r = sel.getBoundingClientRect();
@@ -3655,7 +3690,7 @@ function selectValue(field, value){
   state.page = 1;
   const sel = document.querySelector(`.sel[data-field="${field}"]`);
   const opts = FIELD_OPTS[field];
-  sel.querySelector('.valtxt').textContent = value || opts.placeholder;
+  sel.querySelector('.valtxt').textContent = value ? opts.label(value) : T(opts.ph);
   sel.classList.toggle('on', !!value);
   closeAllDropdowns();
   renderList();
@@ -3706,14 +3741,14 @@ function openRegionModal(region){
   currentMapRegion = region;
   const cnt = REGION_STATS[region] || {oblystyk:0,qalalyk:0,audandyk:0,auyldyk:0,namazhana:0};
   const total = regionTotal(region);
-  document.getElementById('regionModalTitle').textContent = region;
-  document.getElementById('regionModalTotal').textContent = total + ' нысан тіркелген';
+  document.getElementById('regionModalTitle').textContent = MI.region(region);
+  document.getElementById('regionModalTotal').textContent = total + ' ' + T('registered');
   document.getElementById('regionModalGrid').innerHTML = [
-    ['oblystyk','Облыстық мешіттер', cnt.oblystyk],
-    ['qalalyk','Қалалық мешіттер', cnt.qalalyk],
-    ['audandyk','Аудандық мешіттер', cnt.audandyk],
-    ['auyldyk','Ауылдық мешіттер', cnt.auyldyk],
-    ['namazhana','Намазханалар', cnt.namazhana]
+    ['oblystyk',T('cObl'), cnt.oblystyk],
+    ['qalalyk',T('cCity'), cnt.qalalyk],
+    ['audandyk',T('cDist'), cnt.audandyk],
+    ['auyldyk',T('cRural'), cnt.auyldyk],
+    ['namazhana',T('cPrayer'), cnt.namazhana]
   ].map(([key,label,val])=>`
     <div class="modal-tile">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${REGION_CAT_ICON[key]}</svg>
@@ -3737,7 +3772,7 @@ const WC_COLORS_DARK = ['#f2f6f3','#dbe5de','#c3d1c8','#adbdb3','#96a89d','#7f93
 const wcColors = () => document.documentElement.dataset.theme === 'dark' ? WC_COLORS_DARK : WC_COLORS_LIGHT;
 function openWordCloud(region){
   const list = OBJECTS.filter(o=>o.cat==='mosque' && (!region || o.region===region));
-  document.getElementById('wcTitle').textContent = (region||'Барлық өңір') + ' · ' + list.length + ' мешіт';
+  document.getElementById('wcTitle').textContent = (region?MI.region(region):T('allRegions')) + ' · ' + list.length + ' ' + T('mosqueWord');
   const n = list.length;
   const base = Math.max(10, Math.min(34, Math.round(Math.sqrt(640000/(Math.max(n,1)*29)))));
   document.getElementById('wcCloud').innerHTML = list.map((o,i)=>{
@@ -3745,7 +3780,7 @@ function openWordCloud(region){
     const size = Math.round(base * (0.75 + Math.pow(r,4)*2.6));
     const c = (pal=>pal[Math.floor(Math.random()*pal.length)])(wcColors());
     const wt = r>.7 ? 700 : 500;
-    return `<span class="wc-w" style="font-size:calc(${size}px*var(--k,1));font-weight:${wt};color:${c};animation-delay:${Math.min(i*0.02,1.5)}s,${(Math.random()*4).toFixed(2)}s" data-oi="${OBJECTS.indexOf(o)}">${o.n}</span>`;
+    return `<span class="wc-w" style="font-size:calc(${size}px*var(--k,1));font-weight:${wt};color:${c};animation-delay:${Math.min(i*0.02,1.5)}s,${(Math.random()*4).toFixed(2)}s" data-oi="${OBJECTS.indexOf(o)}">${MI.name(o.n)}</span>`;
   }).join('');
   wcOverlay.classList.add('show');
   // Бір экранға толық сыятындай масштабты іздеу (binary search)
@@ -3767,7 +3802,41 @@ document.getElementById('wcClose').addEventListener('click', closeWordCloud);
 wcOverlay.addEventListener('click', e=>{ if (e.target === wcOverlay) closeWordCloud(); });
 document.addEventListener('keydown', e=>{ if (e.key === 'Escape' && !modalOverlay.classList.contains('show')) closeWordCloud(); }, true);
 
-renderList();
+// ── Тіл ауыстыру: қысқа жүктеу экраны, содан кейін барлық мәтін аударылады ──
+const langLoader = document.getElementById('langLoader');
+function applyLang(){
+  const L = MI.lang;
+  MI.apply();
+  document.querySelectorAll('#langSw button').forEach(b=>b.classList.toggle('on', b.dataset.lang === L));
+  ['modalOverlay','regionModalOverlay','wcOverlay'].forEach(id=>document.getElementById(id).classList.remove('show'));
+  document.querySelectorAll('.sel[data-field]').forEach(sel=>{
+    const f = sel.dataset.field, o = FIELD_OPTS[f];
+    sel.querySelector('.valtxt').textContent = state[f] ? o.label(state[f]) : T(o.ph);
+  });
+  closeAllDropdowns();
+  document.getElementById('mapCatLabel').textContent = T(MAP_CAT_KEYS[curMapCat]);
+  allBtn.querySelector('span').textContent = state.showAll ? T('collapse') : T('fullList');
+  document.querySelectorAll('.ctown[data-kk]').forEach(e=>{ e.textContent = MI.short(e.dataset.kk); });
+  document.querySelectorAll('.ec-lbl[data-kk]').forEach(e=>{ e.textContent = MI.region(e.dataset.kk); });
+  document.querySelectorAll('.plabel[data-i18n]').forEach(e=>{ e.textContent = T(e.dataset.i18n); });
+  const note = document.getElementById('mapEmptyNote');
+  if (note) note.textContent = T(MAP_CAT_KEYS[curMapCat]) + (L === 'kk' ? ' ' : '') + T('noMapData');
+  renderList();
+}
+let langBusy = null;
+document.getElementById('langSw').addEventListener('click', e=>{
+  const b = e.target.closest('button[data-lang]'); if (!b || b.dataset.lang === MI.lang) return;
+  if (langBusy) return;
+  const target = b.dataset.lang;
+  document.getElementById('langLoaderTxt').textContent = MI.ui('loading', target);
+  langLoader.classList.add('show');
+  langBusy = setTimeout(()=>{
+    MI.set(target);
+    applyLang();
+    setTimeout(()=>{ langLoader.classList.remove('show'); langBusy = null; }, 250);
+  }, 650);
+});
+applyLang();
 
 (async function(){
   const el = document.getElementById('map');
@@ -3855,8 +3924,7 @@ renderList();
   const vor = delaunay.voronoi([0, 0, w, h]);
   const regionsG = svg.append('g').attr('clip-path','url(#kzclip)').attr('opacity',0);
   const subtitle = document.querySelector('.maphead .s');
-  const subtitleDefault = subtitle.textContent;
-  const chaseStep = 0.55, chaseDur = seeds.length * chaseStep;
+    const chaseStep = 0.55, chaseDur = seeds.length * chaseStep;
   seeds.forEach((s,i) => {
     const poly = vor.cellPolygon(i);
     if (!poly) return;
@@ -3868,11 +3936,11 @@ renderList();
       .style('--chase-delay', (i * chaseStep) + 's')
       .on('mouseenter', function(){
         this.classList.add('hover');
-        subtitle.textContent = s.region;
+        subtitle.textContent = MI.region(s.region);
       })
       .on('mouseleave', function(){
         this.classList.remove('hover');
-        subtitle.textContent = subtitleDefault;
+        subtitle.textContent = T('mapSub');
       })
       .on('click', ()=> openRegionModal(s.region));
   });
@@ -3885,7 +3953,7 @@ renderList();
     const cd = document.createElement('div');
     cd.className='marker cw'; cd.style.left=x+'px'; cd.style.top=y+'px';
     cd.style.animationDelay = (1.2 + i*0.09)+'s';
-    cd.innerHTML = `<div class="cluster${n<35?' sm':''}">${n}<span class="ctown">${p.t}</span></div>`;
+    cd.innerHTML = `<div class="cluster${n<35?' sm':''}">${n}<span class="ctown" data-kk="${p.t}">${MI.short(p.t)}</span></div>`;
     cd.querySelector('.cluster').addEventListener('click', ()=> openRegionModal(p.region));
     pins.appendChild(cd);
   });
@@ -3894,7 +3962,7 @@ renderList();
     const qd = document.createElement('div');
     qd.className='marker pmw'; qd.style.left=(x+46)+'px'; qd.style.top=(y+20)+'px';
     qd.style.animationDelay = '1.7s';
-    qd.innerHTML = `<div class="pm"><div class="thumb-img" style="width:100%;height:100%;border-radius:19px;background-image:url('./assets/qmdb-building.jpeg')"></div></div><div class="plabel">ҚМДБ</div>`;
+    qd.innerHTML = `<div class="pm"><div class="thumb-img" style="width:100%;height:100%;border-radius:19px;background-image:url('./assets/qmdb-building.jpeg')"></div></div><div class="plabel" data-i18n="qmdbShort">${T('qmdbShort')}</div>`;
     qd.querySelector('.pm').addEventListener('click', openQmdbModal);
     pins.appendChild(qd);
   }
@@ -3903,7 +3971,7 @@ renderList();
     const nd = document.createElement('div');
     nd.className='marker pmw'; nd.style.left=(x-20)+'px'; nd.style.top=(y-20)+'px';
     nd.style.animationDelay = '1.9s';
-    nd.innerHTML = `<div class="pm"><div class="thumb-img" style="width:100%;height:100%;border-radius:19px;background-image:url('${NUR_MUBARAK.photo}')"></div></div><div class="plabel">Нұр-Мүбарак</div>`;
+    nd.innerHTML = `<div class="pm"><div class="thumb-img" style="width:100%;height:100%;border-radius:19px;background-image:url('${NUR_MUBARAK.photo}')"></div></div><div class="plabel" data-i18n="nurShort">${T('nurShort')}</div>`;
     nd.querySelector('.pm').addEventListener('click', openNurMubarakModal);
     pins.appendChild(nd);
   }
@@ -3912,7 +3980,7 @@ renderList();
     const d = document.createElement('div');
     d.className='marker cw'; d.style.left=x+'px'; d.style.top=y+'px';
     d.style.animationDelay = (1.2 + i*0.09)+'s';
-    d.innerHTML = `<div class="cluster${c.n<35?' sm':''}" style="animation-delay:${i*0.35}s">${c.n}<span class="ctown">${c.t}</span></div>`;
+    d.innerHTML = `<div class="cluster${c.n<35?' sm':''}" style="animation-delay:${i*0.35}s">${c.n}<span class="ctown" data-kk="${c.t}">${MI.short(c.t)}</span></div>`;
     d.querySelector('.cluster').addEventListener('click', ()=> openRegionModal(c.region));
     pins.appendChild(d);
   });
@@ -3930,7 +3998,6 @@ addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault()},{pass
 addEventListener('touchstart',e=>{if(e.touches.length>1)e.preventDefault()},{passive:false});
 ['gesturestart','gesturechange','gestureend'].forEach(t=>addEventListener(t,e=>e.preventDefault()));
 </script>
-<script src="./kiosk/quran-player.js"></script>
 <script src="./kiosk/pwa.js"></script>
 </body>
 </html>
